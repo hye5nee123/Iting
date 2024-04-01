@@ -1,4 +1,4 @@
-package com.iting.admin.model;
+package com.iting.lecture.model;
 
 import lombok.Data;
 
