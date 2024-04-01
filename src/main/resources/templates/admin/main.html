@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-     >
-<!--  layout:decorate="~{layout/layout}" -->
+	  layout:decorate="~{layout/admin/layout}">
 <head>
+ <!-- layout:decorate="~{layout/admin}" -->
 <meta charset="UTF-8">
 <title>관리자 메인페이지</title>
 </head>
 <body>
-	<table>
+	<div id="container" layout:fragment="container"> <!--/* {폴더명/footer}라면 footer.html을 가져옴 */-->
+		<table>
 			<tr>
 				<th>No</th>
 				<th>employee_id</th>
 			</tr>
 			<tr th:each="test : ${testList}" > <!--/* <tr th:each="emp, stat : ${empList}"> stat : 상태변수 */-->
-				<td th:text="${test.title}">1</td>
-				<td th:text="${test.text}">100</td>
+					<td th:text="${test.title}">1</td>
+					<td th:text="${test.text}">100</td>
 			</tr>
 		</table>
+	</div>
 </body>
 </html>
