@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.cnq.mapper.CnqMapper">
+	<select id="cnqList" resultType="CnqVO">
+SELECT 
+        c.ttl,
+        c.cntn,
+        c.drwup_dt,
+        c.hit,
+        m.name
+FROM lt_cnq c JOIN mem m 
+     on c.mem_num = m.mem_num
+WHERE lt_num = 'lt00001'
+	</select>
+	
+	
+	
+</mapper>
