@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-test
+	<h3>글등록</h3>
+	<form action="/board/insert" method="post"
+		enctype="multipart/form-data">
+		제목 : <input name="title"> 내용 : <input name="content">
+		작성자 : <input name="writer"> 작성일자 : <input name="writeDate"
+			th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}"
+			readonly> 이미지 : <input name="photofile" type="file">
+		<button type="submit">등록</button>
+		<button type="button" id="listBtn">글목록으로</button>
+	</form>
+	<script>
+	listBtn.addEventListener("click",e => {
+		location.href='/board/boardList'
+	})
+</script>
 </body>
 </html>

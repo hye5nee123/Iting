@@ -13,4 +13,7 @@ FROM lt_cnq c JOIN mem m
      on c.mem_num = m.mem_num
 WHERE lt_num = 'lt00001'
 	</select>
+	
+	
+	
 </mapper>
