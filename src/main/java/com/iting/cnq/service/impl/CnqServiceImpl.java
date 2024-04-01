@@ -20,4 +20,10 @@ public class CnqServiceImpl implements CnqService {
 		return cnqMapper.cnqList(vo);
 	}
 
+	@Override
+	public int cnqInsert(CnqVO vo) {
+		
+		return cnqMapper.cnqInsert(vo);
+	}
+
 }
