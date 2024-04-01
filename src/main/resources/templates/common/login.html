@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -20,23 +21,27 @@
 <body>
 	<div class="container">
 		<img class="logo" src="img/common/logo_w.png" alt="Logo" />
-		<div class="col-lg-6">
-			<div class="checkout__input">
-				<p>아이디</p>
-				<input type="text">
+		<form th:action="@{/userlogin}" method="post">
+			<div class="col-lg-6">
+				<div class="checkout__input">
+					<p>아이디</p>
+					<input type="text" name="userId">
+				</div>
 			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="checkout__input">
-				<p>비밀번호</p>
-				<input type="text">
+			<div class="col-lg-6">
+				<div class="checkout__input">
+					<p>비밀번호</p>
+					<input type="password" name="password">
+				</div>
 			</div>
-		</div>
+			<div class="col-lg-6">
+				<button type="submit" class="site-btn">로그인</button>
+			</div>
+		</form>
 		<div class="col-lg-6">
 			<a href="#">아이디찾기</a> | <a href="#">비밀번호찾기</a> | <a href="#">회원가입</a>
 		</div>
 		<div class="col-lg-6">
-			<button type="button" class="site-btn">로그인</button>
 			<img class="naverbtn" src="img/common/btnG_완성형.png"
 				alt="NaverLoginImg" />
 		</div>

@@ -24,6 +24,6 @@ public class CommonController {
 	@GetMapping("/logout")
 	public String logout() {
 		log.info("logout success");
-		return "main";
+		return "member/main";
 	}
 }
