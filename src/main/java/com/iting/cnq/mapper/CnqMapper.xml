@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.cnq.mapper.CnqMapper">
 	<select id="cnqList" resultType="CnqVO">
+	
 SELECT 
         c.ttl,
         c.cntn,
