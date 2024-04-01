@@ -1,1 +1,15 @@
+*{font-family: "Noto Sans KR", sans-serif;}
 .logo img{display:block; width:100%;}
+.menu-vertical .menu-inner{padding-top:20px !important;}
+.menu-link > :not(.menu-icon){font-size:16px; font-weight:600;}
+.bg-menu-theme .menu-inner > .menu-item.active > .menu-link{color:#205cdc; background:rgb(98 140 230 / 16%) !important;}
+.bg-menu-theme .menu-inner > .menu-item.active:before{background:#205cdc;}
+.welcome{margin-bottom:0;}
+.welcome{color:#566a7f; font-size:17px; font-weight:400; letter-spacing:-0.5px;}
+.welcome span{color:#205cdc; font-size:18px; font-weight:700;}
+.statistics{margin-top:30px;}
+.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus{background:#205cdc; box-shadow:0 2px 4px 0 rgba(32, 92, 220, 0.4);}
+.nav .nav-link:hover, .nav .nav-link:focus{color:#205cdc;}
+.content-footer div{margin:0 auto; text-align:center;}
+.avatar{background:#205cdc; border-radius:50%;}
+.avatar i{position:absolute; left:50%; top:50%; color:#fff; font-size:24px; transform:translate(-50%, -50%);}
