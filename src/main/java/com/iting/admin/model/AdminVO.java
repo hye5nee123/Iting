@@ -1,9 +1,9 @@
-package com.example.iting.test;
+package com.iting.admin.model;
 
 import lombok.Data;
 
 @Data
-public class TestVO {
+public class AdminVO {
 	private String title;
 	private String text;
 }

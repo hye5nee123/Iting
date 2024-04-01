@@ -1,4 +1,4 @@
-package com.example.iting;
+package com.iting;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
