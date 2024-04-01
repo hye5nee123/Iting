@@ -9,6 +9,7 @@ import com.iting.member.model.MemberVO;
 @Controller
 public class MemberController {
 
+	// 회원 메인 - 예시
 	@RequestMapping("member/main")
 	public ModelAndView getTestList(MemberVO vo) {
 		ModelAndView mv = new ModelAndView();

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout/member/layout}" >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section layout:fragment="content">
+	<div class="container">
+		<form method="post" id="subspFrm">
+			<input type="radio" value="n1" name="subspTypCd">월간
+			<input type="radio" value="n2" name="subspTypCd">연간
+			<br>
+			구독시작일자<input type="date" name="subspFrDt" value="2024-04-01">
+			<br>
+			구독마감일자<input type="date" name="subspToDt" value="2024-05-01">
+			<br>
+			<input type="hidden" value="m1" name="subspStCd">
+			<br>
+			가격
+			<input type="number" name="subspPrice" value="39800" disabled="disabled">
+			<br>
+			<input type="hidden" value="me00001" name="memNum">
+			
+			<!-- <input type="radio" value="o1" name="subspTypCd">카카오페이
+			<input type="radio" value="o2" name="subspTypCd">일반결제 -->
+			
+			<button type="button" id="saveBtn">결제하기</button>
+		</form>
+	</div>
+	
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>	
+<script>
+//등록 요청
+function saveReq() {
+	const subspTypCd = subspFrm.subspTypCd.value;
+	const subspFrDt = subspFrm.subspFrDt.value;
+	const subspToDt = subspFrm.subspToDt.value;
+	const subspStCd = subspFrm.subspStCd.value;
+	const subspPrice = subspFrm.subspPrice.value;
+	const memNum = subspFrm.memNum.value;
+	//const subspTypCd = subspFrm.subspFrm.value;
+
+	let param = { subspTypCd, subspFrDt, subspToDt, subspStCd, subspPrice, memNum, subspTypCd }
+	
+	console.log(param);
+	
+	axios.post("/member/subsp/insert", param)
+		.then(res => saveRes(res.data))
+}
+// 등록 응답
+function saveRes(res) {
+	console.log(res);
+	alert('구독 등록 완료!');
+}
+
+// 등록 
+saveBtn.addEventListener("click", e => {
+	saveReq();
+})
+
+</script>
+	
+</section>
+</body>
+</html>
