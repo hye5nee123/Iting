@@ -17,5 +17,4 @@ public class MemberController {
 		mv.setViewName("member/main");
 		return mv;
 	}
-	
 }
