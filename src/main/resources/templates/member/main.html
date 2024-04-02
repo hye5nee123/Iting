@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-     layout:decorate="~{layout/member/layout}" >
+     layout:decorate="~{layout/member/layout}" 
+     >
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <section layout:fragment="content">
- <p>메인 올리는 자리</p>
+ <p>메인 자리</p>
+ <div class="hero__items set-bg" data-setbg="/img/member/main/aaa.png">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Summer Collection</h6>
+                                <h2>Fall - Winter Collections 2030</h2>
+                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
+                                commitment to exceptional quality.</p>
+                                <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                                <div class="hero__social">
+                                    <a href="#"><i class='bx bx-dice-1'></i>1</a>
+                                    <a href="#"><i class='bx bx-dice-2'></i>2</a>
+                                    <a href="#"><i class='bx bx-dice-3'></i>3</a>
+                                    <a href="#"><i class='bx bx-dice-4'></i>4</a>
+                                </div>
+                                
+                            </div>
+                            <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span class="arrow_left"><span></span></span></button><button type="button" role="presentation" class="owl-next"><span class="arrow_right"><span></span></span></button></div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            
+<p></p>
 <div class="content">
         <h3 class="title is-4">검색하기</h3>
         <div class="search_wrapper">
           <input class="search" type="text" placeholder="찾는강의가 있으신가요?">
           <button class="button e_search_submit">
-            <span><i class="far fa-search">검색</i></span>
+            <span><i class='bx bx-search-alt-2'></i>검색</span>
           </button>
           <div class="search_view_cover e_search_view_cover">
           </div>
@@ -145,26 +172,12 @@
                     </div>
                     
                 </div>
-        <div class="theme">
-			<div>
-				<h2><img src="/home/images/main17/themeTit.png" alt="테마강의"></h2>
-				<ul>					
-					<li class="theme11"><a href="/home/special/themeCourses.do?taxonCode=99&amp;m=p">직업·직무 교육과정</a></li>
-					<!-- <li class="theme1"><a href="/home/special/themeCourses.do#subject/18">인기강의</a></li>
-					<li class="theme12"><a href="/home/special/themeCourses.do#subject/25">최신강의</a></li> -->
-					<li class="theme2"><a href="/home/special/themeCourses.do#subject/19">대학기초강의</a></li>
-					<li class="theme3"><a href="/home/special/themeCourses.do#subject/04">SW교육</a></li>
-					<li class="theme5"><a href="/home/special/themeCourses.do#subject/01">취업대비</a></li>
-					<li class="theme6"><a href="/home/special/themeCourses.do#subject/20">임용&amp;자격증</a></li>
-					<li class="theme18"><a href="/home/special/themeCourses.do#subject/50">K-MOOC</a></li>
-				</ul>
-			</div>
-		</div>
+   
                 
             </div>
             
         </div>
-        
+        </section>
  </section>
 
 </body>
