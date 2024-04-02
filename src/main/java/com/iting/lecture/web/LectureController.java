@@ -16,18 +16,6 @@ public class LectureController {
 	@Autowired
 	LectureService lectureService;
 	
-	// 목록조회 - 예시
-	@RequestMapping("admin/main")
-	public ModelAndView getLectureList(LectureVO vo) {
-		ModelAndView mv  = new ModelAndView();
-		
-		mv.addObject("testList", lectureService.getLectureList(vo));
-		
-		//뷰페이지 지정
-		mv.setViewName("admin/main");		
-		return mv;
-	}
-	
 	/* 회원 */
 	// 강의 목록 조회
 	
