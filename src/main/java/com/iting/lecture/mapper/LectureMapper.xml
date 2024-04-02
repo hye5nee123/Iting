@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.lecture.mapper.LectureMapper">
+
+	<!-- 수강상세 -->
+	<select id="getLectureInfo" resultType="LectureVO">
+		SELECT LT_NUM
+		       , LT_ST_CD
+		       , LT_TTL
+		       , LT_IMG
+		       , LT_INTRO
+		       , LT_CATE_CD
+		       , FR_DT
+		       , LT_DIF_CD
+		       , LECTURER_NUM
+		       , LT_KEYWORD_CD
+		       , LT_FG_CD
+		FROM LT
+		WHERE LT_NUM = #{ltNum}
+	</select>
+</mapper>
