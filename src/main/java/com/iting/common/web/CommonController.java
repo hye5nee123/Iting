@@ -11,8 +11,13 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class CommonController {
 	@GetMapping("/login")
-	public String loginform() {
+	public String loginForm() {
 		return "common/login";
+	}
+	
+	@GetMapping("/account")
+	public String accountForm() {
+		return "common/account";
 	}
 	
 	@GetMapping("/accessError")
