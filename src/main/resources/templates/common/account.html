@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/member/bootstrap.min.css"
@@ -19,6 +20,7 @@
 }
 </style>
 </head>
+
 <body>
 	<div class="container">
 		<div class="checkout__form">
@@ -62,16 +64,45 @@
 				<!-- 회원, 강사 폼 바뀌는 부분 -->
 			</div>
 			<div class="col-lg-6 accrule">
-				<input type="checkbox">
+				<input type="checkbox" id="chk_all">
 				<h6>전체 약관 동의</h6>
-				<input type="checkbox">
-				<p>[필수]</p>
+				<input type="checkbox" class="chk svc">
+				<p>[필수]Iting 이용 약관에 동의</p>
+				<button type="button">></button>
+				<input type="checkbox" class="chk svc">
+				<p>[필수]개인정보 수집 및 이용에 동의</p>
+				<button type="button">></button>
+				<input type="checkbox" class="chk">
+				<p>[선택]마케팅 정보 수신</p>
+				<button type="button">></button>
+			</div>
+			<div class="accbtn">
+				<button type="button" class="site-btn" style="width: 300px" th:onclick="insertAccount()">가입하기</button>
 			</div>
 		</div>
 	</div>
 	<script>
-	let accode = 'b1'; // 넣을 코드 데이터 값
-	usertype(1); // 첫 화면 폼 그려주기
+		let accode = 'b1'; // 넣을 코드 데이터 값
+		usertype(1); // 첫 화면 폼 그려주기
+
+		let allboxs = document.querySelectorAll('.chk');
+		let chkdboxs = document.querySelectorAll('.chk:checked');
+		for(box of allboxs){
+			box.addEventListener('click', () => {
+				if(allboxs.length != chkdboxs.length){
+					document.querySelector('#chk_all').checked = false;
+				}
+			});
+		}
+		chk_all.addEventListener('click', () => {
+			for(obj of allboxs){
+				if(chk_all.checked){
+					obj.checked = true;
+				} else if(!chk_all.checked) {
+					obj.checked = false;
+				}
+			}
+		});
 		function usertype(num) {
 			let form;
 			document.getElementsByClassName('radios')[0].innerHTML = ''; // 바뀔때 비워주기용
@@ -92,6 +123,18 @@
 			}
 			document.getElementsByClassName('radios')[0].innerHTML = form;
 		}
+		function insertAccount(){
+			// 아이디, 비밀번호 등 체크
+
+
+			let agrees = document.querySelectorAll('.svc:checked');
+			if(agrees.length != 2){
+				console.log("aa");
+				alert("필수 약관에 동의해야합니다.");
+				return;
+			}
+		}
 	</script>
 </body>
+
 </html>
