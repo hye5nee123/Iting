@@ -10,4 +10,5 @@ import com.iting.cnq.model.CnqVO;
 public interface CnqMapper {
 	public List<CnqVO> cnqList(CnqVO vo);
 	public int cnqInsert(CnqVO vo);
+	//제발
 }
