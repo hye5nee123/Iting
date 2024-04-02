@@ -8,34 +8,34 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.iting.member.model.MemberVO;
+import com.iting.common.model.UsersVO;
 
 import lombok.Getter;
 
 @Getter
-public class CustomUsers implements UserDetails {
-
-	private MemberVO memberVO;
-
-	public CustomUsers(MemberVO memberVO) {
-		this.memberVO = memberVO;
+public class CustomUsers implements UserDetails{
+	
+	private UsersVO usersVO;
+	
+	public CustomUsers(UsersVO usersVO) {
+		this.usersVO = usersVO;
 	}
-
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authlist = new ArrayList<>();
-		authlist.add(new SimpleGrantedAuthority(memberVO.getMemFgCd()));
+		authlist.add(new SimpleGrantedAuthority(usersVO.getUserCd()));
 		return authlist;
 	}
 
 	@Override
 	public String getPassword() {
-		return memberVO.getPw();
+		return usersVO.getPw();
 	}
 
 	@Override
 	public String getUsername() {
-		return memberVO.getId();
+		return usersVO.getId();
 	}
 
 	@Override
@@ -57,5 +57,5 @@ public class CustomUsers implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
+	
 }

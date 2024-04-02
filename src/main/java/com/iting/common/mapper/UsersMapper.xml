@@ -3,12 +3,14 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.common.mapper.UsersMapper">
 
-	<select id="getMemberInfo" parameterType="string"
+	<!-- <select id="getMemberInfo" parameterType="string"
 		resultType="MemberVO">
 		select id
 		,'{noop}' || pw AS pw
 		,'ROLE_' || upper(mem_fg_cd) AS "mem_fg_cd"
+		,'ROLE_' || upper(accp_yn_cd) AS "accp_yn_cd"
 		from mem
+		join 
 		where id = #{userid}
 	</select>
 
@@ -19,5 +21,18 @@
 		,'ROLE_' || upper(accp_yn_cd) AS "accp_yn_cd"
 		from lecturer
 		where id = #{userid}
+	</select> -->
+	<select id="getUserInfo" parameterType="string"
+		resultType="UsersVO">
+		select m.id
+            ,'{noop}' || m.pw AS pw
+            ,'ROLE_' || upper(m.mem_fg_cd) AS user_cd
+        from mem m
+        UNION
+        select l.id
+            ,'{noop}' || l.pw AS pw
+            ,'ROLE_' || upper(l.accp_yn_cd) AS user_cd
+        from lecturer l
+        where id = #{userid}
 	</select>
 </mapper>

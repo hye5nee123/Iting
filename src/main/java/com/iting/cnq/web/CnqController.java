@@ -31,6 +31,15 @@ public class CnqController {
 		return "member/cnq/list";
 	}
 
+	// info 조회.
+	@RequestMapping("member/cnq/info/{ltCnqNum}")
+	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
+		model.addAttribute("cnq", cnqService.getCnqInfo(ltCnqNum));
+		System.out.println("조회완료");
+		return "member/cnq/info";
+
+	}
+
 	// 데이터 가져오기.
 //	@ResponseBody
 //	@GetMapping("/fetch/cnqList")
@@ -46,7 +55,7 @@ public class CnqController {
 //	}
 
 	// 등록 페이지로 이동.
-	@GetMapping("/cnq/form")
+	@GetMapping("member/cnq/form")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView("member/cnq/form");
 		return mv;

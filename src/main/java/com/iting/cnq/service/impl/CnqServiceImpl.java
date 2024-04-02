@@ -23,7 +23,14 @@ public class CnqServiceImpl implements CnqService {
 	@Override
 	public int cnqInsert(CnqVO vo) {
 
-		return (Integer) null;
+		return cnqMapper.cnqInsert(vo);
+	}
+
+	@Override
+	public CnqVO getCnqInfo(String ltCnqNum) {
+		CnqVO vo = new CnqVO();
+		vo.setLtCnqNum(ltCnqNum);
+		return cnqMapper.getCnqInfo(ltCnqNum);
 	}
 
 }

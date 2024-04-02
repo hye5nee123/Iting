@@ -4,7 +4,8 @@
 <mapper namespace="com.iting.cnq.mapper.CnqMapper">
 	<select id="cnqList" resultType="CnqVO">
 	
-SELECT 
+SELECT
+		c.lt_cnq_num,
         c.ttl,
         c.cntn,
         c.drwup_dt,
@@ -16,8 +17,10 @@ WHERE lt_num = 'lt00001'
 	</select>
 	
 	<!-- 상세조회 -->
-	<select id="getCnqInfo" resultType="CnqVO">
-	SELECT  c.ttl,
+	<select id="getCnqInfo" parameterType="String" resultType="CnqVO">
+	SELECT  
+		c.lt_cnq_num,
+		c.ttl,
         c.cntn,
         c.drwup_dt,
         c.hit,
