@@ -61,18 +61,19 @@
 // 현재날짜 등록
 
 //등록 요청
+const subspTypCd = subspFrm.subspTypCd.value;
+const subspFrDt = subspFrm.subspFrDt.value;
+const subspToDt = subspFrm.subspToDt.value;
+const subspStCd = subspFrm.subspStCd.value;
+const subspPrice = subspFrm.subspPrice.value;
+const memNum = subspFrm.memNum.value;
+
 function saveReq() {
-	const subspTypCd = subspFrm.subspTypCd.value;
-	const subspFrDt = subspFrm.subspFrDt.value;
-	const subspToDt = subspFrm.subspToDt.value;
-	const subspStCd = subspFrm.subspStCd.value;
-	const subspPrice = subspFrm.subspPrice.value;
-	const memNum = subspFrm.memNum.value;
 	//const subspTypCd = subspFrm.subspFrm.value;
 
 	let param = { subspTypCd, subspFrDt, subspToDt, subspStCd, subspPrice, memNum, subspTypCd }
 	
-	console.log(param);
+	//console.log(param);
 	
 	/*
 	axios.post("/member/subsp/insert", param)
@@ -89,14 +90,49 @@ function saveReq() {
 }
 // 등록 응답
 function saveRes(res) {
-	console.log(res);
+	payRes()
+	//console.log(res);
 	alert('구독 등록 완료!');
 }
 
 // 등록 
 saveBtn.addEventListener("click", e => {
 	saveReq();
+	
 })
+
+// 결제 요청
+async function payRes() {
+	const response = await PortOne.requestPayment({
+		  // Store ID 설정
+		  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
+		  // 채널 키 설정
+		  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
+		  paymentId: `payment-${crypto.randomUUID()}`,
+		  orderName: "아이팅 1개월 구독권",
+		  totalAmount: subspPrice,
+		  currency: "CURRENCY_KRW",
+		  payMethod: "EASY_PAY",
+		});
+	
+	console.log(response)
+	
+	 if (response.code != null) {
+	    // 오류 발생
+	    return alert(response.message);
+	  }
+
+	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
+	  const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
+	    method: "POST",
+	    headers: { "Content-Type": "application/json" },
+	    // paymentId와 주문 정보를 서버에 전달합니다
+	    body: JSON.stringify({
+	      paymentId: paymentId
+	    }),
+	  });
+}
+
 
 </script>
 	
