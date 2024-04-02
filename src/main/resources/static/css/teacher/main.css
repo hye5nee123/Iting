@@ -1,0 +1,6 @@
+.welcome span{color:#ff8a00;}
+.avatar{background:#ff8a00;}
+.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus{background:#ff8a00; box-shadow:0 2px 4px 0 rgb(255 138 0);}
+.nav .nav-link:hover, .nav .nav-link:focus{color:#ff8a00;}
+.bg-menu-theme .menu-inner > .menu-item.active > .menu-link{color:#ff8a00; background:rgb(255 138 0 / 16%) !important;}
+.bg-menu-theme .menu-inner > .menu-item.active:before{background:#ff8a00;}
