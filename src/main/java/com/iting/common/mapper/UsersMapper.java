@@ -2,8 +2,8 @@ package com.iting.common.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.iting.common.model.MemberVO;
 import com.iting.common.model.TeacherVO;
+import com.iting.member.model.MemberVO;
 
 
 

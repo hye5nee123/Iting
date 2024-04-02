@@ -28,7 +28,7 @@ WHERE lt_num = 'lt00001'
 	</select>
 	
 	<!-- cnq 등록 -->
-	<insert id="cnqInsert" parameterType="CnqVO">
+<!--  <insert id="cnqInsert" parameterType="CnqVO">
 		<selectKey keyProperty="ltCnqNum"
 					order="BEFORE"
 					resultType="string">
@@ -80,6 +80,6 @@ WHERE lt_num = 'lt00001'
 		WHERE LT_CNQ_NUM = #{ltCnqNum}
 	</update>
 	
-	
+	-->	
 	
 </mapper>
