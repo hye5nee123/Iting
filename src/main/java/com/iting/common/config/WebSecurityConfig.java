@@ -32,7 +32,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				(requests) -> requests
-				.antMatchers("/*", "/member/main").permitAll()
+				.antMatchers("/**", "/member/**", "/js/**", "/css/**", "/img/**", "/admin/**").permitAll()
 				.antMatchers("/admin/main").hasRole("B2")
 				.anyRequest().authenticated())
 //				.formLogin((form) -> form
