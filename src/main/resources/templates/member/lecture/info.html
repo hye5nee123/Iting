@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+      layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>강의상세 페이지</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+<section layout:fragment="content">
+	<div class="row lecture_info">
+		<div class="col-lg-12">
+			<div class="section-title">
+			    <span>프로그래밍 언어</span>
+			    <h2>프로그래밍언어 이해하기</h2>
+			</div>
+		</div>
+		<div class="info">
+			<ul>
+				<li><i class='bx bx-spreadsheet'></i><p>커리큘럼 수</p><span>10</span></li>
+				<li><i class='bx bx-bar-chart-alt' ></i><p>난이도</p><span>입문</span></li>
+				<li><i class='bx bx-pencil'></i><p>키워드</p><span></span></li>
+			</ul>
+			<button>수강하기</button>
+		</div>
+		<p class="text">프로그래밍 공부, 어떻게 시작해야 할지 막막하시다구요? 입문자도 쉽게 배울 수 있는 파이썬과 함께 시작해 보세요! 이번 토픽을 통해 기초를 탄탄히 쌓고 나면, '프로그래밍 생각보다 별 거 아니네?' 이런 생각이 들 거예요.</p>
+	</div>
+	
+	<div class="row lecture_list">
+		<div class="left"></div>
+		<div class="right">
+			<h3><i class='bx bx-slideshow' ></i> 프로그래밍언어 이해하기</h3>
+			<span class="target">로드맵 목표</span>
+			<span class="txt">프로그래밍 시대에 맞는 인재 되기</span>
+			<p><span><i class='bx bx-user'></i> <i>22,789</i>명 수강</span></p>
+			<div class="btn">
+				<button>수강하기</button>
+				<button>찜하기</button>
+			</div>
+		</div>
+	</div>
 
+</section>
 </body>
 </html>
