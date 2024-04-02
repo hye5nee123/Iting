@@ -6,6 +6,9 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
@@ -33,6 +36,8 @@
     <script src="/js/member/jquery.slicknav.js"></script>
     <script src="/js/member/mixitup.min.js"></script>
     <script src="/js/member/owl.carousel.min.js"></script>
+    
+    
 
 
 </head>
@@ -196,7 +201,15 @@
     <!-- Footer Section End -->
 
     
+    
+    <!-- JS -->
     <script src="/js/member/main.js"></script>
+    
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- Common JS -->
+    <script src="/js/common.js"></script>
 
 </body>
 
