@@ -38,12 +38,12 @@ public class CnqController {
 //		return cnqService.cnqList(vo);
 //	}
 	// 강의문답 단건조회.
-	@RequestMapping("member/cnqInfo/{ltCnqNum}")
-	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
-		model.addAttribute("cnq" , cnqService.)
-		return ltCnqNum;
-
-	}
+//	@RequestMapping("member/cnqInfo/{ltCnqNum}")
+//	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
+//		model.addAttribute("cnq" , cnqService.)
+//		return ltCnqNum;
+//
+//	}
 
 	// 등록 페이지로 이동.
 	@GetMapping("/cnq/form")
