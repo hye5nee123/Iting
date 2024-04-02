@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <title>list.html</title>
 <script th:inline="javascript">
+function move(ltCnqNum){
+	location.href='cnq/info/'+ ltCnqNum
+}	
 </script>
 </head>
 <body>
@@ -39,13 +42,12 @@
 					<td th:text="${cnq.name}"></td>
 				</tr>
 			</tbody>
-
 		</table>
 
 	</div>
 	<script>
 	insertBtn.addEventListener("click", e=>{
-		location.href='/cnq/form'
+		location.href='cnq/form'
 	})
 	</script>
 </body>

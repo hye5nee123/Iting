@@ -6,10 +6,10 @@
 </head>
 <body>
 	<h3>글등록</h3>
-	<form action="/board/insert" method="post"
+	<form action="/cnq/insert" method="post"
 		enctype="multipart/form-data">
-		제목 : <input name="title"> 내용 : <input name="content">
-		작성자 : <input name="writer"> 작성일자 : <input name="writeDate"
+		제목 : <input name="ttl"> 내용 : <input name="cntn">
+		작성자 : <input name="name"> 작성일자 : <input name="drwupDt"
 			th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}"
 			readonly> 이미지 : <input name="photofile" type="file">
 		<button type="submit">등록</button>
@@ -17,7 +17,7 @@
 	</form>
 	<script>
 	listBtn.addEventListener("click",e => {
-		location.href='/board/boardList'
+		location.href='/member/cnq'
 	})
 </script>
 </body>
