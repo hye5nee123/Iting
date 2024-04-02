@@ -1,10 +1,10 @@
-package com.iting.admin.mapper;
+package com.iting.lecture.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.iting.admin.model.AdminVO;
+import com.iting.lecture.model.AdminVO;
 
 @Mapper
 public interface AdminMapper {
