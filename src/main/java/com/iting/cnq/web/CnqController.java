@@ -61,7 +61,7 @@ public class CnqController {
 		return mv;
 	}
 
-	// 등록 기능....
+	// 등록 기능.......
 	@PostMapping("/cnq/insert")
 	public String insert(CnqVO vo, MultipartFile photofile) throws IllegalStateException, IOException {
 		if (photofile != null) {
