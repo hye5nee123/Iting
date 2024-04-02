@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.CnqService;
+import com.iting.cnq.service.ReplyService;
 
 @Controller
 public class CnqController {
@@ -34,6 +35,9 @@ public class CnqController {
 	// info 조회.
 	@RequestMapping("member/cnq/info/{ltCnqNum}")
 	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
+		String a = cnqService.getCnqInfo(ltCnqNum).getLtCnqNum();
+		
+		model.addAttribute("댓글", ReplyService.class);
 		model.addAttribute("cnq", cnqService.getCnqInfo(ltCnqNum));
 		System.out.println("조회완료");
 		return "member/cnq/info";
