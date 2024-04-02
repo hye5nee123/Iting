@@ -8,31 +8,58 @@
 </head>
 <body>
 <section layout:fragment="content">
-	<div class="container">
-		<form method="post" id="subspFrm">
-			<input type="radio" value="n1" name="subspTypCd">월간
-			<input type="radio" value="n2" name="subspTypCd">연간
-			<br>
-			구독시작일자<input type="date" name="subspFrDt" value="2024-04-01">
-			<br>
-			구독마감일자<input type="date" name="subspToDt" value="2024-05-01">
-			<br>
-			<input type="hidden" value="m1" name="subspStCd">
-			<br>
-			가격
-			<input type="number" name="subspPrice" value="39800" disabled="disabled">
-			<br>
-			<input type="hidden" value="me00001" name="memNum">
+	<div class="container">		
+		<div class="card text-center">
+		  <div class="card-header ">
+		    아이팅 1개월 구독권
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">아이팅 구독 시 받는 혜택!</h5>
+		    <p class="card-text">강의 1개 가격으로 모든 강의 무제한 수강
+							<br>언제든 물어볼 수 있는 아이팅 커뮤니티
+			</p>
 			
-			<!-- <input type="radio" value="o1" name="subspTypCd">카카오페이
-			<input type="radio" value="o2" name="subspTypCd">일반결제 -->
-			
-			<button type="button" id="saveBtn">결제하기</button>
-		</form>
+			<div class="checkout__input">			
+				<form method="post" id="subspFrm">
+					<input type="radio" value="n1" name="subspTypCd">월간
+					<input type="radio" value="n2" name="subspTypCd">연간
+					<br>
+					<p>구독시작일자</p>
+					<input type="date" name="subspFrDt" value="2024-04-01">
+					<br>
+					<p>구독마감일자</p>
+					<input type="date" name="subspToDt" value="2024-05-01">
+					<br>
+					<input type="hidden" value="m1" name="subspStCd">
+					<br>
+					가격
+					<input type="number" name="subspPrice" value="39800" disabled="disabled">
+					<br>
+					<input type="hidden" value="me00001" name="memNum">
+					
+					<input type="radio" value="o1" name="sttlTypCd">카카오페이
+					<input type="radio" value="o2" name="sttlTypCd">일반결제
+					
+					<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
+				</form>
+			</div>
+		  </div>
+		</div>
+	
+	
+	
+	
+		
 	</div>
+	
+	
+	
+
 	
 <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->	
 <script>
+// 현재날짜 등록
+
 //등록 요청
 function saveReq() {
 	const subspTypCd = subspFrm.subspTypCd.value;

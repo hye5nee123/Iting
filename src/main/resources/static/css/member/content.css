@@ -2,23 +2,59 @@
 .lecture_info{margin-top:20px;}
 .section-title{margin-bottom:0; text-align:left; letter-spacing:-1px;}
 .section-title span{font-size:15px;}
-.info{width:100%; margin-top:20px; padding:20px; background:#f9f9f9; border-radius:15px; box-sizing:border-box;}
+.info{width:100%; margin-top:20px; padding:20px 40px 20px 30px; background:#f9f9f9; border-radius:15px; box-sizing:border-box;}
 .info ul{float:left; width:calc(100% - 20%); list-style:none;}
-.info li{float:left; width:29%; margin:0 2%;}
-.info li p{color:#333;}
-.info button{float:right;}
+.info li{float:left; position:relative; width:29%; margin:0 2%;}
+.info li:before{content:''; display:block; position:absolute; left:-50px; top:50%; width:1px; height:40px; border-left:1px dashed #ccc; transform:translateY(-50%);}
+.info li:first-child:before{display:none;}
+.info li i{float:left; color:#205cdc; font-size:30px;}
+.info li:last-child i{font-size:27px;}
+.info li div{float:left; margin-left:15px;}
+.info li p{color:#888; font-size:14px; margin-bottom:0;}
+.info li span{display:block; color:#555; font-size:17px; font-weight:700;}
+.info button{float:right; padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .info:after,
-.info ul:after{content:''; display:block; clear:both;}
-.lecture_info .text{color:#333; font-size:16px; margin-top:20px; word-break:keep-all;}
+.info ul:after,
+.info li:after{content:''; display:block; clear:both;}
+.lecture_info .text{color:#555; font-size:16px; font-weight:600; margin-top:30px; word-break:keep-all;}
 .lecture_list{margin-top:20px;}
 .lecture_list:after{content:''; display:block; clear:both;}
-.lecture_list .left{float:left; width:68%; height:380px; margin-right:3%; background:#ddd; border-radius:15px;}
-.lecture_list .right{float:right; width:29%; height:380px; padding:30px 20px; border:1px solid #ddd; border-radius:15px; box-sizing:border-box; box-shadow:0 0 5px 1px rgba(0, 0, 0, 0.1);}
+.lecture_list .left{float:left; width:68%; height:340px; margin-right:3%; background:#ddd; border-radius:15px;}
+.lecture_list .right{float:right; width:29%; height:340px; padding:40px 20px 30px; border-radius:15px; box-sizing:border-box; box-shadow:0 0 5px 1px rgba(0, 0, 0, 0.1);}
 .lecture_list .right h3{font-size:16px; font-weight:700; letter-spacing:-1px; border-bottom:1px dashed #ddd; padding-bottom:20px; box-sizing:border-box;}
-.lecture_list .right h3 i{display:inline-block; margin-right:5px; font-size:20px;}
-.lecture_list .right p{background:#f9f9f9; box-sizing:border-box; padding:10px; border:1px solid #ddd; border-radius:8px; margin-top:15px;}
+.lecture_list .right h3 i{display:inline-block; margin-top:-5px; color:#205cdc; margin-right:3px; font-size:20px;}
+.lecture_list .right p{background:#f9f9f9; box-sizing:border-box; padding:10px 10px 10px 15px; border:1px solid #ddd; border-radius:8px; margin-top:20px;}
 .lecture_list .right p span{display:block;}
 .lecture_list .right p span i{color:#205cdc; font-weight:700; font-style:normal;}
 .lecture_list .right p span .bx{font-weight:300; color:#555;}
 .lecture_list .right .target{display:inline-block; margin-top:20px; padding:5px; border-radius:5px; color:#ff8a00; font-size:13px; font-weight:700; background:#ffecd5; border:1px solid #ff8a00;}
 .lecture_list .right .txt{display:block; margin-top:10px; color:#555; font-size:15px; letter-spacing:-1px;}
+.lecture_list .right .btn{padding:0; margin-top:10px;}
+.lecture_list .right .btn button{width:143px; padding:10px 5px; font-size:15px; letter-spacing:-1px; border:1px solid #205cdc; background:#205cdc; color:#fff; border-radius:5px;}
+.lecture_list .right .btn button + button{margin-left:5px; background:#ff8a00; border:1px solid #ff8a00;}
+.lecture_cur{margin-top:70px;}
+.lecture_cur .related-title{width:100%; text-align:left; margin-bottom:0;}
+.lecture_cur ul{list-style:none;}
+.lecture_cur ul:after{content:''; display:block; clear:both;}
+.lecture_cur li{float:left; margin-right:20px;}
+.lecture_cur li p{margin-top:10px; color:#555;}
+.lecture_cur li i{font-style:normal; font-weight:700;}
+.lecture_cur li .bx{margin-top:-5px; font-size:20px; font-weight:300;}
+.lecture_cur .list{width:100%; margin-top:10px;}
+.lecture_cur .list li{width:100%; margin-bottom:15px;}
+.lecture_cur .list div{padding:15px 20px; border:1px solid #ddd; border-radius:10px; background:#f9f9f9; box-sizing:border-box;}
+.lecture_cur .list div a{display:block; font-size:17px; font-weight:600;}
+.lecture_cur .list div a span{display:inline-block; width:25px; height:25px; margin-right:10px; line-height:24px; color:#fff; font-weight:700; text-align:center; background:#111; border-radius:5px;}
+.product__details__tab{margin-top:30px;}
+.product__details__tab .nav-tabs .nav-item .nav-link.active{border-bottom:2px solid #ff8a00;}
+.review{list-style:none; margin-top:10px;}
+.review li{float:left; width:23.5%; margin:25px 1% 0;}
+.review li:nth-child(4n+1){margin-left:0;}
+.review li:nth-child(4n+4){margin-right:0;}
+.review li > div{border:1px solid #ddd; border-radius:10px; height:280px; padding:30px; box-sizing:border-box; text-align:center;}
+.review li div .img{display:block; width:60px; height:60px; margin:0 auto; border-radius:50%; background:#ddd;}
+.review li div .id{margin-top:5px; color:#888; font-size:14px; font-weight:700;}
+.review li div .text{text-align:left; margin-top:10px; font-size:15px; font-weight:600; line-height:1.5rem; word-break:keep-all; letter-spacing:-1px;}
+.review:after{content:''; display:block; clear:both;}
+.review .star{margin-top:5px;}
+.review .star i{letter-spacing:-1px; color:#ffca35;}
