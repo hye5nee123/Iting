@@ -16,14 +16,14 @@ public class CnqServiceImpl implements CnqService {
 
 	@Override
 	public List<CnqVO> cnqList(CnqVO vo) {
-	
+
 		return cnqMapper.cnqList(vo);
 	}
 
 	@Override
 	public int cnqInsert(CnqVO vo) {
-		
-		return cnqMapper.cnqInsert(vo);
+
+		return (Integer) null;
 	}
 
 }
