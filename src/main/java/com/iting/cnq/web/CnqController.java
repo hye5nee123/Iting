@@ -69,7 +69,7 @@ public class CnqController {
 		if (result > 0) {
 			System.out.println("등록완료");
 		}
-		return "redirect:member/cnq";
+		return "redirect:member/cnq/list";
 
 	}
 
