@@ -52,7 +52,7 @@ public class WebSecurityConfig {
 				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
 				.exceptionHandling(handler -> handler
 						.accessDeniedHandler(accessDeniedHandler()))
-				//.csrf(.disable()
+				//.csrf().disable()
 				.userDetailsService(detailService)
 				;
 		return http.build();
