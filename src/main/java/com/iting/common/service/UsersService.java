@@ -1,7 +1,7 @@
 package com.iting.common.service;
 
-import com.iting.member.model.MemberVO;
+import com.iting.common.model.UsersVO;
 
 public interface UsersService {
-	public MemberVO getMemberInfo(String userid);
+	public UsersVO getUserInfo(String userid);
 }
