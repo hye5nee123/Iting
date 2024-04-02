@@ -40,8 +40,13 @@ public class CommonController {
 	
 	/* 로그인 및 로그아웃 */
 	@GetMapping("/login")
-	public String loginform() {
+	public String loginForm() {
 		return "common/login";
+	}
+	
+	@GetMapping("/account")
+	public String accountForm() {
+		return "common/account";
 	}
 	
 	@GetMapping("/accessError")

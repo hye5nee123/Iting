@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet" href="/css/member/nice-select.css"
+	type="text/css">
+<link rel="stylesheet" href="/css/member/style.css" type="text/css">
+<title>회원가입</title>
+<style>
+.container {
+	margin: 0 auto;
+}
+
+.logo {
+	width: 300px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="checkout__form">
+			<img class="logo" src="img/common/logo_w.png" />
+			<h6 class="checkout__title">회원가입</h6>
+			<div class="checkout">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item"><input class="nav-link active"
+						data-toggle="tab" href="#tabs-5" role="tab" type="radio"
+						name="usertype" value="b1" /> 일반회원</li>
+					<li class="nav-item"><input class="nav-link" data-toggle="tab"
+						href="#tabs-6" role="tab" type="radio" name="usertype" value="d2">
+						강사</li>
+				</ul>
+			</div>
+			<div class="checkout__input col-lg-4">
+				<p>
+					아이디 <span>*</span>
+				</p>
+				<input type="text" name="">
+				<p>
+					비밀번호 <span>*</span>
+				</p>
+				<input type="text">
+				<p>
+					이메일 <span>*</span>
+				</p>
+				<input type="text">
+				<p>
+					연락처 <span>*</span>
+				</p>
+				<input type="text">
+				<p>이름</p>
+				<input type="text">
+				<p>
+					주소 <span>*</span>
+				</p>
+				<input type="text">
+			</div>
+			<div class="checkout__input col-lg-6">
+				<p>
+					상세주소 <span>*</span>
+				</p>
+				<input type="text">
+			</div>
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item"><a>Description</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab"
+					href="#tabs-6" role="tab">Customer Previews(5)</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab"
+					href="#tabs-7" role="tab">Additional information</a></li>
+			</ul>
+			<div class="checkout__input col-lg-4">
+				<p>관심사</p>
+				<input type="text">
+				<button type="button" class="site-btn">관심사 선택</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		function usertype() {
+			if (document.getElementsByName("usertype")[0].value == b1) {
+				return true;
+			}
+			;
+			if (document.getElementsByName("usertype")[0].value != b1) {
+				return false;
+			}
+			;
+		}
+	</script>
+</body>
+</html>
