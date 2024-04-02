@@ -11,6 +11,16 @@ function move(ltCnqNum){
 </script>
 </head>
 <body>
+<!-- 검색 폼 시작 -->
+	<form name="frmSearch" th:object="${CnqVO}" action="bList">
+		<input type="hidden" name="page">
+		제목 <input name="ttl" th:value="*{ttl}">
+		내용 <input name="cntn" th:value="*{cntn}">
+		작성자 <input name="name" th:value="*{name}">
+		<button type="button" onclick="gopage(1)">검색</button>
+		<button type="button" onclick="init()">초기화</button>
+	</form>
+	<!-- 검색 폼 끝 -->
 	<nav>nav입니다</nav>
 	<h1>커뮤니티</h1>
 	<div>

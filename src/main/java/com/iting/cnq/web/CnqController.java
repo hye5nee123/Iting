@@ -2,6 +2,7 @@ package com.iting.cnq.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
+import com.iting.cnq.model.PagingVO;
 import com.iting.cnq.service.CnqService;
 import com.iting.cnq.service.ReplyService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class CnqController {
 
@@ -26,9 +32,18 @@ public class CnqController {
 	/* 회원 */
 
 	// 강의문답 전체조회.
-	@RequestMapping("member/cnq")
-	public String cnqList(Model model, CnqVO vo) {
-		model.addAttribute("cnqList", cnqService.cnqList(vo));
+	@RequestMapping("member/cnq/list")
+	public String cnqList(Model model, CnqVO vo, CSearchVO svo, PagingVO pvo) {
+		// paging처리.
+		pvo.setPageUnit(5); // 데이터수
+		pvo.setPageSize(3); // 페이지번호
+		svo.setStart(pvo.getFirst());
+		svo.setEnd(pvo.getLast());
+
+		Map<String, Object> map = cnqService.getCnqList(vo, svo);
+		pvo.setTotalRecord((long) map.get("count"));
+		model.addAttribute("paging", pvo);
+		model.addAttribute("cnqList", map.get("data"));
 		return "member/cnq/list";
 	}
 
@@ -36,7 +51,7 @@ public class CnqController {
 	@RequestMapping("member/cnq/info/{ltCnqNum}")
 	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
 		String a = cnqService.getCnqInfo(ltCnqNum).getLtCnqNum();
-		
+
 		model.addAttribute("댓글", ReplyService.class);
 		model.addAttribute("cnq", cnqService.getCnqInfo(ltCnqNum));
 		System.out.println("조회완료");
