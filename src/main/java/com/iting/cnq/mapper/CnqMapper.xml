@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.cnq.mapper.CnqMapper">
+	<select id="cnqList" resultType="CnqVO">
+	
+SELECT 
+        c.ttl,
+        c.cntn,
+        c.drwup_dt,
+        c.hit,
+        m.name
+FROM lt_cnq c JOIN mem m 
+     on c.mem_num = m.mem_num
+WHERE lt_num = 'lt00001'
+	</select>
+	
+	<!-- 상세조회 -->
+	<select id="getCnqInfo" resultType="CnqVO">
+	SELECT  c.ttl,
+        c.cntn,
+        c.drwup_dt,
+        c.hit,
+        m.name
+    FROM lt_cnq c JOIN mem m 
+     on c.mem_num = m.mem_num
+	WHERE lt_cnq_num = #{ltCnqNum}
+	</select>
+	
+	<!-- cnq 등록 -->
+	<insert id="cnqInsert" parameterType="CnqVO">
+		<selectKey keyProperty="ltCnqNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(subsp_num, -3)), 0) + 1, 5, '0') AS LI_CNQ_NUM 
+			FROM subsp
+		</selectKey>
+		INSERT INTO lt_Cnq (
+							LT_CNQ_NUM
+			                , TTL
+			                , CNTN
+			                , DRWUP_DT
+			              	, MEM_NUM
+			                , LT_NUM
+			                )
+			VALUES (
+					#{ltCnqNum}
+			        , #{ttl}
+			        , #{cntn}
+			        , #{drwupDt}
+			        , #{memNum}
+			        , #{ltNum}
+			        )
+	</insert>
+	<delete id="deleteCnq">
+		delete from lt_cnq where LT_CNQ_NUM = #{ltCnqNum}
+	</delete>
+		<update id="updateCnq" parameterType="CnqVO">
+		UPDATE lt_cnq
+		<set>
+			<if test="title != null">
+			TTL = #{title},
+			</if>
+			<if test="content != null">
+			CNTN = #{content},
+			</if>
+			<if test="writer != null">
+			WRITER = #{writer},
+			</if>
+			<if test="writeDate != null">
+			WRITE_DATE = #{writeDate},
+			</if>
+			<if test="clickCnt != null">
+			CLICK_CNT = #{clickCnt},
+			</if>
+			<if test="image != null">
+			IMAGE = #{image},
+			</if>
+		</set>
+		WHERE LT_CNQ_NUM = #{ltCnqNum}
+	</update>
+	
+	
+	
+</mapper>
