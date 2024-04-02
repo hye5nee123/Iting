@@ -28,6 +28,7 @@
             ,'{noop}' || m.pw AS pw
             ,'ROLE_' || upper(m.mem_fg_cd) AS user_cd
         from mem m
+        where id = #{userid}
         UNION
         select l.id
             ,'{noop}' || l.pw AS pw
