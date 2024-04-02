@@ -6,6 +6,9 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
@@ -21,7 +24,9 @@
     <link rel="stylesheet" href="/css/member/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/member/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/member/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/boxicons.css" />
     <link rel="stylesheet" href="/css/member/main.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/boxicons.css" />
     
     <!-- Js Plugins -->
     <script src="/js/member/jquery-3.3.1.min.js"></script>
@@ -33,6 +38,8 @@
     <script src="/js/member/jquery.slicknav.js"></script>
     <script src="/js/member/mixitup.min.js"></script>
     <script src="/js/member/owl.carousel.min.js"></script>
+    
+    
 
 
 </head>
@@ -90,6 +97,7 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
+                            
                                 <a href="/login">로그인</a>
                                 <a href="#">회원가입</a>
                             </div>
@@ -113,27 +121,28 @@
                         <ul>
                             <li class="active"><a href="./index.html">수강신청(전체강의)</a>
                             <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="#">기초강의</a></li>
+                                    <li><a href="#">데이터분석</a></li>
+                                    <li><a href="#">웹 개발</a></li>
+                                    <li><a href="#">그로그래밍언어</a></li>
+                                    <li><a href="#">IT자격증</a></li>
+                                    <li><a href="#">전공지식</a></li>
                                 </ul>
                                 
                                 </li>
                             <li><a href="./shop.html">무료강의</a></li>
                             <li><a href="#">커뮤니티</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="#">조혜원씨</a></li>
+                                    <li><a href="#">알아서</a></li>
+                                    <li><a href="#">바꾼다음</a></li>
+                                    <li><a href="#">잘</a></li>
+                                    <li><a href="#">적용하세요</a></li>
                                 </ul>
                             </li>
                             <li><a href="./blog.html">내강의실</a>
                             <ul class="dropdown">
-                                    <li><a href="./about.html">수강현황</a></li>
+                                    <li><a href="#">수강현황</a></li>
                                     <li><a href="./shop-details.html">회원정보 관리</a></li>
                                 </ul>
                             </li>
@@ -196,7 +205,15 @@
     <!-- Footer Section End -->
 
     
+    
+    <!-- JS -->
     <script src="/js/member/main.js"></script>
+    
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- Common JS -->
+    <script src="/js/common.js"></script>
 
 </body>
 

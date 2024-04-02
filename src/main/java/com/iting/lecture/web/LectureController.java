@@ -2,23 +2,26 @@ package com.iting.lecture.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.iting.lecture.model.AdminVO;
-import com.iting.lecture.service.AdminService;
+import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.service.LectureService;
 
 @Controller
-public class AdminController {
+public class LectureController {
 	@Autowired
-	AdminService adminService;
+	LectureService lectureService;
 	
 	// 목록조회 - 예시
 	@RequestMapping("admin/main")
-	public ModelAndView getTestList(AdminVO vo) {
+	public ModelAndView getLectureList(LectureVO vo) {
 		ModelAndView mv  = new ModelAndView();
 		
-		mv.addObject("testList", adminService.getTestList(vo));
+		mv.addObject("testList", lectureService.getLectureList(vo));
 		
 		//뷰페이지 지정
 		mv.setViewName("admin/main");		
@@ -30,7 +33,11 @@ public class AdminController {
 	
 	
 	// 강의 단건 조회
-	
+	@GetMapping("lecture/info/{ltNum}")
+	public String info(@PathVariable String ltNum, Model model) {
+		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
+		return "member/lecture/info";
+	}
 	
 	
 	/* 강사 */
