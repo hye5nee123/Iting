@@ -19,6 +19,7 @@
 	width: 300px;
 }
 </style>
+
 </head>
 
 <body>
@@ -27,38 +28,47 @@
 			<img class="logo" src="img/common/logo_w.png" />
 			<h6 class="checkout__title">회원가입</h6>
 			<div class="checkout">
-				<input type="radio" name="type" onchange="usertype(1)" checked />
-				일반회원 <input type="radio" name="type" onchange="usertype(2)" /> 강사
+				<input type="radio" name="type" onchange="usertypeForm(1)" checked />
+				일반회원 <input type="radio" name="type" onchange="usertypeForm(2)" />
+				강사
 			</div>
 			<div class="checkout__input col-lg-4">
 				<p>
 					아이디 <span>*</span>
 				</p>
-				<input type="text" name="">
+				<input type="text" id="id" name="id"
+					placeholder="4~20자의 영문 대소문자, 숫자">
+				<button type="button" class="site-btn">중복확인</button>
+				<div class="idchk"></div>
 				<p>
 					비밀번호 <span>*</span>
 				</p>
-				<input type="text">
+				<input type="password" id="pw" name="pw"
+					placeholder="8~16자의 영문 대소문자, 숫자">
+				<p>
+					비밀번호 확인<span>*</span>
+				</p>
+				<input type="password" id="pwchk" name="pwchk">
 				<p>
 					이메일 <span>*</span>
 				</p>
-				<input type="text">
+				<input type="text" id="email" name="email">
 				<p>
 					연락처 <span>*</span>
 				</p>
-				<input type="text">
+				<input type="tel" id="phone" name="phone" placeholder="01012345678">
 				<p>이름</p>
-				<input type="text">
+				<input type="text" id="name" name="name">
 				<p>
 					주소 <span>*</span>
 				</p>
-				<input type="text">
+				<input type="text" id="addr" name="addr">
 			</div>
 			<div class="checkout__input col-lg-6">
 				<p>
 					상세주소 <span>*</span>
 				</p>
-				<input type="text">
+				<input type="text" id="detailaddr" name="detailaddr">
 			</div>
 			<div class="col-lg-4 radios">
 				<!-- 회원, 강사 폼 바뀌는 부분 -->
@@ -77,64 +87,11 @@
 				<button type="button">></button>
 			</div>
 			<div class="accbtn">
-				<button type="button" class="site-btn" style="width: 300px" th:onclick="insertAccount()">가입하기</button>
+				<button type="button" class="site-btn" style="width: 300px"
+					th:onclick="insertAccount()">가입하기</button>
 			</div>
 		</div>
 	</div>
-	<script>
-		let accode = 'b1'; // 넣을 코드 데이터 값
-		usertype(1); // 첫 화면 폼 그려주기
-
-		let allboxs = document.querySelectorAll('.chk');
-		let chkdboxs = document.querySelectorAll('.chk:checked');
-		for(box of allboxs){
-			box.addEventListener('click', () => {
-				if(allboxs.length != chkdboxs.length){
-					document.querySelector('#chk_all').checked = false;
-				}
-			});
-		}
-		chk_all.addEventListener('click', () => {
-			for(obj of allboxs){
-				if(chk_all.checked){
-					obj.checked = true;
-				} else if(!chk_all.checked) {
-					obj.checked = false;
-				}
-			}
-		});
-		function usertype(num) {
-			let form;
-			document.getElementsByClassName('radios')[0].innerHTML = ''; // 바뀔때 비워주기용
-			if (num == '1') {
-				actype = 'b1';
-				form = `<div class="checkout__input">
-					<p>관심사</p>
-					<input type="text">
-					<button type="button" class="site-btn">관심사 선택</button>
-					</div>`;
-			}
-			else if (num == '2') {
-				actype = 'd2';
-				form = `<div class="checkout__input">
-					<p>이력서 첨부 <span>*</span></p>
-					</div>
-					<input type="file" accept=".pdf, .xlsx, .hwp"/>`;
-			}
-			document.getElementsByClassName('radios')[0].innerHTML = form;
-		}
-		function insertAccount(){
-			// 아이디, 비밀번호 등 체크
-
-
-			let agrees = document.querySelectorAll('.svc:checked');
-			if(agrees.length != 2){
-				console.log("add"); //
-				alert("필수 약관에 동의해야합니다.");
-				return;
-			}
-		}
-	</script>
+	<script src="/js/join/account.js"></script>
 </body>
-
 </html>
