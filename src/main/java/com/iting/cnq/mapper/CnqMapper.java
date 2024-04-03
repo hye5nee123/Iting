@@ -10,7 +10,7 @@ import com.iting.cnq.model.CSearchVO;
 @Mapper
 public interface CnqMapper {
 	public List<CnqVO> getCnqList(CnqVO vo, CSearchVO svo);
-
+	//수정
 	public int cnqInsert(CnqVO vo);
 
 	public CnqVO getCnqInfo(String ltCnqNum);
