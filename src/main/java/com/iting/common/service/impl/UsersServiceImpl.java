@@ -11,12 +11,12 @@ import com.iting.common.model.UsersVO;
 import com.iting.common.security.CustomUsers;
 import com.iting.common.service.UsersService;
 
-
 @Service
 public class UsersServiceImpl implements UsersService, UserDetailsService {
 
-	@Autowired UsersMapper usersMapper;
-	
+	@Autowired
+	UsersMapper usersMapper;
+
 	@Override
 	public UsersVO getUserInfo(String userid) {
 		return usersMapper.getUserInfo(userid);
@@ -25,10 +25,9 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UsersVO userVO = usersMapper.getUserInfo(username);
-		if(userVO == null) {
+		if (userVO == null) {
 			throw new UsernameNotFoundException("id not found");
 		}
 		return new CustomUsers(userVO);
 	}
-
 }

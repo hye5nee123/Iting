@@ -24,13 +24,15 @@
 	</select> -->
 	<select id="getUserInfo" parameterType="string"
 		resultType="UsersVO">
-		select m.id
+		select m.mem_num AS num_cd
+            ,m.id
             ,'{noop}' || m.pw AS pw
             ,'ROLE_' || upper(m.mem_fg_cd) AS user_cd
         from mem m
         where id = #{userid}
         UNION
-        select l.id
+        select l.lecturer_num AS num_cd
+            ,l.id
             ,'{noop}' || l.pw AS pw
             ,'ROLE_' || upper(l.accp_yn_cd) AS user_cd
         from lecturer l

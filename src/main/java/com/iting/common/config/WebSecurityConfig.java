@@ -8,9 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.iting.common.security.CustomAccessDeniedHandler;
+import com.iting.common.security.CustomAuthFailureHandler;
 import com.iting.common.security.CustomLoginSuccessHandler;
 
 @Configuration
@@ -27,6 +29,10 @@ public class WebSecurityConfig {
 	public AuthenticationSuccessHandler authenticationSuccessHandler() {
 		return new CustomLoginSuccessHandler();
 	}
+//	@Bean
+//    AuthenticationFailureHandler loginFailureHandler(){
+//        return new CustomAuthFailureHandler();
+//    }
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,6 +47,7 @@ public class WebSecurityConfig {
 				.formLogin().loginPage("/login")
 				.usernameParameter("userId")
 				.loginProcessingUrl("/userlogin")
+				.failureForwardUrl("/loginfail")
 				.successHandler(authenticationSuccessHandler())
 				.permitAll()
 				.and()
