@@ -1,9 +1,39 @@
 .tab-content.test_content{padding:0; background:none; border-radius:0; box-shadow:none;}
 .test_content ul{list-style:none; padding:0;}
 .test_content ul li{margin-top:20px;}
-.test_content ul li div:not(.bottom){padding:1.5rem; background:#fff; box-shadow:0 2px 6px 0 rgba(67, 89, 113, 0.12); border-radius:0.375rem;}
-.test_content ul li div:not(.bottom) > p{margin-bottom:10px; color:#ff8a00; font-size:13px; font-weight:600;}
+.test_content ul li div:not(.bottom, .btn_box){padding:1.5rem; background:#fff; box-shadow:0 2px 6px 0 rgba(67, 89, 113, 0.12); border-radius:0.375rem;}
+.test_content ul li div:not(.bottom, .btn_box) > p{margin-bottom:10px; color:#ff8a00; font-size:13px; font-weight:600;}
 .test_content ul li div h5{font-weight:700;}
-.test_content ul li .bottom{border-top:1px solid #eee;}
-.test_content ul li .bottom p{margin-top:15px; margin-bottom:0;}
+.test_content ul li .bottom{display:flex; justify-content:space-between; align-items:center; border-top:1px solid #eee;}
+.test_content ul li .bottom p{margin-bottom:0; margin-top:20px;}
 .test_content ul li .bottom p i{font-style:normal; font-weight:700;}
+.test_content ul li .bottom .demo-inline-spacing{padding:0;}
+.text-muted{font-weight:500;}
+.form-label{color:#ff8a00;}
+.form-label .tit{margin-top:10px; font-size:1rem; margin-bottom:5px;}
+.form-control:focus, .form-select:focus{border-color:#ff8a00;}
+.test_list{margin-bottom:0 !important; margin-top:10px;}
+.test_list label{float:left; width:2%; margin-top:10px; font-size:15px; font-weight:700;}
+.test_list input{float:left; width:calc(100% - 2%);}
+.test_list:after{content:''; display:block; clear:both;}
+.test_list.first_list{margin-top:20px;}
+.test_insert .row{margin-top:30px; position:relative; display:flex; flex-direction:column; min-width:0; word-wrap:break-word; background-color:#fff; background-clip:border-box; border:0 solid #d9dee3; border-radius:0.5rem; padding:1.5rem 1.5rem}
+.test_insert .btn_box{margin-top:20px; text-align:center;}
+.test_insert .form-tit{margin-top:10px; margin-bottom:5px;}
+.test_list span.form-label{display:block; float:left; width:2%; font-size:15px; font-weight:700;}
+.test_list p{float:left; width:calc(100% - 2%); margin-bottom:5px;}
+.test_test .test_list.first_list{margin-top:20px;}
+.test_test span.form-label i{font-style:normal; display:inline-block;}
+.ans .test_list{margin-top:5px;}
+.ans{background:#f9f9f9; padding:10px 20px; margin-top:15px; box-sizing:border-box; border-radius:10px;}
+.ans .test_list:after{content:''; display:block; clear:both;}
+.ans .test_list .tit{display:inline-block; float:left; margin-top:3px; width:40px; font-weight:400; margin-right:10px; text-align:center; font-size:12px; border:1px solid #ff8a00; color:#ff8a00; border-radius:50px;}
+.ans .test_list p{float:left; width:calc(100% - 50px);}
+.ans .test_list label.tit{margin-top:10px;}
+.ans .test_list .tit + input{width:calc(100% - 50px);}
+.insert_ans{padding:10px 20px 20px;}
+.insert_ans .test_list{margin-top:10px;}
+.tR{text-align:right;}
+h4{position:relative;}
+.btn_posi{position:absolute; right:0;}
+.test_test .btn_box{margin-top:10px;}
