@@ -17,6 +17,21 @@
 		ORDER BY PRBL_NUM DESC
 	</select>
 	
+	<!-- 단건조회 -->
+	<select id="getTestInfo" resultType="TestVo">
+		SELECT PRBL_NUM
+               , PRBL_CNTN
+               , QUES1
+               , QUES2
+               , QUES3
+               , QUES4
+               , ANS
+               , CTY
+               , LT_NUM
+		FROM PRBL
+		WHERE PRBL_NUM = #{prblNum}
+	</select>
+	
 	<!-- 등록 -->
 	<insert id="insertTest" parameterType="TestVO">	
 		<selectKey keyProperty="prblNum"
@@ -46,4 +61,9 @@
 				, #{ltNum}
 				)
 	</insert>
+	
+	<delete id="deleteTest">
+		DELETE FROM PRBL
+		WHERE PRBL_NUM = #{prblNum}
+	</delete>
 </mapper>

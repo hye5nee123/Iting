@@ -47,8 +47,8 @@
 		     </div>
 	     </div>
 	     <div class="demo-inline-spacing btn_box">
-   			<button class="btn btn-outline-warning">문제수정</button>
-   			<button class="btn btn-outline-secondary">문제삭제</button>
+   			<button th:href="@{/update/{no}(no=${test.prblNum})}" class="btn btn-outline-warning">문제수정</button>
+   			<button th:href="@{/delete(prblNum=${test.prblNum})}" class="btn btn-outline-secondary">문제삭제</button>
    		</div>
 	</div>
   </div>
