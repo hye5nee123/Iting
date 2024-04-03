@@ -14,14 +14,15 @@
                , CTY
                , LT_NUM
 		FROM PRBL
+		ORDER BY PRBL_NUM DESC
 	</select>
 	
 	<!-- 등록 -->
 	<insert id="insertTest" parameterType="TestVO">	
-		<selectKey keyProperty="subspNum"
+		<selectKey keyProperty="prblNum"
 					order="BEFORE"
 					resultType="string">
-			SELECT 'pr' || LPAD(NVL(MAX(SUBSTR(PRBL_NUM, -3)), 0) + 1, 5, '0') AS PRBL_NUM 
+			SELECT 'pr' || LPAD(NVL(MAX(SUBSTR(PRBL_NUM, -5)), 0) + 1, 5, '0') AS PRBL_NUM 
 			FROM PRBL
 		</selectKey>
 		INSERT INTO PRBL(PRBL_NUM
@@ -31,7 +32,8 @@
 		                 , QUES3
 		                 , QUES4
 		                 , ANS
-		                 , CTY)
+		                 , CTY
+		                 , LT_NUM)
 		VALUES ( 
 				  #{prblNum}
 				, #{prblCntn}
@@ -41,6 +43,7 @@
 				, #{ques4}
 				, #{ans}
 				, #{cty}
+				, #{ltNum}
 				)
 	</insert>
 </mapper>
