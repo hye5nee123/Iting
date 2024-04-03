@@ -15,5 +15,4 @@ public class CnqVO {
 	private String ltNum;
 	private String name;
 	private String image;
-	// 안 들어간다.
 }

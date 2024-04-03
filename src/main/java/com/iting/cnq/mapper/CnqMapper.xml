@@ -2,87 +2,109 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.cnq.mapper.CnqMapper">
-	<select id="cnqList" resultType="CnqVO">
-	
-SELECT
-		c.lt_cnq_num,
-        c.ttl,
-        c.cntn,
-        c.drwup_dt,
-        c.hit,
-        m.name
-FROM lt_cnq c JOIN mem m 
-     on c.mem_num = m.mem_num
-WHERE lt_num = 'lt00001'
-	</select>
-	
-	<!-- 상세조회 -->
-	<select id="getCnqInfo" parameterType="String" resultType="CnqVO">
-	SELECT  
+
+	<select id="getCnqList" resultType="CnqVO">
+		select * from (select ROWNUM as rn, a.* from (
+	SELECT
 		c.lt_cnq_num,
 		c.ttl,
-        c.cntn,
-        c.drwup_dt,
-        c.hit,
-        m.name
-    FROM lt_cnq c JOIN mem m 
-     on c.mem_num = m.mem_num
-	WHERE lt_cnq_num = #{ltCnqNum}
+		c.cntn,
+		c.drwup_dt,
+		c.hit,
+		m.name
+	FROM lt_cnq c JOIN mem m
+		on c.mem_num = m.mem_num
+		<where>
+			<if test="vo.ttl != null and vo.ttl != ''">
+				TTL like '%' || #{vo.ttl} || '%'
+			</if>
+			<if test="vo.cntn != null and vo.cntn != ''">
+				AND CNTN like '%' || #{vo.cntn} || '%'
+			</if>
+			<if test="vo.name != null and vo.name != ''">
+				AND NAME like '%' || #{vo.name} || '%'
+			</if>
+		</where>
+		ORDER by LT_CNQ_NUM
+	<![CDATA[
+	) a where ROWNUM <= #{svo.end}) b where rn >= #{svo.start}
+	]]>
 	</select>
-	
+
+	<!-- 상세조회 -->
+	<select id="getCnqInfo" parameterType="String"
+		resultType="CnqVO">
+		SELECT
+		c.lt_cnq_num,
+		c.ttl,
+		c.cntn,
+		c.drwup_dt,
+		c.hit,
+		m.name
+		FROM lt_cnq c JOIN mem m
+		on c.mem_num = m.mem_num
+		WHERE lt_cnq_num = #{ltCnqNum}
+	</select>
+
 	<!-- cnq 등록 -->
- <insert id="cnqInsert" parameterType="CnqVO">
-		<selectKey keyProperty="ltCnqNum"
-					order="BEFORE"
-					resultType="string">
-			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(subsp_num, -3)), 0) + 1, 5, '0') AS LI_CNQ_NUM 
+	<insert id="cnqInsert" parameterType="CnqVO">
+		<selectKey keyProperty="ltCnqNum" order="BEFORE"
+			resultType="string">
+			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(subsp_num, -3)), 0) +
+			1, 5, '0') AS LI_CNQ_NUM
 			FROM subsp
 		</selectKey>
 		INSERT INTO lt_Cnq (
-							LT_CNQ_NUM
-			                , TTL
-			                , CNTN
-			                , DRWUP_DT
-			              	, MEM_NUM
-			                , LT_NUM
-			                )
-			VALUES (
-					#{ltCnqNum}
-			        , #{ttl}
-			        , #{cntn}
-			        , #{drwupDt}
-			        , #{memNum}
-			        , #{ltNum}
-			        )
+		LT_CNQ_NUM
+		, TTL
+		, CNTN
+		, DRWUP_DT
+		, MEM_NUM
+		, LT_NUM
+		)
+		VALUES (
+		#{ltCnqNum}
+		, #{ttl}
+		, #{cntn}
+		, #{drwupDt}
+		, #{memNum}
+		, #{ltNum}
+		)
 	</insert>
+	
 	<delete id="deleteCnq">
 		delete from lt_cnq where LT_CNQ_NUM = #{ltCnqNum}
 	</delete>
-		<update id="updateCnq" parameterType="CnqVO">
+	
+	<update id="updateCnq" parameterType="CnqVO">
 		UPDATE lt_cnq
 		<set>
 			<if test="title != null">
-			TTL = #{title},
+				TTL = #{title},
 			</if>
 			<if test="content != null">
-			CNTN = #{content},
+				CNTN = #{content},
 			</if>
 			<if test="writer != null">
-			WRITER = #{writer},
+				WRITER = #{writer},
 			</if>
 			<if test="writeDate != null">
-			WRITE_DATE = #{writeDate},
+				WRITE_DATE = #{writeDate},
 			</if>
 			<if test="clickCnt != null">
-			CLICK_CNT = #{clickCnt},
+				CLICK_CNT = #{clickCnt},
 			</if>
 			<if test="image != null">
-			IMAGE = #{image},
+				IMAGE = #{image},
 			</if>
 		</set>
 		WHERE LT_CNQ_NUM = #{ltCnqNum}
 	</update>
 	
-	
-	
+	<select id="getCount" resultType="Long">
+		select count(*)
+		from lt_cnq
+	</select>
+
+
 </mapper>
