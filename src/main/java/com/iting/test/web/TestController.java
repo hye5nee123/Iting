@@ -24,8 +24,7 @@ public class TestController {
 //		return "teacher/test/list";
 //	}
 	
-	// 문제조회
-	@RequestMapping("test/test")
+	
 
 	// 목록조회
 	@RequestMapping("test/list")
