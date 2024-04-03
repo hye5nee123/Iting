@@ -13,4 +13,75 @@ public class PagingVO {
 	long endPage; // 페이지그룹내에서 마지막페이지번호
 	int first;
 	int last;
+
+	public int getFirst() {
+		first = (getPage() - 1) * getPageUnit() + 1;
+		return first;
+	}
+
+	public int getLast() {
+		last = getPage() * getPageUnit();
+		return last;
+	}
+
+	public int getPageUnit() {
+		return pageUnit;
+	}
+
+	public void setPageUnit(int pageUnit) {
+		this.pageUnit = pageUnit;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public long getLastPage() {
+		lastPage = totalRecord / pageUnit + (totalRecord % pageUnit > 0 ? 1 : 0);
+		return lastPage;
+	}
+
+	public void setLastPage(long lastPage) {
+		this.lastPage = lastPage;
+	}
+
+	public long getTotalRecord() {
+		return totalRecord;
+	}
+
+	public void setTotalRecord(long totalRecord) {
+		this.totalRecord = totalRecord;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public long getStartPage() {
+		startPage = (page - 1) / pageSize * pageSize + 1;
+		return startPage;
+	}
+
+	public void setStartPage(long startPage) {
+		this.startPage = startPage;
+	}
+
+	public long getEndPage() {
+		endPage = (page - 1) / pageSize * pageSize + pageSize;
+		if (endPage > getLastPage())
+			endPage = getLastPage();
+		return endPage;
+	}
+
+	public void setEndPage(long endPage) {
+		this.endPage = endPage;
+	}
 }
