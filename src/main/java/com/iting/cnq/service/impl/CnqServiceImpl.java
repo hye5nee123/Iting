@@ -43,4 +43,10 @@ public class CnqServiceImpl implements CnqService {
 		return cnqMapper.getCount(vo, svo);
 	}
 
+	@Override
+	public int updateCnq(CnqVO vo) {
+		
+		return cnqMapper.updateCnq(vo);
+	}
+
 }

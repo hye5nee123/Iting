@@ -1,24 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>글등록</h3>
-	<form action="/cnq/insert" method="post"
-		enctype="multipart/form-data">
-		제목 : <input name="ttl"> 내용 : <input name="cntn">
-		작성자 : <input name="name"> 작성일자 : <input name="drwupDt"
-			th:value="${#calendars.format(#calendars.createNow(),'yyyy/MMdd')}"
-			readonly> 이미지 : <input name="photofile" type="file">
-		<button type="submit">등록</button>
-		<button type="button" id="listBtn">글목록으로</button>
-	</form>
-	<script>
-	listBtn.addEventListener("click",e => {
-		location.href='/member/cnq'
+	<section layout:fragment="content">
+
+
+		<div class="container">
+			<div class="checkout__input contact__form">
+				<h3>글등록</h3>
+				<form name="cnqForm" method="post">
+					제목 : <input name="ttl"> 내용 :
+					<textarea name="cntn"></textarea>
+					<br> 작성자 : <input name="name">
+					<!--  이미지 : <input name="photofile" type="file">-->
+					<button type="button" id="saveBtn">등록</button>
+					<button type="button" id="listBtn">글목록으로</button>
+				</form>
+			</div>
+		</div>
+		<script>
+	//등록요청.
+		
+	function saveReq() {
+		const ttl = cnqForm.ttl.value;
+		const cntn = cnqForm.cntn.value;
+		const name = cnqForm.name.value;
+		let param = { ttl, cntn, name}
+		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/cnq/insert',
+				data: param
+			
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		alert('게시글 등록 완료!');
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		saveReq();
 	})
 </script>
+	</section>
 </body>
 </html>

@@ -1,7 +1,5 @@
 package com.iting.cnq.web;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.cnq.model.CSearchVO;
@@ -39,12 +38,13 @@ public class CnqController {
 		pvo.setPageSize(3); // 페이지번호
 		svo.setStart(pvo.getFirst());
 		svo.setEnd(pvo.getLast());
-		System.out.println( ">>>>>>>>>>>> "+vo + ":"+ svo  );
+		System.out.println(">>>>>>>>>>>> " + vo + ":" + svo);
 		Map<String, Object> map = cnqService.getCnqList(vo, svo);
 		pvo.setTotalRecord((long) map.get("count"));
 		model.addAttribute("paging", pvo);
 		model.addAttribute("cnqList", map.get("data"));
 		return "member/cnq/list";
+
 	}
 
 	// info 조회.
@@ -80,30 +80,27 @@ public class CnqController {
 		return mv;
 	}
 
-	// 등록 기능.......
-	@PostMapping("/cnq/insert")
-	public String insert(CnqVO vo, MultipartFile photofile) throws IllegalStateException, IOException {
-		if (photofile != null) {
-			if (photofile.getSize() > 0) {
-				// 파일 생성
-				File file = new File("c:/upload", photofile.getOriginalFilename());
-				// 파일 저장
-				photofile.transferTo(file);
-				vo.setImage(photofile.getOriginalFilename());
-			}
-
-		}
-		int result = cnqService.cnqInsert(vo);
-		if (result > 0) {
-			System.out.println("등록완료");
-		}
-		return "redirect:member/cnq/list";
-
+	// 등록 기능.
+	@ResponseBody
+	@PostMapping("/member/cnq/insert")
+	// jsonType 을 받기 위해서 @RequestBody붙임.
+	public CnqVO cnqInsert(@RequestBody CnqVO vo) {
+		vo.setMemNum("me00001");
+		vo.setLtNum("lt00001");
+		System.out.println(vo + "====================");
+		cnqService.cnqInsert(vo);
+		return vo;
 	}
 
-	// 수정
-
-	// 삭제
+	// 수정 form 이동.
+	@GetMapping("/member/cnq/update")
+	public ModelAndView updateForm() {
+		ModelAndView mv = new ModelAndView("member/cnq/update");
+		return mv;
+	}
+// 수정 기능.
+	
+// 삭제
 
 	/* 강사 */
 
