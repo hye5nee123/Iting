@@ -51,7 +51,7 @@
     	</form>
     	<div class="btn_box demo-inline-spacing">
            <button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">문제등록하기</button>
-           <button type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary">목록가기</button>
+           <button type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" onclick="location.href='/teacher/test/list'">목록가기</button>
          </div>
   </div>
   
@@ -74,7 +74,7 @@
 		
 		csrf_axios({
 				method: 'POST',
-				url: '/test/insert',
+				url: '/teacher/test/insert',
 				data: JSON.stringify(param)
 			
 				})
@@ -85,12 +85,15 @@
 	function saveRes(res) {
 		console.log(res);
 		alert('문제가 등록되었습니다.');
+		window.location.href = "/teacher/test/list";
 	}
 	
 	//버튼 클릭 시 함수 호출.
 	saveBtn.addEventListener("click", e => {
 		saveReq();
 	})
+	
+	
 </script>
 </div>
 </body>
