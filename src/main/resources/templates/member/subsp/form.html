@@ -5,55 +5,135 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- Core CSS -->
+<link rel="stylesheet" href="/css/admin/core.css" class="template-customizer-core-css" />
+<link rel="stylesheet" href="/css/admin/theme-default.css" class="template-customizer-theme-css" />
+<link rel="stylesheet" href="/css/admin/demo.css" />
+<link rel="stylesheet" href="/css/admin/main.css" />
+
+<link rel="stylesheet" href="/css/member/content.css" />
+
 </head>
 <body>
 <section layout:fragment="content">
-	<div class="container">		
-		<div class="card text-center">
-		  <div class="card-header ">
-		    아이팅 1개월 구독권
-		  </div>
-		  <div class="card-body">
-		    <h5 class="card-title">아이팅 구독 시 받는 혜택!</h5>
-		    <p class="card-text">강의 1개 가격으로 모든 강의 무제한 수강
-							<br>언제든 물어볼 수 있는 아이팅 커뮤니티
-			</p>
-			
-			<div class="checkout__input">			
-				<form method="post" id="subspFrm">
-					<input type="radio" value="n1" name="subspTypCd">월간
-					<input type="radio" value="n2" name="subspTypCd">연간
-					<br>
-					<p>구독시작일자</p>
-					<input type="date" name="subspFrDt" value="2024-04-01">
-					<br>
-					<p>구독마감일자</p>
-					<input type="date" name="subspToDt" value="2024-05-01">
-					<br>
-					<input type="hidden" value="m1" name="subspStCd">
-					<br>
-					가격
-					<input type="number" name="subspPrice" value="39800" disabled="disabled">
-					<br>
-					<input type="hidden" value="me00001" name="memNum">
-					
-					<input type="radio" value="o1" name="sttlTypCd">카카오페이
-					<input type="radio" value="o2" name="sttlTypCd">일반결제
-					
-					<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
-					<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
-				</form>
-			</div>
-		  </div>
-		</div>
 	
-	
-	
-	
-		
+	<div class="row statistics">
+	   <div class="col-md-12">
+	     <div class="card">
+	       <h5 class="card-header">구독하기</h5>
+	       <div class="card-body">
+	        <div class="nav-align-top mb-4">
+                    <ul class="nav nav-pills mb-3" role="tablist">
+                      <li class="nav-item">
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#subsp-Monthly" aria-controls="navs-pills-top-home" aria-selected="true">
+                          월간구독
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#subsp-Yearly" aria-controls="navs-pills-top-profile" aria-selected="false">
+                          연간구독
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="subsp-Monthly" role="tabpanel">		
+						<form method="post" id="subspFrm">
+							<input type="radio" value="n1" name="subspTypCd">월간
+							<input type="radio" value="n2" name="subspTypCd">연간
+							<br>
+							<p>구독시작일자</p>
+							<input type="date" name="subspFrDt" value="2024-04-01">
+							<br>
+							<p>구독마감일자</p>
+							<input type="date" name="subspToDt" value="2024-05-01">
+							<br>
+							<input type="hidden" value="m1" name="subspStCd">
+							<br>
+							가격
+							<input type="number" name="subspPrice" value="39800" disabled="disabled">
+							<br>
+							<input type="hidden" value="me00001" name="memNum">
+							
+							<input type="radio" value="o1" name="sttlTypCd">카카오페이
+							<input type="radio" value="o2" name="sttlTypCd">일반결제
+							
+							<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
+							<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
+						</form>
+
+                      </div>
+                      <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
+                        <h6>연간구독 폼</h6>
+                        <p>하이</p>
+                      </div>
+                      
+                    </div>
+                  </div>
+	       </div>
+	     </div>
+	   </div>
+	 </div>
+	 
+	 <!-- Tab Test -->
+	 <div class="row">
+	    <div class="col-lg-12">
+	        <div class="product__details__tab">
+	            <ul class="nav nav-tabs" role="tablist">
+	                <li class="nav-item">
+	                    <a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">월간구독</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">연간구독</a>
+	                </li>
+	                
+	            </ul>
+	            <div class="tab-content">
+	                <div class="tab-pane active" id="tabs-5" role="tabpanel">
+	                    <div class="product__details__tab__content">
+	                        <div class="product__details__tab__content__item">
+	                            <form method="post" id="subspFrm">
+									<input type="radio" value="n1" name="subspTypCd">월간
+									<input type="radio" value="n2" name="subspTypCd">연간
+									<br>
+									<p>구독시작일자</p>
+									<input type="date" name="subspFrDt" value="2024-04-01">
+									<br>
+									<p>구독마감일자</p>
+									<input type="date" name="subspToDt" value="2024-05-01">
+									<br>
+									<input type="hidden" value="m1" name="subspStCd">
+									<br>
+									가격
+									<input type="number" name="subspPrice" value="39800" disabled="disabled">
+									<br>
+									<input type="hidden" value="me00001" name="memNum">
+									
+									<input type="radio" value="o1" name="sttlTypCd">카카오페이
+									<input type="radio" value="o2" name="sttlTypCd">일반결제
+									
+									<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
+									<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
+								</form>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="tab-pane" id="tabs-6" role="tabpanel">
+	                    <div class="product__details__tab__content">
+	                        <div class="product__details__tab__content__item">
+	                            
+	                        </div>
+	                        <div class="product__details__tab__content__item">
+	                            <h5>연간구독</h5>
+	                            <p>여기여기</p>
+	                        </div>
+	                    </div>
+	                </div>
+	               
+	            </div>
+	        </div>
+	    </div>
 	</div>
-	
-	
 
 <script>
 // 현재날짜 등록
@@ -171,14 +251,8 @@ async function payReq() {
 	      "Authorization": "PortOne HlqMtdjNfDt6fEhGksazVWdRpTLby0yFlMjjm7R30SalvLd6CX4uY7JjsgxOfetFAfqNYUfaS2I3W4gu"
 	    },
 	    data: {
-	      billingKey,
+	      billingKey : billingKey,
 	      orderName: "아이팅 1개월권 정기결제",
-	      // 빌링키 결제 API를 참고해 고객 정보를 채워주세요.
-	      customer: {
-	    	  id : "me00001",
-	    	  name : "홍길동",
-	    	  email : "hong@naver.com"
-	      },
 	      amount: {
 	        total: 38900,
 	      },
@@ -186,12 +260,16 @@ async function payReq() {
 	    },
 	  },
 	);
-	if (!paymentResponse.ok) console.log("pay err");
+	if (!paymentResponse.ok) console.log(paymentResponse);
 }
 
 
 </script>
-	
+<!-- Core JS -->
+<script src="/js/admin/jquery.js"></script>
+<script src="/js/admin/popper.js"></script>
+<script src="/js/admin/bootstrap.js"></script>
+<script src="/js/admin/perfect-scrollbar.js"></script>
 </section>
 </body>
 </html>
