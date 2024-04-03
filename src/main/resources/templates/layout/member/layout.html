@@ -9,6 +9,7 @@
     <!-- CSRF -->
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
@@ -109,10 +110,11 @@
                             <div class="header__top__links">
                             
                                 <a href="/login">로그인</a>
-                                <a href="/account">회원가입</a>
+                                <a href="#">회원가입</a>
+                                <a href="#">마이페이지</a>
                             </div>
+                            <div id="count">0일0시간0분0초</div>
                             <div class="header__top__hover">
-                                <span>마이페이지 </span>
                             </div>
                         </div>
                     </div>
@@ -226,5 +228,28 @@
     <script src="/js/common.js"></script>
 
 </body>
+<script>
+    const goalDate = new Date("2024-04-30").getTime();
 
+    function calcDate() {
+        const now = new Date().getTime();
+        const distance = goalDate - now;
+
+        var days = Math.floor(distance / (1000*60*60*24));
+        var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+        var seconds = Math.floor((distance % (1000*60)) / 1000);
+
+        if (distance < 0) {
+            return '(지나감)';
+        } else {
+            return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음`;
+        }
+    }
+    
+    setInterval(() => {
+        document.getElementById('count').innerText = calcDate();
+    }, 1000);
+
+</script>
 </html>
