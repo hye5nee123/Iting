@@ -6,4 +6,6 @@ import com.iting.test.model.TestVO;
 
 public interface TestService {
 	public List<TestVO> getTestList(TestVO vo);
+
+
 }

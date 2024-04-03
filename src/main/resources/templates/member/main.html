@@ -57,6 +57,11 @@
 <section layout:fragment="content">
 
  <p>메인 자리</p>
+<h1>엑셀 업로드 테스트</h1>
+    <form th:action="@{/test/addExcel}" method="POST" enctype="multipart/form-data">
+      <input type="file" th:name="file">
+      <input th:type="submit" value="업로드 하기" />
+    </form>
 
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
@@ -90,8 +95,6 @@
     });
   </script>
             
-<p></p>
-
  <div class="SectionTitle_container__PcXfF left size-28"><p class="SectionTitle_label__cEYNl default size-28"></p>
  <p class="SectionTitle_title__iqOHl default size-40"></p>
  <p class="SectionTitle_description__3Deqx default size-28"></p>
