@@ -16,8 +16,8 @@ public class TestServiceImpl implements TestService {
 	TestMapper testMapper;
 
 	@Override
-	public List<TestVO> getTestList(TestVO vo) {
-		return testMapper.getTestList(vo);
+	public List<TestVO> getTestList() {
+		return testMapper.getTestList();
 	}
 	
 	
@@ -25,7 +25,8 @@ public class TestServiceImpl implements TestService {
 
 
 
-
-	
-	
+	@Override
+	public int insertTest(TestVO vo) {
+		return testMapper.insertTest(vo);
+	}
 }

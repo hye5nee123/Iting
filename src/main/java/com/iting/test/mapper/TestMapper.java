@@ -8,8 +8,6 @@ import com.iting.test.model.TestVO;
 
 @Mapper
 public interface TestMapper {
-	public List<TestVO> getTestList(TestVO vo);
-
-
-
+	public List<TestVO> getTestList();
+	public int insertTest(TestVO vo);
 }
