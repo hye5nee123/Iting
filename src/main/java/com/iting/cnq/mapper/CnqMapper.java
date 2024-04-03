@@ -23,4 +23,7 @@ public interface CnqMapper {
 
 	// 수정
 	public int updateCnq(CnqVO vo);
+	
+	//삭제
+	public int deleteCnq(CnqVO vo);
 }
