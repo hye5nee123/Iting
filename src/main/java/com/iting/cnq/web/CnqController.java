@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -93,14 +94,20 @@ public class CnqController {
 	}
 
 	// 수정 form 이동.
-	@GetMapping("/member/cnq/update")
+	@GetMapping("/member/cnq/updateform")
 	public ModelAndView updateForm() {
 		ModelAndView mv = new ModelAndView("member/cnq/update");
 		return mv;
 	}
 // 수정 기능.
-	
+//	@PutMapping("/member/cnq/update")
+//	public int updateCnq(@RequestBody CnqVO vo) {
+//		cnqService.updateCnq(vo);
+//		return vo;
+//	}
 // 삭제
+//	@DeleteMapping("/member/cnq/deleteCnq")
+//	public String delete
 
 	/* 강사 */
 
