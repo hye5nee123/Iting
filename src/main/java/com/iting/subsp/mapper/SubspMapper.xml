@@ -8,7 +8,7 @@
 		<selectKey keyProperty="subspNum"
 					order="BEFORE"
 					resultType="string">
-			SELECT 'su' || LPAD(NVL(MAX(SUBSTR(subsp_num, -3)), 0) + 1, 5, '0') AS SUBSP_NUM 
+			SELECT 'su' || LPAD(NVL(MAX(SUBSTR(subsp_num, -5)), 0) + 1, 5, '0') AS SUBSP_NUM 
 			FROM subsp
 		</selectKey>
 		INSERT INTO subsp (
