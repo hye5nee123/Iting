@@ -19,4 +19,36 @@
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 	</select>
+	<!-- 강의 목록 -->
+	<select id="getLectureList" resultType="LectureVO">
+		SELECT LT_NUM
+		       , LT_ST_CD
+		       , LT_TTL
+		       , LT_IMG
+		       , LT_INTRO
+		       , LT_CATE_CD
+		       , FR_DT
+		       , LT_DIF_CD
+		       , LECTURER_NUM
+		       , LT_KEYWORD_CD
+		       , LT_FG_CD
+		FROM LT
+	
+	</select>
+	<!-- 강의 상세 -->
+	<select id="getLectureInfo1" resultType="LectureVO">
+		SELECT LT_NUM
+		       , LT_ST_CD
+		       , LT_TTL
+		       , LT_IMG
+		       , LT_INTRO
+		       , LT_CATE_CD
+		       , FR_DT
+		       , LT_DIF_CD
+		       , LECTURER_NUM
+		       , LT_KEYWORD_CD
+		       , LT_FG_CD
+		FROM LT
+		WHERE LT_NUM = #{ltNum}
+		</select>
 </mapper>

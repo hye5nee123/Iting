@@ -1,12 +1,20 @@
 package com.iting.common.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iting.common.mapper.UsersMapper;
+import com.iting.common.model.UsersVO;
+import com.iting.common.service.UsersService;
 import com.iting.lecture.model.LectureVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -14,6 +22,9 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @Log4j2
 public class CommonController {
+	
+	@Autowired
+	UsersService userservice;
 	/* 메인이동 */
 	// 관리자
 	@RequestMapping("admin/main")
@@ -39,9 +50,23 @@ public class CommonController {
 	
 	
 	/* 로그인 및 로그아웃 */
+	
+	//로그인 페이지 이동
 	@GetMapping("/login")
 	public String loginForm() {
 		return "common/login";
+	}
+	
+	//로그인 정보 가져오기
+	@RequestMapping("/userlogin")
+	public void sessionLogin(String userid, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UsersVO getinfo = userservice.getUserInfo(userid);
+		if(getinfo != null) {
+			session.setAttribute("userid", getinfo);
+		} else {
+			session.setAttribute("userid", null);
+		}
 	}
 	
 	@GetMapping("/account")
@@ -61,4 +86,6 @@ public class CommonController {
 		log.info("logout success");
 		return "member/main";
 	}
+	
+	
 }

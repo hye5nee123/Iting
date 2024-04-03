@@ -6,10 +6,113 @@
  <!-- layout:decorate="~{layout/admin}" -->
 <meta charset="UTF-8">
 <title>문제관리 페이지</title>
+<link rel="stylesheet" href="../css/teacher/content.css" />
 </head>
 <body>
 <div id="container" layout:fragment="container">
-	<h3>문제관리 페이지입니다.</h3>
+	<h4 class="fw-bold py-3 mb-4">문제관리</h4>
+    <div class="nav-align-top mb-4">
+        <ul class="nav nav-pills mb-3" role="tablist">
+          <li class="nav-item">
+            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
+              진행중인 강의
+            </button>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
+              종료된 강의
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content test_content">
+          <div class="tab-pane fade active show" id="navs-pills-top-home" role="tabpanel">
+            <ul>
+            	<li>
+	            	<div>
+		             	<p>프로그래밍 언어</p>
+		             	<h5>프로그래밍언어 이해하기</h5>
+	                   	<div class="bottom">
+	                   		<p>총 문제 <i>30</i>개</p>
+	                   		<div class="demo-inline-spacing btn_box">
+	                   			<button class="btn btn-outline-warning">문제관리</button>
+	                   			<button class="btn btn-outline-secondary">문제등록</button>
+	                   		</div>
+	                   	</div>
+                   	</div>
+	           	</li>
+            	<li>
+	            	<div>
+		             	<p>프로그래밍 언어</p>
+		             	<h5>프로그래밍언어 이해하기</h5>
+	                   	<div class="bottom">
+	                   		<p>총 문제 <i>30</i>개</p>
+	                   		<div class="demo-inline-spacing btn_box">
+	                   			<button class="btn btn-outline-warning">문제관리</button>
+	                   			<button class="btn btn-outline-secondary">문제등록</button>
+	                   		</div>
+	                   	</div>
+                   	</div>
+	           	</li>
+            	<li>
+	            	<div>
+		             	<p>프로그래밍 언어</p>
+		             	<h5>프로그래밍언어 이해하기</h5>
+	                   	<div class="bottom">
+	                   		<p>총 문제 <i>30</i>개</p>
+	                   		<div class="demo-inline-spacing btn_box">
+	                   			<button class="btn btn-outline-warning">문제관리</button>
+	                   			<button class="btn btn-outline-secondary">문제등록</button>
+	                   		</div>
+	                   	</div>
+                   	</div>
+	           	</li>
+            </ul>
+          </div>
+          <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
+            <ul>
+            	<li>
+	            	<div>
+		             	<p>프로그래밍 언어</p>
+		             	<h5>프로그래밍언어 이해하기</h5>
+	                   	<div class="bottom">
+	                   		<p>총 문제 <i>30</i>개</p>
+	                   		<div class="demo-inline-spacing btn_box">
+	                   			<button class="btn btn-outline-warning">문제관리</button>
+	                   			<button class="btn btn-outline-secondary">문제등록</button>
+	                   		</div>
+	                   	</div>
+                   	</div>
+	           	</li>
+            	<li>
+	            	<div>
+		             	<p>프로그래밍 언어</p>
+		             	<h5>프로그래밍언어 이해하기</h5>
+	                   	<div class="bottom">
+	                   		<p>총 문제 <i>30</i>개</p>
+	                   		<div class="demo-inline-spacing btn_box">
+	                   			<button class="btn btn-outline-warning">문제관리</button>
+	                   			<button class="btn btn-outline-secondary">문제등록</button>
+	                   		</div>
+	                   	</div>
+                   	</div>
+	           	</li>
+            	<li>
+	            	<div>
+		             	<p>프로그래밍 언어</p>
+		             	<h5>프로그래밍언어 이해하기</h5>
+	                   	<div class="bottom">
+	                   		<p>총 문제 <i>30</i>개</p>
+	                   		<div class="demo-inline-spacing btn_box">
+	                   			<button class="btn btn-outline-warning">문제관리</button>
+	                   			<button class="btn btn-outline-secondary">문제등록</button>
+	                   		</div>
+	                   	</div>
+                   	</div>
+	           	</li>
+            </ul>
+          </div>
+        </div>
+	</div>
 </div>
 </body>
 </html>
