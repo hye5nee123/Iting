@@ -42,7 +42,14 @@ public class SubspController {
 		return mv;
 	}
 	
-	
+	// 빌링키 발급
+	@PostMapping("/member/subsp/billing")
+	public SubspVO subspBilling(@RequestBody SubspVO vo) {
+		
+		System.out.println(vo);
+		
+		return vo;
+	}
 	
 	
 	/* 강사 */
