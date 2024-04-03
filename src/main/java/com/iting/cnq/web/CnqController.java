@@ -39,7 +39,7 @@ public class CnqController {
 		pvo.setPageSize(3); // 페이지번호
 		svo.setStart(pvo.getFirst());
 		svo.setEnd(pvo.getLast());
-
+		System.out.println( ">>>>>>>>>>>> "+vo + ":"+ svo  );
 		Map<String, Object> map = cnqService.getCnqList(vo, svo);
 		pvo.setTotalRecord((long) map.get("count"));
 		model.addAttribute("paging", pvo);

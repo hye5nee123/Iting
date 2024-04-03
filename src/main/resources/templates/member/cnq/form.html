@@ -10,7 +10,7 @@
 		enctype="multipart/form-data">
 		제목 : <input name="ttl"> 내용 : <input name="cntn">
 		작성자 : <input name="name"> 작성일자 : <input name="drwupDt"
-			th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}"
+			th:value="${#calendars.format(#calendars.createNow(),'yyyy/MMdd')}"
 			readonly> 이미지 : <input name="photofile" type="file">
 		<button type="submit">등록</button>
 		<button type="button" id="listBtn">글목록으로</button>
