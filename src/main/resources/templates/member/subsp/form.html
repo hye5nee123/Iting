@@ -171,14 +171,8 @@ async function payReq() {
 	      "Authorization": "PortOne HlqMtdjNfDt6fEhGksazVWdRpTLby0yFlMjjm7R30SalvLd6CX4uY7JjsgxOfetFAfqNYUfaS2I3W4gu"
 	    },
 	    data: {
-	      billingKey,
+	      billingKey : billingKey,
 	      orderName: "아이팅 1개월권 정기결제",
-	      // 빌링키 결제 API를 참고해 고객 정보를 채워주세요.
-	      customer: {
-	    	  id : "me00001",
-	    	  name : "홍길동",
-	    	  email : "hong@naver.com"
-	      },
 	      amount: {
 	        total: 38900,
 	      },
@@ -186,7 +180,7 @@ async function payReq() {
 	    },
 	  },
 	);
-	if (!paymentResponse.ok) console.log("pay err");
+	if (!paymentResponse.ok) console.log(paymentResponse);
 }
 
 
