@@ -1,11 +1,13 @@
 package com.iting.cnq.service.impl;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iting.cnq.mapper.CnqMapper;
+import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.CnqService;
 
@@ -15,9 +17,11 @@ public class CnqServiceImpl implements CnqService {
 	CnqMapper cnqMapper;
 
 	@Override
-	public List<CnqVO> cnqList(CnqVO vo) {
-
-		return cnqMapper.cnqList(vo);
+	public Map<String, Object> getCnqList(CnqVO vo, CSearchVO svo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", cnqMapper.getCnqList(vo, svo));
+		map.put("count", cnqMapper.getCount(vo, svo));
+		return map;
 	}
 
 	@Override
@@ -31,6 +35,12 @@ public class CnqServiceImpl implements CnqService {
 		CnqVO vo = new CnqVO();
 		vo.setLtCnqNum(ltCnqNum);
 		return cnqMapper.getCnqInfo(ltCnqNum);
+	}
+
+	@Override
+	public long getCount(CnqVO vo, CSearchVO svo) {
+
+		return cnqMapper.getCount(vo, svo);
 	}
 
 }
