@@ -1,5 +1,6 @@
 package com.iting.test.web;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import com.iting.test.service.TestService;
 
 @Controller
 public class TestController {
-	
+
 	@Autowired
 	TestService testService;
 	
@@ -25,6 +26,9 @@ public class TestController {
 	
 	// 문제조회
 	@RequestMapping("test/test")
+
+	// 목록조회
+	@RequestMapping("test/list")
 	public String getTestList(Model model, TestVO vo) {
 		model.addAttribute("testList", testService.getTestList());
 		return "teacher/test/test";
@@ -47,6 +51,7 @@ public class TestController {
 		}
 		return "redirect:test/list";
 	}
+
+
+
 }
-
-
