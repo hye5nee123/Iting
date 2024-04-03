@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>강의 목록</h2>
+<table border="1">
+<tr>
+<th>LT_NUM</th>
+<th>LT_TTL</th>
+
+<th>LT_INTRO</th>
+<th>FR_DT</th>
+</tr>
+ <tr th:each="lta : ${getLectureList}">
+<td th:text="${lta.ltNum}"></td>
+<td th:text="${lta.ltTtl}"></td>
+<td th:text="${lta.ltIntro}"></td>
+<td th:text="${#dates.format(lta.frDt,'yyyy-MM-dd')}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

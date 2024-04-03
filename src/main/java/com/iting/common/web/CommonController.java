@@ -61,4 +61,6 @@ public class CommonController {
 		log.info("logout success");
 		return "member/main";
 	}
+	
+	
 }

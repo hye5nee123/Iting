@@ -9,4 +9,7 @@ import com.iting.test.model.TestVO;
 @Mapper
 public interface TestMapper {
 	public List<TestVO> getTestList(TestVO vo);
+
+
+
 }

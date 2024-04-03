@@ -19,6 +19,11 @@ public class TestServiceImpl implements TestService {
 	public List<TestVO> getTestList(TestVO vo) {
 		return testMapper.getTestList(vo);
 	}
+	
+	
+
+
+
 
 
 	
