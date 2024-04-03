@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>수정</h2>
-	<form action="/update" method="post">
-		lastName<input name="lastName"> hireDate<input name="hireDate">
-		jobId<select name="jobId">
-			<option value="IT_PROG">Programmer</option>
-			<option value="ST_MAN">Stock Manager</option>
-		</select> 이메일<input name="email">
-		<button>등록</button>
-	</form>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="checkout__input contact__form">
+				<h3>글 수정</h3>
+				<form action="/member/cnq/update" method="post">
+					제목 : <input name="ttl" value="${sessionScope.cnq.ttl}"> 
+					내용 : <textarea name="cntn" value="${sessionScope.cnq.ttl}"> </textarea>
+					<br> 
+					작성자 : <input name="name">
+					<!--  이미지 : <input name="photofile" type="file">-->
+					<button type="button" id="saveBtn">등록</button>
+					<button type="button" id="listBtn">글목록으로</button>
+				</form>
+			</div>
+		</div>
+	</section>
 </body>
 </html>
