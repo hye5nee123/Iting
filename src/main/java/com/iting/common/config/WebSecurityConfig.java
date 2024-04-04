@@ -29,10 +29,10 @@ public class WebSecurityConfig {
 	public AuthenticationSuccessHandler authenticationSuccessHandler() {
 		return new CustomLoginSuccessHandler();
 	}
-//	@Bean
-//    AuthenticationFailureHandler loginFailureHandler(){
-//        return new CustomAuthFailureHandler();
-//    }
+	@Bean
+    AuthenticationFailureHandler loginFailureHandler(){
+        return new CustomAuthFailureHandler();
+    }
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -46,14 +46,17 @@ public class WebSecurityConfig {
 //						.permitAll())
 				.formLogin().loginPage("/login")
 				.usernameParameter("userId")
+//				.passwordParameter("password")
 				.loginProcessingUrl("/userlogin")
-				.failureForwardUrl("/loginfail")
 				.successHandler(authenticationSuccessHandler())
+//				.failureForwardUrl("/login")
+				.failureHandler(loginFailureHandler())
 				.permitAll()
 				.and()
 //				.logout((logout) -> logout.permitAll());
 				.logout()
-				.logoutSuccessUrl("/logout")
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/member/main")
 				.permitAll()
 				.and()
 				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
