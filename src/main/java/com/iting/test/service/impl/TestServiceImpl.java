@@ -20,13 +20,19 @@ public class TestServiceImpl implements TestService {
 		return testMapper.getTestList();
 	}
 	
+	@Override
+	public TestVO getTestInfo(String prblNum) {
+		return testMapper.getTestInfo(prblNum);
+	}
 	
-
-
-
-
 	@Override
 	public int insertTest(TestVO vo) {
 		return testMapper.insertTest(vo);
 	}
+
+	@Override
+	public int deleteTest(String prblNum) {
+		return testMapper.deleteTest(prblNum);
+	}
+
 }
