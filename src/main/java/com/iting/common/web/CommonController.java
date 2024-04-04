@@ -2,6 +2,7 @@ package com.iting.common.web;
 
 import java.security.Principal;
 
+//github.com/hye5nee123/Iting.git
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
