@@ -1,8 +1,9 @@
-*{letter-spacing:-0.5px;}
+*{letter-spacing:-0.5px; font-family: "Noto Sans KR", sans-serif !important;}
+/* 강의상세 */
 .lecture_info{margin-top:20px;}
 .section-title{margin-bottom:0; text-align:left; letter-spacing:-1px;}
-.section-title span{font-size:15px;}
-.info{width:100%; margin-top:20px; padding:20px 40px 20px 30px; background:#f9f9f9; border-radius:15px; box-sizing:border-box;}
+.section-title span{margin-bottom:5px; font-size:15px;}
+.info{width:100%; margin-top:25px; padding:20px 40px 20px 30px; background:#f9f9f9; border-radius:15px; box-sizing:border-box;}
 .info ul{float:left; width:calc(100% - 20%); list-style:none;}
 .info li{float:left; position:relative; width:29%; margin:0 2%;}
 .info li:before{content:''; display:block; position:absolute; left:-50px; top:50%; width:1px; height:40px; border-left:1px dashed #ccc; transform:translateY(-50%);}
@@ -21,7 +22,7 @@
 .lecture_list:after{content:''; display:block; clear:both;}
 .lecture_list .left{float:left; width:68%; height:340px; margin-right:3%; background:#ddd; border-radius:15px;}
 .lecture_list .right{float:right; width:29%; height:340px; padding:40px 20px 30px; border-radius:15px; box-sizing:border-box; box-shadow:0 0 5px 1px rgba(0, 0, 0, 0.1);}
-.lecture_list .right h3{font-size:16px; font-weight:700; letter-spacing:-1px; border-bottom:1px dashed #ddd; padding-bottom:20px; box-sizing:border-box;}
+.lecture_list .right h3{font-size:17px; font-weight:700; letter-spacing:-1px; border-bottom:1px dashed #ddd; padding-bottom:20px; box-sizing:border-box;}
 .lecture_list .right h3 i{display:inline-block; margin-top:-5px; color:#205cdc; margin-right:3px; font-size:20px;}
 .lecture_list .right p{background:#f9f9f9; box-sizing:border-box; padding:10px 10px 10px 15px; border:1px solid #ddd; border-radius:8px; margin-top:20px;}
 .lecture_list .right p span{display:block;}
@@ -58,3 +59,26 @@
 .review:after{content:''; display:block; clear:both;}
 .review .star{margin-top:5px;}
 .review .star i{letter-spacing:-1px; color:#ffca35;}
+
+/* 내강의실 */
+.lt_info{position:relative; padding:30px; background:rgb(98 140 230 / 5%);} 
+.lt_info .go_link{position:absolute; right:30px; top:30px; color:#888; font-size:14px; font-weight:500; letter-spacing:-1px;}
+.lt_info .go_link:hover{color:#333;}
+.info.lt_info div{margin-left:0;}
+.lt_info h3{font-size:17px; font-weight:700;}
+.lt_info ul{float:none; margin-top:20px; width:100%;}
+.lt_info ul li{width:23.5%; margin:0 1%;}
+.lt_info ul li:before{display:none;}
+.lt_info ul li:first-child{margin-left:0;}
+.lt_info ul li:last-child{margin-right:0;}
+.lt_info .box{float:none; height:165px; margin-left:0; padding:20px; border:1px solid #ddd; background:#fff; border-radius:10px;}
+.lt_info .box .left i{float:none; display:block; font-style:normal; font-size:13px !important; font-weight:700;}
+.lt_info .box .left p{margin-top:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.lt_info .box .left{float:left; width:calc(100% - 30%);}
+.lt_info .box .graph{float:right; width:27%;}
+.lt_info .box .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
+.lt_info .box .top{float:none;}
+.lt_info .box .top:after{content:''; display:block; clear:both;}
+.lt_info .box .bottom{float:none; width:100%; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
+.lt_info .box .bottom{color:#555;}
+.lt_info .box .bottom i{font-size:20px; margin-right:5px; margin-top:3px;}
