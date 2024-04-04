@@ -1,7 +1,6 @@
 package com.iting.member.model;
 
 import java.sql.Date;
-
 import lombok.Data;
 
 @Data

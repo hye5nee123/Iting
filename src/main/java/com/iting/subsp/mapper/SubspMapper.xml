@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.subsp.mapper.SubspMapper">
+	
+	<!-- 구독 단건 조회 -->
+	<select id="getSubspInfo" resultType="SubspVO" parameterType="string">
+		SELECT subsp_num
+               , subsp_st_cd
+               , subsp_fr_dt
+               , subsp_to_dt
+               , subsp_typ_cd
+               , subsp_price
+               , mem_num
+         FROM subsp
+         WHERE mem_num = #{memNum}
+	
+	</select>
+
 
 	<!-- 구독 등록 -->
 	<insert id="subspInsert" parameterType="SubspVO">
