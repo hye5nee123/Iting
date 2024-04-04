@@ -4,7 +4,7 @@
      layout:decorate="~{layout/member/layout}" >
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>구독하기</title>
 
 <link rel="stylesheet" href="/css/member/content.css" />
 
@@ -29,7 +29,8 @@
 	                <div class="tab-pane active" id="tabs-1" role="tabpanel">
 	                    <div class="product__details__tab__content">
 	                        <div class="product__details__tab__content__item checkout__input">
-	                            <form method="post" id="subspFrm">
+	                        	<h5>아이팅 1개월 구독권</h5>
+	                            <form method="post" id="subspMonthlyFrm">
 	                            	<!-- 월간 -->
 									<input type="hidden" value="n1" name="subspTypCd">월간
 
@@ -44,9 +45,12 @@
 									<input type="radio" value="o1" name="sttlTypCd">카카오페이
 									<input type="radio" value="o2" name="sttlTypCd">일반결제
 									
-									<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
-									<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
+									<button type="button" id="payBtn" class="btn btn-primary">결제하기</button>
 								</form>
+								
+								<p>
+								구독 주의사항 : 1개월권은 결제일로 부터 30일간 유효하며, 별도로 구독해지를 하지 않을 경우 최초 결제일로 부터 매달 자동으로 결제됩니다.
+								</p>
 	                        </div>
 	                    </div>
 	                </div>
@@ -54,7 +58,7 @@
 	                <div class="tab-pane" id="tabs-2" role="tabpanel">
 	                    <div class="product__details__tab__content">
 	                        <div class="product__details__tab__content__item checkout__input">
-	                            <form method="post" id="subspMonthlyFrm">
+	                            <form method="post" id="subspYearlyFrm">
 									<input type="hidden" value="n2" name="subspTypCd">연간
 									<br>
 									<p>구독시작일자</p>
@@ -87,15 +91,49 @@
 	</div>
 
 <script>
-// 현재날짜 등록
+const monthTlt = "아이팅 1개월 구독권";
+const yearTlt = "아이팅 12개월 구독권";
 
-//등록 요청
-const subspTypCd = subspFrm.subspTypCd.value;
-const subspStCd = subspFrm.subspStCd.value;
-const subspPrice = subspFrm.subspPrice.value;
-const memNum = subspFrm.memNum.value;
+const paymentId =  'iting_1month_' + new Date().getTime();
 
-function saveReq() {
+const subspTypCd = subspMonthlyFrm.subspTypCd.value;
+const subspStCd = subspMonthlyFrm.subspStCd.value;
+const subspPrice = subspMonthlyFrm.subspPrice.value;
+
+// 로그인한 회원번호
+const memNum = "[[ ${session.usernum} ]]";
+
+
+// 결제하기 버튼 클릭 시
+payBtn.addEventListener("click", e => {
+	// 0. 구독 DB 조회
+	getSubspInfo(memNum);
+	
+	// 1.빌링키 발급
+	getBillingKey();// 빌링키 발급 함수 호출
+	
+	// 2. 빌링키로 결제
+	
+	// 3. 구독 DB 등록
+	// subspInsertReq(); // 구독 등록 요청
+	
+	// 4. 결제 DB 등록
+	
+})
+
+// 구독 정보 단건조회
+function getSubspInfo(memNum) {
+	axios({
+		method : 'get',
+		url : `/member/subsp/{$memNum}`
+	})
+	.then(res => saveRes(res.data))
+	
+}
+
+
+// 구독 등록 요청
+function subspInsertReq() {
 	//const subspTypCd = subspFrm.subspFrm.value;
 
 	let param = { subspTypCd, subspFrDt, subspToDt, subspStCd, subspPrice, memNum, subspTypCd }
@@ -116,23 +154,11 @@ function saveReq() {
 			.then(res => saveRes(res.data))
 }
 // 등록 응답
-function saveRes(res) {
+function subspInsertReq(res) {
 	payRes()
 	//console.log(res);
 	alert('구독 등록 완료!');
 }
-
-// 등록 
-saveBtn.addEventListener("click", e => {
-	// saveReq();
-	payReq()
-	
-})
-
-// 빌링키 테스트
-getBill.addEventListener("click", e => {
-	getBillingKey();// 빌링키 발급 함수 호출
-})
 
 
 // 결제 요청 (테스트)
@@ -186,10 +212,6 @@ async function getBillingKey() {
 
 async function payReq() {
 	const billingKey = "billing-key-018ea6e8-d64b-d3ed-e5c2-7f07ed31bc37";
-	
-	// 고객사에서 채번하는 새로운 결제 ID를 만들어주세요.
-	//const paymentId = OrderService.getNewPaymentId();
-	const paymentId =  'iting_1month_' + new Date().getTime();
 
 	// 포트원 빌링키 결제 API 호출
 	const paymentResponse = await csrf_axios(

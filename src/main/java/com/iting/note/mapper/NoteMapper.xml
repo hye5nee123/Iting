@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.note.mapper.NoteMapper">
+	<!-- 전체조회 -->
+	<select id="getNoteList" resultType="NoteVO">
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.MEM_NUM
+		       , n.LECTURER_NUM
+		       , n.CFM_YN_CD
+		FROM NOTE n JOIN LECTURER l
+		            ON  n.LECTURER_NUM = l.LECTURER_NUM
+		WHERE l.LECTURER_NUM = #{lecturerNum}
+		ORDER BY n.NOTE_NUM DESC
+	</select>
+</mapper>

@@ -111,8 +111,7 @@
                             <div class="header__top__links">
 
                                 <a th:if="${session.usernum} == null" href="/login">로그인</a>
-                                <a id="logoutbtn" th:if="${session.usernum} != null" href="#"
-                                    onclick="logout()">로그아웃</a>
+                                <a id="logoutbtn" th:if="${session.usernum} != null" href="#" onclick="logout(event)">로그아웃</a>
                                 <a href="/account">회원가입</a>
                                 <a href="#">마이페이지</a>
                             </div>
@@ -254,14 +253,18 @@
     setInterval(() => {
         document.getElementById('count').innerText = calcDate();
     }, 1000);
-
-    function logout() {
-        logoutbtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            axios.get("/logout")
-                .catch(err => console.log(err));
-        });
-    }
+    
+	//로그아웃
+	function logout(e){
+        //e.preventDefault();
+		console.log("로그아웃 작동");
+        csrf_axios({
+            method: 'POST',
+            url: '/logout'
+        })
+        /* axios.get("/logout") */
+            .catch(err => console.log(err));
+	}
 </script>
 
 </html>

@@ -76,11 +76,11 @@ WHERE le.LECTURER_NUM = #{lecturerNum}
 		
   <!-- 도승민 -->
 		<!-- 강의 등록 -->
-		<insert id="Ltinsert" parameterType="CnqVO">
+		<insert id="ltInsert" parameterType="LectureVO">
 		<selectKey keyProperty="ltNum"
 					order="BEFORE"
 					resultType="string">
-			SELECT 'lt' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) + 1, 5, '0') AS LT_NUM 
+			SELECT 'lt' || LPAD(NVL(MAX(SUBSTR(LT_NUM, -5)), 0) + 1, 5, '0') AS LT_NUM 
 			FROM LT
 		</selectKey>
 		INSERT INTO LT(
@@ -88,16 +88,16 @@ WHERE le.LECTURER_NUM = #{lecturerNum}
 					  ,LT_TTL
 					  ,LT_INTRO
 					  ,FR_DT
-					  ,LT_DIF_CD
 					  ,LT_IMG
+					  ,LECTURER_NUM
 						)
 		VALUES(
 			   #{ltNum}
 			   ,#{ltTtl}
 			   ,#{ltIntro}
 			   ,#{frDt}
-			   ,#{ltDifCd}
 			   ,#{ltImg}
+			   ,#{lecturerNum}
 			   )
 		
 		</insert>
