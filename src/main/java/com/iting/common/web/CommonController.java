@@ -35,7 +35,8 @@ public class CommonController {
 	
 	// 회원
 	@RequestMapping("member/main")
-	public ModelAndView goMemberMain() {
+	public ModelAndView goMemberMain(Principal principal) {
+//		System.out.println(principal.getName()+"<<<<<<<<<<<<<<<<");
 		ModelAndView mv  = new ModelAndView("member/main");
 		return mv;
 	}
