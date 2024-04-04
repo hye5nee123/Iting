@@ -48,7 +48,8 @@ let accode = ''; // 넣을 코드 데이터 값
 					idstat = `<p>아이디를 입력해주세요</p>`;
 				} else if(!(/^[a-zA-Z0-9]{4,20}$/.test(id.value))){
 					idstat = `<p>영문 대소문자, 숫자조합 4~20자로 입력해주세요</p>`;
-				} else {
+				} else if(axios.get("/idchk", id.value)
+								.then(res => res.data) != null){
 					idstat = `<p>사용가능한 아이디입니다</p>`;
 				}
 				document.getElementsByClassName('idchk')[0].innerHTML = idstat;

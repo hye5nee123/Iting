@@ -15,3 +15,14 @@ const csrf_axios = axios.create({
 		[header]: token
 	}
 });
+
+//로그아웃
+	function logout(){
+        //e.preventDefault();
+		console.log("로그아웃 작동");
+        csrf_axios({
+            method: 'POST',
+            url: '/logout'
+        })
+            .catch(err => console.log(err));
+	}

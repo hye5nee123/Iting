@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iting.common.ExcelView;
+import com.iting.common.model.UsersVO;
 import com.iting.common.service.UsersService;
 
 import lombok.extern.log4j.Log4j2;
@@ -107,6 +110,12 @@ public class CommonController {
 		return "common/account";
 	}
 	
+	@ResponseBody
+	@GetMapping("/idchk")
+	public UsersVO idchk(@RequestBody String id) {
+		UsersVO vo = userservice.getUserInfo(id);
+		return vo;
+	}
 	@GetMapping("/accessError")
 	public String accessDenied(Authentication auth, Model model) {
 		log.info("access denied :" + auth);

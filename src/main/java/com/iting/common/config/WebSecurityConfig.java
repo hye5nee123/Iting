@@ -44,7 +44,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				(requests) -> requests
-				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/common/**", "/admin/**", "/teacher/**").permitAll()
+				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/common/**", "/teacher/**").permitAll()
 				.antMatchers("/admin/**").hasRole("B2")
 				.anyRequest().authenticated())
 //				.formLogin((form) -> form
@@ -55,7 +55,8 @@ public class WebSecurityConfig {
 //				.passwordParameter("password")
 				.loginProcessingUrl("/userlogin")
 				.successHandler(authenticationSuccessHandler())
-				.failureForwardUrl("/login")
+//				.failureForwardUrl("/login")
+//				.failureUrl("/login")
 				.failureHandler(loginFailureHandler())
 				.permitAll()
 				.and()
