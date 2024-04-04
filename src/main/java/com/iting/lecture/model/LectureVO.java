@@ -2,6 +2,9 @@ package com.iting.lecture.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 import lombok.Data;
 
 @Data
@@ -12,6 +15,7 @@ public class LectureVO {
 	private String ltImg;
 	private String ltIntro;
 	private String ltCateCd;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date frDt;
 	private String accpYnCd;
 	private String ltDifCd;

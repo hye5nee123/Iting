@@ -30,5 +30,11 @@ public class LectureServiceImpl implements LectureService {
 		return lectureMapper.getLectureInfo1(ltNum);
 	}
 
+	@Override
+	public int ltInsert(LectureVO vo) {
+		return lectureMapper.ltInsert(vo);
+	}
+
+
 
 }
