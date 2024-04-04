@@ -17,5 +17,9 @@
 	) a where ROWNUM <= #{svo.end}) b where rn >= #{svo.start}
 	]]>
 	</select>
+		<select id="getCount" resultType="Long">
+		select count(*)
+		from cmt
+	</select>
 
 </mapper>

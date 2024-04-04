@@ -97,34 +97,59 @@
 								</div>
 							</form>
 							<!-- form 종료 -->
-							<!-- 댓글 -->
-							<h3>댓글목록</h3>
-							<div>
-								<table>
-									<thead>
-										<tr>
-											<th>No</th>
-											<th>내용</th>
-											<th>작성일자</th>
-											<th>작성자</th>
-										</tr>
-									</thead>
-									<tbody id="replyList">
-										<tr th:each="reply, stat: ${replyList}">
-											<td th:text="${stat.count}"></td>
-											<td th:text="${reply.cntn}"></td>
-											<td th:text="${reply.drwupDt}"></td>
-											<td th:text="${reply.drwupr}"></td>
-										</tr>
-									</tbody>
-								</table>
-								<!-- 페이징자리 -->
-								<div id="nav"></div>
-							</div>
 						</div>
 					</div>
 				</div>
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>내용</th>
+								<th>작성일자</th>
+								<th>작성자</th>
+							</tr>
+						</thead>
+						<tbody id="replyList">
+						</tbody>
+					</table>
+				</div>
 		</section>
+	<script th:inline="javascript">
+	const ltCnqNum = [[${cnq.ltCnqNum}]]
+	//함수 호출.
+	listReq(1);
+	
+	//controller에서 주소 따옴.
+	function listReq() {
+		fetch("/member/cnq/rList?ltCnqNum=" + ltCnqNum)
+		.then(res => res.json())
+		.then(res => listRes(res))
+	}
+	
+	//list 응답.
+	function listRes(res) {
+		replyList.innerHTML = '';
+	console.log(res);
+	// 목록출력
+	for( obj of res.data) {
+		replyList.innerHTML += makeTr(obj);
+	}
+}
+	//tr 생성.
+	function makeTr(obj) {
+	let newTag = `<tr>
+		<td>${obj.cmtNum}</td>
+		<td>${obj.cntn}</td>
+		<td>${obj.drwupDt}</td>
+		<td>${obj.drwupr}</td>
+	</tr>`
+	console.log(newTag);
+	return newTag;
+}
+	
+	
+	</script>
 	</section>
 </body>
 

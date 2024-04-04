@@ -78,7 +78,7 @@
                 <div data-i18n="Account Settings">전체강의</div>
               </a>
             </li>
-            <li th:each="lecture, stat: ${session.MyLectureList}" class="menu-item">
+            <li th:each="lecture, stat: ${lectureList}" class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-videos"></i>
                 <div th:text="${lecture.ltTtl}" data-i18n="Layouts"></div>
@@ -209,8 +209,6 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-            [[${session.MyLectureList}]]
-            
             <div layout:fragment="container" class="container-xxl flex-grow-1 container-p-y">
             </div>
             <!-- / Content -->
