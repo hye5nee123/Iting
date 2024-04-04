@@ -62,6 +62,20 @@
 				)
 	</insert>
 	
+	<!-- 수정 -->
+	<update id="updateTest">
+		UPDATE PRBL
+		SET PRBL_CNTN = #{prblCntn}
+            , QUES1 = #{ques1}
+            , QUES2 = #{ques2}
+            , QUES3 = #{ques3}
+            , QUES4 = #{ques4}
+            , ANS = #{ans}
+            , CTY = #{cty}
+		WHERE PRBL_NUM = #{prblNum}
+	</update>
+	
+	<!-- 삭제 -->
 	<delete id="deleteTest">
 		DELETE FROM PRBL
 		WHERE PRBL_NUM = #{prblNum}

@@ -30,7 +30,15 @@ public class LectureServiceImpl implements LectureService {
 		return lectureMapper.getLectureInfo1(ltNum);
 	}
 
+  // 신수지
 	@Override
+	public List<LectureVO> getTcList(String lecturerNum) {
+		return lectureMapper.getTcList(lecturerNum);
+  }
+  
+  
+  // 도승민
+  @Override
 	public int ltInsert(LectureVO vo) {
 		return lectureMapper.ltInsert(vo);
 	}

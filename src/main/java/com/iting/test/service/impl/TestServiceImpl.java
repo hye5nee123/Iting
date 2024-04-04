@@ -31,8 +31,12 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
+	public int updateTest(TestVO testVO) {
+		return testMapper.updateTest(testVO);
+	}
+	
+	@Override
 	public int deleteTest(String prblNum) {
 		return testMapper.deleteTest(prblNum);
 	}
-
 }
