@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<body>
+<div id="container" layout:fragment="container">
+	<h4 class="fw-bold py-3 mb-4">강의등록</span></h4>
+   <div class="test_insert">
+     <form id="formAccountSettings" method="POST" name="testForm" onsubmit="return false">
+       <div class="row">
+         <div class="mb-3">
+           
+           	<h5 class="tit">강의명을 입력해주세요.</h5>
+           
+           <input class="form-control" type="text" id="prblCntn" name="prblCntn" value="" autofocus="">
+         </div>
+         <hr class="my-0">
+         <div class="mb-3 test_list first_list">
+           <label for="ques1" class="form-label">강의주제</label>
+           <input class="form-control" type="text" name="ques1" id="ques1" value="">
+         </div>
+         <div class="mb-3 test_list">
+           <label for="ques2" class="form-label">②</label>
+           <input class="form-control" type="text" name="ques2" id="ques2" value="">
+         </div>
+         <div class="mb-3 test_list">
+           <label for="ques3" class="form-label">③</label>
+           <input class="form-control" type="text" name="ques3" id="ques3" value="">
+         </div>
+         <div class="mb-3 test_list">
+           <label for="ques4" class="form-label">④</label>
+           <input class="form-control" type="text" name="ques4" id="ques4" value="">
+         </div>
+          <div class="ans insert_ans">
+	     	<div class="mb-3 test_list">
+		       <label for="ans" class="form-label tit">정답</label>
+		       <input class="form-control" type="text" name="ans" id="ans" value="">
+		     </div>
+	     	<div class="mb-3 test_list">
+		       <label for="cty" class="form-label tit">해설</label>
+		       <input class="form-control" type="text" name="cty" id="cty" value="">
+		     </div>
+	     </div>
+  		</div>
+    	</form>
+    	<div class="btn_box demo-inline-spacing">
+           <button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">등록하기</button>
+           <!-- <button type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" onclick="location.href='/teacher/test/list'">목록가기</button> -->
+         </div>
+  </div>
+
+
+</body>
+</html>
