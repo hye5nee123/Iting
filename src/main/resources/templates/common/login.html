@@ -25,7 +25,7 @@
 
 <body>
 	<div class="container">
-		<form th:action="@{/userlogin}" method="post" name="frm" onsubmit="login()">
+		<form th:action="@{/userlogin}" method="post" name="frm">
 			<img class="logo" src="img/common/logo_h.png" alt="Logo" />
 			<div class="col-lg-6">
 				<div class="checkout__input">
@@ -51,27 +51,30 @@
 		</div>
 	</div>
 	<script>
-		function login() {
-			frm.addEventListener("submit", (e) => {
-				e.preventDefault();
-				let id = document.frm.userId.value;
-				let pw = document.frm.password.value;
-				if (id == '') {
-					alert("아이디를 입력해주세요")
-					return;
-				} else if (pw == '') {
-					alert("비밀번호를 입력해주세요")
-					return;
-				}
-				/* axios.get("/common/chkuser", id)
-				.then(res => res.data)
-				console.log(res);
-				if(res.data == null || res.data.pw != document.frm.password.value){
-					alert("아이디 혹은 비밀번호가 다릅니다");
-				} else { */
-				/* } */
-			});
-		}
+		//function login(e) {
+		frm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			let id = frm.userId.value;
+			let pw = frm.password.value;
+			if (id == '') {
+				alert("아이디를 입력해주세요")
+				return;
+			} else if (pw == '') {
+				alert("비밀번호를 입력해주세요")
+				return;
+			} else {
+				frm.submit();
+			}
+		});
+		/* axios.get("/common/chkuser", id)
+		.then(res => res.data)
+		console.log(res);
+		if(res.data == null || res.data.pw != document.frm.password.value){
+			alert("아이디 혹은 비밀번호가 다릅니다");
+		} else { */
+		/* } */
+		//});
+		//}
 	</script>
 </body>
 
