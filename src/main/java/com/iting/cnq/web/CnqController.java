@@ -99,12 +99,16 @@ public class CnqController {
 		ModelAndView mv = new ModelAndView("member/cnq/update");
 		return mv;
 	}
+
 // 수정 기능.
-//	@PutMapping("/member/cnq/update")
-//	public int updateCnq(@RequestBody CnqVO vo) {
-//		cnqService.updateCnq(vo);
-//		return vo;
-//	}
+	@PutMapping("/member/cnq/update")
+	public String updateCnq(CnqVO vo) {
+		if (cnqService.updateCnq(vo) > 0) {
+			System.out.println("수정완료");
+		}
+
+		return "redirect:/member/cnq/list";
+	}
 // 삭제
 //	@DeleteMapping("/member/cnq/deleteCnq")
 //	public String delete
