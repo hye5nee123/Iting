@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Male_Fashion Template">
@@ -7,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSRF -->
-    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
-	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/css/member/bootstrap.min.css" type="text/css">
@@ -28,7 +29,7 @@
     <link rel="stylesheet" href="/css/admin/boxicons.css" />
     <link rel="stylesheet" href="/css/member/main.css" type="text/css">
     <link rel="stylesheet" href="/css/admin/boxicons.css" />
-    
+
     <!-- Js Plugins -->
     <script src="/js/member/jquery-3.3.1.min.js"></script>
     <script src="/js/member/bootstrap.min.js"></script>
@@ -39,15 +40,15 @@
     <script src="/js/member/jquery.slicknav.js"></script>
     <script src="/js/member/mixitup.min.js"></script>
     <script src="/js/member/owl.carousel.min.js"></script>
-    
-    
+
+
 
 
 </head>
 
 <body>
     <!-- Page Preloder -->
-<!--     <div id="preloder">
+    <!--     <div id="preloder">
         <div class="loader"></div>
     </div> -->
 
@@ -89,28 +90,30 @@
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
                             <p>어서오세요</p>
-                          
+
                         </div>
-                        
-                        
+
+
                     </div>
-                    
+
                     <div class="col-lg-6 col-md-5">
-                    <div class="search_wrapper">
-          <input class="search" type="text" placeholder="찾는강의가 있으신가요?">
-          <button class="button e_search_submit">
-            <span><i class='bx bx-search-alt-2'></i>검색</span>
-          </button>
-          <div class="search_view_cover e_search_view_cover">
-          </div>
-        </div>
-                    
+                        <div class="search_wrapper">
+                            <input class="search" type="text" placeholder="찾는강의가 있으신가요?">
+                            <button class="button e_search_submit">
+                                <span><i class='bx bx-search-alt-2'></i>검색</span>
+                            </button>
+                            <div class="search_view_cover e_search_view_cover">
+                            </div>
+                        </div>
+
                         <div class="header__top__right">
-                        
+
                             <div class="header__top__links">
-                            
-                                <a href="/login">로그인</a>
-                                <a href="#">회원가입</a>
+
+                                <a th:if="${session.usernum} == null" href="/login">로그인</a>
+                                <a id="logoutbtn" th:if="${session.usernum} != null" href="#"
+                                    onclick="logout()">로그아웃</a>
+                                <a href="/account">회원가입</a>
                                 <a href="#">마이페이지</a>
                             </div>
                             <div id="count">0일0시간0분0초</div>
@@ -132,7 +135,7 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a href="./index.html">수강신청(전체강의)</a>
-                            <ul class="dropdown">
+                                <ul class="dropdown">
                                     <li><a href="#">기초강의</a></li>
                                     <li><a href="#">데이터분석</a></li>
                                     <li><a href="#">웹 개발</a></li>
@@ -140,8 +143,8 @@
                                     <li><a href="#">IT자격증</a></li>
                                     <li><a href="#">전공지식</a></li>
                                 </ul>
-                                
-                                </li>
+
+                            </li>
                             <li><a href="./shop.html">무료강의</a></li>
                             <li><a href="#">커뮤니티</a>
                                 <ul class="dropdown">
@@ -151,31 +154,31 @@
                                 </ul>
                             </li>
                             <li><a href="./blog.html">내강의실</a>
-                            <ul class="dropdown">
+                                <ul class="dropdown">
                                     <li><a href="#">수강현황</a></li>
                                     <li><a href="./shop-details.html">회원정보 관리</a></li>
                                 </ul>
                             </li>
                             <li><a href="./contact.html">고객센터</a>
-                             <ul class="dropdown">
+                                <ul class="dropdown">
                                     <li><a href="./about.html">공지사항</a></li>
                                     <li><a href="./shop-details.html">자주하는질문</a></li>
                                     <li><a href="./shopping-cart.html">Q&A</a></li>
                                 </ul>
                             </li>
                         </ul>
-                        
+
                     </nav>
-                    
+
                 </div>
-                 <div class="col-lg-3 col-md-3">
+                <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
                         <a href="#"><img src="img/icon/heart.png" alt=""></a>
                         <a href="/member/subsp/form">구독하기</a>
                         <a href="./contact.html">Live특강</a>
                     </div>
-              
+
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
@@ -183,48 +186,48 @@
                         <a href="#"><img src="img/icon/heart.png" alt=""></a>
                     </div>
                 </div>
-                
+
             </div>
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
-        
+
     </header>
     <!-- Header Section End -->
 
     <!-- 내용 들어올 자리 -->
-	    <section class="product spad">
+    <section class="product spad">
         <div class="container" layout:fragment="content">
-        
-        </div>
-    	</section>
 
-    
+        </div>
+    </section>
+
+
 
     <!-- Footer Section Begin -->
-   <footer class="content-footer footer bg-footer-theme" id="foot">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
+    <footer class="content-footer footer bg-footer-theme" id="foot">
+        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+                ©
+                <script>
                     document.write(new Date().getFullYear());
-                  </script>2024
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                </footer>
+                </script>2024
+                , made with ❤️ by
+                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+            </div>
+    </footer>
     <!-- Footer Section End -->
 
-    
-    
+
+
     <!-- JS -->
     <script src="/js/member/main.js"></script>
-    
+
     <!-- Axios CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
+
     <!-- Common JS -->
     <script src="/js/common.js"></script>
-    
+
     <!-- 포트원 sdk -->
     <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 
@@ -236,10 +239,10 @@
         const now = new Date().getTime();
         const distance = goalDate - now;
 
-        var days = Math.floor(distance / (1000*60*60*24));
-        var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-        var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-        var seconds = Math.floor((distance % (1000*60)) / 1000);
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         if (distance < 0) {
             return '(지나감)';
@@ -247,10 +250,18 @@
             return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음`;
         }
     }
-    
+
     setInterval(() => {
         document.getElementById('count').innerText = calcDate();
     }, 1000);
 
+    function logout() {
+        logoutbtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            axios.get("/logout")
+                .catch(err => console.log(err));
+        });
+    }
 </script>
+
 </html>
