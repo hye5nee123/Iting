@@ -6,95 +6,56 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Core CSS -->
-<link rel="stylesheet" href="/css/admin/core.css" class="template-customizer-core-css" />
-<link rel="stylesheet" href="/css/admin/theme-default.css" class="template-customizer-theme-css" />
-<link rel="stylesheet" href="/css/admin/demo.css" />
-<link rel="stylesheet" href="/css/admin/main.css" />
-
 <link rel="stylesheet" href="/css/member/content.css" />
 
 </head>
 <body>
 <section layout:fragment="content">
-	
-	<div class="row statistics">
-	   <div class="col-md-12">
-	     <div class="card">
-	       <h5 class="card-header">구독하기</h5>
-	       <div class="card-body">
-	        <div class="nav-align-top mb-4">
-                    <ul class="nav nav-pills mb-3" role="tablist">
-                      <li class="nav-item">
-                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#subsp-Monthly" aria-controls="navs-pills-top-home" aria-selected="true">
-                          월간구독
-                        </button>
-                      </li>
-                      <li class="nav-item">
-                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#subsp-Yearly" aria-controls="navs-pills-top-profile" aria-selected="false">
-                          연간구독
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="subsp-Monthly" role="tabpanel">		
-						<form method="post" id="subspFrm">
-							<input type="radio" value="n1" name="subspTypCd">월간
-							<input type="radio" value="n2" name="subspTypCd">연간
-							<br>
-							<p>구독시작일자</p>
-							<input type="date" name="subspFrDt" value="2024-04-01">
-							<br>
-							<p>구독마감일자</p>
-							<input type="date" name="subspToDt" value="2024-05-01">
-							<br>
-							<input type="hidden" value="m1" name="subspStCd">
-							<br>
-							가격
-							<input type="number" name="subspPrice" value="39800" disabled="disabled">
-							<br>
-							<input type="hidden" value="me00001" name="memNum">
-							
-							<input type="radio" value="o1" name="sttlTypCd">카카오페이
-							<input type="radio" value="o2" name="sttlTypCd">일반결제
-							
-							<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
-							<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
-						</form>
-
-                      </div>
-                      <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
-                        <h6>연간구독 폼</h6>
-                        <p>하이</p>
-                      </div>
-                      
-                    </div>
-                  </div>
-	       </div>
-	     </div>
-	   </div>
-	 </div>
-	 
-	 <!-- Tab Test -->
-	 <div class="row">
-	    <div class="col-lg-12">
+	<div class="container">
+	<!-- Subscribe Tab -->
+	<div class="row">
+		<div class="col-lg-12">
 	        <div class="product__details__tab">
 	            <ul class="nav nav-tabs" role="tablist">
 	                <li class="nav-item">
-	                    <a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">월간구독</a>
+	                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">월간구독</a>
 	                </li>
 	                <li class="nav-item">
-	                    <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">연간구독</a>
+	                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">연간구독</a>
 	                </li>
-	                
 	            </ul>
 	            <div class="tab-content">
-	                <div class="tab-pane active" id="tabs-5" role="tabpanel">
+	            	<!-- 월간 구독 -->
+	                <div class="tab-pane active" id="tabs-1" role="tabpanel">
 	                    <div class="product__details__tab__content">
-	                        <div class="product__details__tab__content__item">
+	                        <div class="product__details__tab__content__item checkout__input">
 	                            <form method="post" id="subspFrm">
-									<input type="radio" value="n1" name="subspTypCd">월간
-									<input type="radio" value="n2" name="subspTypCd">연간
+	                            	<!-- 월간 -->
+									<input type="hidden" value="n1" name="subspTypCd">월간
+
+									<!-- 회원번호 -->
+									<input type="hidden" value="m1" name="subspStCd">
+									
+									<p>가격</p>
+									<input type="number" name="subspPrice" value="39800" disabled="disabled">
+
+									<input type="hidden" value="me00001" name="memNum">
+									
+									<input type="radio" value="o1" name="sttlTypCd">카카오페이
+									<input type="radio" value="o2" name="sttlTypCd">일반결제
+									
+									<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
+									<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
+								</form>
+	                        </div>
+	                    </div>
+	                </div>
+	                <!-- 연간 구독 -->
+	                <div class="tab-pane" id="tabs-2" role="tabpanel">
+	                    <div class="product__details__tab__content">
+	                        <div class="product__details__tab__content__item checkout__input">
+	                            <form method="post" id="subspMonthlyFrm">
+									<input type="hidden" value="n2" name="subspTypCd">연간
 									<br>
 									<p>구독시작일자</p>
 									<input type="date" name="subspFrDt" value="2024-04-01">
@@ -112,27 +73,17 @@
 									<input type="radio" value="o1" name="sttlTypCd">카카오페이
 									<input type="radio" value="o2" name="sttlTypCd">일반결제
 									
-									<button type="button" id="saveBtn" class="btn btn-primary">결제하기</button>
-									<button type="button" id="getBill" class="btn btn-primary">빌링키 테스트</button>
+									<button type="button" id="saveBtns" class="btn btn-primary">결제하기</button>
+									<button type="button" id="getBills" class="btn btn-primary">빌링키 테스트</button>
 								</form>
 	                        </div>
 	                    </div>
 	                </div>
-	                <div class="tab-pane" id="tabs-6" role="tabpanel">
-	                    <div class="product__details__tab__content">
-	                        <div class="product__details__tab__content__item">
-	                            
-	                        </div>
-	                        <div class="product__details__tab__content__item">
-	                            <h5>연간구독</h5>
-	                            <p>여기여기</p>
-	                        </div>
-	                    </div>
-	                </div>
-	               
 	            </div>
 	        </div>
 	    </div>
+	</div>
+	
 	</div>
 
 <script>
@@ -140,8 +91,6 @@
 
 //등록 요청
 const subspTypCd = subspFrm.subspTypCd.value;
-const subspFrDt = subspFrm.subspFrDt.value;
-const subspToDt = subspFrm.subspToDt.value;
 const subspStCd = subspFrm.subspStCd.value;
 const subspPrice = subspFrm.subspPrice.value;
 const memNum = subspFrm.memNum.value;
@@ -216,7 +165,7 @@ async function getBillingKey() {
 	  billingKeyMethod: "EASY_PAY",
 	  issueName: "빌링키 발급중"
 	});
-	// 빌링키가 제대로 발급되지 않은 경우 에러 코드가 존재합니다
+	// 빌링키가 제대로 발급되지 않은 경우 에러 코드가 존재
 	if (issueResponse.code != null) {
 	  return alert(issueResponse.message);
 	}
@@ -224,10 +173,10 @@ async function getBillingKey() {
 	
 	console.log("=======빌링키======" + issueResponse.billingKey)
 	
-	// 고객사 서버에 빌링키를 전달합니다
+	// 서버에 빌링키를 전달
 	const response = await csrf_axios({
 	  method: "POST",
-	  url : "/member/subsp/billing",
+	  url : "/member/sttl/billing",
 	  data: {
 	    billingKey: issueResponse.billingKey
 	  },
@@ -236,7 +185,7 @@ async function getBillingKey() {
 }
 
 async function payReq() {
-	const billingKey = "billing-key-018ea20a-1da0-531d-5c92-40126b027aa9";
+	const billingKey = "billing-key-018ea6e8-d64b-d3ed-e5c2-7f07ed31bc37";
 	
 	// 고객사에서 채번하는 새로운 결제 ID를 만들어주세요.
 	//const paymentId = OrderService.getNewPaymentId();
@@ -265,11 +214,9 @@ async function payReq() {
 
 
 </script>
-<!-- Core JS -->
-<script src="/js/admin/jquery.js"></script>
-<script src="/js/admin/popper.js"></script>
-<script src="/js/admin/bootstrap.js"></script>
-<script src="/js/admin/perfect-scrollbar.js"></script>
+
+
+
 </section>
 </body>
 </html>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.subsp.model.SubspVO;
-import com.iting.subsp.service.impl.SubspService;
+import com.iting.subsp.service.SubspService;
 
 @RestController
 public class SubspController {
@@ -40,15 +40,6 @@ public class SubspController {
 	public ModelAndView subspList() {
 		ModelAndView mv = new ModelAndView("/admin/subsp/info");
 		return mv;
-	}
-	
-	// 빌링키 발급
-	@PostMapping("/member/subsp/billing")
-	public SubspVO subspBilling(@RequestBody SubspVO vo) {
-		
-		System.out.println(vo);
-		
-		return vo;
 	}
 	
 	

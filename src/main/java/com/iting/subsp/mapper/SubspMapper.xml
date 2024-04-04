@@ -23,8 +23,8 @@
 			VALUES (
 					#{subspNum}
 			        , #{subspStCd}
-			        , #{subspFrDt}
-			        , #{subspToDt}
+			        , SYSDATE
+			        , SYSDATE + 30
 			        , #{subspTypCd}
 			        , #{subspPrice}
 			        , #{memNum}
