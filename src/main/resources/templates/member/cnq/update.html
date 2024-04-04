@@ -12,15 +12,16 @@
 			<div class="checkout__input contact__form">
 				<h3>글 수정</h3>
 				<form action="/member/cnq/update" method="post">
-					제목 : <input name="ttl" value="${sessionScope.cnq.ttl}"> 
-					내용 : <textarea name="cntn" value="${sessionScope.cnq.ttl}"> </textarea>
+					제목 : <input type="text" name="ttl" value="${sessionScope.cnq.ttl}"> 
+					내용 : <textarea type="text" name="cntn" value="${cnq.cntn}"> </textarea>
 					<br> 
-					작성자 : <input name="name">
+					작성자 : <input type="text" name="name" value="${cnq.name}">
 					<!--  이미지 : <input name="photofile" type="file">-->
 					<button type="button" id="saveBtn">등록</button>
 					<button type="button" id="listBtn">글목록으로</button>
 				</form>
 			</div>
+			${cnq}
 		</div>
 	</section>
 </body>

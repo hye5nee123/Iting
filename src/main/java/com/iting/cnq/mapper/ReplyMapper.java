@@ -6,11 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
-import com.iting.cnq.model.ReplyVO;
 
 @Mapper
 public interface ReplyMapper {
-	public List<ReplyVO> replyList(ReplyVO vo);
+	// 목록 출력.
+	public List<CnqVO> getListWithPaging(CnqVO vo, CSearchVO svo);
 
-	public long getCount(CnqVO vo, CSearchVO svo);
+	// 개수 계산.
+	public long getCount(CnqVO vo);
 }
