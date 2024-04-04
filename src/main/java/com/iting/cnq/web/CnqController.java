@@ -3,14 +3,14 @@ package com.iting.cnq.web;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.cnq.model.CSearchVO;
@@ -21,8 +21,24 @@ import com.iting.common.model.PagingVO;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @author 조혜원
+ * @since 2024.04.01
+ * @version 1.0
+ * @see
+ * 
+ *      <pre>
+* << 개정이력(Modification Information) >>
+*  
+*  *   수정일     수정자          수정내용
+*  -------    --------    ---------------------------
+*  2024.04.01   조혜원          최초 생성
+ *      </pre>
+ * 
+ * 
+ **/
+@RestController
 @RequiredArgsConstructor
-@Controller
 public class CnqController {
 
 	@Autowired
@@ -81,7 +97,6 @@ public class CnqController {
 	}
 
 	// 등록 기능.
-	@ResponseBody
 	@PostMapping("/member/cnq/insert")
 	// jsonType 을 받기 위해서 @RequestBody붙임.
 	public CnqVO cnqInsert(@RequestBody CnqVO vo) {
@@ -100,14 +115,10 @@ public class CnqController {
 	}
 
 // 수정 기능.
-//	@PutMapping("/member/cnq/update")
-//	public String updateCnq(CnqVO vo) {
-//		if (cnqService.updateCnq(vo) > 0) {
-//			System.out.println("수정완료");
-//		}
-//
-//		return "redirect:/member/cnq/list";
-//	}
+	@PutMapping("/member/cnq/update/{ltCnqNum}")
+	public String updateCnq(CnqVO vo) {
+		return cnqService.updateCnq(vo);
+	}
 
 // 삭제처리.
 	@RequestMapping("/member/cnq/{ltCnqNum}")
