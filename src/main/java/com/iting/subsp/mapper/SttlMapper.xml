@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.subsp.mapper.SttlMapper">
+
+	<!-- 결제 등록 -->
+	<insert id="sttlInsert" parameterType="SttlVO">
+		<selectKey keyProperty="sttlNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'st' || LPAD(NVL(MAX(SUBSTR(sttl_num, -5)), 0) + 1, 5, '0') 
+			FROM sttl
+		</selectKey>
+		INSERT INTO sttl (
+							sttl_num
+							, sttl_typ_cd
+							, sttl_dt
+							, sttl_st_cd
+							<if test="dcPrice != 0">
+							, dc_price
+							</if>
+							, all_sttl_price
+							, subsp_num
+							, mem_num
+							, card_accp_num
+			                )
+			VALUES (
+					#{sttlNum}
+			        , #{sttlTypCd}
+			        , #{sttlDt}
+			        , #{sttlStCd}
+			        <if test="dcPrice != 0">
+			        , #{dcPrice}			        
+			        </if>
+			        , #{allSttlPrice}
+			        , #{subspNum}
+			        , #{memNum}
+			        , #{cardAccpNum}
+			        )
+	</insert>
+
+</mapper>

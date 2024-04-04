@@ -1,4 +1,4 @@
-package com.iting.subsp.service.impl;
+package com.iting.subsp.service;
 
 import com.iting.subsp.model.SubspVO;
 
