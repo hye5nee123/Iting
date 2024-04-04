@@ -51,7 +51,7 @@
 		<selectKey keyProperty="ltCnqNum"
 					order="BEFORE"
 					resultType="string">
-			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) + 1, 5, '0') AS LI_CNQ_NUM 
+			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) + 1, 5, '0') AS LT_CNQ_NUM 
 			FROM lt_cnq
 		</selectKey>
 		INSERT INTO lt_Cnq (
@@ -75,7 +75,8 @@
 	</insert>
 	
 	<delete id="deleteCnq">
-		delete from lt_cnq where LT_CNQ_NUM = #{ltCnqNum}
+		DELETE FROM lt_cnq 
+		WHERE 		lt_cnq_num = #{ltCnqNum}
 	</delete>
 	
 	<update id="updateCnq" parameterType="CnqVO">

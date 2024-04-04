@@ -45,8 +45,13 @@ public class CnqServiceImpl implements CnqService {
 
 	@Override
 	public int updateCnq(CnqVO vo) {
-		
+
 		return cnqMapper.updateCnq(vo);
+	}
+
+	@Override
+	public int deleteCnq(String ltCnqNum) {
+		return cnqMapper.deleteCnq(ltCnqNum);
 	}
 
 }

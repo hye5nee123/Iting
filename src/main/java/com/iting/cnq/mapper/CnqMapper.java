@@ -25,5 +25,5 @@ public interface CnqMapper {
 	public int updateCnq(CnqVO vo);
 	
 	//삭제
-	public int deleteCnq(CnqVO vo);
+	public int deleteCnq(String ltCnqNum);
 }

@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
-import com.iting.cnq.model.PagingVO;
 import com.iting.cnq.service.CnqService;
 import com.iting.cnq.service.ReplyService;
+import com.iting.common.model.PagingVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -101,17 +100,21 @@ public class CnqController {
 	}
 
 // 수정 기능.
-	@PutMapping("/member/cnq/update")
-	public String updateCnq(CnqVO vo) {
-		if (cnqService.updateCnq(vo) > 0) {
-			System.out.println("수정완료");
-		}
+//	@PutMapping("/member/cnq/update")
+//	public String updateCnq(CnqVO vo) {
+//		if (cnqService.updateCnq(vo) > 0) {
+//			System.out.println("수정완료");
+//		}
+//
+//		return "redirect:/member/cnq/list";
+//	}
 
+// 삭제처리.
+	@RequestMapping("/member/cnq/{ltCnqNum}")
+	public String delete(@PathVariable String ltCnqNum) {
+		cnqService.deleteCnq(ltCnqNum);
 		return "redirect:/member/cnq/list";
 	}
-// 삭제
-//	@DeleteMapping("/member/cnq/deleteCnq")
-//	public String delete
 
 	/* 강사 */
 

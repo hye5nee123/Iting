@@ -1,4 +1,4 @@
-package com.iting.cnq.model;
+package com.iting.common.model;
 
 import lombok.Data;
 
