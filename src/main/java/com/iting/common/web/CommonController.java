@@ -1,7 +1,6 @@
 package com.iting.common.web;
 
 
-
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,8 +36,7 @@ public class CommonController {
 	
 	// 회원
 	@RequestMapping("member/main")
-	public ModelAndView goMemberMain(Principal principal) {
-		// System.out.println(principal.getName()+"<<<<<<<<<<<<<<<<");
+	public ModelAndView goMemberMain() {
 		ModelAndView mv  = new ModelAndView("member/main");
 		return mv;
 	}
@@ -116,13 +113,15 @@ public class CommonController {
 		model.addAttribute("msg", "access denied");
 		return "common/accessError";
 	}
-	@ResponseBody
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		log.info("logout success");
-		System.out.println(session);
-		System.out.println(session.getAttribute("userId"));
-//		session.invalidate(); // 세션 비워줌
-		return "member/main";
-	}
+	
+//	@ResponseBody
+//	@PostMapping("/logout")
+//	public String logout(HttpSession session) {
+//		log.info("logout success");
+//		System.out.println(session);
+//		System.out.println(session.getAttribute("userId"));
+//		System.out.println("로그아웃 성공");
+////		session.invalidate(); // 세션 비워줌
+//		return "redirect:/login";
+//	}
 }

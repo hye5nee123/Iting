@@ -10,10 +10,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.iting.common.security.CustomAccessDeniedHandler;
 import com.iting.common.security.CustomAuthFailureHandler;
 import com.iting.common.security.CustomLoginSuccessHandler;
+import com.iting.common.security.CustomLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -30,10 +32,14 @@ public class WebSecurityConfig {
 		return new CustomLoginSuccessHandler();
 	}
 	@Bean
-    AuthenticationFailureHandler loginFailureHandler(){
+    public AuthenticationFailureHandler loginFailureHandler(){
         return new CustomAuthFailureHandler();
     }
-
+	@Bean
+	public LogoutSuccessHandler logoutSuccessHandler() {
+		return new CustomLogoutSuccessHandler();
+	}
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
@@ -49,14 +55,18 @@ public class WebSecurityConfig {
 //				.passwordParameter("password")
 				.loginProcessingUrl("/userlogin")
 				.successHandler(authenticationSuccessHandler())
-//				.failureForwardUrl("/login")
+				.failureForwardUrl("/login")
 				.failureHandler(loginFailureHandler())
 				.permitAll()
 				.and()
 //				.logout((logout) -> logout.permitAll());
 				.logout()
 				.logoutUrl("/logout")
-				.logoutSuccessUrl("/member/main")
+				.logoutSuccessHandler(logoutSuccessHandler())
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
+//				.logoutSuccessHandler((request, response, authentication) -> {
+//	                response.sendRedirect("/member/main");
+//				})
 				.permitAll()
 				.and()
 				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
