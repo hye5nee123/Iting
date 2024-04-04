@@ -3,9 +3,10 @@ package com.iting.common.web;
 
 
 import java.security.Principal;
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
-
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iting.common.ExcelView;
 import com.iting.common.service.UsersService;
 
 import lombok.extern.log4j.Log4j2;
@@ -45,6 +48,24 @@ public class CommonController {
 	@RequestMapping("teacher/main")
 	public ModelAndView goTeacherMain() {
 		ModelAndView mv  = new ModelAndView("teacher/main");
+		return mv;
+	}
+	
+	
+	/* 엑셀로 DB 테이블 내려받기 */
+	@GetMapping("/empExcel")
+	public ModelAndView empExcel() {
+		ModelAndView mv = new ModelAndView(new ExcelView());
+		/*
+		mv.addObject("type", EmpVO.class);
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<Map> list = empService.getEmpList(null)
+                                   .stream()
+                                   .map(d->objectMapper.convertValue(d, Map.class))
+                                   .collect(Collectors.toList());
+	
+		mv.addObject("datas", list);
+		*/
 		return mv;
 	}
 	
