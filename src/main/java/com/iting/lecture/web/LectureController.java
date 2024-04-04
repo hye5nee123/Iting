@@ -1,5 +1,7 @@
 package com.iting.lecture.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,8 @@ public class LectureController {
 	}
 	
 	
-	/* 강사 */
+	/* 강사 */	
+	
 	// 강의 목록 조회
 	@GetMapping("lecture/lecture")
 	public String getLectureList(Model model,LectureVO vo) {

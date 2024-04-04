@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -65,59 +65,45 @@
           <ul class="menu-inner py-1 ps ps--active-y">
             <!-- Home -->
             <li class="menu-item active">
-              <a href="main" class="menu-link">
+              <a href="../main" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Home</div>
               </a>
             </li>
 
-            <li class="menu-item">
+			<li class="menu-header small text-uppercase"><span class="menu-header-text">강의관리</span></li>
+			<li class="menu-item">
+              <a href="/teacher/test/list" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-receipt"></i>
+                <div data-i18n="Account Settings">전체강의</div>
+              </a>
+            </li>
+            <li th:each="lecture, stat: ${lectureList}" class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-videos"></i>
-                <div data-i18n="Layouts">강의관리</div>
+                <div th:text="${lecture.ltTtl}" data-i18n="Layouts"></div>
               </a>
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
-                    <div data-i18n="Without menu">Without menu</div>
+                  <a href="layouts-container.html" class="menu-link">
+                    <div data-i18n="Container">강의관리</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/teacher/test/list" class="menu-link">
+                    <div data-i18n="Without menu">문제관리</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="layouts-without-navbar.html" class="menu-link">
-                    <div data-i18n="Without navbar">Without navbar</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-container.html" class="menu-link">
-                    <div data-i18n="Container">Container</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-fluid.html" class="menu-link">
-                    <div data-i18n="Fluid">Fluid</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Blank">Blank</div>
+                    <div data-i18n="Without navbar">질의답변</div>
                   </a>
                 </li>
               </ul>
             </li>
-
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-receipt"></i>
-                <div data-i18n="Account Settings">문제관리</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-message-square-dots"></i>
-                <div data-i18n="Account Settings">질의답변</div>
-              </a>
-            </li>
+            
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">공통</span></li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-alt"></i>
@@ -136,6 +122,7 @@
                 <div data-i18n="Misc">LIVE특강</div>
               </a>
             </li>
+            
           <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 843px; right: 4px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 797px;"></div></div></ul>
         </aside>
         <!-- / Menu -->

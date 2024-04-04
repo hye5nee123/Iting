@@ -51,24 +51,25 @@ public class TestController {
 	}
 	
 	// 수정페이지 이동
-		@GetMapping("teacher/test/update/{prblNum}")
-		public String update(@PathVariable String prblNum, Model model) {
-			model.addAttribute("test", testService.getTestInfo(prblNum));
-			return "teacher/test/update";
-		}
+	@GetMapping("teacher/test/update/{prblNum}")
+	public String update(@PathVariable String prblNum, Model model) {
+		model.addAttribute("test", testService.getTestInfo(prblNum));
+		return "teacher/test/update";
+	}
 		
-		// 수정처리
-		@PostMapping("teacher/test/update/{prblNum}")
-		public String update(TestVO vo) {
-			testService.insertTest(vo);
-			return "redirect:teacher/test/list";
-		}
+	// 수정처리
+	@ResponseBody
+	@PostMapping("teacher/test/update/{prblNum}")
+	public String update(@RequestBody TestVO vo) {
+		testService.updateTest(vo);
+		return "redirect:teacher/test/list";
+	}
 			
-		// 삭제처리
-		@RequestMapping("teacher/test/delete/{prblNum}")
-		public String delete(@PathVariable String prblNum){ 
-			System.out.println("prblNum : " + prblNum);
-			testService.deleteTest(prblNum);
-			return "redirect:teacher/test/list";
-		}
+	// 삭제처리
+	@RequestMapping("teacher/test/delete/{prblNum}")
+	public String delete(@PathVariable String prblNum){ 
+		System.out.println("prblNum : " + prblNum);
+		testService.deleteTest(prblNum);
+		return "redirect:/teacher/test/list";
+	}
 }

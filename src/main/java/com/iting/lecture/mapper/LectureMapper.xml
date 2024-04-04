@@ -51,4 +51,25 @@
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 		</select>
+	
+	<!-- 강사 + 강의 단건조회 -->
+	<select id="getTcList" resultType="LectureVO">
+		SELECT l.LT_NUM
+        ,l.LT_ST_CD
+        ,l.LT_TTL
+        ,l.LT_IMG
+        ,l.LT_INTRO
+        ,l.LT_CATE_CD
+        ,l.FR_DT
+        ,l.ACCP_YN_CD
+        ,l.LT_DIF_CD
+        ,l.LECTURER_NUM
+        ,l.LT_KEYWORD_CD
+        ,l.RDM_CATE_CD
+        ,l.LT_FG_CD
+FROM LT l JOIN LECTURER le
+        ON l.LECTURER_NUM = le.LECTURER_NUM
+WHERE le.LECTURER_NUM = #{lecturerNum}
+	</select>
+
 </mapper>
