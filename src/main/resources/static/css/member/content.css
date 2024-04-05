@@ -110,3 +110,52 @@
 .lecture_calendar .list span{display:block; color:#555; margin-bottom:8px; font-size:13px; font-weight:600; letter-spacing:-1px; padding:5px 10px; border-radius:5px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
 .lecture_calendar .list li:nth-child(odd) span{background:#f7f9fe;}
 .lecture_calendar .list li:nth-child(even) span{background:#f9f9f9;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*게시판*/
+.insertBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
