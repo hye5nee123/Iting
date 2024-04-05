@@ -30,7 +30,7 @@ public class CnqController {
 
 	/* 회원 */
 
-	// 강의문답 전체조회.
+	// 강의문답 전체조회. //
 	@RequestMapping("/member/cnq/list")
 	public String cnqList(Model model, CnqVO vo, CSearchVO svo, PagingVO pvo) {
 		// paging처리.
