@@ -125,7 +125,6 @@ payBtn.addEventListener("click", e => {
 
 // 구독 정보 단건조회
 function getSubspInfo(memNum) {
-	console.log(memNum);
 	axios({
 		method : 'get',
 		url : "/member/subsp/" + memNum,
@@ -133,7 +132,9 @@ function getSubspInfo(memNum) {
 	.then(res => {
 		if(res.data.subspStCd == "m1"){
 			errorAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
-			//confirmAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
+		}
+		else {
+			console.log("구독정보 : ", res.data);
 		}
 	})
 	
