@@ -23,6 +23,7 @@
 							, subsp_num
 							, mem_num
 							, card_accp_num
+							, billing_key
 			                )
 			VALUES (
 					#{sttlNum}
@@ -36,6 +37,7 @@
 			        , #{subspNum}
 			        , #{memNum}
 			        , #{cardAccpNum}
+			        , #{billingKey}
 			        )
 	</insert>
 

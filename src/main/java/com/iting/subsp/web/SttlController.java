@@ -22,15 +22,14 @@ public class SttlController {
 		
 		System.out.println(vo);
 		
-		sttlService.sttlInsert(vo);
-		
 		return vo;
 	}
 	
-	// 빌링키 발급
+	// 빌링키 DB등록
 	@PostMapping("/member/sttl/billing")
-	public SubspVO subspBilling(@RequestBody SubspVO vo) {
+	public SttlVO subspBilling(@RequestBody SttlVO vo) {
 		
+		sttlService.sttlInsert(vo); // 빌링키 + 회원번호 등록
 		System.out.println(vo);
 		
 		return vo;
