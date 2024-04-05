@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>강의질문 페이지</title>
 <link rel="stylesheet" href="/css/teacher/content.css" />
+<script th:inline="javascript">
+function link(noteNum){
+	location.href='/teacher/note/info/'+ noteNum
+}
+</script>
 </head>
 <body>
 <div id="container" layout:fragment="container">
@@ -31,21 +36,11 @@
         </ul>
         <div class="tab-content test_content">
           <div class="tab-pane fade active show note_box" id="navs-pills-top-home" role="tabpanel">
-            <ul>
+            <ul th:each="note, stat: ${noteList}" th:onclick="link([[${note.noteNum}]])">
             	<li>
-            		<p class="new">읽지않은 쪽지 테스트입니다.읽지않은 쪽지 테스트입니다.읽지않은 쪽지 테스트입니다.읽지않은 쪽지 테스트입니다.읽지않은 쪽지 테스트입니다.읽지않은 쪽지 테스트입니다.</p>
-            		<span>보낸회원</span>
-            		<i>2024-04-05</i>
-            	</li>
-            	<li>
-            		<p>읽지않은 쪽지 테스트입니다.</p>
-            		<span>보낸회원</span>
-            		<i>2024-04-05</i>
-            	</li>
-            	<li>
-            		<p>읽지않은 쪽지 테스트입니다.</p>
-            		<span>보낸회원</span>
-            		<i>2024-04-05</i>
+            		<a href="#" th:text="${note.noteTtl}" class="new"></a>
+            		<span th:text="${note.sentPs}">보낸회원</span>
+            		<i th:text="${#dates.format(note.recDt, 'yyyy-MM-dd')}"></i>
             	</li>
             </ul>
           </div>

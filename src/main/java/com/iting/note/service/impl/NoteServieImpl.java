@@ -19,10 +19,16 @@ public class NoteServieImpl implements NoteService {
 	public List<NoteVO> getNoteList() {
 		return noteMapper.getNoteList();
 	}
+	
+	@Override
+	public NoteVO getNoteInfo(String noteNum) {
+		return noteMapper.getNoteInfo(noteNum);
+	}
 
 	@Override
 	public int insertNote(NoteVO vo) {
 		return noteMapper.insertNote(vo);
 	}
+
 	
 }

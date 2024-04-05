@@ -9,6 +9,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,6 @@ import com.iting.note.model.NoteVO;
 import com.iting.note.service.NoteService;
 import com.iting.socket.model.Greeting;
 import com.iting.socket.model.HelloMessage;
-import com.iting.test.model.TestVO;
 
 @Controller
 public class NoteController {
@@ -33,8 +33,15 @@ public class NoteController {
 	// 목록조회
 	@RequestMapping("teacher/note/list")
 	public String getNoteList(Model model, NoteVO vo) {
-		model.addAttribute("testList", noteService.getNoteList());
+		model.addAttribute("noteList", noteService.getNoteList());
 		return "teacher/note/list";
+	}
+	
+	// 단건조회
+	@GetMapping("teacher/note/info/{noteNum}")
+	public String info(@PathVariable String noteNum, Model model) {
+		model.addAttribute("note", noteService.getNoteInfo(noteNum));
+		return "teacher/note/info";
 	}
 	
 	@MessageMapping("/hello") // 메세지가 들어오면
@@ -51,17 +58,17 @@ public class NoteController {
 		return mv;
 	}
 	
-
 	// 메세지 등록
 	@ResponseBody
-	@GetMapping("teacher/note/insert")
+	@PostMapping("teacher/note/insert")
 	public NoteVO insertTest(@RequestBody NoteVO vo) {
-		// 요청 처리 메세지를 보내고
-	    String text = "[" + new Date() + "]:" + "승인요청 ";
-	    this.template.convertAndSendToUser(
-	    	noteService.getUserName(), "/queue/position-updates", noteService.insertNote(vo));
-	    	noteService.insertNote(vo);
-		return vo;  
-	  }
+		noteService.insertNote(vo);
+		
+	// 요청 처리 메세지를 보내고
+    String text = "[" + new Date() + "]:" + "승인요청 ";
+    this.template.convertAndSendToUser(
+    	vo.getRecPs(), "/topic/message", noteService.insertNote(vo));
+	return vo;  
+  }
 	
 }

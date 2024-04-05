@@ -8,7 +8,7 @@ stompClient.onConnect = (frame) => {
     stompClient.subscribe('/topic/greetings', (greeting) => {
         showGreeting(JSON.parse(greeting.body).content);
     });
-    stompClient.subscribe('/topic/approve', (greeting) => {
+    stompClient.subscribe('/topic/message', (greeting) => {
         alert(greeting.body);
     });
 };
