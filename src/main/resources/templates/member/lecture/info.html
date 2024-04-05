@@ -9,6 +9,14 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
+	
+	<style>
+	#cnq {
+  width: 100%; /* 부모에 맞게 꽉 채운다. */
+  height: 300px;
+  border:none;
+}
+	</style>
 </head>
 <body>
 	<section layout:fragment="content">
@@ -191,7 +199,7 @@
 						<div class="tab-pane" id="tabs-6" role="tabpanel">
 							<div class="product__details__tab__content">
 								<div class="product__details__tab__content__item" >
-									<iframe src="/member/cnq/list"></iframe>
+									<iframe src="/member/cnq/list" id="cnq"></iframe>
 								</div>
 								<div class="product__details__tab__content__item">
 									<h5>Material used</h5>
