@@ -28,27 +28,27 @@
          <hr class="my-0">
          <div class="mb-3 test_list first_list">
            <label for="tlTtl" class="form-label">강의주제</label>
-           <input class="form-control" type="text" name="tlTtl" id="tlTtl" value="">
+           <input class="form-control" type="text" name="tlTtl" id="tlTtl">
          </div>
          <div class="mb-3 test_list">
            <label for="ques" class="form-label">커리큘럼</label>
-           <input class="form-control" type="text" name="ques" id="ques" value="">
+           <input class="form-control" type="text" name="ques" id="ques">
          </div>
          <div class="mb-3 test_list">
            <label for="ltIntro" class="form-label">강의소개</label>
-           <input class="form-control" type="text" name="ltIntro" id="ltIntro" value="">
+           <input class="form-control" type="text" name="ltIntro" id="ltIntro">
          </div>
          <div class="mb-3 test_list">
            <label for="file" class="form-label">첨부파일</label>
-           <input class="form-control" type="file" name="file" id="file" value="">
+           <input class="form-control" type="file" name="file" id="file">
          </div>
 	     	 <div class="mb-3 test_list">
            <label for="frDt" class="form-label">강의날짜</label>
-           <input class="form-control" type="Date" name="frDt" id="frDt" value="">
+           <input class="form-control" type="Date" name="frDt" id="frDt">
          </div>
           <div class="mb-3 test_list">
            <label for="ltDifCd" class="form-label">강의난이도</label>
-           <input class="form-control" type="text" name="ltDifCd" id="ltDifCd" value="">
+           <input class="form-control" type="text" name="ltDifCd" id="ltDifCd">
          </div>
 	     	
 	     </div>
@@ -71,7 +71,7 @@
 		
 		
 		
-		let param = {tlTtl, ltIntro, ltImg,frDt, ltDifCd, lecturerNum}
+		let param = {ltName, tlTtl, ltIntro, ltImg,frDt, ltDifCd, lecturerNum}
 		console.log(param);
 		
 		/*
@@ -81,7 +81,7 @@
 		
 		csrf_axios({
 				method: 'POST',
-				url: '/teacher/lecture/insert1',
+				url: '/teacher/lecture/insert1', 
 				data: param
 			
 				})
