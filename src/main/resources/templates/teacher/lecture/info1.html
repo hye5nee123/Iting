@@ -1,97 +1,68 @@
-	<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/teacher/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
 <head>
 <meta charset="UTF-8">
 <title>강의상세 페이지</title>
 <link rel="stylesheet" href="/css/teacher/content.css" />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 </head>
 <body>
-<div id="container" layout:fragment="container">
-	<div class="card mb-4">
-                    <h5 class="card-header">강의상세</h5>
-                    <div class="card-body">
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">강의번호</label>
-                        <div th:text="${ltNum}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">강의제목</label>
-                        <div th:text="${ltTtl}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">강의소개</label>
-                        <div th:text="${ltIntro}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">강사번호</label>
-                        <div th:text="${lecturerNum}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">강의상태코드</label>
-                        <div th:text="${ltStCd}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">강의난이도</label>
-                        <div th:text="${ltDifCd}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">시작날짜</label>
-                        <div th:text="${#dates.format(frDt,'yyyy-MM-dd')}" class="col-md-10">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="datetime-local" value="2021-06-18T12:30:00" id="html5-datetime-local-input">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="html5-date-input" class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="date" value="2021-06-18" id="html5-date-input">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="html5-month-input" class="col-md-2 col-form-label">Month</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="month" value="2021-06" id="html5-month-input">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="html5-week-input" class="col-md-2 col-form-label">Week</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="week" value="2021-W25" id="html5-week-input">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="html5-time-input" class="col-md-2 col-form-label">Time</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="time" value="12:30:00" id="html5-time-input">
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="html5-color-input" class="col-md-2 col-form-label">Color</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="color" value="#666EE8" id="html5-color-input">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <label for="html5-range" class="col-md-2 col-form-label">Range</label>
-                        <div class="col-md-10">
-                          <input type="range" class="form-range mt-3" id="html5-range">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-</div>
+	<div id="container" layout:fragment="container">
+		<div class="card mb-4">
+			<h5 class="card-header">강의상세</h5>
+			<div class="card-body">
+				<div class="mb-3 row">
+
+					<label class="col-md-2 col-form-label">강의번호</label>
+					<div th:text="${ltNum}" class="col-md-10"></div>
+				</div>
+				
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의제목</label>
+					<div th:text="${ltTtl}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의소개</label>
+					<div th:text="${ltIntro}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강사번호</label>
+					<div th:text="${lecturerNum}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의상태코드</label>
+					<div th:text="${ltStCd}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의난이도</label>
+					<div th:text="${ltDifCd}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">시작날짜</label>
+					<div th:text="${#dates.format(frDt,'yyyy-MM-dd')}"
+						class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label for="html5-datetime-local-input"
+						class="col-md-2 col-form-label">강의구분코드</label>
+					<div th:text="${ltFgCd}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label for="html5-datetime-local-input"
+						class="col-md-2 col-form-label">강의키워드코드</label>
+					<div th:text="${ltKeywordCd}" class="col-md-10"></div>
+				</div>
+				<div class="mb-3 row">
+					<label for="html5-date-input" class="col-md-2 col-form-label">이미지</label>
+					<div th:text="${ltImg}" class="col-md-10"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

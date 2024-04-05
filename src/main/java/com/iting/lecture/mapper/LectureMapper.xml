@@ -50,6 +50,7 @@
 		       , LT_FG_CD
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
+		
 		</select>
 
   <!-- 신수지 -->
