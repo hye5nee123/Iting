@@ -102,6 +102,7 @@ const subspPrice = subspMonthlyFrm.subspPrice.value;
 
 // 로그인한 회원번호
 const memNum = "[[ ${session.usernum} ]]";
+//console.log(memNum);
 
 
 // 결제하기 버튼 클릭 시
@@ -110,9 +111,10 @@ payBtn.addEventListener("click", e => {
 	getSubspInfo(memNum);
 	
 	// 1.빌링키 발급
-	getBillingKey();// 빌링키 발급 함수 호출
+	//getBillingKey();// 빌링키 발급 함수 호출
 	
 	// 2. 빌링키로 결제
+	//billingPayReq();
 	
 	// 3. 구독 DB 등록
 	// subspInsertReq(); // 구독 등록 요청
@@ -123,14 +125,19 @@ payBtn.addEventListener("click", e => {
 
 // 구독 정보 단건조회
 function getSubspInfo(memNum) {
+	console.log(memNum);
 	axios({
 		method : 'get',
-		url : `/member/subsp/{$memNum}`
+		url : "/member/subsp/" + memNum,
 	})
-	.then(res => saveRes(res.data))
+	.then(res => {
+		if(res.data.subspStCd == "m1"){
+			errorAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
+			//confirmAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
+		}
+	})
 	
 }
-
 
 // 구독 등록 요청
 function subspInsertReq() {
@@ -210,7 +217,7 @@ async function getBillingKey() {
 	if (!response.ok) console.log("err")
 }
 
-async function payReq() {
+async function billingPayReq() {
 	const billingKey = "billing-key-018ea6e8-d64b-d3ed-e5c2-7f07ed31bc37";
 
 	// 포트원 빌링키 결제 API 호출

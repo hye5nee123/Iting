@@ -47,6 +47,7 @@ public class SubspController {
 	// 구독정보 단건 조회
 	@GetMapping("/member/subsp/{memNum}")
 	public SubspVO memInfo(@PathVariable String memNum) {
+		System.out.println(memNum);
 		return subspService.getSubspInfo(memNum);
 	}
 	
