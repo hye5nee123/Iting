@@ -29,7 +29,7 @@
 		       , FR_DT
 		       , find_code(LT_DIF_CD) LT_DIF_CD
 		       , LECTURER_NUM
-		       , LT_KEYWORD_CD
+		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
 		FROM LT
 	
 	</select>
@@ -42,9 +42,9 @@
 		       , LT_INTRO
 		       , LT_CATE_CD
 		       , FR_DT
-		       , LT_DIF_CD
+		       , find_code(LT_DIF_CD) LT_DIF_CD
 		       , LECTURER_NUM
-		       , LT_KEYWORD_CD
+		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 		
