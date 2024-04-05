@@ -55,14 +55,19 @@ public class LectureController {
 	// 등록기능
 	@ResponseBody
 	@PostMapping("/teacher/lecture/insert1")
-	public LectureVO ltInsert(@RequestBody LectureVO vo) {
+	public String ltInsert(@RequestBody LectureVO vo) {
 		System.out.println(vo +
 				"===============");
 		lectureService.ltInsert(vo);
-		return vo;
+		return "redirect:/admin/lecture/list";
 	}
 	/* 관리자 */
 	// 강의 수정
 
-	//
+	//강의 리스트
+	@GetMapping("/admin/lecture/list")
+	public String list(Model model, LectureVO vo) {
+		model.addAttribute("list", lectureService.getLectureList(vo));
+		return "/admin/lecture/list";
+	}
 }
