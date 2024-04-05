@@ -22,7 +22,7 @@ public interface CnqMapper {
 	public long getCount(CnqVO vo, CSearchVO svo);
 
 	// 수정
-	public int updateCnq(CnqVO vo);
+	public String updateCnq(CnqVO vo);
 	
 	//삭제
 	public int deleteCnq(String ltCnqNum);
