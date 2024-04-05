@@ -38,3 +38,14 @@ h4{position:relative;}
 .btn_posi{position:absolute; right:0;}
 .test_test .btn_box{margin-top:10px;}
 .hidden{display:none;}
+
+/* 쪽지 */
+.note_box{margin-top:20px; background:#fff; border-radius:0.5rem; padding:1.5rem 1.5rem;}
+.note_box ul li{margin-top:15px; padding-bottom:15px; border-bottom:1px solid #ddd;}
+.note_box ul li > *{float:left;}
+.note_box ul li:after{content:''; display:block; clear:both;}
+.note_box ul li p{margin-bottom:0; font-size:15px; width:calc(100% - 16%); letter-spacing:-1px; color:#555; font-weight:700; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.note_box ul li p.new{position:relative; padding-left:20px;}
+.note_box ul li p.new:before{content:'N'; display:block; position:absolute; left:0; top:50%; width:10px; height:10px;}
+.note_box ul li span{display:block; margin:0 1%; font-size:14px; font-weight:500;}
+.note_box ul li i{float:right; font-style:normal; color:#777; font-weight:300; font-size:13px;}

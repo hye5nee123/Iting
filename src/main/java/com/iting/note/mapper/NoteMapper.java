@@ -9,4 +9,5 @@ import com.iting.note.model.NoteVO;
 @Mapper
 public interface NoteMapper {
 	public List<NoteVO> getNoteList();
+	public int insertNote(NoteVO vo);
 }

@@ -11,7 +11,7 @@ public class NoteVO {
 	private String rply;
 	private Date sentDt;
 	private Date recDt;
-	private String memNum;
-	private String lectureNum;
 	private String cfmYnCd;
+	private String sentPs;
+	private String recPs;
 }
