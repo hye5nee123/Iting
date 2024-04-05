@@ -93,11 +93,13 @@
 const monthTlt = "아이팅 1개월 구독권";
 const yearTlt = "아이팅 12개월 구독권";
 
-const paymentId =  'iting_1month_' + new Date().getTime();
-
 const subspTypCd = subspMonthlyFrm.subspTypCd.value;
 const subspStCd = subspMonthlyFrm.subspStCd.value;
 const subspPrice = subspMonthlyFrm.subspPrice.value;
+
+const paymentId =  'iting_1month_' + new Date().getTime();
+
+let subspNum = "";
 
 // 로그인한 회원번호
 const memNum = "[[ ${session.usernum} ]]";
@@ -112,9 +114,7 @@ payBtn.addEventListener("click", e => {
 		reqSubspInfo(memNum); // 0.구독 DB 조회
 		
 		getBillingKey(memNum); // 1.빌링키 발급
-		
-		//billingPayReq(); // 2.빌링키로 결제
-		
+				
 		// 3. 구독 DB 등록
 		// subspInsertReq(); // 구독 등록 요청
 		
@@ -151,7 +151,7 @@ function resSubspInfo(res) {
 // 구독 등록 요청
 function subspInsertReq() {
 	
-	let param = { subspTypCd, subspFrDt, subspToDt, subspStCd, subspPrice, memNum, subspTypCd }
+	let param = { subspTypCd, subspStCd, subspPrice, memNum }
 	
 	csrf_axios({
 			method: 'POST',
@@ -163,12 +163,13 @@ function subspInsertReq() {
 }
 // 등록 응답
 function subspInsertRes(data) {
+	subspNum = data.subspNum;
 	console.log('구독 등록 완료!', data);
 }
 
 
 /* 1.빌링키 발급 */
-// 빌링키 발급
+// 빌링키 발급 (최초결제)
 async function getBillingKey(memNum) {
 	const issueResponse = await PortOne.requestIssueBillingKey({
 	  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
@@ -184,20 +185,27 @@ async function getBillingKey(memNum) {
 	console.log("=======빌링키======" + issueResponse.billingKey)
 	
 	// 서버에 빌링키를 전달
-	const response = await csrf_axios({
+	await csrf_axios({
 	  method: "POST",
 	  url : "/member/sttl/billing",
 	  data: {
 	    billingKey: issueResponse.billingKey,
 	    memNum
 	  },
+	}).then(res => {
+		//console.log(res.data.billingKey)
+		if(res.data.billingKey != "") {
+			billingPayReq(res.data.billingKey) /* 2.빌링키로 결제 */	
+		} else{
+			alert("빌링키가 없습니다.");
+		}
+		
 	});
-	if (!response.ok) console.log("err")
+	
 }
-
-async function billingPayReq() {
-	const billingKey = "billing-key-018ea6e8-d64b-d3ed-e5c2-7f07ed31bc37";
-
+/* 2.빌링키로 결제 */
+// 빌링키 결제 요청
+async function billingPayReq(billingKey) {
 	// 포트원 빌링키 결제 API 호출
 	const paymentResponse = await csrf_axios(
 	  {
@@ -208,9 +216,9 @@ async function billingPayReq() {
 	    },
 	    data: {
 	      billingKey : billingKey,
-	      orderName: "아이팅 1개월권 정기결제",
+	      orderName: monthTlt,
 	      amount: {
-	        total: 38900,
+	        total: subspPrice,
 	      },
 	      currency: "KRW"
 	    },
@@ -220,6 +228,8 @@ async function billingPayReq() {
 }
 
 
+
+/* 결제 연동 테스트 */
 // 결제 요청 (테스트)
 async function TestPayRes() {
 	const response = await PortOne.requestPayment({
@@ -227,8 +237,8 @@ async function TestPayRes() {
 		  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
 		  // 채널 키 설정
 		  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
-		  paymentId: "202020310230232010",
-		  orderName: "아이팅 1개월 구독권",
+		  paymentId: paymentId,
+		  orderName: monthTlt,
 		  totalAmount: subspPrice,
 		  currency: "CURRENCY_KRW",
 		  payMethod: "EASY_PAY"
