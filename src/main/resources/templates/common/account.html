@@ -19,7 +19,7 @@
 	width: 300px;
 }
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
 					아이디 <span>*</span>
 				</p>
 				<input type="text" id="id" name="id"
-					placeholder="4~20자의 영문 대소문자, 숫자">
+					placeholder="4~20자의 영문 대소문자, 숫자" onblur="idchk()">
 				<div class="idchk"></div>
 				<p>
 					비밀번호 <span>*</span>
@@ -91,6 +91,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script src="/js/join/account.js"></script>
 </body>
 </html>

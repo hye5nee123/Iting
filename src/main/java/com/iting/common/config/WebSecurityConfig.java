@@ -70,6 +70,10 @@ public class WebSecurityConfig {
 //				})
 				.permitAll()
 				.and()
+				.headers()
+				.frameOptions()
+				.sameOrigin()
+				.and()
 				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
 				.exceptionHandling(handler -> handler
 						.accessDeniedHandler(accessDeniedHandler()))
