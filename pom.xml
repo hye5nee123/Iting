@@ -72,6 +72,13 @@
 			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Socket -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
 		<dependency>
 		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -90,29 +97,29 @@
 		</dependency>
 		
 		<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi</artifactId>
-    <version>3.12</version>
-</dependency>
-<!-- excel 2007 over-->
-<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi-ooxml</artifactId>
-    <version>3.12</version>
-</dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.12</version>
+		</dependency>
+		<!-- excel 2007 over-->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>3.12</version>
+		</dependency>
 
- <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.6</version>
-    </dependency>
+		 <dependency>
+	        <groupId>commons-io</groupId>
+	        <artifactId>commons-io</artifactId>
+	        <version>2.6</version>
+	    </dependency>
     
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket -->
-	<dependency>
-	    <groupId>org.springframework.boot</groupId>
-	    <artifactId>spring-boot-starter-websocket</artifactId>
-	    <version>3.2.4</version>
-	</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-websocket</artifactId>
+		    <version>3.2.4</version>
+		</dependency>
 		
 	</dependencies>
 
