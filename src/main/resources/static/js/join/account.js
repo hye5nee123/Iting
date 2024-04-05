@@ -51,10 +51,10 @@ async function idchk() {
 	} else if (!(/^[a-zA-Z0-9]{4,20}$/.test(inputid))) {
 		idstat = `<p>영문 대소문자, 숫자조합 4~20자로 입력해주세요</p>`;
 	} else {
-		await axios.get(`/ajax/idchk/${inputid}`)
+		axios.get("/ajax/idchk/"+inputid)
 			.then(res => {
 				console.log(res.data);
-				if (res.data != null) {
+				if (res.data.id != null) {
 					idstat = `<p>사용할 수 없는 아이디입니다. 다른 아이디를 입력해주세요<p>`
 				} else {
 					idstat = `<p>사용가능한 아이디입니다</p>`;
