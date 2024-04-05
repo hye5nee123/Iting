@@ -15,7 +15,6 @@
 		       , LT_DIF_CD
 		       , LECTURER_NUM
 		       , LT_KEYWORD_CD
-		       , LT_FG_CD
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 	</select>
@@ -28,10 +27,9 @@
 		       , LT_INTRO
 		       , LT_CATE_CD
 		       , FR_DT
-		       , LT_DIF_CD
+		       , find_code(LT_DIF_CD) LT_DIF_CD
 		       , LECTURER_NUM
 		       , LT_KEYWORD_CD
-		       , LT_FG_CD
 		FROM LT
 	
 	</select>
@@ -47,7 +45,6 @@
 		       , LT_DIF_CD
 		       , LECTURER_NUM
 		       , LT_KEYWORD_CD
-		       , LT_FG_CD
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 		
@@ -69,7 +66,6 @@
 		        , l.LECTURER_NUM
 		        , l.LT_KEYWORD_CD
 		        , l.RDM_CATE_CD
-		        , l.LT_FG_CD
 		FROM LT l JOIN LECTURER le
         		  ON l.LECTURER_NUM = le.LECTURER_NUM
 		WHERE le.LECTURER_NUM = #{lecturerNum}
