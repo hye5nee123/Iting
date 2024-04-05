@@ -26,3 +26,27 @@ const csrf_axios = axios.create({
         })
             .catch(err => console.log(err));
 	}
+	
+	
+/* sweetAlert2 공통함수 */
+// 1. x표시 알림창
+function errorAlert(tit, txt) {
+	Swal.fire({
+		  icon: "error",
+		  title: tit,
+		  text: txt,
+		  confirmButtonText: "확인",
+		  confirmButtonColor: "#ff8a00"
+		});
+}
+
+// 2. 체크표시 알림창
+function confirmAlert(tit, txt) {
+	Swal.fire({
+		icon: "success",
+		title: tit,
+		text: txt,
+		confirmButtonText: "확인",
+		confirmButtonColor: "#205cdc"
+	});
+}
