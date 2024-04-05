@@ -22,6 +22,5 @@ public class LectureVO {
 	private String lecturerNum;
 	private String ltKeywordCd;
 	private String rdmCateCd;
-	private String ltFgCd;
 	
 }
