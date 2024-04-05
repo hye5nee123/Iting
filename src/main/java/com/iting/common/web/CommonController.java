@@ -112,10 +112,10 @@ public class CommonController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/ajax/idchk/{id}")
+	@GetMapping("/common/idchk/{id}")
 	public UsersVO idchk(@PathVariable String id) {
 		return userservice.getUserInfo(id);
-	}
+	} // 작동안됨
 	
 	@GetMapping("/accessError")
 	public String accessDenied(Authentication auth, Model model) {
