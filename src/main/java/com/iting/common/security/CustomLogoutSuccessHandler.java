@@ -19,6 +19,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 			throws IOException, ServletException {
 		log.info("Logout Success");
 		response.sendRedirect("/login");
+		
 	}
 
 }
