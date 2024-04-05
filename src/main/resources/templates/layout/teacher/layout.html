@@ -85,7 +85,7 @@
                 <div data-i18n="Account Settings">전체강의</div>
               </a>
             </li>
-            <li th:each="lecture, stat: ${lectureList}" class="menu-item">
+            <li th:each="lecture, stat: ${session.myLectureList}" class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-videos"></i>
                 <div th:text="${lecture.ltTtl}" data-i18n="Layouts"></div>
