@@ -14,8 +14,8 @@ public class ReqPaymentScheduler {
 		
 		// 서버로 요청할 Header
 		HttpHeaders header = new HttpHeaders();
-		//@Value("${IAMPORT-KEY}")
-		//private String IAMPORT-KEY;
+		@Value("${IAMPORT-KEY}") 
+		String apiKey;
 		header.setContentType(MediaType.APPLICATION_JSON);
 		header.add("Authorization", "PortOne HlqMtdjNfDt6fEhGksazVWdRpTLby0yFlMjjm7R30SalvLd6CX4uY7JjsgxOfetFAfqNYUfaS2I3W4gu");
 		
