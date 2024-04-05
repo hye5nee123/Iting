@@ -28,7 +28,7 @@ public class CnqController {
 	@Autowired
 	CnqService cnqService;
 
-	/* 회원 */
+	/* 회원 */ //
 
 	// 강의문답 전체조회. //
 	@RequestMapping("/member/cnq/list")
