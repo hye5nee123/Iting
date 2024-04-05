@@ -43,7 +43,6 @@
 									<input type="hidden" value="me00001" name="memNum">
 									
 									<input type="radio" value="o1" name="sttlTypCd">카카오페이
-									<input type="radio" value="o2" name="sttlTypCd">일반결제
 									
 									<button type="button" id="payBtn" class="btn btn-primary">결제하기</button>
 								</form>
@@ -107,51 +106,52 @@ const memNum = "[[ ${session.usernum} ]]";
 
 // 결제하기 버튼 클릭 시
 payBtn.addEventListener("click", e => {
-	// 0. 구독 DB 조회
-	getSubspInfo(memNum);
+	if(memNum == "") {
+		errorAlert("로그인이 필요합니다.", "");
+	} else {
+		reqSubspInfo(memNum); // 0.구독 DB 조회
+		
+		getBillingKey(memNum); // 1.빌링키 발급
+		
+		//billingPayReq(); // 2.빌링키로 결제
+		
+		// 3. 구독 DB 등록
+		// subspInsertReq(); // 구독 등록 요청
+		
+		// 4. 결제 DB 등록
+		
+	}
 	
-	// 1.빌링키 발급
-	//getBillingKey();// 빌링키 발급 함수 호출
-	
-	// 2. 빌링키로 결제
-	//billingPayReq();
-	
-	// 3. 구독 DB 등록
-	// subspInsertReq(); // 구독 등록 요청
-	
-	// 4. 결제 DB 등록
 	
 })
 
-// 구독 정보 단건조회
-function getSubspInfo(memNum) {
+
+/* 0.구독 DB 조회 */
+// 구독 정보 단건조회 요청
+function reqSubspInfo(memNum) {
 	axios({
 		method : 'get',
 		url : "/member/subsp/" + memNum,
 	})
-	.then(res => {
-		if(res.data.subspStCd == "m1"){
-			errorAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
-		}
-		else {
-			console.log("구독정보 : ", res.data);
-		}
-	})
+	.then(res => resSubspInfo(res))
 	
+}
+
+//구독 정보 단건조회 응답
+function resSubspInfo(res) {
+	if(res.data.subspStCd == "구독중"){
+		errorAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
+	}
+	else {
+		console.log("구독정보 없음, 구독 단건 조회", res.data);
+		subspInsertReq() // 구독정보 등록
+	}
 }
 
 // 구독 등록 요청
 function subspInsertReq() {
-	//const subspTypCd = subspFrm.subspFrm.value;
-
+	
 	let param = { subspTypCd, subspFrDt, subspToDt, subspStCd, subspPrice, memNum, subspTypCd }
-	
-	//console.log(param);
-	
-	/*
-	axios.post("/member/subsp/insert", param)
-		.then(res => saveRes(res.data))
-	*/
 	
 	csrf_axios({
 			method: 'POST',
@@ -159,51 +159,27 @@ function subspInsertReq() {
 			data: param,
 		
 			})
-			.then(res => saveRes(res.data))
+			.then(res => subspInsertRes(res.data))
 }
 // 등록 응답
-function subspInsertReq(res) {
-	payRes()
-	//console.log(res);
-	alert('구독 등록 완료!');
+function subspInsertRes(data) {
+	console.log('구독 등록 완료!', data);
 }
 
 
-// 결제 요청 (테스트)
-async function TestPayRes() {
-	const response = await PortOne.requestPayment({
-		  // Store ID 설정
-		  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
-		  // 채널 키 설정
-		  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
-		  paymentId: "202020310230232010",
-		  orderName: "아이팅 1개월 구독권",
-		  totalAmount: subspPrice,
-		  currency: "CURRENCY_KRW",
-		  payMethod: "EASY_PAY"
-		});
-	
-	console.log("====결제결과=====" + response);
-	
-	 if (response.code != null) {
-	    // 오류 발생
-	    return alert(response.message);
-	 }
-}
-
+/* 1.빌링키 발급 */
 // 빌링키 발급
-async function getBillingKey() {
+async function getBillingKey(memNum) {
 	const issueResponse = await PortOne.requestIssueBillingKey({
 	  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
 	  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
 	  billingKeyMethod: "EASY_PAY",
-	  issueName: "빌링키 발급중"
+	  issueName: monthTlt
 	});
 	// 빌링키가 제대로 발급되지 않은 경우 에러 코드가 존재
 	if (issueResponse.code != null) {
 	  return alert(issueResponse.message);
 	}
-	
 	
 	console.log("=======빌링키======" + issueResponse.billingKey)
 	
@@ -212,7 +188,8 @@ async function getBillingKey() {
 	  method: "POST",
 	  url : "/member/sttl/billing",
 	  data: {
-	    billingKey: issueResponse.billingKey
+	    billingKey: issueResponse.billingKey,
+	    memNum
 	  },
 	});
 	if (!response.ok) console.log("err")
@@ -243,6 +220,27 @@ async function billingPayReq() {
 }
 
 
+// 결제 요청 (테스트)
+async function TestPayRes() {
+	const response = await PortOne.requestPayment({
+		  // Store ID 설정
+		  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
+		  // 채널 키 설정
+		  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
+		  paymentId: "202020310230232010",
+		  orderName: "아이팅 1개월 구독권",
+		  totalAmount: subspPrice,
+		  currency: "CURRENCY_KRW",
+		  payMethod: "EASY_PAY"
+		});
+	
+	console.log("====결제결과=====" + response);
+	
+	 if (response.code != null) {
+	    // 오류 발생
+	    return alert(response.message);
+	 }
+}
 </script>
 
 
