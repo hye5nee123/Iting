@@ -1,7 +1,7 @@
 *{letter-spacing:-0.5px; font-family: "Noto Sans KR", sans-serif !important;}
 /* 강의상세 */
 .lecture_info{margin-top:20px;}
-.section-title{margin-bottom:0; text-align:left; letter-spacing:-1px;}
+.section-title{position:relative; margin-bottom:0; text-align:left; letter-spacing:-1px;}
 .section-title span{margin-bottom:5px; font-size:15px;}
 .info{width:100%; margin-top:25px; padding:20px 40px 20px 30px; background:#f9f9f9; border-radius:15px; box-sizing:border-box;}
 .info ul{float:left; width:calc(100% - 20%); list-style:none;}
@@ -61,7 +61,7 @@
 .review .star i{letter-spacing:-1px; color:#ffca35;}
 
 /* 내강의실 */
-.lt_info{position:relative; padding:30px; background:rgb(98 140 230 / 5%);} 
+.lt_info{position:relative; padding:30px; border:1px solid #d5def9; background:rgb(98 140 230 / 5%);} 
 .lt_info .go_link{position:absolute; right:30px; top:30px; color:#888; font-size:14px; font-weight:500; letter-spacing:-1px;}
 .lt_info .go_link:hover{color:#333;}
 .info.lt_info div{margin-left:0;}
@@ -82,3 +82,31 @@
 .lt_info .box .bottom{float:none; width:100%; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
 .lt_info .box .bottom{color:#555;}
 .lt_info .box .bottom i{font-size:20px; margin-right:5px; margin-top:3px;}
+.myclass_list{margin-top:20px;}
+.myclass_list ul{list-style:none;}
+.myclass_list > ul{display:flex; width:100%; gap:2%; justify-content:space-between;}
+.myclass_list > ul > li{width:33%;}
+.myclass_list > ul > li > div{height:100%; padding:25px 20px; border:1px solid #ddd; background:#f9f9f9; border-radius:10px;}
+.myclass_list > ul > li:first-child > div{background:rgb(255 138 0 / 5%); border:1px solid #ffd8a9;}
+.myclass_list h3{font-size:17px; font-weight:700;}
+.myclass_list div{position:relative;}
+.myclass_list div ul{margin-top:15px;}
+.myclass_list div ul li, .graph{margin-top:5px;}
+.myclass_list div ul a{display:block; background:#fff; padding:10px; border:1px dashed #ddd; border-radius:5px; color:#888; font-size:15px; font-weight:600;}
+.myclass_list div ul a i{margin-right:3px; margin-top:-3px;}
+.myclass_list .go_link{position:absolute; right:20px; top:25px; color:#888; letter-spacing:-1px; font-size:14px;}
+.myclass_list > ul > li:first-child div a i{color:#ff8a00;}
+.print{position:absolute; right:0; top:0; padding:12px 30px; font-size:16px; color:#fff; border:0; letter-spacing:-1px; border-radius:5px; background:#205cdc;}
+.lecture_calendar{position:relative; margin-top:70px;}
+.lecture_calendar .go_link{position:absolute; right:0; top:13px; color:#555; font-size:14px;}
+.lecture_calendar h3{width:100%; margin-bottom:25px; text-align:left;}
+.lecture_calendar h3 span{display:inline-block; margin-left:10px; font-size:15px; font-wegiht:700; color:#888;}
+.lecture_calendar .list{width:100%; height:250px; padding:20px 0; border:1px solid #ddd; border-radius:10px;}
+.lecture_calendar .list ul{display:flex; justify-content:space-between; height:100%; list-style:none;}
+.lecture_calendar .list li{width:14%; padding:0 15px; border-left:1px solid #ddd; box-sizing:border-box;}
+.lecture_calendar .list li:first-child{border-left:0;}
+.lecture_calendar .list p{font-size:15px; font-weight:700;}
+.lecture_calendar .list p i{margin-top:-5px;}
+.lecture_calendar .list span{display:block; color:#555; margin-bottom:8px; font-size:13px; font-weight:600; letter-spacing:-1px; padding:5px 10px; border-radius:5px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.lecture_calendar .list li:nth-child(odd) span{background:#f7f9fe;}
+.lecture_calendar .list li:nth-child(even) span{background:#f9f9f9;}
