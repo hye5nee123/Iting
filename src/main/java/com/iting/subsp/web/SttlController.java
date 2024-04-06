@@ -1,18 +1,23 @@
 package com.iting.subsp.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iting.subsp.model.SttlVO;
-import com.iting.subsp.model.SubspVO;
+import com.iting.subsp.service.ReqPaymentScheduler;
 import com.iting.subsp.service.SttlService;
 
 @RestController
 public class SttlController {
 	@Autowired
 	SttlService sttlService;
+	
+	@Autowired
+	ReqPaymentScheduler ReqPaymentSchedulerTest;
 	
 	/* 회원 */
 	
@@ -34,6 +39,12 @@ public class SttlController {
 		
 		return vo;
 	}
+	
+	@GetMapping("/member/test")
+    public HttpEntity<String> getPostTest(){
+		return ReqPaymentSchedulerTest.test();
+       
+    }
 	
 	
 	/* 강사 */
