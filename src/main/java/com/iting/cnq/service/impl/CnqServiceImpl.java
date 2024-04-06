@@ -54,4 +54,10 @@ public class CnqServiceImpl implements CnqService {
 		return cnqMapper.deleteCnq(ltCnqNum);
 	}
 
+	@Override
+	public int updateHit(String ltCnqNum) {
+
+		return cnqMapper.updateHit(ltCnqNum);
+	}
+
 }

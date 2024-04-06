@@ -26,9 +26,16 @@ function usertypeForm(num) {
 		actype = 'b1';
 		form = `<div class="checkout__input">
 					<p>관심사</p>
-					<input type="text" id="intr" name="intr" readonly>
-					<button type="button" class="site-btn">관심사 선택</button>
-					</div>`;
+				</div>
+                <select name="ocmenu">
+                    <option value="">선택</option>
+                    <option value="c1">프로그래밍 언어</option>
+                    <option value="c2">컴퓨터공학 전공</option>
+                    <option value="c3">웹 개발</option>
+                    <option value="c4">데이터 분석</option>
+                    <option value="c5">IT 자격증</option>
+                </select>
+                    `;
 	}
 	else if (num == '2') {
 		actype = 'd2';
@@ -42,55 +49,130 @@ function usertypeForm(num) {
 
 
 // 유효성 검사
-// id.addEventListener('blur', () => {
-async function idchk() {
-	let inputid = id.value;
-	let idstat;
-	if (inputid == '') {
-		idstat = `<p>아이디를 입력해주세요</p>`;
-	} else if (!(/^[a-zA-Z0-9]{4,20}$/.test(inputid))) {
-		idstat = `<p>영문 대소문자, 숫자조합 4~20자로 입력해주세요</p>`;
+let idAccep = false;
+let pwAccep = false;
+let mailAccep = false;
+let phoneAccep = false;
+async function idChk() {
+	let inputId = id.value;
+	let idStat;
+	idAccep = false;
+	if (inputId == '') {
+		idStat = `<p>아이디를 입력해주세요</p>`;
+	} else if (!(/^[a-zA-Z0-9]{4,20}$/.test(inputId))) {
+		idStat = `<p>영문 대소문자, 숫자조합 4~20자로 입력해주세요</p>`;
 	} else {
-		axios.get("/ajax/idchk/"+inputid)
+		await axios.get(`/common/idchk/${inputId}`)
 			.then(res => {
-				console.log(res.data);
 				if (res.data.id != null) {
-					idstat = `<p>사용할 수 없는 아이디입니다. 다른 아이디를 입력해주세요<p>`
+					idStat = `<p>사용할 수 없는 아이디입니다. 다른 아이디를 입력해주세요<p>`
 				} else {
-					idstat = `<p>사용가능한 아이디입니다</p>`;
+					idStat = `<p>사용가능한 아이디입니다</p>`;
+					idAccep = true;
 				}
 			})
 			.catch(err => console.log(err));
 
 	}
-	document.getElementsByClassName('idchk')[0].innerHTML = idstat;
+	document.getElementsByClassName('idchk')[0].innerHTML = idStat;
 }
-// });
+function pwCheck() {
+	let inputPw = pw.value;
+	let inputPwChk = pwchk.value;
+	let statPw = ``;
+	let statPwChk = ``;
+	pwAccep = false;
+	if (inputPw == '') {
+		statPw = `<p>비밀번호를 입력해주세요</p>`;
+	} else if (!(/^[a-zA-Z0-9]{8,16}$/.test(inputPw))) {
+		statPw = `<p>영문 대소문자, 숫자조합 8~16자로 입력해주세요</p>`;
+	} else if (inputPw == inputPwChk) {
+		// statpw = ``;
+		statPwChk = `<p>일치</p>`;
+		pwAccep = true;
+	} else if (inputPwChk != '') {
+		statPwChk = `<p>비밀번호가 일치하지 않습니다</p>`;
+	}
+	document.getElementsByClassName('pwchkstr')[0].innerHTML = statPw;
+	document.getElementsByClassName('pwchkchkstr')[0].innerHTML = statPwChk;
+}
+function mailCheck() {
+	let inputMail = email.value;
+	let statMail = ``;
+	mailAccep = false;
+	if (inputMail == '') {
+		statMail = `<p>이메일을 입력해주세요</p>`;
+	} else if (!(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(inputMail))) {
+		statMail = `<p>이메일 형식이 맞지 않습니다.</p>`;
+	} else {
+		mailAccep = true;
+	}
+	document.getElementsByClassName('mailchkstr')[0].innerHTML = statMail;
+}
+
+function phoneCheck() {
+	let inputPhone = phone.value;
+	let statphone = ``;
+	phoneAccep = false;
+	if (inputPhone == '') {
+		statphone = `<p>휴대전화번호를 입력해주세요</p>`;
+	} else if (!(/^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/.test(inputPhone))) {
+		statphone = `<p>휴대전화번호 형식이 맞지 않습니다.</p>`;
+	} else {
+		phoneAccep = true;
+	}
+	document.getElementsByClassName('phonechkstr')[0].innerHTML = statphone;
+}
 function insertAccount() {
-	// /^[a-zA-Z0-9]{4,20}$/ 아이디 정규식
-	// /^[a-zA-Z0-9]{8,16}/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]$/g 비밀번호 정규식
 	// ^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i 이메일 정규식
 	// 유효성검사
-
+	sendSMS(phone.value);
+	if (id.value == '') {
+		alert("아이디를 입력해주세요");
+		return;
+	} else if (!idAccep) {
+		alert("아이디가 올바르지 않습니다. 다시 확인해주세요.")
+		return;
+	}
 	if (pw.value == '') {
 		alert("비밀번호를 입력해주세요");
+		return;
+	}
+	if (pwchk.value != pw.value) {
+		alert("비밀번호가 일치하지 않습니다.");
+		return;
+	} else if (!pwAccep) {
+		alert("비밀번호가 올바르지 않습니다. 다시 확인해주세요.")
 		return;
 	}
 	if (email.value == '') {
 		alert("이메일을 입력해주세요");
 		return;
-	}
-	if (phone.value == '') {
-		alert("연락처를 입력해주세요");
+	} else if (!mailAccep) {
+		alert("이메일 형식이 올바르지 않습니다. 다시 확인해주세요.")
 		return;
 	}
-	// if(pwchk.value != pw.value){
-	// 	alert("비밀번호가 일치하지 않습니다");
-	// 	return;
-	// }
+	if (phone.value == '') {
+		alert("휴대전화번호를 입력해주세요");
+		return;
+	} else if (!phoneAccep) {
+		alert("휴대전화번호가 올바르지 않습니다. 다시 확인해주세요.")
+		return;
+	}
 	let agrees = document.querySelectorAll('.svc:checked');
 	if (agrees.length != 2) {
 		alert("필수 약관에 동의해야합니다.");
 		return;
 	}
+}
+
+// SMS전송요청
+function sendSMS(phonenum){
+	csrf_axios({
+		method: 'post',
+		url: '/sendsms',
+		data: phonenum,
+		})
+		//axios.post("/sendsms", phonenum)
+		.then(res => console.log("문자 전송 : "+res.data));
 }

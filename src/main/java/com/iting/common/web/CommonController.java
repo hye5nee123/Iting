@@ -80,42 +80,16 @@ public class CommonController {
 		return "common/login";
 	}
 	
-//	@GetMapping("/loginfail")
-//	public void loginfail(Model model)	{
-//		model.addAttribute("failmessage", "아이디 혹은 비밀번호가 다릅니다");
-//	}
-	
-	//로그인 정보 체크
-//	@ResponseBody
-//	@GetMapping("/common/chkuser")
-//	public UsersVO dataChk(@RequestBody String id, Model model) {
-//		System.out.println(id);
-//		UsersVO vo = userservice.getUserInfo(id);
-//		return vo;
-//	}
-	
-	//로그인 정보 가져오기
-//	@RequestMapping("/userlogin")
-//	public void sessionLogin(String userid, HttpServletRequest request) {
-//		HttpSession session = request.getSession();
-//		UsersVO getinfo = userservice.getUserInfo(userid);
-//		if(getinfo != null) {
-//			session.setAttribute("userid", getinfo);
-//		} else {
-//			session.setAttribute("userid", null);
-//		}
-//	}
-	
 	@GetMapping("/account")
 	public String accountForm() {
 		return "common/account";
 	}
 	
 	@ResponseBody
-	@GetMapping("/ajax/idchk/{id}")
+	@GetMapping("/common/idchk/{id}")
 	public UsersVO idchk(@PathVariable String id) {
 		return userservice.getUserInfo(id);
-	}
+	} // 작동안됨
 	
 	@GetMapping("/accessError")
 	public String accessDenied(Authentication auth, Model model) {

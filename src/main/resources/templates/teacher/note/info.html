@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/teacher/layout}">
+<head>
+ <!-- layout:decorate="~{layout/admin}" -->
+<meta charset="UTF-8">
+<title>읽지않은쪽지 페이지</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+</head>
+<body>
+<div id="container" layout:fragment="container">
+	<h4 class="fw-bold py-3 mb-4">강의질문</h4>
+    <div class="tab-content test_content note_content">
+      <div class="tab-pane fade active show note_box" id="navs-pills-top-home" role="tabpanel">
+        <div class="table-responsive table-bordered">
+        	<div class="message_info">
+         	<span th:text="${note.sentPs}"></span>
+         	<i th:text="${#dates.format(note.recDt, 'yyyy-MM-dd')}"></i>
+         	<p th:text="${note.noteTtl}"></p>
+        		<div class="txt note_txt" th:text="${note.noteCntn}"></div>
+        	</div>      
+              
+         </div>
+      </div>
+      <div class="btn_box demo-inline-spacing">
+      		<a th:href="@{/teacher/note/insert/{no}(no=${note.noteNum})}" class="btn btn-lg btn-warning">답장하기</a>
+           <button type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" onclick="location.href='/teacher/note/list'">목록가기</button>
+         </div>
+    </div>
+</div>
+</body>
+</html>
