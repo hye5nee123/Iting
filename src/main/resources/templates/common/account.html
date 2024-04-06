@@ -4,13 +4,19 @@
 
 <head>
 <meta charset="UTF-8">
+<!-- CSRF -->
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
+
 <link rel="stylesheet" href="/css/member/bootstrap.min.css"
 	type="text/css">
 <link rel="stylesheet" href="/css/member/nice-select.css"
 	type="text/css">
 <link rel="stylesheet" href="/css/member/style.css" type="text/css">
 
-	<link rel="stylesheet" href="/css/member/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/css/member/slicknav.min.css"
+	type="text/css">
 <title>회원가입</title>
 <style>
 .container {
@@ -58,16 +64,16 @@
 				<input type="text" id="email" name="email" onblur="mailCheck()">
 				<div class="mailchkstr"></div>
 				<p>
-					연락처 <span>*</span>
+					휴대전화번호 <span>*</span>
 				</p>
-				<input type="tel" id="phone" name="phone" placeholder="01012345678" onblur="phoneCheck()">
+				<input type="tel" id="phone" name="phone" placeholder="'-'제외하고 입력"
+					onblur="phoneCheck()">
+				<div class="phonechkstr"></div>
 				<p>이름(닉네임)</p>
 				<input type="text" id="name" name="name">
 			</div>
 			<div class="checkout__input col-lg-4">
-				<p>
-					주소
-				</p>
+				<p>주소</p>
 			</div>
 			<div class="checkout__input col-lg-2">
 				<input type="text" id="sample6_postcode" placeholder="우편번호" readonly>
@@ -78,9 +84,7 @@
 				<input type="text" id="sample6_address" name="addr" readonly>
 			</div>
 			<div class="checkout__input col-lg-6">
-				<p>
-					상세주소
-				</p>
+				<p>상세주소</p>
 				<input type="text" id="sample6_detailAddress" name="detailaddr">
 			</div>
 			<div class="col-lg-4 radios">
@@ -105,7 +109,7 @@
 			</div>
 		</div>
 	</div>
-
+	<script src="/js/common.js"></script>
 	<script src="/js/join/account.js"></script>
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
