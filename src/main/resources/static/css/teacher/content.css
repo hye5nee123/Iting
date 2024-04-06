@@ -52,6 +52,6 @@ h4{position:relative;}
 .message_info span{display:inline-block; color:#ff8a00; font-size:13px; font-weight:700;}
 .message_info i{position:relative; margin-left:10px; padding-left:10px; font-size:13px; color:#777; font-style:normal; display:inline-block;}
 .message_info i:before{content:''; display:block; position:absolute; left:-2px; top:2px; width:1px; height:15px; background:#ddd;}
-.message_info p{margin-top:5px; font-size:15px; font-weight:700; letter-spacing:-1px;}
+.message_info p{margin-top:10px; font-size:15px; font-weight:700; letter-spacing:-1px;}
 .message_info .txt{margin-top:5px; padding-top:15px; border-top:1px solid #ddd; font-size:14px; color:#555; letter-spacing:-1px; font-weight:400;}
 .note_content .btn_box{text-align:center; margin-top:20px;}
