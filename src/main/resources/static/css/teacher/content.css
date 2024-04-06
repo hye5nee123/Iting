@@ -38,3 +38,20 @@ h4{position:relative;}
 .btn_posi{position:absolute; right:0;}
 .test_test .btn_box{margin-top:10px;}
 .hidden{display:none;}
+
+/* 쪽지 */
+.note_box{margin-top:20px; background:#fff; border-radius:0.5rem; padding:1.5rem 1.5rem;}
+.note_box ul li{margin-top:15px; padding-bottom:15px; border-bottom:1px solid #ddd;}
+.note_box ul li > *{float:left;}
+.note_box ul li:after{content:''; display:block; clear:both;}
+.note_box ul li a{margin-bottom:0; font-size:15px; width:calc(100% - 16%); letter-spacing:-1px; color:#555; font-weight:700; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.note_box ul li a.new{position:relative; padding-left:20px;}
+.note_box ul li a.new:before{content:'N'; display:block; position:absolute; left:0; top:4px; width:15px; height:15px; color:#fff; border-radius:50%; font-size:10px; text-align:center; background:red;}
+.note_box ul li span{display:block; margin:0 1%; font-size:14px; font-weight:500;}
+.note_box ul li i{float:right; font-style:normal; color:#777; font-weight:300; font-size:13px;}
+.message_info span{display:inline-block; color:#ff8a00; font-size:13px; font-weight:700;}
+.message_info i{position:relative; margin-left:10px; padding-left:10px; font-size:13px; color:#777; font-style:normal; display:inline-block;}
+.message_info i:before{content:''; display:block; position:absolute; left:-2px; top:2px; width:1px; height:15px; background:#ddd;}
+.message_info p{margin-top:10px; font-size:15px; font-weight:700; letter-spacing:-1px;}
+.message_info .txt{margin-top:5px; padding-top:15px; border-top:1px solid #ddd; font-size:14px; color:#555; letter-spacing:-1px; font-weight:400;}
+.note_content .btn_box{text-align:center; margin-top:20px;}

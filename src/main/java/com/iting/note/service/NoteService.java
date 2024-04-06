@@ -6,4 +6,6 @@ import com.iting.note.model.NoteVO;
 
 public interface NoteService {
 	public List<NoteVO> getNoteList();
+	public NoteVO getNoteInfo(String noteNum);
+	public int insertNote(NoteVO vo);
 }

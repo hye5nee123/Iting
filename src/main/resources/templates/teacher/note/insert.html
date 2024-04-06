@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/teacher/layout}">
+<head>
+ <!-- layout:decorate="~{layout/admin}" -->
+<meta charset="UTF-8">
+<title>문제등록 페이지</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+</head>
+<body>
+<div id="container" layout:fragment="container">
+	<h4 class="fw-bold py-3 mb-4">문제등록 / <span class="text-muted">프로그래밍언어 이해하기</span></h4>
+   <div class="test_insert">
+     <form id="formAccountSettings" method="POST" name="testForm" onsubmit="return false">
+       <div class="row">
+         <div class="mb-3">
+           <label for="prblCntn" class="form-label">문제 1
+           	<h5 class="tit">문제를 입력하세요.</h5>
+           </label>
+           <input class="form-control" type="text" id="prblCntn" name="prblCntn" value="" autofocus="">
+         </div>
+         <hr class="my-0">
+         <div class="mb-3 test_list first_list">
+           <label for="ques1" class="form-label">①</label>
+           <input class="form-control" type="text" name="ques1" id="ques1" value="">
+         </div>
+         <div class="mb-3 test_list">
+           <label for="ques2" class="form-label">②</label>
+           <input class="form-control" type="text" name="ques2" id="ques2" value="">
+         </div>
+         <div class="mb-3 test_list">
+           <label for="ques3" class="form-label">③</label>
+           <input class="form-control" type="text" name="ques3" id="ques3" value="">
+         </div>
+         <div class="mb-3 test_list">
+           <label for="ques4" class="form-label">④</label>
+           <input class="form-control" type="text" name="ques4" id="ques4" value="">
+         </div>
+          <div class="ans insert_ans">
+	     	<div class="mb-3 test_list">
+		       <label for="ans" class="form-label tit">정답</label>
+		       <input class="form-control" type="text" name="ans" id="ans" value="">
+		     </div>
+	     	<div class="mb-3 test_list">
+		       <label for="cty" class="form-label tit">해설</label>
+		       <input class="form-control" type="text" name="cty" id="cty" value="">
+		     </div>
+	     </div>
+  		</div>
+    	</form>
+    	<div class="btn_box demo-inline-spacing">
+           <button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">문제등록하기</button>
+           <button type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" onclick="location.href='/teacher/test/list'">목록가기</button>
+         </div>
+  </div>
+  
+  <script>
+	function saveReq() {
+		const prblCntn = testForm.prblCntn.value;
+		const ques1 = testForm.ques1.value;
+		const ques2 = testForm.ques2.value;
+		const ques3 = testForm.ques3.value;
+		const ques4 = testForm.ques4.value;
+		const ans = testForm.ans.value;
+		const cty = testForm.cty.value;
+		let param = {prblCntn, ques1, ques2, ques3, ques4, ans, cty}
+		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/teacher/test/insert',
+				data: JSON.stringify(param)
+			
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		alert('문제가 등록되었습니다.');
+		window.location.href = "/teacher/test/list";
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		saveReq();
+	})
+	
+	
+</script>
+</div>
+</body>
+</html>

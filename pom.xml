@@ -17,6 +17,12 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -122,10 +128,18 @@
 			<version>3.2.4</version>
 		</dependency>
 		
+    <!-- SMS API -->
 		<dependency>
 			<groupId>net.nurigo</groupId>
 			<artifactId>sdk</artifactId>
 			<version>4.2.7</version>
+		</dependency>
+
+		<!-- iamport -->
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.2.23</version>
 		</dependency>
 
 	</dependencies>
