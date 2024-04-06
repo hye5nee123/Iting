@@ -70,4 +70,6 @@ public class LectureController {
 		model.addAttribute("list", lectureService.getLectureList(vo));
 		return "/admin/lecture/list";
 	}
+	
+	
 }

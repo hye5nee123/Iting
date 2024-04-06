@@ -43,6 +43,7 @@ function move(ltNum){
 							<th>시작날짜</th>
 							<th>강의난이도</th>
 							<th>강의키워드</th>
+							<th>강사번호</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,6 +55,7 @@ function move(ltNum){
 							<td th:text="${#dates.format(ltb.frDt,'yyyy-MM-dd')}"></td>
 							<td th:text="${ltb.ltDifCd}"></td>
 							<td th:text="${ltb.ltKeywordCd}"></td>
+							<td th:text="${ltb.lecturerNum}"></td>
 						</tr>
 					</tbody>
 				</table>
