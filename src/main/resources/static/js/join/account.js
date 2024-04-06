@@ -102,7 +102,7 @@ function mailCheck() {
 	mailAccep = false;
 	if (inputMail == '') {
 		statMail = `<p>이메일을 입력해주세요</p>`;
-	} else if (!(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(inputmail))) {
+	} else if (!(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(inputMail))) {
 		statMail = `<p>이메일 형식이 맞지 않습니다.</p>`;
 	} else {
 		mailAccep = true;
@@ -111,21 +111,22 @@ function mailCheck() {
 }
 
 function phoneCheck() {
-	// let inputPhone = phone.value;
-	// let statphone = ``;
-	// phoneAccep = false;
-	// if (inputMail == '') {
-	// 	statMail = `<p>연락처를 입력해주세요</p>`;
-	// } else if (!) {
-	// 	statMail = `<p>이메일 형식이 맞지 않습니다.</p>`;
-	// } else {
-	// 	mailAccep = true;
-	// }
-	// document.getElementsByClassName('mailchkstr')[0].innerHTML = statMail;
+	let inputPhone = phone.value;
+	let statphone = ``;
+	phoneAccep = false;
+	if (inputPhone == '') {
+		statphone = `<p>휴대전화번호를 입력해주세요</p>`;
+	} else if (!(/^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/.test(inputPhone))) {
+		statphone = `<p>휴대전화번호 형식이 맞지 않습니다.</p>`;
+	} else {
+		phoneAccep = true;
+	}
+	document.getElementsByClassName('phonechkstr')[0].innerHTML = statphone;
 }
 function insertAccount() {
 	// ^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i 이메일 정규식
 	// 유효성검사
+	sendSMS(phone.value);
 	if (id.value == '') {
 		alert("아이디를 입력해주세요");
 		return;
@@ -152,10 +153,10 @@ function insertAccount() {
 		return;
 	}
 	if (phone.value == '') {
-		alert("연락처를 입력해주세요");
+		alert("휴대전화번호를 입력해주세요");
 		return;
 	} else if (!phoneAccep) {
-		alert("연락처가 올바르지 않습니다. 다시 확인해주세요.")
+		alert("휴대전화번호가 올바르지 않습니다. 다시 확인해주세요.")
 		return;
 	}
 	let agrees = document.querySelectorAll('.svc:checked');
@@ -163,4 +164,15 @@ function insertAccount() {
 		alert("필수 약관에 동의해야합니다.");
 		return;
 	}
+}
+
+// SMS전송요청
+function sendSMS(phonenum){
+	csrf_axios({
+		method: 'post',
+		url: '/sendsms',
+		data: phonenum,
+		})
+		//axios.post("/sendsms", phonenum)
+		.then(res => console.log("문자 전송 : "+res.data));
 }
