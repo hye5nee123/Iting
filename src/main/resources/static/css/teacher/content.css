@@ -55,3 +55,7 @@ h4{position:relative;}
 .message_info p{margin-top:10px; font-size:15px; font-weight:700; letter-spacing:-1px;}
 .message_info .txt{margin-top:5px; padding-top:15px; border-top:1px solid #ddd; font-size:14px; color:#555; letter-spacing:-1px; font-weight:400;}
 .note_content .btn_box{text-align:center; margin-top:20px;}
+.test_insert textarea{padding:0.4375rem 0.875rem; border:1px solid #d9dee3; border-radius:0.375rem; width:100%;}
+.test_insert textarea::placeholder{color:#b4bdc6; opacity:1;}
+.mT0{margin-top:0 !important;}
+.note_txt{min-height:350px;}
