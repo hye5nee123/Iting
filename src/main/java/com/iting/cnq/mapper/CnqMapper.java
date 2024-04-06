@@ -26,4 +26,7 @@ public interface CnqMapper {
 	
 	//삭제
 	public int deleteCnq(String ltCnqNum);
+	
+	// 조회수 올리기
+	public int updateHit(String ltCnqNum);
 }

@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.CnqService;
-import com.iting.cnq.service.ReplyService;
 import com.iting.common.model.PagingVO;
 
 import lombok.RequiredArgsConstructor;
@@ -48,14 +47,13 @@ public class CnqController {
 	}
 
 	// info 조회.
-	@RequestMapping("member/cnq/info/{l"
-			+ "tCnqNum}")
+	@RequestMapping("member/cnq/info/{l" + "tCnqNum}")
 	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
 		String a = cnqService.getCnqInfo(ltCnqNum).getLtCnqNum();
-
 //		model.addAttribute("댓글", ReplyService.class);
 		model.addAttribute("cnq", cnqService.getCnqInfo(ltCnqNum));
 		System.out.println("조회완료");
+		cnqService.updateHit(ltCnqNum);
 		return "member/cnq/info";
 
 	}
@@ -75,9 +73,9 @@ public class CnqController {
 //	}
 
 	// 등록 페이지로 이동.
-	@GetMapping("member/cnq/form")
+	@GetMapping("member/cnq/insert")
 	public ModelAndView list() {
-		ModelAndView mv = new ModelAndView("member/cnq/form");
+		ModelAndView mv = new ModelAndView("member/cnq/insert");
 		return mv;
 	}
 
@@ -91,6 +89,7 @@ public class CnqController {
 		System.out.println(vo + "====================");
 		cnqService.cnqInsert(vo);
 		return vo;
+		
 	}
 
 	// 수정 form 이동.

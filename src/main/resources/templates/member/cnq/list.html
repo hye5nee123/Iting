@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/blank}">
-
+<meta charset="UTF-8">
 <section layout:fragment="content" >
 
 	<script th:inline="javascript">
@@ -26,7 +26,7 @@
 	<h3 class="related-title">커뮤니티</h3>
 	<br>
 	<!-- 검색 폼 시작 -->
-	<form name="frmSearch" th:object="${cnqVO}" class="align-baseline">
+	<form name="frmSearch" th:object="${cnqVO}" style="display: inline-block;">
 		<input type="hidden" name="page" >
 		제목 <input name="ttl" th:value="*{ttl}"> 
 		내용 <input name="cntn" th:value="*{cntn}">
@@ -43,6 +43,7 @@
 		<div>
 			<button class="insertBtn" type="button" id="insertBtn">등록</button>
 		</div>
+		<br>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -93,7 +94,7 @@
 
 	<script>
 	insertBtn.addEventListener("click", e=>{
-		location.href='/member/cnq/form'
+		location.href='/member/cnq/insert'
 	})
 	</script>
 </section>

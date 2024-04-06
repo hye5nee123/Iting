@@ -5,14 +5,14 @@
 
 	<select id="getCnqList" resultType="CnqVO">
 		select * from (select ROWNUM as rn, a.* from (
-	SELECT
+		SELECT
 		c.lt_cnq_num,
 		c.ttl,
 		c.cntn,
 		c.drwup_dt,
 		c.hit,
 		m.name
-	FROM lt_cnq c JOIN mem m
+		FROM lt_cnq c JOIN mem m
 		on c.mem_num = m.mem_num
 		<where>
 			<if test="vo.ttl != null and vo.ttl != ''">
@@ -43,42 +43,43 @@
 		m.name
 		FROM lt_cnq c JOIN mem m
 		on c.mem_num = m.mem_num
-		WHERE lt_cnq_num = #{ltCnqNum}
+		WHERE lt_cnq_num =
+		#{ltCnqNum}
 	</select>
 
 	<!-- cnq 등록 -->
- <insert id="cnqInsert" parameterType="CnqVO">
-		<selectKey keyProperty="ltCnqNum"
-					order="BEFORE"
-					resultType="string">
-			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) + 1, 5, '0') AS LT_CNQ_NUM 
+	<insert id="cnqInsert" parameterType="CnqVO">
+		<selectKey keyProperty="ltCnqNum" order="BEFORE"
+			resultType="string">
+			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) +
+			1, 5, '0') AS LT_CNQ_NUM
 			FROM lt_cnq
 		</selectKey>
 		INSERT INTO lt_Cnq (
-							LT_CNQ_NUM
-			                , TTL
-			                , CNTN
-			                , DRWUP_DT
-			              	, MEM_NUM
-			                , LT_NUM
-			                , HIT
-			                )
-			VALUES (
-					#{ltCnqNum}
-			        , #{ttl}
-			        , #{cntn}
-			        , sysDate
-			        , #{memNum}
-			        , #{ltNum}
-			        , 0 
-			        )
+		LT_CNQ_NUM
+		, TTL
+		, CNTN
+		, DRWUP_DT
+		, MEM_NUM
+		, LT_NUM
+		, HIT
+		)
+		VALUES (
+		#{ltCnqNum}
+		, #{ttl}
+		, #{cntn}
+		, sysDate
+		, #{memNum}
+		, #{ltNum}
+		, 0
+		)
 	</insert>
-	
+
 	<delete id="deleteCnq">
-		DELETE FROM lt_cnq 
-		WHERE 		lt_cnq_num = #{ltCnqNum}
+		DELETE FROM lt_cnq
+		WHERE lt_cnq_num = #{ltCnqNum}
 	</delete>
-	
+
 	<update id="updateCnq" parameterType="CnqVO">
 		UPDATE lt_cnq
 		<set>
@@ -103,11 +104,15 @@
 		</set>
 		WHERE LT_CNQ_NUM = #{ltCnqNum}
 	</update>
-	
+
 	<select id="getCount" resultType="Long">
 		select count(*)
 		from lt_cnq
 	</select>
-
+	<update id="updateHit">
+		UPDATE lt_cnq 
+			SET hit = hit + 1 
+		WHERE lt_cnq_num = #{ltCnqNum}
+	</update>
 
 </mapper>
