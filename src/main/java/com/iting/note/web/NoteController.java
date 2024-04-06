@@ -52,7 +52,7 @@ public class NoteController {
 	  }
 	
 	// 등록페이지 이동
-	@GetMapping("teacher/note/insert")
+	@GetMapping("teacher/note/insert/{noteNum}")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView("teacher/note/insert");
 		return mv;
