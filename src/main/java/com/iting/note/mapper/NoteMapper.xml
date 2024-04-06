@@ -4,18 +4,61 @@
 <mapper namespace="com.iting.note.mapper.NoteMapper">
 	<!-- 전체조회 -->
 	<select id="getNoteList" resultType="NoteVO">
-		SELECT n.NOTE_NUM
-		       , n.NOTE_TTL
-		       , n.NOTE_CNTN
-		       , n.RPLY
-		       , n.SENT_DT
-		       , n.REC_DT
-		       , n.MEM_NUM
-		       , n.LECTURER_NUM
-		       , n.CFM_YN_CD
-		FROM NOTE n JOIN LECTURER l
-		            ON  n.LECTURER_NUM = l.LECTURER_NUM
-		WHERE l.LECTURER_NUM = #{lecturerNum}
-		ORDER BY n.NOTE_NUM DESC
+		SELECT NOTE_NUM
+		       , NOTE_TTL
+		       , NOTE_CNTN
+		       , RPLY
+		       , SENT_DT
+		       , REC_DT
+		       , CFM_YN_CD
+		       , SENT_PS
+		       , REC_PS
+		FROM NOTE
+		ORDER BY NOTE_NUM DESC
 	</select>
+	
+	<!-- 단건 조회 -->
+	<select id="getNoteInfo" resultType="NoteVO">
+		SELECT NOTE_NUM
+		       , NOTE_TTL
+		       , NOTE_CNTN
+		       , RPLY
+		       , SENT_DT
+		       , REC_DT
+		       , CFM_YN_CD
+		       , SENT_PS
+		       , REC_PS
+		FROM NOTE
+		WHERE NOTE_NUM = #{noteNum}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertNote" parameterType="NoteVO">	
+		<selectKey keyProperty="noteNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'no' || LPAD(NVL(MAX(SUBSTR(NOTE_NUM, -5)), 0) + 1, 5, '0') AS NOTE_NUM 
+			FROM NOTE
+		</selectKey>
+		INSERT INTO NOTE(NOTE_NUM
+						, NOTE_TTL
+						, NOTE_CNTN
+						, RPLY
+						, SENT_DT
+						, REC_DT
+						, CFM_YN_CD
+						, SENT_PS
+						, REC_PS)
+		VALUES ( 
+				  #{noteNum}
+				, #{noteTtl}
+				, #{noteCntn}
+				, #{rply}
+			    , #{sentDt}
+				, #{recDt}
+				, #{cfmYnCd}
+				, #{sentPs}
+				, #{recPs}
+				)
+	</insert>
 </mapper>
