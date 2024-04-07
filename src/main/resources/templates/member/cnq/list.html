@@ -61,7 +61,7 @@
 					<td th:text="${stat.count}"></td>
 					<td th:text="${cnq.ttl}"></td>
 					<td th:text="${cnq.cntn}"></td>
-					<td th:text="${cnq.drwupDt}"></td>
+					<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
 					<td th:text="${cnq.hit}"></td>
 					<td th:text="${cnq.name}"></td>
 				</tr>
