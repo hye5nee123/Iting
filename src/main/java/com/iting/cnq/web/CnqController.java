@@ -47,9 +47,9 @@ public class CnqController {
 	}
 
 	// info 조회.
-	@RequestMapping("member/cnq/info/{l" + "tCnqNum}")
+	@RequestMapping("member/cnq/info/{ltCnqNum}")
 	public String cnqInfo(@PathVariable String ltCnqNum, Model model) {
-		String a = cnqService.getCnqInfo(ltCnqNum).getLtCnqNum();
+		//String a = cnqService.getCnqInfo(ltCnqNum).getLtCnqNum();
 //		model.addAttribute("댓글", ReplyService.class);
 		model.addAttribute("cnq", cnqService.getCnqInfo(ltCnqNum));
 		System.out.println("조회완료");
@@ -89,25 +89,24 @@ public class CnqController {
 		System.out.println(vo + "====================");
 		cnqService.cnqInsert(vo);
 		return vo;
-		
+
 	}
 
 	// 수정 form 이동.
-	@GetMapping("/member/cnq/updateform")
-	public ModelAndView updateForm() {
-		ModelAndView mv = new ModelAndView("member/cnq/update");
-		return mv;
+	@GetMapping("member/cnq/updateform/{ltCnqNum}")
+	public String update(@PathVariable String ltCnqNum, Model model) {
+		model.addAttribute("cnq", cnqService.getCnqInfo(ltCnqNum));
+		return "member/cnq/update" ;
+
 	}
 
-// 수정 기능.
-//	@PutMapping("/member/cnq/update")
-//	public String updateCnq(CnqVO vo) {
-//		if (cnqService.updateCnq(vo) > 0) {
-//			System.out.println("수정완료");
-//		}
-//
-//		return "redirect:/member/cnq/list";
-//	}
+	// 수정 기능.
+	@ResponseBody
+	@PostMapping("/member/cnq/update/{ltCnqNum}")
+	public String updateCnq(@RequestBody CnqVO vo) {
+		cnqService.updateCnq(vo);
+		return "redirect:/member/cnq/list";
+	}
 
 // 삭제처리.
 	@RequestMapping("/member/cnq/{ltCnqNum}")

@@ -1,28 +1,59 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/member/layout}">
-<head>
+	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<section layout:fragment="content">
-		<div class="container">
-			<div class="checkout__input contact__form">
-				<h3>글 수정</h3>
-				<form action="/member/cnq/update" method="post">
-					제목 : <input type="text" name="ttl" value="${sessionScope.cnq.ttl}"> 
-					내용 : <textarea type="text" name="cntn" value="${cnq.cntn}"> </textarea>
-					<br> 
-					작성자 : <input type="text" name="name" value="${cnq.name}">
-					<!--  이미지 : <input name="photofile" type="file">-->
-					<button type="button" id="saveBtn">등록</button>
-					<button type="button" id="listBtn">글목록으로</button>
-				</form>
-			</div>
-			${cnq}
+<section layout:fragment="content">
+
+<h3 class="related-title">글 수정</h3>
+	<form name="cnqUpdateForm" method="post">
+		<input th:value="${cnq.ltCnqNum}" class="form-control hidden" type="text" id="ltCnqNum" name="ltCnqNum" >
+		제목 : <input type="text" name="ttl" th:value="${cnq.ttl}"> 
+		내용 : <textarea name="cntn" th:value="${cnq.cntn}"></textarea>
+		<br> 작성자 : <input type="text" name="name"th:value="${cnq.name}">
+		<div>
+			<a class="btn" id="saveBtn">등록</a> 
+			<a class="btn" id="listBtn" onclick="location.href='/member/cnq/list'">글목록으로</a>
+			<a class="btn" id=cancel_btn>수정 취소</a>
 		</div>
-	</section>
-</body>
+	</form>
+  <script>
+	function saveReq() {
+		const ltCnqNum = cnqUpdateForm.ltCnqNum.value;
+		const ttl = cnqUpdateForm.ttl.value;
+		const cntn = cnqUpdateForm.cntn.value;
+		const name = cnqUpdateForm.name.value;
+		let param = {ltCnqNum, ttl, cntn, name}
+		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: `/member/cnq/update/{ltCnqNum}`,
+				data: JSON.stringify(param)
+			
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		alert('게시글이 수정되었습니다.');
+		window.location.href = "/member/cnq/list";
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		saveReq();
+	})
+	
+	
+</script>
+</section>
 </html>
+
+
