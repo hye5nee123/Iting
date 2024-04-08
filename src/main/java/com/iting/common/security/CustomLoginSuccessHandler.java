@@ -40,6 +40,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		if(roleNames.contains("ROLE_B2")) {
 			response.sendRedirect("/admin/main");
+		} else if(roleNames.contains("ROLE_D1")) {
+			response.sendRedirect("/teacher/main");
 		} else {
 			response.sendRedirect("/member/main");
 		}

@@ -2,26 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.common.mapper.UsersMapper">
-
-	<!-- <select id="getMemberInfo" parameterType="string"
-		resultType="MemberVO">
-		select id
-		,'{noop}' || pw AS pw
-		,'ROLE_' || upper(mem_fg_cd) AS "mem_fg_cd"
-		,'ROLE_' || upper(accp_yn_cd) AS "accp_yn_cd"
-		from mem
-		join 
-		where id = #{userid}
-	</select>
-
-	<select id="getTeacherInfo" parameterType="string"
-		resultType="TeacherVO">
-		select id
-		,'{noop}' || pw AS pw
-		,'ROLE_' || upper(accp_yn_cd) AS "accp_yn_cd"
-		from lecturer
-		where id = #{userid}
-	</select> -->
 	<select id="getUserInfo" parameterType="string"
 		resultType="UsersVO">
 		select m.mem_num AS num_cd
@@ -38,4 +18,34 @@
         from lecturer l
         where id = #{userid}
 	</select>
+	<insert id="insertUser">
+		insert into 
+		mem
+		(
+		id
+		, pw
+		, name
+		, addr
+		, detailaddr
+		, mail
+		, phone
+		, join_dt
+		, login_typ_cd
+		, token
+		
+		)
+		values(
+				#{id}
+				, #{pw}
+				, #{name}
+				, #{addr}
+				, #{detailAddr}
+				, #{mail}
+				, #{phone}
+				, sysdate
+				, #{loginTypCd}
+				, #{token}
+				
+				)
+	</insert>
 </mapper>
