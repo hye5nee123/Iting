@@ -2,7 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.lecture.mapper.LectureMapper">
-
+	<!-- 장효은 -->
+	<!-- 검색조건 : 키워드, 난이도, 강의제목검색, 강사명 -->
+	<sql id="condition">
+		<where>
+		<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">\
+			find_code(l.lt_keyword_cd) = #{vo.ltKeywordCd}
+		</if>
+		<if test="vo.ltDifCd != null and vo.ltDifCd != ''">\
+			AND find_code(l.lt_dif_cd) = #{vo.ltDifCd}
+		</if>
+		<if test="vo.ltTtl != null and vo.ltTtl != ''">\
+			AND l.lt_ttl LIKE '%' || #{vo.ltTtl} || '%'
+		</if>
+		<if test="vo.name != null and vo.name != ''">\
+			AND lec.name LIKE '%' || #{vo.name} || '%'
+		</if>
+		</where>
+	</sql>
+	
+	<!-- 강의 전체 목록 -->
+	<select id="getAllLectureList">
+		SELECT * FROM ( SELECT ROWNUM AS rn, a.* FROM (
+	
+		SELECT l.lt_num
+             , find_code(l.lt_st_cd) lt_st_cd
+             , l.lt_ttl
+             , l.lt_img
+             , l.lt_intro
+             , find_code(l.lt_cate_cd) lt_cate_cd
+             , l.fr_dt
+             , find_code(l.accp_yn_cd) accp_yn_cd
+             , find_code(l.lt_dif_cd) lt_dif_cd
+             , l.lecturer_num
+             , find_code(l.lt_keyword_cd) lt_keyword_cd
+             , find_code(l.rdm_cate_cd) rdm_cate_cd
+             , lec.name
+		FROM lt l JOIN lecturer lec
+                    ON l.lecturer_num = lec.lecturer_num
+        <include refid="condition"></include>
+		ORDER BY lt_num DESC
+		
+	<![CDATA[ ) a WHERE ROWNUM <= #{pvo.last} ) b WHERE rn >= #{pvo.first} ]]>
+	</select>
+	
 	<!-- 수강상세 -->
 	<select id="getLectureInfo" resultType="LectureVO">
 		SELECT LT_NUM
@@ -18,6 +61,7 @@
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 	</select>
+	
 	<!-- 강의 목록 -->
 	<select id="getLectureList" resultType="LectureVO">
 		SELECT LT_NUM

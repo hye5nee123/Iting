@@ -164,7 +164,10 @@ function subspInsertReq() {
 // 등록 응답
 function subspInsertRes(data) {
 	subspNum = data.subspNum;
-	console.log('구독 등록 완료!', data);
+	console.log('구독 등록 : ', data);
+	if(data.retCode == "OK") {
+		alert("구독등록완료");
+	}
 }
 
 
