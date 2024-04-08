@@ -20,6 +20,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.getMemberList();
 	}
 
+	@Override
+	public List<MemberVO> getMemberLtsn() {
+		return memberMapper.getMemberLtsn();
+	}
+
 
 
 

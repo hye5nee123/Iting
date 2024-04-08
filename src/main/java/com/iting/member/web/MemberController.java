@@ -15,9 +15,9 @@ public class MemberController {
 	MemberService memberService;
 	
 	// 마이페이지
-		@RequestMapping("member/mycalss/list")
-		public String getMemberList(Model model, MemberVO vo) {
-			model.addAttribute("testList", memberService.getMemberList());
-			return "member/myclass/list";
-		}
+	@RequestMapping("member/mycalss/list")
+	public String getMemberList(Model model, MemberVO vo) {
+		model.addAttribute("testList", memberService.getMemberList());
+		return "member/myclass/list";
+	}
 }

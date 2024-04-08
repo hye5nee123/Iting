@@ -19,4 +19,11 @@ public interface LectureService {
 	// 도승민
 	// 등록
 	public int ltInsert(LectureVO vo);
+	//수정(승인여부)
+	public int update(LectureVO vo);
+	//승인
+	public List<LectureVO> endLectureList(LectureVO vo);
+	//미승인
+	public List<LectureVO> ingLectureList(LectureVO vo);
 }
+

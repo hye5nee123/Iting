@@ -22,4 +22,7 @@ public interface LectureMapper {
 	//등록
 	public int ltInsert(LectureVO vo);
 	public LectureVO getLectureInfo1(String ltNum);
+	public int update(LectureVO vo);
+	public List<LectureVO> endLectureList(LectureVO vo);
+	public List<LectureVO> ingLectureList(LectureVO vo);
 }

@@ -9,4 +9,5 @@ import com.iting.member.model.MemberVO;
 @Mapper
 public interface MemberMapper {
 	public List<MemberVO> getMemberList();
+	public List<MemberVO> getMemberLtsn();
 }

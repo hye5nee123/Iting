@@ -95,5 +95,21 @@ public class LectureController {
 		return "/admin/lecture/list";
 	}
 	
+	//승인 목록
+	@ResponseBody
+	@GetMapping("/admin/lecture/endLectureList")
+	public List<LectureVO> endList(LectureVO vo) {
+	
+		return lectureService.endLectureList(vo);
+	
+	}
+	//승인수정 기능
+	@ResponseBody
+	@GetMapping("/admin/lecture/update/{ltNum}")
+	public LectureVO update(LectureVO vo,@PathVariable String ltNum) {
+		vo.setLtNum(ltNum);
+		lectureService.update(vo);
+		return vo;
+	}
 	
 }
