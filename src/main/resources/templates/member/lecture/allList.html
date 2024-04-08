@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<title>강의상세 페이지</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<h4 class="col-8">전체 강의</h4>
+				<div class="shop__sidebar__search col-4">
+					<input type="text" placeholder="강의명을 검색해주세요.">
+		            <button type="submit"><i class='bx bx-search-alt-2'></i>검색</button>
+				</div>
+			</div>
+            <div class="shop__product__option">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="shop__product__option__left">
+                            <p>검색 옵션</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="shop__product__option__right">
+                            <p>정렬기준 : </p>
+                            <select style="display: none;">
+                                <option value="">최신순</option>
+                                <option value="">평점순</option>
+                                <option value="">추천순</option>
+                                <option value="">인기순</option>
+                            </select>
+                            <div class="nice-select" tabindex="0">
+                            	<span class="current">최신순</span>
+                            	<ul class="list">
+                            		<li data-value="" class="option selected">최신순</li>
+                            		<li data-value="" class="option selected">평점순</li>
+                            		<li data-value="" class="option">추천순</li>
+                            		<li data-value="" class="option">인기순</li>
+                            	</ul>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/html.png">
+                            <ul class="product__hover">
+                                <li><a href="#"><img src="/img/member/main/heart.png" alt="찜하기버튼"></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><span>홍길동</span> 선생님</h6>
+                            <a href="#" class="add-cart">상세보기</a>
+                            <div class="rating">
+                                <i class='bx bxs-star'></i>
+								<i class='bx bxs-star'></i>
+								<i class='bx bxs-star'></i>
+								<i class='bx bxs-star'></i>
+								<i class='bx bx-star' ></i>
+                            </div>
+                            <h5>강의명</h5>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="product__pagination">
+            	<a href="#"><i class='bx bxs-chevron-left' ></i></a>
+                <a class="active" href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <span>...</span>
+                <a href="#">21</a>
+            	<a href="#"><i class='bx bxs-chevron-right' ></i></a>
+            </div>
+        </div>
+		
+		<script src="/js/member/allList.js"></script>
+		<script>
+			console.log("즉시 실행 함수 목록 : " , lectureService);
+		
+			lectureService.ltListReq();
+			
+		</script>
+	</section>
+</body>
+</html>
