@@ -18,34 +18,59 @@
         from lecturer l
         where id = #{userid}
 	</select>
-	<insert id="insertUser">
+	<insert id="insertUser" parameterType="AccountVO">
+		<selectKey keyProperty="accnum"
+				order="BEFORE"
+				resultType="string">
+			<if test='actype == "b1"'>
+				SELECT 'me' || LPAD(NVL(MAX(SUBSTR(mem_num, -5)), 0) + 1, 5, '0') AS mem_num
+				FROM mem
+			</if>
+			<if test='actype == "d2"'>
+				SELECT 'le' || LPAD(NVL(MAX(SUBSTR(lecturer_num, -5)), 0) + 1, 5, '0') AS lecturer_num
+				FROM lecturer
+			</if>
+		</selectKey>
 		insert into 
+		<if test='actype == "b1"'>
 		mem
 		(
-		id
+		mem_num
+		, mem_fg_cd
+		, int_cd
+		</if>
+		<if test='actype == "d2"'>
+		lecturer
+		(
+		lecturer_num
+		, accp_yn_cd
+		, atch_num
+		</if>
+		, id
 		, pw
 		, name
 		, addr
-		, detailaddr
+		, detail_addr
 		, mail
 		, phone
 		, join_dt
 		, login_typ_cd
 		, token
-		
 		)
 		values(
-				#{id}
-				, #{pw}
-				, #{name}
-				, #{addr}
-				, #{detailAddr}
-				, #{mail}
-				, #{phone}
+				#{accnum}
+				, #{actype}
+				, #{intorfile}
+				, #{idv}
+				, #{pwv}
+				, #{nickv}
+				, #{addrv}
+				, #{dadrv}
+				, #{mailv}
+				, #{phonev}
 				, sysdate
-				, #{loginTypCd}
+				, #{logCd}
 				, #{token}
-				
 				)
 	</insert>
 </mapper>

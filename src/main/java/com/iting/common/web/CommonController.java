@@ -99,11 +99,16 @@ public class CommonController {
 	public UsersVO idchk(@PathVariable String id) {
 		return userservice.getUserInfo(id);
 	}
+	@GetMapping("/account-email")
+	public String emailsend() {
+		return "common/account-email";
+	}
 	// 회원가입 등록
 	@ResponseBody
 	@PostMapping("/insertaccount")
-	public String insertAccount(@RequestBody AccountVO vo) {
-		
-		return "common/account-email";
+	public int insertAccount(@RequestBody AccountVO vo) {
+		System.out.println(vo);
+		int ckcnt = userservice.insertUser(vo);
+		return ckcnt;
 	}
 }
