@@ -4,49 +4,62 @@
 <mapper namespace="com.iting.note.mapper.NoteMapper">
 	<!-- 받은쪽지함 -->
 	<select id="getRecList" resultType="NoteVO">
-		SELECT NOTE_NUM
-		       , NOTE_TTL
-		       , NOTE_CNTN
-		       , RPLY
-		       , SENT_DT
-		       , REC_DT
-		       , CFM_YN_CD
-		       , SENT_PS
-		       , REC_PS
-		FROM NOTE
-		WHERE SENT_PS = #{memNum}
-		ORDER BY NOTE_NUM DESC
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.CFM_YN_CD
+		       , n.SENT_PS
+		       , n.REC_PS
+		       , m.ID
+		       , m.NAME
+		FROM NOTE n JOIN LECTURER l
+		              ON n.REC_PS = #{user}
+		            JOIN MEM m
+		              ON n.SENT_PS = m.MEM_NUM
+		WHERE n.SENT_PS = m.MEM_NUM
+		ORDER BY n.NOTE_NUM DESC
 	</select>
 	
 	<!-- 보낸쪽지함 -->
 	<select id="getSentList" resultType="NoteVO" parameterType="String">
-		SELECT NOTE_NUM
-		       , NOTE_TTL
-		       , NOTE_CNTN
-		       , RPLY
-		       , SENT_DT
-		       , REC_DT
-		       , CFM_YN_CD
-		       , SENT_PS
-		       , REC_PS
-		FROM NOTE
-		WHERE SENT_PS = #{user}
-		ORDER BY NOTE_NUM DESC
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.CFM_YN_CD
+		       , n.SENT_PS
+		       , n.REC_PS
+		       , m.ID
+		       , m.NAME
+		FROM NOTE n JOIN LECTURER l
+		              ON n.SENT_PS = l.LECTURER_NUM
+		            JOIN MEM m
+		              ON n.REC_PS = m.MEM_NUM
+		WHERE n.SENT_PS = #{user}
+		ORDER BY n.NOTE_NUM DESC
 	</select>
 	
-	<!-- 단건 조회 -->
-	<select id="getNoteInfo" resultType="NoteVO">
-		SELECT NOTE_NUM
-		       , NOTE_TTL
-		       , NOTE_CNTN
-		       , RPLY
-		       , SENT_DT
-		       , REC_DT
-		       , CFM_YN_CD
-		       , SENT_PS
-		       , REC_PS
-		FROM NOTE
-		WHERE NOTE_NUM = #{noteNum}
+	<!-- 받은쪽지 단건조회 -->
+	<select id="getRecInfo" resultType="NoteVO">
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.CFM_YN_CD
+		       , e.ID as SENT_PS
+		       , m.ID as REC_PS
+		FROM NOTE n JOIN mem_lec_view m
+                      ON n.REC_PS = m.MEM_NUM
+                    JOIN mem_lec_view e
+                      ON n.SENT_PS = e.MEM_NUM
+		WHERE n.NOTE_NUM = #{noteNum}
 	</select>
 	
 	<!-- 등록 -->

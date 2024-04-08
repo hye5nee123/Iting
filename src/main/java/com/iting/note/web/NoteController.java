@@ -42,20 +42,22 @@ public class NoteController {
 	// 목록조회
 	@RequestMapping("teacher/note/list")
 	public String getNoteList(Model model, NoteVO vo) {
-		model.addAttribute("noteList", noteService.getRecList());
 		String user = (String) httpSession.getAttribute("usernum");
 		System.out.println(user);
-		model.addAttribute("noteList", noteService.getSentList(user));
+		model.addAttribute("recList", noteService.getRecList(user));
+		model.addAttribute("sentList", noteService.getSentList(user));
 		model.addAttribute("ltsnList", memberService.getMemberLtsn());
 		return "teacher/note/list";
 	}
 	
 	// 단건조회
-	@GetMapping("teacher/note/info/{noteNum}")
-	public String info(@PathVariable String noteNum, Model model) {
-		model.addAttribute("note", noteService.getNoteInfo(noteNum));
+	@GetMapping("teacher/note/info/{noteNum}/{gb}")
+	public String info(@PathVariable String noteNum, @PathVariable String gb, Model model) {
+		model.addAttribute("note", noteService.getRecInfo(noteNum));
+		model.addAttribute("gb", gb);
 		return "teacher/note/info";
 	}
+
 	
 	@MessageMapping("/hello") // 메세지가 들어오면
 	  @SendTo("/topic/greetings") // greetings 구독자에게 메세지 전송

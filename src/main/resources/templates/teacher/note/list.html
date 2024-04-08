@@ -7,11 +7,6 @@
 <meta charset="UTF-8">
 <title>강의질문 페이지</title>
 <link rel="stylesheet" href="/css/teacher/content.css" />
-<script th:inline="javascript">
-function link(noteNum){
-	location.href='/teacher/note/info/'+ noteNum
-}
-</script>
 </head>
 <body>
 <div id="container" layout:fragment="container">
@@ -19,23 +14,24 @@ function link(noteNum){
     <div class="nav-align-top mb-4">
         <ul class="nav nav-pills mb-3" role="tablist">
           <li class="nav-item">
-            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
+            <button type="button" class="nav-link " role="tab" th:classappend="${param.gb} == null ? 'active':_" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="false">
               쪽지보내기
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-list" aria-controls="navs-pills-top-profile" aria-selected="false">
+            <button type="button" class="nav-link " role="tab" data-bs-toggle="tab"  th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  data-bs-target="#navs-pills-top-list" aria-controls="navs-pills-top-profile" aria-selected="true">
               받은쪽지함
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
+            <button type="button" class="nav-link" th:classappend="${#strings.equals(param.gb , 'rec')}? 'active':_" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
               보낸쪽지함
             </button>
           </li>
         </ul>
+        <!--/* [[${#strings.equals(param.gb , 'sent')}]] */-->
         <div class="tab-content test_content">
-          <div class="tab-pane fade active show note_box" id="navs-pills-top-home" role="tabpanel">
+          <div class="tab-pane note_box" th:classappend="${param.gb} == null ? 'active':_" id="navs-pills-top-home" role="tabpanel">
             <div class="table-responsive text-nowrap">
 	            <table class="table">
 	            	<thead>
@@ -64,26 +60,45 @@ function link(noteNum){
 	            </table>
 	      	</div>
           </div>
-          <div class="tab-pane fade note_box" id="navs-pills-top-list" role="tabpanel">
-            <ul th:each="note, stat: ${noteList}" th:onclick="link([[${note.noteNum}]])">
+          <div class="tab-pane  note_box"  th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  id="navs-pills-top-list" role="tabpanel">
+            <ul th:each="rec, stat: ${recList}" th:onclick="link('sent',[[${rec.noteNum}]])">
             	<li>
-            		<a href="#" th:text="${note.noteTtl}" class="new"></a>
-            		<span th:text="${note.recPs}">보낸사람</span>
-            		<i th:text="${#dates.format(note.sentDt, 'yyyy-MM-dd')}"></i>
+            		<a href="#" th:text="${rec.noteTtl}" class="new"></a>
+            		<span th:text="${rec.id}"></span>
+            		<span th:text="${rec.name}"></span>
+            		<i th:text="${#dates.format(rec.recDt, 'yyyy-MM-dd')}"></i>
             	</li>
             </ul>
           </div>
-          <div class="tab-pane fade note_box" id="navs-pills-top-profile" role="tabpanel">
-            <ul th:each="note, stat: ${noteList}" th:onclick="link([[${note.noteNum}]])">
+          <div class="tab-pane  note_box" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_" id="navs-pills-top-profile" role="tabpanel">
+            <ul th:each="sent, stat: ${sentList}" th:onclick="link('rec',[[${sent.noteNum}]])">
             	<li>
-            		<a href="#" th:text="${note.noteTtl}" class="new"></a>
-            		<span th:text="${note.sentPs}">받은사람</span>
-            		<i th:text="${#dates.format(note.recDt, 'yyyy-MM-dd')}"></i>
+            		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
+            		<span th:text="${sent.id}"></span>
+            		<span th:text="${sent.name}"></span>
+            		<i th:text="${#dates.format(sent.sentDt, 'yyyy-MM-dd')}"></i>
             	</li>
             </ul>
           </div>
         </div>
 	</div>
+<script th:inline="javascript">
+function link(gb,noteNum){
+	location.href=`/teacher/note/info/${noteNum}/${gb}`
+}
+function tab_select() {
+	const gb = [[${param.gb}]]
+	if(gb != null){
+		if(gb[0] == 'sent'){
+			$('[data-bs-target="#navs-pills-top-list"]').tab('show')
+		} else if(gb[0] == 'rec'){
+			$('[data-bs-target="#navs-pills-top-profile"]').tab('show')
+		}
+	}
+}
+//window.setTimeout(tab_select, 100);
+
+</script>
 </div>
 </body>
 </html>
