@@ -20,11 +20,11 @@ function link(noteNum){
         <ul class="nav nav-pills mb-3" role="tablist">
           <li class="nav-item">
             <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
-              읽지않은 쪽지함
+              쪽지보내기
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
+            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-list" aria-controls="navs-pills-top-profile" aria-selected="false">
               받은쪽지함
             </button>
           </li>
@@ -36,55 +36,50 @@ function link(noteNum){
         </ul>
         <div class="tab-content test_content">
           <div class="tab-pane fade active show note_box" id="navs-pills-top-home" role="tabpanel">
+            <div class="table-responsive text-nowrap">
+	            <table class="table">
+	            	<thead>
+	            		<tr>
+	            			<th>회원아이디</th>
+	            			<th>이름</th>
+	            			<th>주소</th>
+	            			<th>상세주소</th>
+	            			<th>이메일</th>
+	            			<th>연락처</th>
+	            			<th>쪽지보내기</th>
+	            		</tr>
+	            	</thead>
+	            	<tbody>
+		            	<tr th:each="ltsn, stat: ${ltsnList}">
+			            	<td class="hidden" th:text="${ltsn.memNum}"></td>
+			            	<td th:text="${ltsn.id}"></td>
+			            	<td th:text="${ltsn.name}"></td>
+			            	<td th:text="${ltsn.addr}"></td>
+			            	<td th:text="${ltsn.detailAddr}"></td>
+			            	<td th:text="${ltsn.mail}"></td>
+			            	<td th:text="${ltsn.phone}"></td>
+			            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/teacher/note/insert/{memNum}(memNum=${ltsn.memNum})}">보내기</a></td>
+		            	</tr>
+	            	</tbody>
+	            </table>
+	      	</div>
+          </div>
+          <div class="tab-pane fade note_box" id="navs-pills-top-list" role="tabpanel">
             <ul th:each="note, stat: ${noteList}" th:onclick="link([[${note.noteNum}]])">
             	<li>
             		<a href="#" th:text="${note.noteTtl}" class="new"></a>
-            		<span th:text="${note.sentPs}">보낸회원</span>
-            		<i th:text="${#dates.format(note.recDt, 'yyyy-MM-dd')}"></i>
+            		<span th:text="${note.recPs}">보낸사람</span>
+            		<i th:text="${#dates.format(note.sentDt, 'yyyy-MM-dd')}"></i>
             	</li>
             </ul>
           </div>
-          <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
-            <ul>
+          <div class="tab-pane fade note_box" id="navs-pills-top-profile" role="tabpanel">
+            <ul th:each="note, stat: ${noteList}" th:onclick="link([[${note.noteNum}]])">
             	<li>
-	            	<div>
-		             	<p>프로그래밍 언어</p>
-		             	<h5>프로그래밍언어 이해하기</h5>
-	                   	<div class="bottom">
-	                   		<p>총 문제 <i>30</i>개</p>
-	                   		<div class="demo-inline-spacing btn_box">
-	                   			<button class="btn btn-outline-warning">문제관리</button>
-	                   			<button class="btn btn-outline-secondary">문제등록</button>
-	                   		</div>
-	                   	</div>
-                   	</div>
-	           	</li>
-            	<li>
-	            	<div>
-		             	<p>프로그래밍 언어</p>
-		             	<h5>프로그래밍언어 이해하기</h5>
-	                   	<div class="bottom">
-	                   		<p>총 문제 <i>30</i>개</p>
-	                   		<div class="demo-inline-spacing btn_box">
-	                   			<button class="btn btn-outline-warning">문제관리</button>
-	                   			<button class="btn btn-outline-secondary">문제등록</button>
-	                   		</div>
-	                   	</div>
-                   	</div>
-	           	</li>
-            	<li>
-	            	<div>
-		             	<p>프로그래밍 언어</p>
-		             	<h5>프로그래밍언어 이해하기</h5>
-	                   	<div class="bottom">
-	                   		<p>총 문제 <i>30</i>개</p>
-	                   		<div class="demo-inline-spacing btn_box">
-	                   			<button class="btn btn-outline-warning">문제관리</button>
-	                   			<button class="btn btn-outline-secondary">문제등록</button>
-	                   		</div>
-	                   	</div>
-                   	</div>
-	           	</li>
+            		<a href="#" th:text="${note.noteTtl}" class="new"></a>
+            		<span th:text="${note.sentPs}">받은사람</span>
+            		<i th:text="${#dates.format(note.recDt, 'yyyy-MM-dd')}"></i>
+            	</li>
             </ul>
           </div>
         </div>

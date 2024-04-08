@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.note.mapper.NoteMapper">
-	<!-- 전체조회 -->
-	<select id="getNoteList" resultType="NoteVO">
+	<!-- 받은쪽지함 -->
+	<select id="getRecList" resultType="NoteVO">
 		SELECT NOTE_NUM
 		       , NOTE_TTL
 		       , NOTE_CNTN
@@ -14,6 +14,23 @@
 		       , SENT_PS
 		       , REC_PS
 		FROM NOTE
+		WHERE SENT_PS = #{memNum}
+		ORDER BY NOTE_NUM DESC
+	</select>
+	
+	<!-- 보낸쪽지함 -->
+	<select id="getSentList" resultType="NoteVO" parameterType="String">
+		SELECT NOTE_NUM
+		       , NOTE_TTL
+		       , NOTE_CNTN
+		       , RPLY
+		       , SENT_DT
+		       , REC_DT
+		       , CFM_YN_CD
+		       , SENT_PS
+		       , REC_PS
+		FROM NOTE
+		WHERE SENT_PS = #{user}
 		ORDER BY NOTE_NUM DESC
 	</select>
 	
@@ -43,22 +60,18 @@
 		INSERT INTO NOTE(NOTE_NUM
 						, NOTE_TTL
 						, NOTE_CNTN
-						, RPLY
 						, SENT_DT
-						, REC_DT
-						, CFM_YN_CD
 						, SENT_PS
-						, REC_PS)
+						, REC_PS
+						)
 		VALUES ( 
 				  #{noteNum}
 				, #{noteTtl}
 				, #{noteCntn}
-				, #{rply}
-			    , #{sentDt}
-				, #{recDt}
-				, #{cfmYnCd}
+				, sysdate
 				, #{sentPs}
 				, #{recPs}
+				
 				)
 	</insert>
 </mapper>

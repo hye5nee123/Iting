@@ -8,7 +8,8 @@ import com.iting.note.model.NoteVO;
 
 @Mapper
 public interface NoteMapper {
-	public List<NoteVO> getNoteList();
+	public List<NoteVO> getRecList();
+	public List<NoteVO> getSentList(String user);
 	public NoteVO getNoteInfo(String noteNum);
 	public int insertNote(NoteVO vo);
 }
