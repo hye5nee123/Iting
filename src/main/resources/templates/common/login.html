@@ -51,7 +51,6 @@
 		</div>
 	</div>
 	<script>
-		//function login(e) {
 		frm.addEventListener("submit", (e) => {
 			e.preventDefault();
 			let id = frm.userId.value;
@@ -66,15 +65,6 @@
 				frm.submit();
 			}
 		});
-		/* axios.get("/common/chkuser", id)
-		.then(res => res.data)
-		console.log(res);
-		if(res.data == null || res.data.pw != document.frm.password.value){
-			alert("아이디 혹은 비밀번호가 다릅니다");
-		} else { */
-		/* } */
-		//});
-		//}
 	</script>
 </body>
 
