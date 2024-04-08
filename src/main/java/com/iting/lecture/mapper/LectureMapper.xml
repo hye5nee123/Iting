@@ -30,7 +30,11 @@
 		       , find_code(LT_DIF_CD) LT_DIF_CD
 		       , LECTURER_NUM
 		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		       , find_code(ACCP_YN_CD) ACCP_YN_CD
+		       , find_code(RDM_CATE_CD) RDM_CATE_CD
 		FROM LT
+		WHERE ACCP_YN_CD = 'd2'
+		
 	
 	</select>
 	<!-- 강의 상세 -->
@@ -45,6 +49,9 @@
 		       , find_code(LT_DIF_CD) LT_DIF_CD
 		       , LECTURER_NUM
 		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		       , find_code(ACCP_YN_CD) ACCP_YN_CD
+		       , find_code(RDM_CATE_CD) RDM_CATE_CD
+		       
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 		
@@ -87,6 +94,12 @@
 					  ,FR_DT
 					  ,LT_IMG
 					  ,LECTURER_NUM
+					  ,lt_keyword_cd
+					  ,lt_dif_cd
+					  ,lt_cate_cd
+					  ,ACCP_YN_CD
+					  ,RDM_CATE_CD
+					  
 						)
 		VALUES(
 			   #{ltNum}
@@ -95,8 +108,56 @@
 			   ,#{frDt}
 			   ,#{ltImg}
 			   ,#{lecturerNum}
+			   ,#{ltKeywordCd}
+			   ,#{ltDifCd}
+			   ,#{ltCateCd}
+			   ,#{accpYnCd}
+			   ,#{rdmCateCd}
+			   
 			   )
 		
 		</insert>
+		
+		<update id="update">
+		UPDATE lt 
+			SET ACCP_YN_CD = 'd1'
+            WHERE lt_num = #{ltNum} 
+		
+	</update>
+	<!-- 승인 목록출력 -->
+		<select id="endLectureList" resultType="LectureVO">
+		SELECT LT_NUM
+		       , LT_ST_CD
+		       , LT_TTL
+		       , LT_IMG
+		       , LT_INTRO
+		       , LT_CATE_CD
+		       , FR_DT
+		       , find_code(LT_DIF_CD) LT_DIF_CD
+		       , LECTURER_NUM
+		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		       , find_code(ACCP_YN_CD) ACCP_YN_CD
+		       , find_code(RDM_CATE_CD) RDM_CATE_CD
+		FROM LT
+		WHERE ACCP_YN_CD = 'd1'
+		
+	</select>
+	<!-- 미승인 -->
+			<select id="ingLectureList" resultType="LectureVO">
+		SELECT LT_NUM
+		       , LT_ST_CD
+		       , LT_TTL
+		       , LT_IMG
+		       , LT_INTRO
+		       , LT_CATE_CD
+		       , FR_DT
+		       , find_code(LT_DIF_CD) LT_DIF_CD
+		       , LECTURER_NUM
+		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		       , find_code(ACCP_YN_CD) ACCP_YN_CD
+		       , find_code(RDM_CATE_CD) RDM_CATE_CD
+		FROM LT
+		WHERE ACCP_YN_CD = 'd2'
+		</select>
 		
 </mapper>

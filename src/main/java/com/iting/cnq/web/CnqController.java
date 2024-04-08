@@ -102,7 +102,7 @@ public class CnqController {
 // 수정 기능.
 //	@PutMapping("/member/cnq/update")
 //	public String updateCnq(CnqVO vo) {
-//		if (cnqService.updateCnq(vo) > 0) {
+//		if (cnqService.udateCnq(vo) > 0) {
 //			System.out.println("수정완료");
 //		}
 //
