@@ -3,52 +3,64 @@
 	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
 <section layout:fragment="content">
-<div>
-	<h2 class="related-title">글정보</h2>
-	<ul>
-		<li>[[${cnq.hit}]]</li>
-		<li>[[${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}]]</li>
-		<li>댓글수</li>
-	</ul>
-	<!-- form 시작 -->
-	<br>
-	<form method="post" name="frm"  class="info">
-		<div>
-			<span>No</span>
-			<div th:text="${cnq.ltCnqNum}"></div>
-		</div>
+	<div class="accordion" id="accordionExample">
+		<div class="card">
+			<div class="card-header" id="headingOne">
+				<h2 class="mb-0">
+					<h2 class="related-title">글정보</h2>
+					<ul class="info">
+						<li>[[${cnq.hit}]]</li>
+						<li>[[${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}]]</li>
+						<li>댓글수</li>
+					</ul>
+					<button class="btn btn-link" type="button" data-toggle="collapse"
+						data-target="#collapseOne" aria-expanded="true"
+						aria-controls="collapseOne"></button>
+				</h2>
+			</div>
 
-		<div >
-			<span class="section-title">제목</span>
-			<div th:text="${cnq.ttl}"></div>
-		</div>
+			<div id="collapseOne" class="collapse show"
+				aria-labelledby="headingOne" data-parent="#accordionExample">
+				<div class="card-body">
+					<form method="post" name="frm">
+						<div>
+							<table>
+								<thead>
+									<tr>
+										<th>No</th>
+										<th>제목</th>
+										<th>내용</th>
+										<th>작성자</th>
+										<th>등록일자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td th:text="${cnq.ltCnqNum}"></td>
+										<td th:text="${cnq.ttl}"></td>
+										<td th:text="${cnq.cntn}"></td>
+										<td th:text="${cnq.name}"></td>
+										<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
 
-		<div>
-			<span>내용</span>
-			<div th:text="${cnq.cntn}"></div>
-		</div>
 
-		<div>
-			<span>작성자</span>
-			<div th:text="${cnq.name}"></div>
-		</div>
-
-		<div>
-			<span>등록일자</span>
-			<div th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></div>
-		</div>
-
-		<div class="col-lg-6 col-md-6 col-sm-6">
-			<div class="blog__details__tags">
-				<a href="/member/cnq/list">#List</a>
-				<!-- 수정 버튼은 지금 기능은 삭제입니다. -->
-				<a th:href="@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#수정</a>
-				<a th:href="@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#삭제</a>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div>
+									<a href="/member/cnq/list">#List</a> <a
+										th:href="@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#수정</a>
+									<a
+										th:href="@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#삭제</a>
+								</div>
+							</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</form>
-	
-	<!-- form 종료 -->
+		<div class="card"></div>
+	</div>
 	<div>
 		<table>
 			<thead>
@@ -64,10 +76,9 @@
 		</table>
 	</div>
 	</div>
-</section>
-<script th:inline="javascript">
+	<script th:inline="javascript">
 	const ltCnqNum = [[${cnq.ltCnqNum}]]
-	//함수 호출.[[]]
+	//함수 호출.
 	listReq(1);
 	
 	//controller에서 주소 따옴.
@@ -100,4 +111,5 @@
 	
 	
 	</script>
+</section>
 </html>

@@ -35,16 +35,15 @@
 	<select id="getCnqInfo" parameterType="String"
 		resultType="CnqVO">
 		SELECT
-		c.lt_cnq_num,
-		c.ttl,
-		c.cntn,
-		c.drwup_dt,
-		c.hit,
-		m.name
-		FROM lt_cnq c JOIN mem m
-		on c.mem_num = m.mem_num
-		WHERE lt_cnq_num =
-		#{ltCnqNum}
+				c.lt_cnq_num,
+				c.ttl,
+				c.cntn,
+				c.drwup_dt,
+				c.hit,
+				m.name
+		FROM 	lt_cnq c JOIN mem m
+			on c.mem_num = m.mem_num
+		WHERE 	lt_cnq_num = #{ltCnqNum}
 	</select>
 
 	<!-- cnq 등록 -->
@@ -82,26 +81,8 @@
 
 	<update id="updateCnq" parameterType="CnqVO">
 		UPDATE lt_cnq
-		<set>
-			<if test="ttl != null">
-				TTL = #{ttl},
-			</if>
-			<if test="cntn != null">
-				CNTN = #{cntn},
-			</if>
-			<if test="drwupDt != null">
-				DRWUP_DT = #{drwupDt},
-			</if>
-			<if test="memNum != null">
-				MEM_NUM = #{memNum},
-			</if>
-			<if test="ltNum != null">
-				LT_NUM = #{ltNum},
-			</if>
-			<if test="hit != null">
-				HIT = #{hit},
-			</if>
-		</set>
+		SET    TTL = #{ttl},
+				CNTN = #{cntn}
 		WHERE LT_CNQ_NUM = #{ltCnqNum}
 	</update>
 
