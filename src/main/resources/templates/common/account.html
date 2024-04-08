@@ -75,7 +75,7 @@
 					<!-- 인증번호 입력란 -->
 				</div>
 				<p>이름(닉네임)</p>
-				<input type="text" id="name" name="name">
+				<input type="text" id="nick" name="nick">
 			</div>
 			<div class="checkout__input col-lg-4">
 				<p>주소</p>
@@ -110,7 +110,7 @@
 			</div>
 			<div class="accbtn">
 				<button type="button" class="site-btn" style="width: 300px"
-					th:onclick="insertAccount()">가입하기</button>
+					onclick="chkAccount()">가입하기</button>
 			</div>
 		</div>
 	</div>
@@ -162,7 +162,7 @@
 				url: '/sendsms',
 				data: param,
 				})
-				.then(res => console.log("문자 전송 : "+res.data));
+				.then(res => console.log("문자 전송"));
 				document.getElementsByClassName('smschk')[0].innerHTML =
 				`
 						<input type="text" id="sms" name="sms" placeholder="인증번호 4자리 입력">
@@ -174,7 +174,6 @@
 		}
 		function smschk(num){
 			let smschkresult;
-				console.log(num);
 			if(phoneAccep && num == sms.value){
 				smschkresult = `<p>인증이 완료되었습니다</p>`;
 			document.getElementsByClassName('smschk')[0].innerHTML = '';
