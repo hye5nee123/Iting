@@ -43,6 +43,23 @@ public class LectureServiceImpl implements LectureService {
 		return lectureMapper.ltInsert(vo);
 	}
 
+@Override
+public int update(LectureVO vo) {
+	
+	return lectureMapper.update(vo);
+}
+
+@Override
+public List<LectureVO> endLectureList(LectureVO vo) {
+	return lectureMapper.endLectureList(vo);
+}
+
+@Override
+public List<LectureVO> ingLectureList(LectureVO vo) {
+	
+	return lectureMapper.ingLectureList(vo);
+}
+
 
 
 }
