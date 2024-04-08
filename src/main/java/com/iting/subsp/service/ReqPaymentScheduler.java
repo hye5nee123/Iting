@@ -45,7 +45,6 @@ public class ReqPaymentScheduler {
 		header.add("Authorization", "PortOne " + apiKey); 	// 인증키
 		
 		// Body set
-		// Gson gson = new Gson();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -54,18 +53,7 @@ public class ReqPaymentScheduler {
 		
 		map.put("currency", "KRW");
 		map.put("amount", Collections.singletonMap("total", 39800));
-		//String body = gson.toJson(map);
-		
-		/*
-		 {
-	      billingKey : billingKey,
-	      orderName: monthTlt,
-	      amount: {
-	        total: subspPrice,
-	      },
-	      currency: "KRW"
-	      } 
-		 */
+
 		
 		// Message
         HttpEntity<Map<String, Object>> requestMessage = new HttpEntity<>(map, header);	

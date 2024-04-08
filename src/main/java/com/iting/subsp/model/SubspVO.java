@@ -13,4 +13,6 @@ public class SubspVO {
 	private String subspTypCd;
 	private int subspPrice;
 	private String memNum;
+	
+	private String retCode;
 }

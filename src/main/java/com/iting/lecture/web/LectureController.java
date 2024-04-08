@@ -1,5 +1,7 @@
 package com.iting.lecture.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
 import com.iting.lecture.service.LectureService;
 
@@ -19,7 +23,27 @@ public class LectureController {
 	LectureService lectureService;
 
 	/* 회원 */
-	// 강의 목록 조회
+	// 강의 전체목록 페이지 이동
+	@RequestMapping("/member/lecture/allList")
+	public ModelAndView allList() {
+		ModelAndView mv = new ModelAndView("/member/lecture/allList");
+		return mv;
+	}
+	
+	// 강의 전체목록 조회처리 - 장효은
+	@GetMapping("/member/lecture/allSelect")
+	@ResponseBody
+	public List<LectureVO> allList(LectureVO vo, PagingVO pvo) {
+		pvo.setPageUnit(16);
+		pvo.setPageSize(16);
+		pvo.setFirst(0);
+		pvo.setLast(5);
+		
+		List<LectureVO> list = lectureService.getAllLectureList(vo, pvo);
+		
+		return list;
+		
+	}
 
 	// 강의 단건 조회
 	@GetMapping("lecture/info/{ltNum}")
@@ -71,5 +95,21 @@ public class LectureController {
 		return "/admin/lecture/list";
 	}
 	
+	//승인 목록
+	@ResponseBody
+	@GetMapping("/admin/lecture/endLectureList")
+	public List<LectureVO> endList(LectureVO vo) {
+	
+		return lectureService.endLectureList(vo);
+	
+	}
+	//승인수정 기능
+	@ResponseBody
+	@GetMapping("/admin/lecture/update/{ltNum}")
+	public LectureVO update(LectureVO vo,@PathVariable String ltNum) {
+		vo.setLtNum(ltNum);
+		lectureService.update(vo);
+		return vo;
+	}
 	
 }
