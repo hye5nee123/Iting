@@ -28,22 +28,30 @@ const csrf_axios = axios.create({
 	}
 	
 /* 파일업로드 ajax */
-function uploadFileReq(typCode) {
-	let param = new FormData(document.imgForm);
-	console.log(param);
+let fileNum = ""; // 첨부파일번호
+
+function uploadFileReq(typCode, formName) {
+
+	let fileForm = new FormData(formName);
+	
 	axios({
             method: 'POST',
             url: `/upload/file?fileCode=${typCode}`,
-            data : param,
+            data : fileForm,
             headers: {
 				[header]: token
 			}
         })
         .then(res => uploadFileRes(res.data));
 }
-function uploadFileRes(retCode) {
-	console.log(retCode)
-	if(retCode > 0) {
+function uploadFileRes(data) {
+	console.log(data.fvo.atchNum);
+	console.log(data.retCode);
+	//console.log(data)
+	
+	fileNum = data.fvo.atchNum;
+	
+	if(data.retCode > 0) {
 		confirmAlert("파일 등록이 완료되었습니다.");
 	} else {
 		errorAlert("파일등록이 실패했습니다", "관리자에게 문의 바랍니다.");
