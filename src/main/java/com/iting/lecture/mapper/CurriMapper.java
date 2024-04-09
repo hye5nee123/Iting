@@ -13,4 +13,6 @@ public interface CurriMapper {
 	public List<CurriVO> getCurriList(CurriVO vo);
 	//상세
 	public CurriVO getCurriInfo(String rndNum);
+	//등록
+	public int CurriInsert(CurriVO vo);
 }

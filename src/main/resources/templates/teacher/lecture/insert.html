@@ -54,9 +54,10 @@
 								id="ltIntro"></textarea>
 						</div>
 						<div class="mb-3 test_list">
-							<label for="file" class="form-label">첨부파일</label> <input
-								class="form-control" type="file" name="file" id="file">
+							<label for="file" class="form-label">이미지</label> <input
+								class="form-control" type="file" name="ltImg" id="ltImg">
 						</div>
+						
 						<div class="mb-3 test_list">
 							<label for="frDt" class="form-label">강의날짜</label> <input
 								class="form-control" type="Date" name="frDt" id="frDt">
@@ -145,7 +146,12 @@
 			</div>
 		<div class="btn_box demo-inline-spacing">
 			<button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">신청하기</button>
+			
 		</div>
+		
+		
+	<div>
+		
 		</div>
 		<input type="hidden" th:value="${session.usernum}" name="tnum">
 		<script>

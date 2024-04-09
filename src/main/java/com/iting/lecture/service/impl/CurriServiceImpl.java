@@ -27,4 +27,10 @@ public class CurriServiceImpl implements CurriService{
 		return curriMapper.getCurriInfo(rndNum);
 	}
 
+
+	@Override
+	public int CurriInsert(CurriVO vo) {
+		return curriMapper.CurriInsert(vo);
+	}
+
 }

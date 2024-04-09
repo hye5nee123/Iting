@@ -35,16 +35,19 @@
 			FROM CURRI
 		</selectKey>
 		INSERT INTO CURRI (
-		RND_NUM
-		,RND_TTL
-		,ATCH_NUM
-		,RND_CNTN
-		,LT_TM
-		,LT_NUM
-		)
+		 SELECT RND_NUM
+              ,RND_TTL
+              ,ATCH_NUM
+              ,RND_CNTN
+              ,LT_TM
+              ,LT_NUM
 		VALUES(
 		#{RND_NUM}
+		,#{RND_TTL}
 		,#{ATCH_NUM}
+		,#{RND_CNTN}
+		,#{LT_TM}
+		,#{LT_NUM}
 		)
 	</insert>
 
