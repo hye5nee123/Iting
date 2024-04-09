@@ -4,7 +4,7 @@
       layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
-<title>내강의실 페이지</title>
+<title>내강의실</title>
 <link rel="stylesheet" href="/css/member/content.css" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
@@ -19,62 +19,15 @@
 		</div>
 		<div class="info lt_info">
 			<h3>수강 중인 강의</h3>
-			<a href="#" class="go_link">전체보기 ></a>
-			<ul>
+			<a th:href="@{/member/tlsn/list}" class="go_link">전체보기 ></a>
+			<ul th:each="tlsn, stat: ${tlsnList}">
 				<li>
 					<div class="box">
 						<div class="top">
 							<div class="left">
-							<i>프로그래밍언어</i>
-							<p>프로그래밍언어 이해하기</p>
-							</div>
-							<div class="graph">
-								<span>그래프</span>
-							</div>
-						</div>
-						<div class="bottom">
-							<p><i class="menu-icon tf-icons bx bx-play-circle"></i> 2. 프로그래밍 시작하기</p>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="box">
-						<div class="top">
-							<div class="left">
-								<i>프로그래밍언어</i>
-								<p>프로그래밍언어 이해하기</p>
-							</div>
-							<div class="graph">
-								<span>그래프</span>
-							</div>
-						</div>
-						<div class="bottom">
-							<p><i class="menu-icon tf-icons bx bx-play-circle"></i> 2. 프로그래밍 시작하기</p>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="box">
-						<div class="top">
-							<div class="left">
-							<i>프로그래밍언어</i>
-							<p>프로그래밍언어 이해하기</p>
-							</div>
-							<div class="graph">
-								<span>그래프</span>
-							</div>
-						</div>
-						<div class="bottom">
-							<p><i class="menu-icon tf-icons bx bx-play-circle"></i> 2. 프로그래밍 시작하기</p>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="box">
-						<div class="top">
-							<div class="left">
-								<i>프로그래밍언어</i>
-								<p>프로그래밍언어 이해하기</p>
+							<i th:text="${tlsn.ltCateCd}">프로그래밍언어</i>
+							<p th:text="${tlsn.ltTtl}">프로그래밍언어 이해하기</p>
+							<span><i th:text="${tlsn.name}"></i> 강사님</span>
 							</div>
 							<div class="graph">
 								<span>그래프</span>
@@ -95,10 +48,8 @@
 				<div>
 					<h3>쪽지시험</h3>
 					<a href="#" class="go_link">전체보기 ></a>
-					<ul>
-						<li><a href="#"><i class='bx bx-edit'></i> 프로그래밍 시작하기</a></li>
-						<li><a href="#"><i class='bx bx-edit'></i> 프로그래밍 시작하기</a></li>
-						<li><a href="#"><i class='bx bx-edit'></i> 프로그래밍 시작하기</a></li>
+					<ul th:each="tlsn, stat: ${tlsnList}">
+						<li><a href="#"><i class='bx bx-edit'></i> <span th:text="${tlsn.ltTtl}"></span></a></li>
 					</ul>
 				</div>
 			</li>
