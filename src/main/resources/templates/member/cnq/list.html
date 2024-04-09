@@ -15,7 +15,6 @@
 		function init(){
 			frmSearch.ttl.value = "";
 			frmSearch.name.value = "";
-			frmSearch.cntn.value = "";
 		}
 		function move(ltCnqNum){
 			location.href='/member/cnq/info/'+ ltCnqNum
@@ -29,7 +28,6 @@
 	<form name="frmSearch" th:object="${cnqVO}" style="display: inline-block;">
 		<input type="hidden" name="page" >
 		제목 <input name="ttl" th:value="*{ttl}"> 
-		내용 <input name="cntn" th:value="*{cntn}">
 		작성자 <input name="name" th:value="*{name}"> 
 		<a href="#" onclick="gopage(1)" class="search-switch"> 
 		<img src="/img/member/main/search.png" alt="searchBtn"></a>
@@ -49,7 +47,6 @@
 				<tr>
 					<th>번호</th>
 					<th>제목</th>
-					<th>내용</th>
 					<th>날짜</th>
 					<th>조회수</th>
 					<th>작성자</th>
@@ -60,7 +57,6 @@
 					th:onclick="move([[${cnq.ltCnqNum}]])">
 					<td th:text="${cnq.ltCnqNum}"></td>
 					<td th:text="${cnq.ttl}"></td>
-					<td th:text="${cnq.cntn}"></td>
 					<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
 					<td th:text="${cnq.hit}"></td>
 					<td th:text="${cnq.name}"></td>
@@ -83,7 +79,7 @@
 				</li>
 
 				<li class="page-item"
-					th:classappend="${paging.endPage} <= ${paging.lastPage} ? disabled">
+					th:classappend="${paging.endPage} >= ${paging.lastPage} ? disabled">
 					<a class="page-link"
 					th:href="|javascript:gopage(${paging.endPage+1})|">Next</a>
 				</li>
