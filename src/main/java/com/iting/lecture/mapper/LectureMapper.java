@@ -16,7 +16,6 @@ public interface LectureMapper {
 
 	// 신수지
 	public List<LectureVO> getTcList(String lecturerNum);	
-	public LectureVO getLectureMemInfo(String lecturerNum);	
 	
   
 	//도승민

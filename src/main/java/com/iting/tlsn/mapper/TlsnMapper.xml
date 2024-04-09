@@ -12,10 +12,18 @@
 		       , t.TLSN_ST_CD
 		       , t.CETE_YN_CD
 		       , t.APPL_DT
+		       , e.NAME
+		       , e.ID
+		       , e.ADDR
+		       , e.DETAIL_ADDR
+		       , e.MAIL
+		       , e.PHONE
 		FROM TLSN t JOIN LT l
 		              ON t.LT_NUM = l.LT_NUM
 		            JOIN MEM m
 		              ON t.MEM_NUM = m.MEM_NUM
+		            JOIN LECTURER e
+		              ON l.LECTURER_NUM = e.LECTURER_NUM
 		ORDER BY t.APPL_DT
 	</select>
 	

@@ -31,7 +31,7 @@ public class LectureController {
 		ModelAndView mv = new ModelAndView("/member/lecture/allList");
 		return mv;
 	}
-	
+
 	// 강의 전체목록 조회처리 - 장효은
 	@GetMapping("/member/lecture/allSelect")
 	@ResponseBody

@@ -15,4 +15,5 @@ public class TlsnVO {
 	private String ltTtl;
 	private String ltCateCd;
 	private String lecturerNum;
+	private String name;
 }

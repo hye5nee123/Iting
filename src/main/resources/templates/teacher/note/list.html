@@ -19,12 +19,12 @@
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="nav-link " role="tab" data-bs-toggle="tab"  th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  data-bs-target="#navs-pills-top-list" aria-controls="navs-pills-top-profile" aria-selected="true">
+            <button type="button" class="nav-link " role="tab" data-bs-toggle="tab"  th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_"  data-bs-target="#navs-pills-top-list" aria-controls="navs-pills-top-profile" aria-selected="true">
               받은쪽지함
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="nav-link" th:classappend="${#strings.equals(param.gb , 'rec')}? 'active':_" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
+            <button type="button" class="nav-link" th:classappend="${#strings.equals(param.gb , 'sent')}? 'active':_" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
               보낸쪽지함
             </button>
           </li>
@@ -60,8 +60,8 @@
 	            </table>
 	      	</div>
           </div>
-          <div class="tab-pane  note_box"  th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  id="navs-pills-top-list" role="tabpanel">
-            <ul th:each="rec, stat: ${recList}" th:onclick="link('sent',[[${rec.noteNum}]])">
+          <div class="tab-pane note_box"  th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_"  id="navs-pills-top-list" role="tabpanel">
+            <ul th:each="rec, stat: ${recList}" th:onclick="link('rec',[[${rec.noteNum}]])">
             	<li>
             		<a href="#" th:text="${rec.noteTtl}" class="new"></a>
             		<span th:text="${rec.id}"></span>
@@ -70,8 +70,8 @@
             	</li>
             </ul>
           </div>
-          <div class="tab-pane  note_box" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_" id="navs-pills-top-profile" role="tabpanel">
-            <ul th:each="sent, stat: ${sentList}" th:onclick="link('rec',[[${sent.noteNum}]])">
+          <div class="tab-pane  note_box" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_" id="navs-pills-top-profile" role="tabpanel">
+            <ul th:each="sent, stat: ${sentList}" th:onclick="link('sent',[[${sent.noteNum}]])">
             	<li>
             		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
             		<span th:text="${sent.id}"></span>
@@ -89,9 +89,9 @@ function link(gb,noteNum){
 function tab_select() {
 	const gb = [[${param.gb}]]
 	if(gb != null){
-		if(gb[0] == 'sent'){
+		if(gb[0] == 'rec'){
 			$('[data-bs-target="#navs-pills-top-list"]').tab('show')
-		} else if(gb[0] == 'rec'){
+		} else if(gb[0] == 'sent'){
 			$('[data-bs-target="#navs-pills-top-profile"]').tab('show')
 		}
 	}

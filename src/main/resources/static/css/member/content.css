@@ -74,6 +74,8 @@
 .lt_info .box{float:none; height:165px; margin-left:0; padding:20px; border:1px solid #ddd; background:#fff; border-radius:10px;}
 .lt_info .box .left i{float:none; display:block; font-style:normal; font-size:13px !important; font-weight:700;}
 .lt_info .box .left p{margin-top:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.lt_info .box .left span{display:block; margin-top:5px; color:#777; font-size:14px !important; font-weight:400;}
+.lt_info .box .left span i{display:inline-block; color:#777; font-style:normal; font-size:14px !important; font-weight:700;}
 .lt_info .box .left{float:left; width:calc(100% - 30%);}
 .lt_info .box .graph{float:right; width:27%;}
 .lt_info .box .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
@@ -82,7 +84,7 @@
 .lt_info .box .bottom{float:none; width:100%; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
 .lt_info .box .bottom{color:#555;}
 .lt_info .box .bottom i{font-size:20px; margin-right:5px; margin-top:3px;}
-.myclass_list{margin-top:20px;}
+.myclass_list{margin-top:20px; min-height:240px;}
 .myclass_list ul{list-style:none;}
 .myclass_list > ul{display:flex; width:100%; gap:2%; justify-content:space-between;}
 .myclass_list > ul > li{width:33%;}

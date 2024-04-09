@@ -27,6 +27,7 @@
 							<div class="left">
 							<i th:text="${tlsn.ltCateCd}">프로그래밍언어</i>
 							<p th:text="${tlsn.ltTtl}">프로그래밍언어 이해하기</p>
+							<span><i th:text="${tlsn.name}"></i> 강사님</span>
 							</div>
 							<div class="graph">
 								<span>그래프</span>
@@ -47,10 +48,8 @@
 				<div>
 					<h3>쪽지시험</h3>
 					<a href="#" class="go_link">전체보기 ></a>
-					<ul>
-						<li><a href="#"><i class='bx bx-edit'></i> 프로그래밍 시작하기</a></li>
-						<li><a href="#"><i class='bx bx-edit'></i> 프로그래밍 시작하기</a></li>
-						<li><a href="#"><i class='bx bx-edit'></i> 프로그래밍 시작하기</a></li>
+					<ul th:each="tlsn, stat: ${tlsnList}">
+						<li><a href="#"><i class='bx bx-edit'></i> <span th:text="${tlsn.ltTtl}"></span></a></li>
 					</ul>
 				</div>
 			</li>
