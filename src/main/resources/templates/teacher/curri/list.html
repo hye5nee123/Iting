@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>커리큘럼목록</title>
+<script th:inline="javascript">
+function move(rndNum){
+	location.href='/teacher/curri/info/'+ rndNum
+}
+</script>
+
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				커리큘럼목록
+
+				<button type="button" id="asd" onclick="location.href='#'">등록하기</button>
+			</h4>
+			
+
+			<div class="table-responsive text-nowrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>회차번호</th>
+							<th>회차제목</th>
+							<th>첨부파일번호</th>
+							<th>회차내용</th>
+							<th>강의시간</th>
+							<th>강의번호</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="curri, stat: ${list}"
+							th:onclick="move([[${curri.rndNum}]])">
+							<td th:text="${curri.rndNum}"></td>
+							<td th:text="${curri.rndTtl}"></td>
+							<td th:text="${curri.atchNum}"></td>
+							<td th:text="${curri.rndCntn}"></td>
+							<td th:text="${curri.ltTm}"></td>
+							<td th:text="${curri.ltNum}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	
+	</div>
+
+	
+</body>
+
+</html>

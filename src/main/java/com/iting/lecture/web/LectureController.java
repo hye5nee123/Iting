@@ -60,6 +60,9 @@ public class LectureController {
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
 		return "teacher/lecture/getLectureList";
 	}
+	
+	
+	
 
 	// 강의 단건 조회
 	@GetMapping("lecture/info1/{ltNum}")
@@ -87,6 +90,7 @@ public class LectureController {
 	}
 	/* 관리자 */
 	// 강의 수정
+	
 
 	//강의 리스트
 	@GetMapping("/admin/lecture/list")

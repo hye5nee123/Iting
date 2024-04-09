@@ -116,5 +116,7 @@ public class CnqController {
 
 	/* 강사 */
 
+	
+	
 	/* 관리자 */
 }

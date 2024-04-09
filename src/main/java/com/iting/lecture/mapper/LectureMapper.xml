@@ -204,4 +204,6 @@
 		WHERE ACCP_YN_CD = 'd2'
 		</select>
 		
+		
+		
 </mapper>
