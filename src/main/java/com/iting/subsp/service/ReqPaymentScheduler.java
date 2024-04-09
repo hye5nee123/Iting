@@ -38,7 +38,7 @@ public class ReqPaymentScheduler {
 				.toUri();
 		
 		
-		// 서버로 요청할 Header
+		// Header set
 		HttpHeaders header = new HttpHeaders();
 		
 		header.setContentType(MediaType.APPLICATION_JSON); // content-type
