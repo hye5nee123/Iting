@@ -18,8 +18,8 @@ public class FileUtil {
 		if(uFile != null) {
 			// 원본 파일명
 			String origFileName = uFile.getOriginalFilename();
-			// 새 파일명 (중복 덮어쓰기 방지)
-			String newFile = origFileName + "_" +  new Date().getSeconds();
+			// 새 파일명 (중복 덮어쓰기 방지) => 수정필요(240409)
+			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds();
 			
 			// 파일 생성 (저장 경로, 파일이름)
 			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
