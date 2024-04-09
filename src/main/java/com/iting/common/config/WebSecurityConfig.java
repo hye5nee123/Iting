@@ -44,7 +44,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				(requests) -> requests
-				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/common/**", "/lecture/**").permitAll()
+				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/common/**", "/lecture/**", "/download/**", "/upload/**").permitAll()
 				.antMatchers("/admin/**").hasRole("B2")
 				.antMatchers("/teacher/**").hasRole("D1")
 				.anyRequest().authenticated())
