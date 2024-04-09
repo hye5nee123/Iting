@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.common.ExcelView;
+import com.iting.common.FileUtil;
 import com.iting.common.model.AccountVO;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
@@ -65,69 +66,17 @@ public class CommonController {
 	public int uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
 		int retCode = 0; // 등록 완료 코드
 		
-		if(uFile != null) {
-			// 원본 파일명
-			String origFileName = uFile.getOriginalFilename();
-			// 새 파일명 (중복 덮어쓰기 방지)
-			String newFile = origFileName + "_" +  new Date().getSeconds();
-			
-			// 파일 생성 (저장 경로, 파일이름)
-			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
-			// 파일저장
-			uFile.transferTo(file);
-			
-			
-			System.out.println("파일명 : " + uFile.getOriginalFilename());
-			System.out.println("파일크기 : " + uFile.getSize());
-			
-			// 첨부파일 DB에 저장하기
-			FileVO fvo = FileVO.builder()
-								.atchTtl(origFileName)
-								.atchMarkTtl(newFile)
-								// 파일 유형 코드 : 쿼리스트링으로 받아와서 넘겨야할지..										
-								.atchTypCd(fileCode)
-								// 파일 경로 구분 할 경우 파일 경로 들어가야 함.
-								//.atchPath(filePath)
-								.build();
-					
+		FileVO fvo = FileUtil.uploadFile(uFile);
+		if(fvo != null) {
+			// 달라 질수 있는 로직
 			retCode = commonService.fileInsert(fvo);
 		}
 		return retCode;
 		
 	}
 	
-	/* 파일업로드 메소드 */
-	public int uploadFile(MultipartFile uFile) throws IllegalStateException, IOException {
-		int retCode = 0; // 등록 완료 코드
-		
-		if(uFile != null) {
-			// 원본 파일명
-			String origFileName = uFile.getOriginalFilename();
-			// 새 파일명 (중복 덮어쓰기 방지)
-			String newFile = origFileName + "_" +  new Date().getSeconds();
-			
-			// 파일 생성 (저장 경로, 파일이름)
-			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
-			// 파일저장
-			uFile.transferTo(file);
-			
-			
-			System.out.println("파일명 : " + uFile.getOriginalFilename());
-			System.out.println("파일크기 : " + uFile.getSize());
-			
-			// 첨부파일 DB에 저장하기
-			FileVO fvo = FileVO.builder()
-								.atchTtl(origFileName)
-								.atchMarkTtl(newFile)
-								// 파일 경로 구분 할 경우 파일 경로 들어가야 함.
-								//.atchPath(filePath)
-								.build();
-					
-			retCode = commonService.fileInsert(fvo);
-		}
-		return retCode;
-		
-	}
+	
+	
 	
 	/* 파일 업로드 (멀티) */
 	
