@@ -41,6 +41,10 @@ public class LectureServiceImpl implements LectureService {
 	public List<LectureVO> getTcList(String lecturerNum) {
 		return lectureMapper.getTcList(lecturerNum);
 	}
+	@Override
+	public LectureVO getLectureMemInfo(String lecturerNum) {
+		return lectureMapper.getLectureMemInfo(lecturerNum);
+	}
   
   
 	// 도승민

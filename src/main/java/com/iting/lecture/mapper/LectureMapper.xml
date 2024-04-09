@@ -121,6 +121,19 @@
         		  ON l.LECTURER_NUM = le.LECTURER_NUM
 		WHERE le.LECTURER_NUM = #{lecturerNum}
 	</select>
+	
+	<!-- 강사정보 -->
+	<select id="getLectureMemInfo" resultType="LectureVO">
+		SELECT LECTURER_NUM
+			   , ID
+			   , NAME
+			   , ADDR
+			   , DETAIL_ADDR
+			   , MAIL
+			   , PHONE
+		FROM LECTURER
+		WHERE LECTURER_NUM = #{lecturerNum}
+	</select>
 		
   <!-- 도승민 -->
 		<!-- 강의 등록 -->
