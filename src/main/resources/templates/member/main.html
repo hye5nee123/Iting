@@ -59,13 +59,13 @@
  <p>메인 자리</p>
 <h1>엑셀 업로드 테스트</h1>
     <form th:action="@{/test/addExcel}" method="POST" enctype="multipart/form-data">
-      <input type="file" th:name="file">
+      <input type="file" name="file">
       <input th:type="submit" value="업로드 하기" />
     </form>
     
-    <form th:action="@{/upload/file}" method="post" enctype="multipart/form-data">
-		<br>첨부파일<input type="file" th:name="uploadFiles" multiple="multiple">
-		<br><button>등록</button>
+    <form method="post" enctype="multipart/form-data" id="imgForm" name="imgForm">
+		<br>이미지첨부파일<input type="file" name="uFile" multiple="multiple">
+		<br><button type="button" onclick="uploadFileReq('k1')">등록</button>
 	</form>
 
   <div class="swiper mySwiper">

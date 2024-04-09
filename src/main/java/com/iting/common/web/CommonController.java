@@ -20,8 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.common.ExcelView;
+import com.iting.common.FileUtil;
 import com.iting.common.model.AccountVO;
+import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
+import com.iting.common.service.CommonService;
 import com.iting.common.service.UsersService;
 
 import lombok.extern.log4j.Log4j2;
@@ -32,7 +35,10 @@ public class CommonController {
 
 	@Autowired
 	UsersService userservice;
-
+	
+	@Autowired
+	CommonService commonService;
+	
 	/* 메인이동 */
 	// 관리자
 	@RequestMapping("admin/main")
@@ -82,21 +88,33 @@ public class CommonController {
 
 	}
 	
-	// 파일 업로드 단건
-	@RequestMapping("upload/onefile")
-	public void uploadFileOne(MultipartFile upFile) throws IllegalStateException, IOException {
-		if (!upFile.isEmpty()) {
-			String orginName = upFile.getOriginalFilename();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			UUID uuid = UUID.randomUUID();
-			String fileName = uuid + orginName + dateFormat.format(new Date());
-			System.out.println(fileName);
-			// 파일 생성 경로및 파일 이름 양식 지정
-			File file = new File("D:/iting_webstorage/", fileName);
-			// 파일을 해당 경로에 저장
-			upFile.transferTo(file);
-			// DB에 저장하기
+	
+	/* 파일 업로드 (싱글)*/
+	@PostMapping("upload/file")
+	@ResponseBody
+	public int uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
+		int retCode = 0; // 등록 완료 코드
+		
+		FileVO fvo = FileUtil.uploadFile(uFile);
+		if(fvo != null) {
+			// 달라 질수 있는 로직
+			retCode = commonService.fileInsert(fvo);
 		}
+		return retCode;
+		
+	}
+	
+	
+	
+	
+	/* 파일 업로드 (멀티) */
+	
+	
+	/* 파일 다운로드 */
+	@GetMapping("/downfile")
+	public ModelAndView downLoadFile(String fileName) {
+		ModelAndView mv = new ModelAndView();
+		return mv;
 	}
 
 	/* 엑셀로 DB 테이블 내려받기 */
