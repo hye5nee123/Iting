@@ -19,8 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.common.ExcelView;
+import com.iting.common.FileUtil;
 import com.iting.common.model.AccountVO;
+import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
+import com.iting.common.service.CommonService;
 import com.iting.common.service.UsersService;
 
 import lombok.extern.log4j.Log4j2;
@@ -31,6 +34,10 @@ public class CommonController {
 	
 	@Autowired
 	UsersService userservice;
+	
+	@Autowired
+	CommonService commonService;
+	
 	/* 메인이동 */
 	// 관리자
 	@RequestMapping("admin/main")
@@ -53,32 +60,32 @@ public class CommonController {
 		return mv;
 	}
 	
-	/* 파일 업로드 */
-	@RequestMapping("upload/file")
-	public String uploadFile(MultipartFile[] uploadFiles) throws IllegalStateException, IOException {
-		if(uploadFiles != null) {
-			for(MultipartFile uFile : uploadFiles) {
-				if(!uFile.isEmpty()) { // if(photo.getSize > 0){}
-					// 파일 이름이 중복일 경우 새 이름으로 저장 될 수 있도록
-					String Origin = uFile.getOriginalFilename();
-					//String newFile = Origin + new Date().getSeconds();
-					
-					// 파일 생성 (저장 경로, 파일이름)
-					File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
-					// 파일저장
-					uFile.transferTo(file);
-					
-					
-					System.out.println("파일명 : " + uFile.getOriginalFilename());
-					System.out.println("파일크기 : " + uFile.getSize());	
-					
-					// 첨부파일 DB에 저장하기
-					
-				}
-			}			
-		}
-		return "/member/main";
+	/* 파일 업로드 (싱글)*/
+	@PostMapping("upload/file")
+	@ResponseBody
+	public int uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
+		int retCode = 0; // 등록 완료 코드
 		
+		FileVO fvo = FileUtil.uploadFile(uFile);
+		if(fvo != null) {
+			// 달라 질수 있는 로직
+			retCode = commonService.fileInsert(fvo);
+		}
+		return retCode;
+		
+	}
+	
+	
+	
+	
+	/* 파일 업로드 (멀티) */
+	
+	
+	/* 파일 다운로드 */
+	@GetMapping("/downfile")
+	public ModelAndView downLoadFile(String fileName) {
+		ModelAndView mv = new ModelAndView();
+		return mv;
 	}
 
 	
