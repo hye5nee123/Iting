@@ -111,11 +111,30 @@
 .lecture_calendar .list li:nth-child(odd) span{background:#f7f9fe;}
 .lecture_calendar .list li:nth-child(even) span{background:#f9f9f9;}
 
+/* 수강중인강의 */
+.tlsn_info{position:relative; padding:30px; border:1px solid #ddd; background:#fff;}
+.tlsn_info .top{display:flex; justify-content:space-between; align-items:center;}
+.tlsn_info .top i{float: none; display:block; font-style:normal; color:#205cdc; font-size:13px !important; font-weight:700;}
+.tlsn_info .top p{margin-top:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.tlsn_info .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
+.tlsn_info .bottom{position:relative; float:none; width:100%; color:#555; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
+.tlsn_info .bottom p{color:#888; font-size:15px; margin-bottom:0; font-weight:400; margin-top:10px;}
+.tlsn_info .bottom  i{margin-top:-2px; font-size:20px; color:#205cdc;}
+.tlsn_info .go_link{position:absolute; right:0; top:50%; padding:5px 15px; background:#205cdc; border-radius:50px; color:#fff; font-size:14px; font-weight:700;}
+.btn_box{margin-top:30px; text-align:center;}
+.btn_box [class^="go_"]{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
+.tlsn_title h2{float:left;}
+.tlsn_title .message{margin-left:10px; border:0; background:none; padding:0; float:left;}
+.tlsn_title .message i{margin-top:9px; color:#205cdc; font-size:35px;}
+.tlsn_title:after{content:''; display:block; clear:both;}
 
-
-
-
-
+/* 강의질문 */
+#message_box{position:fixed; left:50%; top:50%; width:100%; height:100%; background:rgba(0, 0, 0, 0.3); z-index:100; transform:translate(-50%, -50%);}
+#message_box .box{position:absolute; left:50%; top:50%; background:#fff; padding:20px; width:830px; height:400px; transform:translate(-50%, -50%); border-radius:20px;}
+#message_box .tit{display:flex; justify-content:space-between; align-items:center;}
+#message_box .tit h3{color:#333; font-size:24px; font-weight:700;}
+#message_box .tit button{border:0; padding:0; background:none;}
+#message_box .tit button i{color:#888; font-size:40px;}
 
 
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.tlsn.mapper.TlsnMapper">
+	<select id="getTlsnList">
+		SELECT l.LT_NUM
+		       , l.LT_TTL
+		       , find_code(LT_CATE_CD) LT_CATE_CD
+		       , l.LECTURER_NUM
+		       , m.MEM_NUM
+		       , t.TLSN_NUM
+		       , t.TLSN_ST_CD
+		       , t.CETE_YN_CD
+		       , t.APPL_DT
+		FROM TLSN t JOIN LT l
+		              ON t.LT_NUM = l.LT_NUM
+		            JOIN MEM m
+		              ON t.MEM_NUM = m.MEM_NUM
+		ORDER BY t.APPL_DT
+	</select>
+	
+	<select id="getTlsnDetailList">
+		SELECT l.LT_NUM
+		       , l.LT_TTL
+		       , find_code(LT_CATE_CD) LT_CATE_CD
+		       , l.LECTURER_NUM
+		       , m.MEM_NUM
+		       , t.TLSN_NUM
+		       , t.TLSN_ST_CD
+		       , t.CETE_YN_CD
+		       , t.APPL_DT
+		FROM TLSN t JOIN LT l
+		              ON t.LT_NUM = l.LT_NUM
+		            JOIN MEM m
+		              ON t.MEM_NUM = m.MEM_NUM
+		ORDER BY t.APPL_DT
+	</select>
+</mapper>
