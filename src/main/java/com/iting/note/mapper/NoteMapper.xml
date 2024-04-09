@@ -13,13 +13,13 @@
 		       , n.CFM_YN_CD
 		       , n.SENT_PS
 		       , n.REC_PS
-		       , m.ID
-		       , m.NAME
-		FROM NOTE n JOIN LECTURER l
-		              ON n.REC_PS = #{user}
-		            JOIN MEM m
-		              ON n.SENT_PS = m.MEM_NUM
-		WHERE n.SENT_PS = m.MEM_NUM
+		       , e.ID
+		       , e.NAME
+		FROM NOTE n JOIN mem_lec_view m
+                      ON n.REC_PS = m.MEM_NUM
+                    JOIN mem_lec_view e
+                      ON n.SENT_PS = e.MEM_NUM
+		WHERE n.REC_PS = #{user}
 		ORDER BY n.NOTE_NUM DESC
 	</select>
 	
@@ -36,10 +36,10 @@
 		       , n.REC_PS
 		       , m.ID
 		       , m.NAME
-		FROM NOTE n JOIN LECTURER l
-		              ON n.SENT_PS = l.LECTURER_NUM
-		            JOIN MEM m
-		              ON n.REC_PS = m.MEM_NUM
+		FROM NOTE n JOIN mem_lec_view m
+                      ON n.REC_PS = m.MEM_NUM
+                    JOIN mem_lec_view e
+                      ON n.SENT_PS = e.MEM_NUM
 		WHERE n.SENT_PS = #{user}
 		ORDER BY n.NOTE_NUM DESC
 	</select>

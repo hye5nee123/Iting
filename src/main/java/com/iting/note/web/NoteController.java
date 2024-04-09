@@ -39,7 +39,7 @@ public class NoteController {
 	@Autowired
 	private HttpSession httpSession;
 	
-	// 목록조회
+	// 강사 목록조회
 	@RequestMapping("teacher/note/list")
 	public String getNoteList(Model model, NoteVO vo) {
 		String user = (String) httpSession.getAttribute("usernum");
@@ -50,12 +50,31 @@ public class NoteController {
 		return "teacher/note/list";
 	}
 	
-	// 단건조회
+	// 회원 목록조회
+	@RequestMapping("member/note/list")
+	public String getMemNoteList(Model model, NoteVO vo) {
+		String user = (String) httpSession.getAttribute("usernum");
+		System.out.println(user);
+		model.addAttribute("recList", noteService.getRecList(user));
+		model.addAttribute("sentList", noteService.getSentList(user));
+		model.addAttribute("ltsnList", memberService.getMemberLtsn());
+		return "member/note/list";
+	}
+	
+	// 강사 단건조회
 	@GetMapping("teacher/note/info/{noteNum}/{gb}")
 	public String info(@PathVariable String noteNum, @PathVariable String gb, Model model) {
 		model.addAttribute("note", noteService.getRecInfo(noteNum));
 		model.addAttribute("gb", gb);
 		return "teacher/note/info";
+	}
+	
+	// 회원 단건조회
+	@GetMapping("member/note/info/{noteNum}/{gb}")
+	public String infoMem(@PathVariable String noteNum, @PathVariable String gb, Model model) {
+		model.addAttribute("note", noteService.getRecInfo(noteNum));
+		model.addAttribute("gb", gb);
+		return "member/note/info";
 	}
 
 	
@@ -66,7 +85,7 @@ public class NoteController {
 	    return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!"); // 이 내용을 전송하겠다
 	  }
 	
-	// 등록페이지 이동
+	// 강사 등록페이지 이동
 	@GetMapping("teacher/note/insert/{memNum}")
 	public ModelAndView list(@PathVariable String memNum, Model model) {
 		model.addAttribute("memNum", memNum);
@@ -86,5 +105,26 @@ public class NoteController {
     	vo.getRecPs(), "/topic/message", noteService.insertNote(vo));
 	return vo;  
   }
+	
+	// 회원 등록페이지 이동
+	@GetMapping("member/note/insert/{memNum}")
+	public ModelAndView listMem(@PathVariable String memNum, Model model) {
+		model.addAttribute("memNum", memNum);
+		ModelAndView mv = new ModelAndView("member/note/insert");
+		return mv;
+	}
+	
+	// 회원 메세지 등록
+		@ResponseBody
+		@PostMapping("member/note/insert")
+		public NoteVO insertMemTest(@RequestBody NoteVO vo) {
+			noteService.insertNote(vo);
+			
+		// 요청 처리 메세지를 보내고
+	    String text = "[" + new Date() + "]:" + "승인요청 ";
+	    this.template.convertAndSendToUser(
+	    	vo.getRecPs(), "/topic/message", noteService.insertNote(vo));
+		return vo;  
+	  }
 	
 }

@@ -40,6 +40,11 @@ public class NoteServieImpl implements NoteService {
 		return noteMapper.insertNote(vo);
 	}
 
+	@Override
+	public List<NoteVO> getMemNoteList(String user) {
+		return noteMapper.getMemNoteList(user);
+	}
+
 
 
 	
