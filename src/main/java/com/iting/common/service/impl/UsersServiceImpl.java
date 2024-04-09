@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.iting.common.mapper.UsersMapper;
+import com.iting.common.model.AccountVO;
 import com.iting.common.model.UsersVO;
 import com.iting.common.security.CustomUsers;
 import com.iting.common.service.UsersService;
@@ -29,5 +30,10 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 			throw new UsernameNotFoundException("id not found");
 		}
 		return new CustomUsers(userVO);
+	}
+
+	@Override
+	public int insertUser(AccountVO acvo) {
+		return usersMapper.insertUser(acvo);
 	}
 }

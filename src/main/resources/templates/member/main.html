@@ -62,6 +62,11 @@
       <input type="file" th:name="file">
       <input th:type="submit" value="업로드 하기" />
     </form>
+    
+    <form th:action="@{/upload/file}" method="post" enctype="multipart/form-data">
+		<br>첨부파일<input type="file" th:name="uploadFiles" multiple="multiple">
+		<br><button>등록</button>
+	</form>
 
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">

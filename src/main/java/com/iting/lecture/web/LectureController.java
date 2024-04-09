@@ -1,6 +1,8 @@
 package com.iting.lecture.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,15 +35,20 @@ public class LectureController {
 	// 강의 전체목록 조회처리 - 장효은
 	@GetMapping("/member/lecture/allSelect")
 	@ResponseBody
-	public List<LectureVO> allList(LectureVO vo, PagingVO pvo) {
+	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
 		pvo.setPageUnit(16);
 		pvo.setPageSize(16);
 		pvo.setFirst(0);
 		pvo.setLast(5);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		List<LectureVO> list = lectureService.getAllLectureList(vo, pvo);
 		
-		return list;
+		map.put("lectList", list);
+		map.put("paging", pvo);
+		
+		return map;
 		
 	}
 
