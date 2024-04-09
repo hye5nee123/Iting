@@ -2,6 +2,7 @@ package com.iting.subsp.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +41,8 @@ public class SttlController {
 		return vo;
 	}
 	
+	// 2회차 이상 결제 (정기결제 테스트)
+	//@Scheduled(cron="0 0/2 * * * ?")
 	@GetMapping("/member/test")
     public HttpEntity<String> getPostTest(){
 		return ReqPaymentSchedulerTest.test();
