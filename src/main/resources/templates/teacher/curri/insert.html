@@ -40,6 +40,9 @@
 							<label for="ltIntro" class="form-label">첨부파일 번호</label>
 							<input class="form-control" type="file" name="atchNum"
 								id="atchNum"></input>
+							<br>첨부파일 동시 테스트 <input class="form-control" type="file" name="uFile" multiple="multiple">
+							<br>파일유형코드 : 숨김 <input type="hidden" name="typCode" th:value="k2">
+							<br><button type="button" onclick="uploadFileReq(testForm.typCode.value, testForm)">등록</button>
 						</div>
 						<div class="mb-3 test_list">
 							<label for="file" class="form-label">내용</label> <textarea

@@ -9,6 +9,7 @@
 function move(ltNum){
 	location.href='/lecture/info1/'+ ltNum
 }
+
 </script>
 <style>
 #asd {
@@ -47,7 +48,9 @@ function move(ltNum){
 							<th>승인여부</th>
 							<th>커리큘럼</th>
 							
-						</tr>
+							</tr>
+							
+						
 					</thead>
 					<tbody>
 						<tr th:each="ltb, stat: ${getLectureList}"
@@ -60,8 +63,9 @@ function move(ltNum){
 							<td th:text="${ltb.ltKeywordCd}"></td>
 							<td th:text="${ltb.lecturerNum}"></td>
 							<td th:text="${ltb.accpYnCd}"></td>
-							
-							
+							<td>
+							<button type="button" id="asd" onclick="location.href='/teacher/curri/list/'">리스트가기</button>
+							</td>
 							
 						</tr>
 					</tbody>
