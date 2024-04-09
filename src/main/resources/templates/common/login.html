@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/css/member/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/member/nice-select.css" type="text/css">
-	<link rel="stylesheet" href="/css/member/style.css" type="text/css">
-	<title>로그인</title>
-	<style>
-		.container {
-			margin: 0 auto;
-		}
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet" href="/css/member/nice-select.css"
+	type="text/css">
+<link rel="stylesheet" href="/css/member/style.css" type="text/css">
+<title>로그인</title>
+<style>
+.container {
+	margin: 0 auto;
+}
 
-		.logo {
-			width: 150px;
-		}
+.logo {
+	width: 150px;
+}
 
-		.naverbtn {
-			width: 200px;
-		}
-	</style>
+.naverbtn {
+	width: 200px;
+}
+</style>
 
 </head>
 
@@ -46,11 +49,14 @@
 		<div class="col-lg-6">
 			<a href="#">아이디찾기</a> | <a href="#">비밀번호찾기</a> | <a href="/account">회원가입</a>
 		</div>
-		<div class="col-lg-6">
-			<img class="naverbtn" src="img/common/btnG_완성형.png" alt="NaverLoginImg" />
+		<div class="col-lg-6 naverIdLogin">
+			<a id="naverIdLogin_loginButton" href="#" role="button"><img
+				class="naverbtn" src="img/common/btnG_완성형.png" alt="NaverLoginImg"/></a>
 		</div>
 	</div>
-	<script>
+	<!-- (2) LoginWithNaverId Javscript SDK -->
+	<script
+		src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script><script>
 		frm.addEventListener("submit", (e) => {
 			e.preventDefault();
 			let id = frm.userId.value;
@@ -65,6 +71,51 @@
 				frm.submit();
 			}
 		});
+		/* (3) LoginWithNaverId Javscript 설정 정보 및 초기화 */
+		window.name='opener';
+		var naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "IUFmLIwupwmkJxh3eacH",
+				callbackUrl: "https://" + window.location.hostname + ((location.port==""||location.port==undefined)?"":":" + location.port) + "/member/main.html",
+				isPopup: true,
+				loginButton: {color: "green", type: 3, height: 60}
+			}
+		);
+		/* (4) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
+		naverLogin.init();
+		
+		/* (4-1) 임의의 링크를 설정해줄 필요가 있는 경우 */
+		/* $("#gnbLogin").attr("href", naverLogin.generateAuthorizeUrl()); */
+
+		/* (5) 현재 로그인 상태를 확인 */
+		window.addEventListener('load', function () {
+			naverLogin.getLoginStatus(function (status) {
+				if (status) {
+					/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+					setLoginStatus();
+				}
+			});
+		});
+
+		/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+		function setLoginStatus() {
+			var profileImage = naverLogin.user.getProfileImage();
+			var nickName = naverLogin.user.getNickName();
+			var imageViewer = '';
+			if (profileImage) {
+				imageViewer += '<br><br><img src="' + profileImage + '" height=50 /> <p>';
+			}
+			$("#naverIdLogin_loginButton").html(imageViewer + nickName + '님 반갑습니다.</p>');
+			$("#gnbLogin").html("Logout");
+			$("#gnbLogin").attr("href", "#");
+			/* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
+			$("#gnbLogin").click(function (e) {
+				e.preventDefault();
+				naverLogin.logout();
+				location.replace('/member/main.html');
+			});
+		}
+	</script>
 	</script>
 </body>
 

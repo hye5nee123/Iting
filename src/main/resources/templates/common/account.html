@@ -26,8 +26,12 @@
 .logo {
 	width: 300px;
 }
+
+.naverbtn {
+	width: 200px;
+}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -113,12 +117,19 @@
 					onclick="chkAccount()">가입하기</button>
 			</div>
 		</div>
+		<div class="col-lg-6 naverIdLogin">
+			<a id="naverIdLogin_loginButton" href="#" role="button"><img
+				class="naverbtn" src="img/common/btnG_완성형.png" alt="NaverLoginImg" /></a>
+		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/js/common.js"></script>
 	<script src="/js/join/account.js"></script>
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
 	<!-- 다음 주소 api -->
 	<script>
 		// 다음 주소 api 코드

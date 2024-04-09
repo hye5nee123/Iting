@@ -41,7 +41,7 @@ function usertypeForm(num) {
 	else if (num == '2') {
 		actype = 'd2';
 		form = `<div class="checkout__input">
-				<form action="/accountfile" method="post" enctype="multipart/form-data">
+				<form action="upload/onefile" method="post" enctype="multipart/form-data">
 					<p>이력서 첨부 <span>*</span></p>
 					</div>
 					<input type="file" accept=".pdf, .xlsx, .hwp" id="file" name="file"/>
