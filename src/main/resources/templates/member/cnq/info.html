@@ -3,64 +3,78 @@
 	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
 <section layout:fragment="content">
-	<div class="accordion" id="accordionExample">
-		<div class="card">
-			<div class="card-header" id="headingOne">
-				<h2 class="mb-0">
-					<h2 class="related-title">글정보</h2>
-					<ul class="info">
-						<li>[[${cnq.hit}]]</li>
-						<li>[[${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}]]</li>
-						<li>댓글수</li>
-					</ul>
-					<button class="btn btn-link" type="button" data-toggle="collapse"
-						data-target="#collapseOne" aria-expanded="true"
-						aria-controls="collapseOne"></button>
-				</h2>
-			</div>
 
-			<div id="collapseOne" class="collapse show"
-				aria-labelledby="headingOne" data-parent="#accordionExample">
-				<div class="card-body">
-					<form method="post" name="frm">
-						<div>
-							<table>
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>제목</th>
-										<th>내용</th>
-										<th>작성자</th>
-										<th>등록일자</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td th:text="${cnq.ltCnqNum}"></td>
-										<td th:text="${cnq.ttl}"></td>
-										<td th:text="${cnq.cntn}"></td>
-										<td th:text="${cnq.name}"></td>
-										<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
-									</tr>
-								</tbody>
-							</table>
-							</div>
+<style>
+#cntn th {
+	background: #EFEFFB
+}
 
+#cntn {
+	border: 1px solid;
+	border-color: #E0ECF8;
+	border-radius: 30px;
+	width:100%;
+}
 
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div>
-									<a href="/member/cnq/list">#List</a> <a
-										th:href="@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#수정</a>
-									<a
-										th:href="@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#삭제</a>
-								</div>
-							</div>
-					</form>
-				</div>
-			</div>
+#cntn th, td {
+	border: 1px solid;
+	border-color: #E0ECF8;
+}
+
+.info {
+	background: #E0ECF8
+}
+
+.info li {
+	font-weight: bolder;
+	list-style: none;
+}
+</style>
+	<h2 class="related-title">글정보</h2>
+	<ul class="info">
+		<li>조회수 : [[${cnq.hit}]]</li>
+		<br>
+		<br>
+		<li>글번호 :[[${cnq.ltCnqNum}]]</li>
+		<br>
+		<br>
+		<li>댓글수</li>
+	</ul>
+	<br> <br> <br>
+	<form method="post" name="frm">
+		<div>
+			<table id="cntn">
+				<colgroup>
+					<col style="width: 20%;">
+					<col style="width: 30%;">
+					<col style="width: 20%;">
+					<col style="width: 30%;">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th style="padding: 20px;">작성자</th>
+						<td th:text="${cnq.name}" style="padding: 20px;"></td>
+						<th style="padding: 20px;">등록일자</th>
+						<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"
+							style="padding: 20px;"></td>
+					</tr>
+					<tr>
+						<th style="padding: 20px;">제목</th>
+						<td colspan="3"><h5 th:text="${cnq.ttl}"
+								style="padding: 20px;"></h5></td>
+					</tr>
+					<tr>
+						<th style="padding: 20px;">내용</th>
+						<td th:text="${cnq.cntn}" colspan="3" style="padding: 20px;"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<div class="card"></div>
-	</div>
+		<div >
+			<button  type="button" id="cnq_insertBtn" th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+			<button>삭제</button>
+		</div>
+	</form>
 	<div>
 		<table>
 			<thead>
@@ -74,7 +88,6 @@
 			<tbody id="replyList">
 			</tbody>
 		</table>
-	</div>
 	</div>
 	<script th:inline="javascript">
 	const ltCnqNum = [[${cnq.ltCnqNum}]]

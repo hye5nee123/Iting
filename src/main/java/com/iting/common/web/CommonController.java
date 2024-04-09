@@ -1,11 +1,5 @@
 package com.iting.common.web;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,20 +86,22 @@ public class CommonController {
 	/* 파일 업로드 (싱글)*/
 	@PostMapping("upload/file")
 	@ResponseBody
-	public int uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
+	public Map<String, Object> uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
 		int retCode = 0; // 등록 완료 코드
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		FileVO fvo = FileUtil.uploadFile(uFile);
 		if(fvo != null) {
 			// 달라 질수 있는 로직
 			retCode = commonService.fileInsert(fvo);
+			
+			map.put("retCode", retCode);
+			map.put("fvo", fvo);
 		}
-		return retCode;
+		return map;
 		
 	}
-	
-	
-	
 	
 	/* 파일 업로드 (멀티) */
 	

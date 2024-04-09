@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<title>강의질문상세</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section layout:fragment="content">
+	<div class="row lecture_info">
+		<div class="col-lg-12">
+			<div class="section-title message_box">
+			    <h2>강의질문 <i>/ 정보처리기사</i></h2>
+			</div>
+		</div>
+	</div>
+	
+
+    <div class="message_info">
+	 	<span th:text="${gb=='sent'}?${note.sentPs}:${note.recPs}"></span>
+	 	<i th:text="${gb=='sent'}?${#dates.format(note.sentDt,'yyyy-MM-dd')}:${#dates.format(note.recDt,'yyyy-MM-dd')}"></i>
+	 	<p th:text="${note.noteTtl}"></p>
+		<div class="txt note_txt" th:text="${note.noteCntn}"></div>
+	</div> 
+   
+	<div class="btn_box demo-inline-spacing">
+		<a th:href="@{/member/note/insert/{no}(no=${note.noteNum})}" class="btn btn-lg">답장하기</a>
+		<a id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" th:href="@{/member/note/list(gb=${gb})}">목록가기</a>
+	</div>
+</section>
+
+</body>
+</html>

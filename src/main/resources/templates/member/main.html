@@ -8,6 +8,24 @@
 
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <!-- Demo styles -->
+  <script>
+ 
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+  ChannelIO('boot', {
+    "pluginKey": "0e4565f7-9e3e-4b55-a0d4-b02dc2c809bf"
+  });
+  
+  
+ 
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+  ChannelIO('boot', {
+    "pluginKey": "0e4565f7-9e3e-4b55-a0d4-b02dc2c809bf"
+  });
+
+
+  </script>
   <style>
     html,
     body {
@@ -62,11 +80,46 @@
       <input type="file" name="file">
       <input th:type="submit" value="업로드 하기" />
     </form>
-    
+    <!-- 
     <form method="post" enctype="multipart/form-data" id="imgForm" name="imgForm">
 		<br>이미지첨부파일<input type="file" name="uFile" multiple="multiple">
 		<br><button type="button" onclick="uploadFileReq('k1')">등록</button>
 	</form>
+	 -->
+	
+	<form method="post" id="subspMonthlyFrm" enctype="multipart/form-data" name="TestForm">
+		<br>첨부파일 동시 테스트 <input type="file" name="uFile" multiple="multiple">
+		<br>파일유형코드 : 숨김 <input type="hidden" name="typCode" th:value="k1">
+		<br><button type="button" onclick="uploadFileReq(TestForm.typCode.value, TestForm)">등록</button>
+		<br>
+		<br>
+		<!-- 월간 -->
+		<input type="hidden" value="n1" name="subspTypCd">월간
+	
+		<!-- 회원번호 -->
+		<input type="hidden" value="me00001" name="memNum">
+		<button type="button" id="payBtn" class="btn btn-primary">구독등록</button>
+	</form>
+	
+	<script>
+	const subspTypCd = TestForm.subspTypCd.value;
+	const memNum = TestForm.memNum.value;
+	
+	payBtn.addEventListener("click", e => {
+		let params = { subspTypCd, memNum }
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/subsp/insert',
+				data: params,
+			
+				})
+				.then(res => console.log("구독등록 완료", res.data))
+			
+	});
+	</script>
+	    
+	
 
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">

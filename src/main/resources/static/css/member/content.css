@@ -74,6 +74,8 @@
 .lt_info .box{float:none; height:165px; margin-left:0; padding:20px; border:1px solid #ddd; background:#fff; border-radius:10px;}
 .lt_info .box .left i{float:none; display:block; font-style:normal; font-size:13px !important; font-weight:700;}
 .lt_info .box .left p{margin-top:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.lt_info .box .left span{display:block; margin-top:5px; color:#777; font-size:14px !important; font-weight:400;}
+.lt_info .box .left span i{display:inline-block; color:#777; font-style:normal; font-size:14px !important; font-weight:700;}
 .lt_info .box .left{float:left; width:calc(100% - 30%);}
 .lt_info .box .graph{float:right; width:27%;}
 .lt_info .box .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
@@ -82,7 +84,7 @@
 .lt_info .box .bottom{float:none; width:100%; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
 .lt_info .box .bottom{color:#555;}
 .lt_info .box .bottom i{font-size:20px; margin-right:5px; margin-top:3px;}
-.myclass_list{margin-top:20px;}
+.myclass_list{margin-top:20px; min-height:240px;}
 .myclass_list ul{list-style:none;}
 .myclass_list > ul{display:flex; width:100%; gap:2%; justify-content:space-between;}
 .myclass_list > ul > li{width:33%;}
@@ -111,15 +113,52 @@
 .lecture_calendar .list li:nth-child(odd) span{background:#f7f9fe;}
 .lecture_calendar .list li:nth-child(even) span{background:#f9f9f9;}
 
+/* 수강중인강의 */
+.tlsn_info{position:relative; padding:30px; border:1px solid #ddd; background:#fff;}
+.tlsn_info .top{display:flex; justify-content:space-between; align-items:center;}
+.tlsn_info .top i{float: none; display:block; font-style:normal; color:#205cdc; font-size:13px !important; font-weight:700;}
+.tlsn_info .top p{margin-top:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.tlsn_info .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
+.tlsn_info .bottom{position:relative; float:none; width:100%; color:#555; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
+.tlsn_info .bottom p{color:#888; font-size:15px; margin-bottom:0; font-weight:400; margin-top:10px;}
+.tlsn_info .bottom  i{margin-top:-2px; font-size:20px; color:#205cdc;}
+.tlsn_info .go_link{position:absolute; right:0; top:50%; padding:5px 15px; background:#205cdc; border-radius:50px; color:#fff; font-size:14px; font-weight:700;}
+.btn_box{margin-top:30px; text-align:center;}
+.btn_box [class^="go_"]{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
+.tlsn_title h2{float:left;}
+.tlsn_title .message{margin-left:10px; border:0; background:none; padding:0; float:left;}
+.tlsn_title .message i{margin-top:9px; color:#205cdc; font-size:35px;}
+.tlsn_title:after{content:''; display:block; clear:both;}
 
-
-
-
-
-
-
-
-
+/* 강의질문 */
+.message_box h2 i{font-style:normal; color:#b7b7b7; font-size:20px;}
+.message_list{margin-top:30px;}
+.message_list .product__details__tab{margin-top:0; padding-top:0;}
+.message_list .tab-content ul{list-style:none;}
+.message_list .tab-content ul li > *{float:left;}
+.message_list .tab-content ul li:first-child{padding-top:15px; border-top:1px dashed #ddd;}
+.message_list .tab-content ul li{margin-top:15px; padding-bottom:15px; border-bottom:1px dashed #ddd;}
+.message_list .tab-content ul li:after{content:''; display:block; clear:both;}
+.message_list .tab-content ul li a{margin-bottom:0; font-size:16px; width:calc(100% - 17%); letter-spacing:-1px; color:#555; font-weight:700; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.message_list .tab-content ul li a.new{position:relative; padding-left:20px;}
+.message_list .tab-content ul li a.new:before{content:'N'; display:block; position:absolute; left:0; top:4px; width:15px; height:15px; color:#fff; border-radius:50%; font-size:10px; text-align:center; background:red;}
+.message_list .tab-content ul li span{display:block; margin:0 1%; font-size:15px; font-weight:500;}
+.message_list .tab-content ul li i{float:right; font-style:normal; color:#777; font-weight:300; font-size:15px;}
+.message_info{margin-top:30px;}
+.message_info span{display:inline-block; color:#ff8a00; font-size:13px; font-weight:700;}
+.message_info i{position:relative; margin-left:10px; padding-left:10px; font-size:13px; color:#777; font-style:normal; display:inline-block;}
+.message_info i:before{content:''; display:block; position:absolute; left:-2px; top:2px; width:1px; height:15px; background:#ddd;}
+.message_info p{margin-top:10px; font-size:16px; font-weight:700; letter-spacing:-1px;}
+.message_info .txt{margin-top:5px; padding-top:15px; border-top:1px solid #ddd; font-size:15px; color:#555; letter-spacing:-1px; font-weight:400;}
+.btn_box.demo-inline-spacing .btn{width:143px; padding:12px 40px; font-size:16px; letter-spacing:-1px; border:1px solid #205cdc; background:#205cdc; color:#fff; border-radius:5px;}
+.btn_box.demo-inline-spacing .btn.btn-secondary{margin-left:5px; background:#ff8a00; border:1px solid #ff8a00;}
+.hidden{display:none;}
+.test_insert .row{margin-top:30px; position:relative; display:flex; flex-direction:column; min-width:0; word-wrap:break-word; background-color:#fff; background-clip:border-box; border:0 solid #d9dee3; border-radius:0.5rem; padding:1.5rem 1.5rem}
+.test_insert .btn_box{margin-top:20px; text-align:center;}
+.test_insert .form-tit{margin-top:10px; margin-bottom:5px;}
+.test_insert input{border-radius:0; height:50px; width:100%; border:1px solid #e1e1e1; font-size:14px; color:#b7b7b7; padding-left:20px; margin-bottom:20px;}
+.test_insert textarea{width:100%; border:1px solid #e1e1e1; border-top:0; padding:.375rem .75rem; font-size:14px; color:#b7b7b7;}
+.mT20{margin-top:20px;}
 
 
 
@@ -158,4 +197,6 @@
 
 
 /*게시판*/
-.insertBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
+.cnq_insertBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
+.detailCntn{width: 99%;height: 340px; padding: 40px 20px 30px; border-radius: 15px; box-sizing: border-box; box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);};
+.cnq_reset{float: right; padding: 12px 40px; font-size: 16px; border: 0; letter-spacing: -1px; background: #ff8a00; border-radius: 5px;};

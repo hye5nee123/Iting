@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<title>수강중인강의상세</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section layout:fragment="content">
+	<div class="row lecture_info">
+		<div class="col-lg-12">
+			<div class="section-title tlsn_title">
+			    <h2>정보처리기사</h2>
+			    <a th:href="@{/member/note/list}" class="message"><i class='bx bx-envelope'></i></a>
+			    <button class="print">수료증 발급</button>
+			</div>
+		</div>
+	</div>
+	
+	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info">
+		<div class="top">
+			<div class="left">
+				<i th:text="${tlsn.ltCateCd}"></i>
+				<p th:text="${tlsn.ltTtl}"></p>
+			</div>
+			<div class="graph">
+				<span>그래프</span>
+			</div>
+		</div>
+		<div class="bottom">
+			<p><i class="menu-icon tf-icons bx bx-play-circle"></i> 2. 프로그래밍 시작하기</p>
+			<a href="#" class="go_link">수강하기 ></a>
+		</div>
+	</div>
+	<div class="btn_box">
+		<a th:href="@{/member/mycalss/list}" class="go_list">내강의실 목록가기</a>
+	</div>
+</section>
+
+</body>
+</html>

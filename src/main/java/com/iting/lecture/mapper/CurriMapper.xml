@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.lecture.mapper.CurriMapper">
+
+	<!-- 커리큘럼 목록 -->
+	<select id="getCurriList" resultType="CurriVO">
+		SELECT RND_NUM
+		,RND_TTL
+		,ATCH_NUM
+		,RND_CNTN
+		,LT_TM
+		,LT_NUM
+		FROM CURRI
+	</select>
+	
+	<!-- 커리상세 -->
+	<select id="getCurriInfo" resultType="CurriVO">
+		SELECT RND_NUM
+		,RND_TTL
+		,ATCH_NUM
+		,RND_CNTN
+		,LT_TM
+		,LT_NUM
+		FROM CURRI
+		WHERE RND_NUM = #{rndNum}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="curriInsert" parameterType="CurriVO">
+	<selectKey keyProperty="rndNum" order="BEFORE"
+			resultType="string">
+			SELECT 'rndNum' || LPAD(NVL(MAX(SUBSTR(RND_NUM, -5)), 0) +
+			1, 5, '0') AS RND_NUM
+			FROM CURRI
+		</selectKey>
+		INSERT INTO CURRI (
+		 SELECT RND_NUM
+              ,RND_TTL
+              ,ATCH_NUM
+              ,RND_CNTN
+              ,LT_TM
+              ,LT_NUM
+		VALUES(
+		#{RND_NUM}
+		,#{RND_TTL}
+		,#{ATCH_NUM}
+		,#{RND_CNTN}
+		,#{LT_TM}
+		,#{LT_NUM}
+		)
+	</insert>
+
+</mapper>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<title>강의질문</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section layout:fragment="content">
+	<div class="row lecture_info">
+		<div class="col-lg-12">
+			<div class="section-title message_box">
+			    <h2>강의질문 <i>/ 정보처리기사</i></h2>
+			</div>
+		</div>
+	</div>
+	
+	<div class="message_list">
+         <div class="product__details__tab">
+             <ul class="nav nav-tabs" role="tablist">
+                 <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab" th:classappend="${param.gb} == null ? 'active':_">쪽지보내기</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_">받은쪽지함</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab" th:classappend="${#strings.equals(param.gb , 'rec')}? 'active':_">보낸쪽지함</a>
+                 </li>
+             </ul>
+             <div class="tab-content">
+                 <div class="tab-pane" th:classappend="${param.gb} == null ? 'active':_" id="tabs-5" role="tabpanel">
+                      <div class="product__details__tab__content">
+                      <table class="table">
+		            	<thead>
+		            		<tr>
+		            			<th>강사아이디</th>
+		            			<th>이름</th>
+		            			<th>주소</th>
+		            			<th>상세주소</th>
+		            			<th>이메일</th>
+		            			<th>연락처</th>
+		            			<th>쪽지보내기</th>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+			            	<tr>
+				            	<td th:text="${lectureInfo.lecturerNum}"></td>
+				            	<td th:text="${lectureInfo.id}"></td>
+				            	<td th:text="${lectureInfo.name}"></td>
+				            	<td th:text="${lectureInfo.addr}"></td>
+				            	<td th:text="${lectureInfo.detailAddr}"></td>
+				            	<td th:text="${lectureInfo.mail}"></td>
+				            	<td th:text="${lectureInfo.phone}"></td>
+				            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/member/note/insert/{lecturerNum}(lecturerNum=${lectureInfo.lecturerNum})}">보내기</a></td>
+			            	</tr>
+		            	</tbody>
+		            </table>
+		           </div>
+                 </div>
+                 <div class="tab-pane" id="tabs-6" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_" role="tabpanel">
+                     <div class="product__details__tab__content">
+                         <ul>
+                         	<li th:each="sent, stat: ${sentList}" th:onclick="link('sent',[[${sent.noteNum}]])">
+			            		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
+			            		<span th:text="${sent.id}"></span>
+			            		<span th:text="${sent.name}"></span>
+			            		<i th:text="${#dates.format(sent.sentDt, 'yyyy-MM-dd')}"></i>
+			            	</li>
+                         </ul>
+                     </div>
+                 </div>
+                 <div class="tab-pane" id="tabs-7" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_"  role="tabpanel">
+                     <div class="product__details__tab__content">
+                    
+                        <ul>
+                         	<li th:each="rec, stat: ${recList}" th:onclick="link('rec',[[${rec.noteNum}]])">
+			            		<a href="#" th:text="${rec.noteTtl}" class="new"></a>
+			            		<span th:text="${rec.id}"></span>
+			            		<span th:text="${rec.name}"></span>
+			            		<i th:text="${#dates.format(rec.recDt, 'yyyy-MM-dd')}"></i>
+			            	</li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+      </div>
+  </div>
+	<div class="btn_box">
+		<a th:href="@{/member/tlsn/detailList}" class="go_list">목록가기</a>
+	</div>
+<script th:inline="javascript">
+function link(gb,noteNum){
+	location.href=`/member/note/info/${noteNum}/${gb}`
+}
+function tab_select() {
+	const gb = [[${param.gb}]]
+	if(gb != null){
+		if(gb[0] == 'sent'){
+			$('[id="tabs-6"]').tab('show')
+		} else if(gb[0] == 'rec'){
+			$('[id="tabs-7"]').tab('show')
+		}
+	}
+}
+//window.setTimeout(tab_select, 100);
+
+</script>
+</section>
+
+</body>
+</html>
