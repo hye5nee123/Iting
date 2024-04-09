@@ -99,7 +99,6 @@ public class CnqController {
 		return "member/cnq/update" ;
 
 	}
-
 	// 수정 기능.
 	@ResponseBody
 	@PostMapping("/member/cnq/update/{ltCnqNum}")

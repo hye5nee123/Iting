@@ -19,4 +19,6 @@ public class NoteVO {
 	private String cfmYnCd;
 	private String sentPs;
 	private String recPs;
+	private String id;
+	private String name;
 }

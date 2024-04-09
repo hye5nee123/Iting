@@ -16,19 +16,31 @@ public class NoteServieImpl implements NoteService {
 	NoteMapper noteMapper;
 	
 	@Override
-	public List<NoteVO> getNoteList() {
-		return noteMapper.getNoteList();
+	public List<NoteVO> getRecList(String user) {
+		return noteMapper.getRecList(user);
 	}
 	
 	@Override
-	public NoteVO getNoteInfo(String noteNum) {
-		return noteMapper.getNoteInfo(noteNum);
+	public List<NoteVO> getSentList(String user) {
+		return noteMapper.getSentList(user);
+	}
+	
+	@Override
+	public NoteVO getRecInfo(String noteNum) {
+		return noteMapper.getRecInfo(noteNum);
 	}
 
+	@Override
+	public NoteVO getSentInfo(String noteNum) {
+		return noteMapper.getRecInfo(noteNum);
+	}
+	
 	@Override
 	public int insertNote(NoteVO vo) {
 		return noteMapper.insertNote(vo);
 	}
+
+
 
 	
 }

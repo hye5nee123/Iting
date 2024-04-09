@@ -25,7 +25,12 @@ public class SubspController {
 		
 		System.out.println(vo);
 		
-		subspService.subspInsert(vo);
+		int result = subspService.subspInsert(vo);
+		if(result > 0) {
+			vo.setRetCode("OK");
+		} else {
+			vo.setRetCode("FAIL");
+		}
 		
 		return vo;
 	}

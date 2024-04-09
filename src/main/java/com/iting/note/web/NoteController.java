@@ -2,6 +2,8 @@ package com.iting.note.web;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
+import com.iting.member.service.MemberService;
 import com.iting.note.model.NoteVO;
 import com.iting.note.service.NoteService;
 import com.iting.socket.model.Greeting;
@@ -30,19 +33,31 @@ public class NoteController {
 	@Autowired
 	NoteService noteService;
 	
+	@Autowired
+	MemberService memberService;
+	
+	@Autowired
+	private HttpSession httpSession;
+	
 	// 목록조회
 	@RequestMapping("teacher/note/list")
 	public String getNoteList(Model model, NoteVO vo) {
-		model.addAttribute("noteList", noteService.getNoteList());
+		String user = (String) httpSession.getAttribute("usernum");
+		System.out.println(user);
+		model.addAttribute("recList", noteService.getRecList(user));
+		model.addAttribute("sentList", noteService.getSentList(user));
+		model.addAttribute("ltsnList", memberService.getMemberLtsn());
 		return "teacher/note/list";
 	}
 	
 	// 단건조회
-	@GetMapping("teacher/note/info/{noteNum}")
-	public String info(@PathVariable String noteNum, Model model) {
-		model.addAttribute("note", noteService.getNoteInfo(noteNum));
+	@GetMapping("teacher/note/info/{noteNum}/{gb}")
+	public String info(@PathVariable String noteNum, @PathVariable String gb, Model model) {
+		model.addAttribute("note", noteService.getRecInfo(noteNum));
+		model.addAttribute("gb", gb);
 		return "teacher/note/info";
 	}
+
 	
 	@MessageMapping("/hello") // 메세지가 들어오면
 	  @SendTo("/topic/greetings") // greetings 구독자에게 메세지 전송
@@ -52,8 +67,9 @@ public class NoteController {
 	  }
 	
 	// 등록페이지 이동
-	@GetMapping("teacher/note/insert/{noteNum}")
-	public ModelAndView list() {
+	@GetMapping("teacher/note/insert/{memNum}")
+	public ModelAndView list(@PathVariable String memNum, Model model) {
+		model.addAttribute("memNum", memNum);
 		ModelAndView mv = new ModelAndView("teacher/note/insert");
 		return mv;
 	}
