@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.common.mapper.CommonMapper">
+	<!-- 첨부 파일 등록 -->
+	<insert id="fileInsert" parameterType="FileVO">
+	
+		<selectKey keyProperty="atchNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') 
+			FROM atch
+		</selectKey>
+		INSERT INTO atch
+						(
+		                atch_num
+		                <if test="atchPath != null and atchPath != ''">
+		                , atch_path		                
+		                </if>
+		                , atch_ttl
+		                , atch_typ_cd
+		                , atch_mark_ttl
+		                )
+			VALUES 
+					(
+					#{atchNum}
+					<if test="atchPath != null and atchPath != ''">
+					, #{atchPath}
+					</if>
+					, #{atchTtl}
+					, #{atchTypCd}
+					, #{atchMarkTtl}
+					)
+	</insert>
+</mapper>
