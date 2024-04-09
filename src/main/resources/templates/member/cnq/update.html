@@ -3,20 +3,32 @@
 	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
 <section layout:fragment="content">
-
-<h3 class="related-title">글 수정</h3>
-	<form name="cnqUpdateForm" method="post">
-		<input th:value="${cnq.ltCnqNum}" class="form-control hidden" type="text" id="ltCnqNum" name="ltCnqNum" >
-		제목 : <input type="text" name="ttl" th:value="${cnq.ttl}"> 
-		내용 : <textarea name="cntn" th:value="${cnq.cntn}"></textarea>
-		<br> 작성자 : <input type="text" name="name"th:value="${cnq.name}">
-		<div>
-			<a class="btn" id="saveBtn">등록</a> 
-			<a class="btn" id="listBtn" onclick="location.href='/member/cnq/list'">글목록으로</a>
-			<a class="btn" id=cancel_btn>수정 취소</a>
-		</div>
-	</form>
-  <script>
+	<style>
+.cnq_reset {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	border-radius: 5px;
+}
+</style>
+	<div class="checkout__input contact__form">
+		<h3 class="related-title">글 수정</h3>
+		<form name="cnqUpdateForm" method="post">
+			<input th:value="${cnq.ltCnqNum}" class="form-control hidden"
+				type="text" id="ltCnqNum" name="ltCnqNum" readonly> 제목 : <input
+				type="text" name="ttl" th:value="${cnq.ttl}"> 내용 :
+			<textarea name="cntn" th:value="${cnq.cntn}"></textarea>
+			<br> 작성자 : <input type="text" name="name" th:value="${cnq.name}">
+			<div>
+				<a class="cnq_insertBtn" id="saveBtn">등록</a> <a class="cnq_reset"
+					id="listBtn" onclick="location.href='/member/cnq/list'">글목록으로</a>
+			</div>
+		</form>
+	</div>
+	<script>
 	function saveReq() {
 		const ltCnqNum = cnqUpdateForm.ltCnqNum.value;
 		const ttl = cnqUpdateForm.ttl.value;
@@ -51,7 +63,9 @@
 		saveReq();
 	})
 	
-	
+	cancel_btn.addEventListener("click", e => {
+		//이전 page로 돌아가야 함...
+	})
 </script>
 </section>
 </html>

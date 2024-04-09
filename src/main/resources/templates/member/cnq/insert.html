@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/member/layout}">
-<head>
+	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<section layout:fragment="content">
+<section layout:fragment="content">
 
 
-		<div class="container">
-			<div class="checkout__input contact__form">
-				<h3>글등록</h3>
-				<form name="cnqForm" method="post">
-					제목 : <input name="ttl"> 내용 :
-					<textarea name="cntn"></textarea>
-					<br> 작성자 : <input name="name">
-					<!--  이미지 : <input name="photofile" type="file">-->
-					<button type="button" id="saveBtn">등록</button>
-					<button type="button" id="listBtn"  onclick="location.href='/member/cnq/list'">글목록으로</button>
-				</form>
-			</div>
+
+
+	<div class="container">
+		<div class="checkout__input contact__form">
+			<h3 class="related-title">글등록</h3>
+			<form name="cnqForm" method="post">
+				제목 : <input name="ttl"> 
+				내용 : <textarea name="cntn"></textarea>
+				<br> 작성자 : <input name="name">
+				<!--  이미지 : <input name="photofile" type="file">-->
+				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
+				<button  class="cnq_reset" type="button" id="listBtn"
+					onclick="location.href='/member/cnq/list'">글목록으로</button>
+			</form>
 		</div>
-		<script>
+	</div>
+	<script>
 	//등록요청.
 		
 	function saveReq() {
@@ -58,6 +57,5 @@
 		saveReq();
 	})
 </script>
-	</section>
-</body>
+</section>
 </html>

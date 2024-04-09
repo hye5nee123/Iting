@@ -70,10 +70,9 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
-			<a href="/member/cnq/list" id="button">#List</a> 
-			<a th:href="@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#수정</a>
-			<a th:href="@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}">#삭제</a>
+		<div >
+			<button  type="button" id="cnq_insertBtn" th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+			<button>삭제</button>
 		</div>
 	</form>
 	<div>
