@@ -9,6 +9,7 @@
 function move(ltNum){
 	location.href='/lecture/info1/'+ ltNum
 }
+
 </script>
 <style>
 #asd {
@@ -28,8 +29,8 @@ function move(ltNum){
 		<div class="card">
 			<h4 class="card-header">
 				강의목록
-
 				<button type="button" id="asd" onclick="location.href='/teacher/lecture/insert'">등록하기</button>
+			
 			</h4>
 			
 
@@ -45,8 +46,11 @@ function move(ltNum){
 							<th>강의키워드</th>
 							<th>강사번호</th>
 							<th>승인여부</th>
+							<th>커리큘럼</th>
 							
-						</tr>
+							</tr>
+							
+						
 					</thead>
 					<tbody>
 						<tr th:each="ltb, stat: ${getLectureList}"
@@ -59,6 +63,9 @@ function move(ltNum){
 							<td th:text="${ltb.ltKeywordCd}"></td>
 							<td th:text="${ltb.lecturerNum}"></td>
 							<td th:text="${ltb.accpYnCd}"></td>
+							<td>
+							<button type="button" id="asd" onclick="location.href='/teacher/curri/list/'">리스트가기</button>
+							</td>
 							
 						</tr>
 					</tbody>

@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>커리큘럼상세</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+<style>
+#updateBtn {
+float: right;
+}
+</style>
+</head>
+
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card mb-4">
+			<h5 class="card-header">커리큘럼상세</h5>
+			<div class="card-body">
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">커리번호</label>
+					<div class="col-md-10">
+						<input th:value="${curri.rndNum}" class="col-md-10 form-control"
+							readonly>
+					</div>
+				</div>
+
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">커리제목</label>
+					<div class="col-md-10">
+						<input th:value="${curri.rndTtl}" class="col-md-10 form-control"
+							readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">첨부파일번호</label>
+					<div class="col-md-10">
+						<input th:value="${curri.atchNum}"
+							class="col-md-10 form-control" type="file" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">회차내용</label>
+					<div class="col-md-10">
+						<input th:value="${curri.rndCntn}"
+							class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의시간</label>
+					<div class="col-md-10">
+						<input th:value="${curri.ltTm}" class="col-md-10 form-control"
+							readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의번호</label>
+					<div class="col-md-10">
+						<input th:value="${curri.ltNum}"
+							class="col-md-10 form-control" readonly>
+					</div>
+					<div class="btn_box demo-inline-spacing">
+			<button type="button" id="updateBtn" class="btn btn-lg btn btn-warning"
+			>수정하기</button>
+		</div>
+
+				</div>
+			</div>
+		</div>
+		</div>
+</body>
+</html>

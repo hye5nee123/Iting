@@ -1,5 +1,6 @@
 package com.iting.lecture.web;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iting.common.FileUtil;
+import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
 import com.iting.lecture.service.LectureService;
@@ -67,6 +71,9 @@ public class LectureController {
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
 		return "teacher/lecture/getLectureList";
 	}
+	
+	
+	
 
 	// 강의 단건 조회
 	@GetMapping("lecture/info1/{ltNum}")
@@ -86,14 +93,16 @@ public class LectureController {
 	// 등록기능
 	@ResponseBody
 	@PostMapping("/teacher/lecture/insert1")
-	public String ltInsert(@RequestBody LectureVO vo) {
+	public String ltInsert(@RequestBody LectureVO vo, MultipartFile uFile) throws IllegalStateException, IOException {
 		System.out.println(vo +
 				"===============");
 		lectureService.ltInsert(vo);
+		FileVO fvo = FileUtil.uploadFile(uFile);
 		return "redirect:/admin/lecture/list";
 	}
 	/* 관리자 */
 	// 강의 수정
+	
 
 	//강의 리스트
 	@GetMapping("/admin/lecture/list")
