@@ -1,9 +1,12 @@
 package com.iting.common.web;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -16,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.emp.EmpVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iting.common.ExcelView;
 import com.iting.common.model.AccountVO;
@@ -99,16 +104,9 @@ public class CommonController {
 	public UsersVO idchk(@PathVariable String id) {
 		return userservice.getUserInfo(id);
 	}
-	@GetMapping("/account-email")
+	@GetMapping("/send-email")
 	public String emailsend() {
-		return "common/account-email";
+		return "common/send-email";
 	}
-	// 회원가입 등록
-	@ResponseBody
-	@PostMapping("/insertaccount")
-	public int insertAccount(@RequestBody AccountVO vo) {
-		System.out.println(vo);
-		int ckcnt = userservice.insertUser(vo);
-		return ckcnt;
-	}
+	
 }

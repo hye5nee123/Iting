@@ -41,9 +41,12 @@ function usertypeForm(num) {
 	else if (num == '2') {
 		actype = 'd2';
 		form = `<div class="checkout__input">
+				<form action="/accountfile" method="post" enctype="multipart/form-data">
 					<p>이력서 첨부 <span>*</span></p>
 					</div>
-					<input type="file" accept=".pdf, .xlsx, .hwp" id="file" name="file"/>`;
+					<input type="file" accept=".pdf, .xlsx, .hwp" id="file" name="file"/>
+				</form>
+				`;
 	}
 	document.getElementsByClassName('radios')[0].innerHTML = form;
 }
@@ -221,13 +224,38 @@ async function insertAccount(){
 		url: '/insertaccount',
 		data: param,
 	})
-		.then(res => console.log(res.data));
-		if(result >= 1){
+		.then(res => res.data);
+		if(result == 1){
 			if(actype == 'b1'){
-				confirmAlert("회원가입 완료", "홈페이지로 이동합니다");
+				Swal.fire({
+					icon: "success",
+					title: "회원가입이 완료되었습니다",
+					showDenyButton: true,
+					confirmButtonText: "메인으로",
+					 denyButtonText: "로그인화면으로",
+					confirmButtonColor: "#205cdc"
+				}).then((rest) => {
+	  				if (rest.isConfirmed) {
+						location.href = "/member/main";
+	  				} else if (rest.isDenied) {
+	 					location.href = "/login";
+	  				}
+				});
 			} else if(actype == 'd2'){
-				confirmAlert("가입신청 완료", "홈페이지로 이동합니다");
+				Swal.fire({
+					icon: "success",
+					title: "가입신청이 완료되었습니다",
+					test: "*검토 후 연락드릴때까지 기다려주세요",
+					confirmButtonText: "메인으로",
+					confirmButtonColor: "#205cdc"
+				}).then((rest) => {
+	  				if (rest.isConfirmed) {
+						location.href = "/member/main";
+					}
+				});
 			}
+		} else {
+			errorAlert("회원가입 실패", "관리자에게 문의바랍니다");
 		}
 	}
 
