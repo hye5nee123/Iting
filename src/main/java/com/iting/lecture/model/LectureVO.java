@@ -23,4 +23,8 @@ public class LectureVO {
 	private String rdmCateCd;	//로드맵 카테고리 코드
 	private String name;	// 강사명
 	
+	//페이징
+	int start = 1;
+	int end = 10;
+	
 }

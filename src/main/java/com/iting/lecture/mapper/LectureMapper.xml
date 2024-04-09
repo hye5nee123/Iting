@@ -6,204 +6,242 @@
 	<!-- 검색조건 : 키워드, 난이도, 강의제목검색, 강사명 -->
 	<sql id="condition">
 		<where>
-		<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">\
-			find_code(l.lt_keyword_cd) = #{vo.ltKeywordCd}
-		</if>
-		<if test="vo.ltDifCd != null and vo.ltDifCd != ''">\
-			AND find_code(l.lt_dif_cd) = #{vo.ltDifCd}
-		</if>
-		<if test="vo.ltTtl != null and vo.ltTtl != ''">\
-			AND l.lt_ttl LIKE '%' || #{vo.ltTtl} || '%'
-		</if>
-		<if test="vo.name != null and vo.name != ''">\
-			AND lec.name LIKE '%' || #{vo.name} || '%'
-		</if>
+			<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">\
+				find_code(l.lt_keyword_cd) = #{vo.ltKeywordCd}
+			</if>
+			<if test="vo.ltDifCd != null and vo.ltDifCd != ''">\
+				AND find_code(l.lt_dif_cd) = #{vo.ltDifCd}
+			</if>
+			<if test="vo.ltTtl != null and vo.ltTtl != ''">\
+				AND l.lt_ttl LIKE '%' || #{vo.ltTtl} || '%'
+			</if>
+			<if test="vo.name != null and vo.name != ''">\
+				AND lec.name LIKE '%' || #{vo.name} || '%'
+			</if>
 		</where>
 	</sql>
-	
+
 	<!-- 강의 전체 목록 -->
 	<select id="getAllLectureList">
 		SELECT * FROM ( SELECT ROWNUM AS rn, a.* FROM (
-	
+
 		SELECT l.lt_num
-             , find_code(l.lt_st_cd) lt_st_cd
-             , l.lt_ttl
-             , l.lt_img
-             , l.lt_intro
-             , find_code(l.lt_cate_cd) lt_cate_cd
-             , l.fr_dt
-             , find_code(l.accp_yn_cd) accp_yn_cd
-             , find_code(l.lt_dif_cd) lt_dif_cd
-             , l.lecturer_num
-             , find_code(l.lt_keyword_cd) lt_keyword_cd
-             , find_code(l.rdm_cate_cd) rdm_cate_cd
-             , lec.name
+		,
+		find_code(l.lt_st_cd) lt_st_cd
+		, l.lt_ttl
+		, l.lt_img
+		, l.lt_intro
+		,
+		find_code(l.lt_cate_cd) lt_cate_cd
+		, l.fr_dt
+		, find_code(l.accp_yn_cd)
+		accp_yn_cd
+		, find_code(l.lt_dif_cd) lt_dif_cd
+		, l.lecturer_num
+		,
+		find_code(l.lt_keyword_cd) lt_keyword_cd
+		, find_code(l.rdm_cate_cd)
+		rdm_cate_cd
+		, lec.name
 		FROM lt l JOIN lecturer lec
-                    ON l.lecturer_num = lec.lecturer_num
-        <include refid="condition"></include>
+		ON l.lecturer_num =
+		lec.lecturer_num
+		<include refid="condition"></include>
 		ORDER BY lt_num DESC
 		
 	<![CDATA[ ) a WHERE ROWNUM <= #{pvo.last} ) b WHERE rn >= #{pvo.first} ]]>
 	</select>
-	
+
 	<!-- 수강상세 -->
 	<select id="getLectureInfo" resultType="LectureVO">
 		SELECT LT_NUM
-		       , LT_ST_CD
-		       , LT_TTL
-		       , LT_IMG
-		       , LT_INTRO
-		       , LT_CATE_CD
-		       , FR_DT
-		       , LT_DIF_CD
-		       , LECTURER_NUM
-		       , LT_KEYWORD_CD
+		, LT_ST_CD
+		,
+		LT_TTL
+		, LT_IMG
+		, LT_INTRO
+		, LT_CATE_CD
+		, FR_DT
+		, LT_DIF_CD
+		, LECTURER_NUM
+		,
+		LT_KEYWORD_CD
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 	</select>
-	
+
 	<!-- 강의 목록 -->
 	<select id="getLectureList" resultType="LectureVO">
 		SELECT LT_NUM
-		       , LT_ST_CD
-		       , LT_TTL
-		       , LT_IMG
-		       , LT_INTRO
-		       , LT_CATE_CD
-		       , FR_DT
-		       , find_code(LT_DIF_CD) LT_DIF_CD
-		       , LECTURER_NUM
-		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
-		       , find_code(ACCP_YN_CD) ACCP_YN_CD
-		       , find_code(RDM_CATE_CD) RDM_CATE_CD
+		, LT_ST_CD
+		,
+		LT_TTL
+		, LT_IMG
+		, LT_INTRO
+		, LT_CATE_CD
+		, FR_DT
+		, find_code(LT_DIF_CD)
+		LT_DIF_CD
+		, LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		,
+		find_code(ACCP_YN_CD) ACCP_YN_CD
+		, find_code(RDM_CATE_CD) RDM_CATE_CD
 		FROM LT
 		WHERE ACCP_YN_CD = 'd2'
-		
-	
+
+
 	</select>
 	<!-- 강의 상세 -->
 	<select id="getLectureInfo1" resultType="LectureVO">
 		SELECT LT_NUM
-		       , LT_ST_CD
-		       , LT_TTL
-		       , LT_IMG
-		       , LT_INTRO
-		       , LT_CATE_CD
-		       , FR_DT
-		       , find_code(LT_DIF_CD) LT_DIF_CD
-		       , LECTURER_NUM
-		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
-		       , find_code(ACCP_YN_CD) ACCP_YN_CD
-		       , find_code(RDM_CATE_CD) RDM_CATE_CD
-		       
+		, LT_ST_CD
+		, LT_TTL
+		, LT_IMG
+		, LT_INTRO
+		, LT_CATE_CD
+		, FR_DT
+		, find_code(LT_DIF_CD)
+		LT_DIF_CD
+		, LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		,
+		find_code(ACCP_YN_CD) ACCP_YN_CD
+		, find_code(RDM_CATE_CD) RDM_CATE_CD
+
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
-		
-		</select>
 
-  <!-- 신수지 -->
-	
+	</select>
+
+	<!-- 신수지 -->
+
 	<!-- 강사 + 강의 단건조회 -->
 	<select id="getTcList" resultType="LectureVO">
 		SELECT l.LT_NUM
-		        , l.LT_ST_CD
-		        , l.LT_TTL
-		        , l.LT_IMG
-		        , l.LT_INTRO
-		        , l.LT_CATE_CD
-		        , l.FR_DT
-		        , l.ACCP_YN_CD
-		        , l.LT_DIF_CD
-		        , l.LECTURER_NUM
-		        , l.LT_KEYWORD_CD
-		        , l.RDM_CATE_CD
-		FROM LT l JOIN LECTURER le
-        		  ON l.LECTURER_NUM = le.LECTURER_NUM
-		WHERE le.LECTURER_NUM = #{lecturerNum}
+		, l.LT_ST_CD
+		,
+		l.LT_TTL
+		, l.LT_IMG
+		, l.LT_INTRO
+		, l.LT_CATE_CD
+		, l.FR_DT
+		, l.ACCP_YN_CD
+		,
+		l.LT_DIF_CD
+		, l.LECTURER_NUM
+		, l.LT_KEYWORD_CD
+		, l.RDM_CATE_CD
+		FROM LT l
+		JOIN LECTURER le
+		ON l.LECTURER_NUM = le.LECTURER_NUM
+		WHERE
+		le.LECTURER_NUM =
+		#{lecturerNum}
 	</select>
-		
-  <!-- 도승민 -->
-		<!-- 강의 등록 -->
-		<insert id="ltInsert" parameterType="LectureVO">
-		<selectKey keyProperty="ltNum"
-					order="BEFORE"
-					resultType="string">
-			SELECT 'lt' || LPAD(NVL(MAX(SUBSTR(LT_NUM, -5)), 0) + 1, 5, '0') AS LT_NUM 
+
+	<!-- 도승민 -->
+	<!-- 강의 등록 -->
+	<insert id="ltInsert" parameterType="LectureVO">
+		<selectKey keyProperty="ltNum" order="BEFORE"
+			resultType="string">
+			SELECT 'lt' || LPAD(NVL(MAX(SUBSTR(LT_NUM, -5)), 0) + 1,
+			5, '0') AS LT_NUM
 			FROM LT
 		</selectKey>
 		INSERT INTO LT(
-					   LT_NUM
-					  ,LT_TTL
-					  ,LT_INTRO
-					  ,FR_DT
-					  ,LT_IMG
-					  ,LECTURER_NUM
-					  ,lt_keyword_cd
-					  ,lt_dif_cd
-					  ,lt_cate_cd
-					  ,ACCP_YN_CD
-					  ,RDM_CATE_CD
-					  
-						)
+		LT_NUM
+		,LT_TTL
+		,LT_INTRO
+		,FR_DT
+		,LT_IMG
+		,LECTURER_NUM
+		,lt_keyword_cd
+		,lt_dif_cd
+		,lt_cate_cd
+		,ACCP_YN_CD
+		,RDM_CATE_CD
+
+		)
 		VALUES(
-			   #{ltNum}
-			   ,#{ltTtl}
-			   ,#{ltIntro}
-			   ,#{frDt}
-			   ,#{ltImg}
-			   ,#{lecturerNum}
-			   ,#{ltKeywordCd}
-			   ,#{ltDifCd}
-			   ,#{ltCateCd}
-			   ,#{accpYnCd}
-			   ,#{rdmCateCd}
-			   
-			   )
-		
-		</insert>
-		
-		<update id="update">
-		UPDATE lt 
-			SET ACCP_YN_CD = 'd1'
-            WHERE lt_num = #{ltNum} 
-		
+		#{ltNum}
+		,#{ltTtl}
+		,#{ltIntro}
+		,#{frDt}
+		,#{ltImg}
+		,#{lecturerNum}
+		,#{ltKeywordCd}
+		,#{ltDifCd}
+		,#{ltCateCd}
+		,#{accpYnCd}
+		,#{rdmCateCd}
+
+		)
+
+	</insert>
+
+	<update id="update">
+		UPDATE lt
+		SET ACCP_YN_CD = 'd1'
+		WHERE lt_num = #{ltNum}
+
 	</update>
 	<!-- 승인 목록출력 -->
-		<select id="endLectureList" resultType="LectureVO">
+	<select id="endLectureList" resultType="LectureVO">
+	SELECT * FROM(SELECT ROWNUM as rn, a.* FROM(
 		SELECT LT_NUM
-		       , LT_ST_CD
-		       , LT_TTL
-		       , LT_IMG
-		       , LT_INTRO
-		       , LT_CATE_CD
-		       , FR_DT
-		       , find_code(LT_DIF_CD) LT_DIF_CD
-		       , LECTURER_NUM
-		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
-		       , find_code(ACCP_YN_CD) ACCP_YN_CD
-		       , find_code(RDM_CATE_CD) RDM_CATE_CD
+		, LT_ST_CD
+		, LT_TTL
+		, LT_IMG
+		, LT_INTRO
+		, LT_CATE_CD
+		, FR_DT
+		, find_code(LT_DIF_CD) LT_DIF_CD
+		, LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		, find_code(ACCP_YN_CD) ACCP_YN_CD
+		, find_code(RDM_CATE_CD) RDM_CATE_CD
 		FROM LT
 		WHERE ACCP_YN_CD = 'd1'
 		
+				<where>
+			<if test="vo.ltTtl != null and vo.ltTtl != ''">
+				LT_TTL like '%' || #{vo.ltTtl} || '%'
+			</if>
+			<if test="vo.lectureNum != null and vo.lectureNum != ''">
+				AND LECTURE_NUM like '%' || #{vo.lecturerNum} || '%'
+			</if>
+		</where>
+		ORDER BY LT_NUM
+<![CDATA[
+) a where ROWNUM <= #{vo.end}) b where rn >= #{vo.start}
+]]>
 	</select>
+
+
+
 	<!-- 미승인 -->
-			<select id="ingLectureList" resultType="LectureVO">
+	<select id="ingLectureList" resultType="LectureVO">
+		
 		SELECT LT_NUM
-		       , LT_ST_CD
-		       , LT_TTL
-		       , LT_IMG
-		       , LT_INTRO
-		       , LT_CATE_CD
-		       , FR_DT
-		       , find_code(LT_DIF_CD) LT_DIF_CD
-		       , LECTURER_NUM
-		       , find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
-		       , find_code(ACCP_YN_CD) ACCP_YN_CD
-		       , find_code(RDM_CATE_CD) RDM_CATE_CD
+		, LT_ST_CD
+		, LT_TTL
+		, LT_IMG
+		, LT_INTRO
+		, LT_CATE_CD
+		, FR_DT
+		, find_code(LT_DIF_CD) LT_DIF_CD
+		, LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		, find_code(ACCP_YN_CD) ACCP_YN_CD
+		, find_code(RDM_CATE_CD) RDM_CATE_CD
 		FROM LT
-		WHERE ACCP_YN_CD = 'd2'
-		</select>
-		
-		
-		
+		WHERE ACCP_YN_CD = 'd1'
+
+	</select>
+
+
+
+
+
 </mapper>
