@@ -33,7 +33,7 @@ public class FileUtil {
 			String exetension = FilenameUtils.getExtension(origFileName);
 			
 			// 새 파일명 (중복 덮어쓰기 방지) => 수정필요(240409)
-			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds() + exetension;
+			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds() + "." +  exetension;
 			
 			
 			// 파일 생성 (저장 경로, 파일이름)
