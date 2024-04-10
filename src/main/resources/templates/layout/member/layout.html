@@ -122,7 +122,7 @@
                             <div class="header__top__links">
 
                                 <a th:if="${session.usernum} == null" href="/login">로그인</a>
-                                <a id="logoutbtn" th:if="${session.usernum} != null" href="/member/main" onclick="logout(event)">로그아웃</a>
+                                <a id="logoutbtn" th:if="${session.usernum} != null" href="/member/main" onclick="logout()">로그아웃</a>
                                 <a href="/account">회원가입</a>
                                 <a href="#">마이페이지</a>
                             </div>

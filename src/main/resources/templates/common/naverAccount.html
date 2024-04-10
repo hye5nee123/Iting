@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+<script>
+/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
+function setLoginStatus() {
+	let naverPhone = naverLogin.user.getMobile();
+	let naverEmail = naverLogin.user.getEmail();
+	let token = naverLogin.accessToken.accessToken;
+	location.replace('/naverAcconut'); //추가정보입력창
+}
+</script>
+</html>

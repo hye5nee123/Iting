@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/blank}">
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/member/bootstrap.min.css"
+<!--<link rel="stylesheet" href="/css/member/bootstrap.min.css"
 	type="text/css">
 <link rel="stylesheet" href="/css/member/nice-select.css"
 	type="text/css">
 <link rel="stylesheet" href="/css/member/style.css" type="text/css">
-<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="/js/join/naverlogin.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/common.js"></script>
+<script src="/js/join/naverlogin.js" charset="utf-8"></script>-->
 <title>로그인</title>
 <style>
 .container {
@@ -32,6 +35,7 @@
 </head>
 
 <body>
+<section layout:fragment="content">
 	<div class="container">
 		<form th:action="@{/userlogin}" method="post" name="frm">
 			<img class="logo" src="img/common/logo_h.png" alt="Logo" />
@@ -52,13 +56,14 @@
 			</div>
 		</form>
 		<div class="col-lg-6">
-			<a href="#">아이디찾기</a> | <a id="nlogout" href="#">비밀번호찾기</a> | <a href="/account">회원가입</a>
+			<a href="#">아이디찾기</a> | <a id="nlogout" href="#">비밀번호찾기</a> | <a
+				href="/account">회원가입</a>
 		</div>
 		<div class="col-lg-6" id="naverIdLogin">
-			<a id="naverIdLogin_loginButton" href="#" role="button"></a>
+			<a id="naverIdLogin_loginButton" role="button"></a>
 		</div>
 	</div>
-	</script>
+	</section>
 	<script>
 		frm.addEventListener("submit", (e) => {
 			e.preventDefault();
@@ -74,46 +79,24 @@
 				frm.submit();
 			}
 		});
-		// (3) LoginWithNaverId Javscript 설정 정보 및 초기화
-			var naverLogin = new naver.LoginWithNaverId(
-				{
-					clientId: "IUFmLIwupwmkJxh3eacH",
-					callbackUrl: "http://localhost:8081/login",
-					isPopup: false,
-					loginButton: {color: "green", type: 3, height: 50},
-					callbackHandle: true
-				}
-			);
-			/* (4) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
-			naverLogin.init();
-			
-			/* (4-1) 임의의 링크를 설정해줄 필요가 있는 경우 */
-			$("#nlogout").attr("href", naverLogin.generateAuthorizeUrl());
-
 			/* (5) 현재 로그인 상태를 확인 */
 			window.addEventListener('load', function () {
 				naverLogin.getLoginStatus(function (status) {
 					if (status) {
 						/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
-						console.log(naverLogin.user);
-						console.log(naverLogin.generateAuthorizeUrl());
-						naverLogin.logout();
-						setLoginStatus();
-					}
+						Swal.fire({
+							icon: "error",
+							title: "이미 로그인되어 있습니다.",
+							confirmButtonText: "확인",
+							confirmButtonColor: "#205cdc"
+						}).then((res) => {
+			  				if (res.isConfirmed) {
+								location.href = "/member/main";
+			  				}
+		  				});
+	  				} 
 				});
 			});
-
-			/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
-			function setLoginStatus() {
-				let naverId = naverLogin.user.getEmail();
-				// let nickName = naverLogin.user.get();
-				/* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
-				$("#nlogout").click(function (e) {
-					e.preventDefault();
-					naverLogin.logout();
-					location.replace('/member/main');
-				});
-			}
 	</script>
 </body>
 

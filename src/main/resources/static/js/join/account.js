@@ -245,7 +245,7 @@ async function insertAccount(){
 				Swal.fire({
 					icon: "success",
 					title: "가입신청이 완료되었습니다",
-					test: "*검토 후 연락드릴때까지 기다려주세요",
+					test: "*검토 후 연락예정",
 					confirmButtonText: "메인으로",
 					confirmButtonColor: "#205cdc"
 				}).then((rest) => {

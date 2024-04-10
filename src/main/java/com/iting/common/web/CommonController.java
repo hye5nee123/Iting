@@ -148,6 +148,11 @@ public class CommonController {
 	public String loginForm() {
 		return "common/login";
 	}
+	
+	@GetMapping("/naverAcconut")
+	public String naverAccForm() {
+		return "common/naverAcconut";
+	}
 
 	// 회원가입 페이지 이동
 	@GetMapping("/account")
@@ -174,11 +179,5 @@ public class CommonController {
 		System.out.println(vo);
 		int ckcnt = userservice.insertUser(vo);
 		return ckcnt;
-	}
-	
-	// 네이버 로그인 이동
-	@GetMapping("/naverlogin")
-	public String naverlog() {
-		return "common/naverlogin";
 	}
 }
