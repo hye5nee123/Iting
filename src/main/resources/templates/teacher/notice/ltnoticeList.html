@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>강의 공지사항</title>
+<script th:inline="javascript">
+function move(ltNoticeNum){
+	location.href='/lecture/info/'+ ltNoticeNum
+}
+
+
+</script>
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				강의 공지사항 목록
+				<button type="button" id="asd" onclick="location.href='/teacher/notice/insert'">공지등록</button>
+			
+			</h4>
+			
+
+			<div class="table-responsive text-nowrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>공지사항 번호</th>
+							<th>공지사항 제목</th>
+							<th>내용</th>
+							<th>공지날짜</th>
+							</tr>
+					</thead>
+					<tbody>
+						<tr th:each="list, stat: ${getLtNoticeList}"
+							th:onclick="move([[${list.ltNoticeNum}]])">
+							<td th:text="${list.ltNoticeNum}"></td>
+							<td th:text="${list.ltNoticeTtl}"></td>
+							<td th:text="${list.ltNoticeCntn}"></td>
+							<td th:text="${#dates.format(list.ltNoticeRegDt,'yyyy-MM-dd')}"></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	
+	</div>
+</body>
+
+</html>

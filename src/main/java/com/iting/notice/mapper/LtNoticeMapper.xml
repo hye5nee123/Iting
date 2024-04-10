@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.notice.mapper.LtNoticeMapper">
+
+<!-- 강의공지사항 목록 -->
+<select id="getLtNoticeList" resultType="LtNoticeVO">
+SELECT LT_NOTICE_NUM
+      ,LT_NOTICE_TTL
+      ,LT_NOTICE_CNTN
+      ,LT_NOTICE_REG_DT
+FROM LT_NOTICE
+
+</select>
+
+<!-- 공지사항 등록 -->
+<insert id="ltNoticeInsert" parameterType="LtNoticeVO">
+<selectKey keyProperty="ltNoticeNum" order="BEFORE"
+			resultType="string">
+			SELECT 'ltNoticeNum' || LPAD(NVL(MAX(SUBSTR(LT_NOTICE_NUM, -5)), 0) +
+			1, 5, '0') AS LT_NOTICE_NUM
+			FROM LT_NOTICE
+		</selectKey>
+		INSERT INTO LT_NOTICE (
+			   LT_NOTICE_NUM
+		      ,LT_NOTICE_TTL
+		      ,LT_NOTICE_CNTN
+		      ,LT_NOTICE_REG_DT)
+      	VALUES(
+      		   #{ltNoticeNum}
+      		  ,#{ltNoticeTtl}
+      		  ,#{ltNoticeCntn}
+      		  ,#{ltNoticeRegDt}
+      )
+</insert>
+</mapper>
