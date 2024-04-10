@@ -18,4 +18,9 @@ public class CommonServiceImpl implements CommonService {
 		return commonMapper.fileInsert(fvo);
 	}
 
+	@Override
+	public FileVO getFileInfo(String fileNum) {
+		return commonMapper.getFileInfo(fileNum);
+	}
+
 }
