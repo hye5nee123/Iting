@@ -4,11 +4,12 @@
 	layout:decorate="~{layout/teacher/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>강의 목록</title>
 <script th:inline="javascript">
 function move(ltNum){
 	location.href='/lecture/info1/'+ ltNum
 }
+
 
 </script>
 <style>
@@ -63,7 +64,7 @@ function move(ltNum){
 							<td th:text="${ltb.ltKeywordCd}"></td>
 							<td th:text="${ltb.lecturerNum}"></td>
 							<td th:text="${ltb.accpYnCd}"></td>
-							<td>
+							<td onclick="event.cancelBubble = true;">
 							<button type="button" id="asd" onclick="location.href='/teacher/curri/list/'">리스트가기</button>
 							</td>
 							

@@ -36,7 +36,7 @@ public class CurriController {
 		curriService.getCurriInfo(rndNum);
 		return "/teacher/curri/info";
 	}
-	//커리등록
+	//커리등록페이지
 	@GetMapping("/teacher/curri/insert")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView("/teacher/curri/insert");

@@ -40,7 +40,7 @@
               ,ATCH_NUM
               ,RND_CNTN
               ,LT_TM
-              ,LT_NUM
+              ,LT_NUM)
 		VALUES(
 		#{RND_NUM}
 		,#{RND_TTL}
