@@ -34,7 +34,7 @@
              <div class="tab-content">
                  <div class="tab-pane" th:classappend="${param.gb} == null ? 'active':_" id="tabs-5" role="tabpanel">
                       <div class="product__details__tab__content">
-                      <table class="table">
+                      <table class="table taC">
 		            	<thead>
 		            		<tr>
 		            			<th>강사아이디</th>
@@ -47,15 +47,16 @@
 		            		</tr>
 		            	</thead>
 		            	<tbody>
-			            	<tr>
-				            	<td th:text="${lectureInfo.lecturerNum}"></td>
-				            	<td th:text="${lectureInfo.id}"></td>
-				            	<td th:text="${lectureInfo.name}"></td>
-				            	<td th:text="${lectureInfo.addr}"></td>
-				            	<td th:text="${lectureInfo.detailAddr}"></td>
-				            	<td th:text="${lectureInfo.mail}"></td>
-				            	<td th:text="${lectureInfo.phone}"></td>
-				            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/member/note/insert/{lecturerNum}(lecturerNum=${lectureInfo.lecturerNum})}">보내기</a></td>
+			            	<tr th:each="tlsn, stat: ${tlsnList}">
+				            	<td th:text="${tlsn.lecturerNum}" class="hidden"></td>
+				            	<td th:text="${tlsn.ltNum}" class="hidden"></td>
+				            	<td th:text="${tlsn.id}"></td>
+				            	<td th:text="${tlsn.name}"></td>
+				            	<td th:text="${tlsn.addr}"></td>
+				            	<td th:text="${tlsn.detailAddr}"></td>
+				            	<td th:text="${tlsn.mail}"></td>
+				            	<td th:text="${tlsn.phone}"></td>
+				            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/member/note/insert/{lecturerNum}(lecturerNum=${tlsn.lecturerNum})}">보내기</a></td>
 			            	</tr>
 		            	</tbody>
 		            </table>
@@ -90,7 +91,7 @@
       </div>
   </div>
 	<div class="btn_box">
-		<a th:href="@{/member/tlsn/detailList}" class="go_list">목록가기</a>
+		<a th:href="@{/member/tlsn/detailList/}" class="go_list">목록가기</a> <!-- {ltNum}(ltNum=${tlsn.ltNum}) -->
 	</div>
 <script th:inline="javascript">
 function link(gb,noteNum){

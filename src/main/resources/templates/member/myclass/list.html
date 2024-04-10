@@ -47,9 +47,14 @@
 			<li>
 				<div>
 					<h3>쪽지시험</h3>
-					<a href="#" class="go_link">전체보기 ></a>
+					<a th:href="@{/member/test/list}" class="go_link">전체보기 ></a>
 					<ul th:each="tlsn, stat: ${tlsnList}">
-						<li><a href="#"><i class='bx bx-edit'></i> <span th:text="${tlsn.ltTtl}"></span></a></li>
+						<li>
+							<a href="#"><i class='bx bx-edit'></i>
+								<span th:text="${tlsn.ltTtl}"></span>
+								<em><i th:text="${tlsn.name}"></i> 강사님</em>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</li>

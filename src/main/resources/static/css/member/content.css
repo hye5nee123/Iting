@@ -96,6 +96,9 @@
 .myclass_list div ul li, .graph{margin-top:5px;}
 .myclass_list div ul a{display:block; background:#fff; padding:10px; border:1px dashed #ddd; border-radius:5px; color:#888; font-size:15px; font-weight:600;}
 .myclass_list div ul a i{margin-right:3px; margin-top:-3px;}
+.myclass_list div ul a em{float:right; font-size:14px; color:#777; font-weight:400; font-style:normal;}
+.myclass_list div ul a em i{color:#777 !important; margin-right:0; font-size:14px; font-weight:700; font-style:normal;}
+.myclass_list div ul a:after{content:''; display:block; clear:both;}
 .myclass_list .go_link{position:absolute; right:20px; top:25px; color:#888; letter-spacing:-1px; font-size:14px;}
 .myclass_list > ul > li:first-child div a i{color:#ff8a00;}
 .print{position:absolute; right:0; top:0; padding:12px 30px; font-size:16px; color:#fff; border:0; letter-spacing:-1px; border-radius:5px; background:#205cdc;}
@@ -117,7 +120,9 @@
 .tlsn_info{position:relative; padding:30px; border:1px solid #ddd; background:#fff;}
 .tlsn_info .top{display:flex; justify-content:space-between; align-items:center;}
 .tlsn_info .top i{float: none; display:block; font-style:normal; color:#205cdc; font-size:13px !important; font-weight:700;}
-.tlsn_info .top p{margin-top:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.tlsn_info .top p{margin-top:5px; margin-bottom:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
+.tlsn_info .top span{display:block; color:#777; font-weight:400; font-size:14px;}
+.tlsn_info .top span i{display:inline-block; color:#777; font-size:14px !important; font-style:normal; font-weight:700;}
 .tlsn_info .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
 .tlsn_info .bottom{position:relative; float:none; width:100%; color:#555; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
 .tlsn_info .bottom p{color:#888; font-size:15px; margin-bottom:0; font-weight:400; margin-top:10px;}
@@ -159,22 +164,22 @@
 .test_insert input{border-radius:0; height:50px; width:100%; border:1px solid #e1e1e1; font-size:14px; color:#b7b7b7; padding-left:20px; margin-bottom:20px;}
 .test_insert textarea{width:100%; border:1px solid #e1e1e1; border-top:0; padding:.375rem .75rem; font-size:14px; color:#b7b7b7;}
 .mT20{margin-top:20px;}
+.taC{text-align:center;}
+.btn-outline-warning:hover{color:#fff;}
 
+/* 쪽지시험 */
+.test_info .left .top span{margin-left:5px;}
+.test_info .left .top > i{color:#ff8a00;}
+.test_info .go_link{right:30px; background:#ff8a00; transform:translateY(-50%);}
+.test_btn [class^="go_"]{background:#ff8a00;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 모달 */
+.test_modal{display:none; position:absolute; left:0; top:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.2); z-index:100;}
+.test_modal .text{position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); width:700px; height:500px; border-radius:10px; padding:25px; background:#fff; box-shadow:0 2px 20px 0 rgba(67, 89, 113, 0.45);}
+.test_modal .text h3{font-size:25px; font-weight:700;}
+.test_modal .text .btn_close{position:absolute; right:-15px; top:-15px; background:#ff8a00; border-radius:0.5rem; opacity:1; padding:7px 8px; border:0; box-shadow:0 0.125rem 0.25rem rgba(161, 172, 184, 0.4); transition:all 0.23s ease 0.1s;}
+.test_modal .text .btn_close i{color:#fff; font-size:30px;}
+.test_modal.on{display:block;}
 
 
 

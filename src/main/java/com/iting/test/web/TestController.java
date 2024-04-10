@@ -15,12 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iting.test.model.TestVO;
 import com.iting.test.service.TestService;
+import com.iting.tlsn.service.TlsnService;
 
 @Controller
 public class TestController {
 
 	@Autowired
 	TestService testService;
+	
+	@Autowired
+	TlsnService tlsnService;
 	
 	// 강의조회
 //	@RequestMapping("test/list")
@@ -34,6 +38,14 @@ public class TestController {
 	public String getTestList(Model model, TestVO vo) {
 		model.addAttribute("testList", testService.getTestList());
 		return "teacher/test/test";
+	}
+	
+	// 학생 목록조회
+	@RequestMapping("member/test/list")
+	public String getTestMemList(Model model, TestVO vo) {
+		model.addAttribute("testList", testService.getTestList());
+		model.addAttribute("tlsnList", tlsnService.getTlsnList());
+		return "member/test/list";
 	}
 	
 	// 등록페이지 이동

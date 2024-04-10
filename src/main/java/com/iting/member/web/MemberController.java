@@ -18,7 +18,7 @@ public class MemberController {
 	TlsnService tlsnService;
 	
 	// 마이페이지
-	@RequestMapping("member/mycalss/list")
+	@RequestMapping("member/myclass/list")
 	public String getMemberList(Model model, MemberVO vo) {
 		model.addAttribute("testList", memberService.getMemberList());
 		model.addAttribute("tlsnList", tlsnService.getTlsnList());

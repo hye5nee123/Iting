@@ -25,6 +25,7 @@ import com.iting.note.model.NoteVO;
 import com.iting.note.service.NoteService;
 import com.iting.socket.model.Greeting;
 import com.iting.socket.model.HelloMessage;
+import com.iting.tlsn.service.TlsnService;
 
 @Controller
 public class NoteController {
@@ -38,7 +39,7 @@ public class NoteController {
 	MemberService memberService;
 	
 	@Autowired
-	LectureService lectureService;
+	TlsnService tlsnService;
 	
 	@Autowired
 	private HttpSession httpSession;
@@ -61,6 +62,7 @@ public class NoteController {
 		System.out.println(user);
 		model.addAttribute("recList", noteService.getRecList(user));
 		model.addAttribute("sentList", noteService.getSentList(user));
+		model.addAttribute("tlsnList", tlsnService.getTlsnList());
 		return "member/note/list";
 	}
 	

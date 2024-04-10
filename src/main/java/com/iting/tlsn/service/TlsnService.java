@@ -6,5 +6,5 @@ import com.iting.tlsn.model.TlsnVO;
 
 public interface TlsnService {
 	public List<TlsnVO> getTlsnList();
-	public List<TlsnVO> getTlsnDetailList();
+	public List<TlsnVO> getTlsnDetailList(String ltNum);
 }

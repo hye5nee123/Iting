@@ -24,9 +24,9 @@ public class TlsnController {
 	}
 	
 	// 수강목록상세
-	@RequestMapping("member/tlsn/detailList")
-	public String getTlsnDetailList(Model model, TlsnVO vo) {
-		model.addAttribute("tlsnList", tlsnService.getTlsnDetailList());
+	@RequestMapping("member/tlsn/detailList/{ltNum}")
+	public String getTlsnDetailList(String ltNum, Model model, TlsnVO vo) {
+		model.addAttribute("tlsn", tlsnService.getTlsnDetailList(ltNum));
 		return "member/tlsn/detailList";
 	}
 }

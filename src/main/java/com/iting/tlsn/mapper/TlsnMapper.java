@@ -9,5 +9,5 @@ import com.iting.tlsn.model.TlsnVO;
 @Mapper
 public interface TlsnMapper {
 	public List<TlsnVO> getTlsnList();
-	public List<TlsnVO> getTlsnDetailList();
+	public List<TlsnVO> getTlsnDetailList(String ltNum);
 }

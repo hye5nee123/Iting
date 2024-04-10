@@ -21,8 +21,8 @@ public class TlsnServiceImpl implements TlsnService {
 	}
 
 	@Override
-	public List<TlsnVO> getTlsnDetailList() {
-		return tlsnMapper.getTlsnDetailList();
+	public List<TlsnVO> getTlsnDetailList(String ltNum) {
+		return tlsnMapper.getTlsnDetailList(ltNum);
 	}
 	
 }
