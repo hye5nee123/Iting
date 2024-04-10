@@ -60,7 +60,7 @@ public class CommonController {
 		return mv;
 	}
 
-	/* 파일 업로드 */
+	/* 첨부 파일 업로드 - 테스트용*/
 	@RequestMapping("upload/file")
 	public String uploadFile(MultipartFile[] uploadFiles) throws IllegalStateException, IOException {
 		if (uploadFiles != null) {
@@ -88,7 +88,7 @@ public class CommonController {
 	}
 	
 	
-	/* 파일 업로드 (싱글)*/
+	/* 첨부 파일 업로드 (싱글)*/
 	@PostMapping("upload/file")
 	@ResponseBody
 	public Map<String, Object> uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
@@ -108,10 +108,18 @@ public class CommonController {
 		
 	}
 	
-	/* 파일 업로드 (멀티) */
+	/* 첨부 파일 업로드 (멀티) */
 	
 	
-	/* 파일 다운로드 */
+	/* 첨부 파일 다운로드 */
+	@GetMapping("/download/file/{fileNum}")
+	@ResponseBody
+	public FileVO findFile(@PathVariable String fileNum) {
+        return commonService.getFileInfo(fileNum);
+    }
+	
+	
+	/* 첨부 파일 다운로드 - 테스트용 */
 	@GetMapping("/downfile")
 	public ModelAndView downLoadFile(String fileName) {
 		ModelAndView mv = new ModelAndView();

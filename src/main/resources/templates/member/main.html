@@ -101,6 +101,12 @@
 		<button type="button" id="payBtn" class="btn btn-primary">구독등록</button>
 	</form>
 	
+	<div>
+		<p>이미지 다운로드 예시</p> 
+		<img th:src="@{/download/cats.jpg}"></img>
+		<button th:onclick="|location.href='@{/download/첨부파일테스용.xlsx}'|">엑셀파일 다운로드 테스트</button>
+	</div>
+	
 	<script>
 	const subspTypCd = TestForm.subspTypCd.value;
 	const memNum = TestForm.memNum.value;
