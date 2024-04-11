@@ -44,16 +44,16 @@ public class LectureController {
 		pvo.setPageSize(16);
 		pvo.setFirst(0);
 		pvo.setLast(5);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		List<LectureVO> list = lectureService.getAllLectureList(vo, pvo);
-		
+
 		map.put("lectList", list);
 		map.put("paging", pvo);
-		
+
 		return map;
-		
+
 	}
 
 	// 강의 단건 조회
@@ -63,17 +63,14 @@ public class LectureController {
 		return "member/lecture/info";
 	}
 
-  
 	/* 강사 */
 	// 강의 목록 조회
 	@GetMapping("lecture/lecture")
 	public String getLectureList(Model model, LectureVO vo) {
+		vo.setLecturerNum("le00002");
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
 		return "teacher/lecture/getLectureList";
 	}
-	
-	
-	
 
 	// 강의 단건 조회
 	@GetMapping("lecture/info1/{ltNum}")
@@ -94,38 +91,43 @@ public class LectureController {
 	@ResponseBody
 	@PostMapping("/teacher/lecture/insert1")
 	public String ltInsert(@RequestBody LectureVO vo, MultipartFile uFile) throws IllegalStateException, IOException {
-		System.out.println(vo +
-				"===============");
+		System.out.println(vo + "===============");
 		lectureService.ltInsert(vo);
 		FileVO fvo = FileUtil.uploadFile(uFile);
 		return "redirect:/admin/lecture/list";
 	}
 	/* 관리자 */
 	// 강의 수정
-	
 
-	//강의 리스트
+	// 강의 리스트
 	@GetMapping("/admin/lecture/list")
 	public String list(Model model, LectureVO vo) {
 		model.addAttribute("list", lectureService.getLectureList(vo));
 		return "/admin/lecture/list";
 	}
+
+	//승인 대기 목록
 	
-	//승인 목록
-	@ResponseBody
-	@GetMapping("/admin/lecture/endLectureList")
-	public List<LectureVO> endList(LectureVO vo) {
-	
-		return lectureService.endLectureList(vo);
-	
+	@GetMapping("/admin/lecture/ingLectureList")
+	public String ingLectureList(Model model, LectureVO vo) {
+		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
+		return "/admin/lecture/ingLectureList";
+
 	}
-	//승인수정 기능
+	//승인 완료 목록
+	@GetMapping("/admin/lecture/endLectureList")
+	public String endLectureList(Model model, LectureVO vo) {
+		model.addAttribute("endLectureList", lectureService.endLectureList(vo));
+		return "/admin/lecture/endLectureList";
+	}
+
+	// 승인수정 기능
 	@ResponseBody
 	@GetMapping("/admin/lecture/update/{ltNum}")
-	public LectureVO update(LectureVO vo,@PathVariable String ltNum) {
+	public LectureVO update(LectureVO vo, @PathVariable String ltNum) {
 		vo.setLtNum(ltNum);
 		lectureService.update(vo);
 		return vo;
 	}
-	
+
 }
