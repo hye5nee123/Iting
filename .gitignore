@@ -153,3 +153,4 @@ $RECYCLE.BIN/
 
 # ignore properties file
 application-API-KEY.properties
+apikey.js

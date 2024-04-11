@@ -16,17 +16,6 @@ const csrf_axios = axios.create({
 	}
 });
 
-//로그아웃
-	function logout(){
-        //e.preventDefault();
-		console.log("로그아웃 작동");
-        csrf_axios({
-            method: 'POST',
-            url: '/logout'
-        })
-            .catch(err => console.log(err));
-	}
-	
 /* 파일업로드 ajax */
 let fileNum = ""; // 첨부파일번호
 
@@ -82,25 +71,23 @@ function confirmAlert(tit, txt) {
 	});
 }
 
-/* (5) 현재 로그인 상태를 확인 */
-			window.addEventListener('load', function () {
-				naverLogin.getLoginStatus(function (status) {
-					if (status) {
-						/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
-						console.log(naverLogin.user);
-						setLoginStatus();
-					}
-				});
-			});
-
-			/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
-			function setLoginStatus() {
-				let naverId = naverLogin.user.getEmail();
-				// let nickName = naverLogin.user.get();
-				/* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
-				$("#gnbLogin").click(function (e) {
-					e.preventDefault();
-					naverLogin.logout();
-					location.replace('/member/main');
-				});
-			}
+//로그아웃
+	async function logout(){
+		//nlogout();
+		console.log("로그아웃 작동");
+        await csrf_axios({
+            method: 'POST',
+            url: '/logout'
+        })
+            .catch(err => console.log(err));
+	}
+	
+//네이버 로그아웃
+function nlogout(){
+	let naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "IUFmLIwupwmkJxh3eacH"
+		}
+	);
+		naverLogin.logout(); // 네이버 로그아웃 처리
+}
