@@ -37,10 +37,5 @@ public class ReplyRestController {
 
 	}
 
-	// 댓글 등록.
-	@PostMapping("/member/cnq/rInsert")
-	public CnqVO save(CnqVO vo) {
-		replyService.register(vo);
-		return vo;
-	}
+
 }

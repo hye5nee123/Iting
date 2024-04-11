@@ -102,19 +102,6 @@
 			<tbody id="replyList">
 			</tbody>
 		</table>
-		<!-- paging 자리 -->
-		<h3>댓글등록</h3>
-		<form method="post" name="replyForm">
-			<input type="hidden" name="bno" th:value="${board.boardNo}">
-			<input type="hidden" name="rno"> <input type="hidden"
-				name="replyDate"
-				th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}">
-			<input type="hidden" name="updateDate"
-				th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}">
-			내용 <input name="reply"> 작성자 <input name="replyer">
-			<button type="button" id="reSaveBtn">등록</button>
-			<button type="button" id="reUpdate">수정</button>
-		</form>
 	</div>
 	<script th:inline="javascript">
 	const ltCnqNum = [[${cnq.ltCnqNum}]]
