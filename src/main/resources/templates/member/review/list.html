@@ -8,24 +8,9 @@
 			frmSearch.page.value = p;
 			frmSearch.submit();
 		}
-		function init() {
-			frmSearch.ttl.value = "";
-			frmSearch.name.value = "";
-		}
 	</script>
 	<h3 class="related-title">review</h3>
 	<br>
-	<!-- 검색 폼 시작 -->
-	<form name="frmSearch" th:object="${reviewVO}"
-		style="display: inline-block;">
-		<input type="hidden" name="page"> 제목 <input name="ttl"
-			th:value="*{ttl}"> 작성자 <input name="name" th:value="*{name}">
-		<a href="#" onclick="gopage(1)" class="search-switch"> <img
-			src="/img/member/main/search.png" alt="searchBtn"></a> <a href="#"
-			onclick="init()" class="search-switch"> <img
-			src="/img/member/main/resetBtn.png" alt="searchBtn"></a>
-	</form>
-	<!-- 검색 폼 끝 -->
 	<div>
 		<br> <br>
 		<div>
