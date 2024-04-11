@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <section layout:fragment="content">
 
-<style>
+	<style>
 #cntn th {
 	background: #EFEFFB
 }
@@ -13,7 +13,7 @@
 	border: 1px solid;
 	border-color: #E0ECF8;
 	border-radius: 30px;
-	width:100%;
+	width: 100%;
 }
 
 #cntn th, td {
@@ -34,7 +34,7 @@
 	float: right;
 	padding: 12px 40px;
 	font-size: 16px;
-	color:#fff;
+	color: #fff;
 	border: 0;
 	letter-spacing: -1px;
 	background: #ff8a00;
@@ -81,11 +81,14 @@
 				</tbody>
 			</table>
 		</div>
-		<div >
-			<button  class="cnq_insertBtn" type="button" id="cnq_insertBtn" th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
-			<button class="cnq_reset" type="button" id="cnq_insertBtn" th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
+		<div>
+			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
+				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+			<button class="cnq_reset" type="button" id="cnq_insertBtn"
+				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
 		</div>
 	</form>
+	<!-- 댓글 -->
 	<div>
 		<table>
 			<thead>
@@ -99,6 +102,19 @@
 			<tbody id="replyList">
 			</tbody>
 		</table>
+		<!-- paging 자리 -->
+		<h3>댓글등록</h3>
+		<form method="post" name="replyForm">
+			<input type="hidden" name="bno" th:value="${board.boardNo}">
+			<input type="hidden" name="rno"> <input type="hidden"
+				name="replyDate"
+				th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}">
+			<input type="hidden" name="updateDate"
+				th:value="${#calendars.format(#calendars.createNow(),'yyyy/MM/dd')}">
+			내용 <input name="reply"> 작성자 <input name="replyer">
+			<button type="button" id="reSaveBtn">등록</button>
+			<button type="button" id="reUpdate">수정</button>
+		</form>
 	</div>
 	<script th:inline="javascript">
 	const ltCnqNum = [[${cnq.ltCnqNum}]]
