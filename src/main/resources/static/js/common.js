@@ -16,17 +16,6 @@ const csrf_axios = axios.create({
 	}
 });
 
-//로그아웃
-	function logout(){
-		naverLogin.logout(); // 네이버 로그아웃 처리
-		console.log("로그아웃 작동");
-        csrf_axios({
-            method: 'POST',
-            url: '/logout'
-        })
-            .catch(err => console.log(err));
-	}
-	
 /* 파일업로드 ajax */
 let fileNum = ""; // 첨부파일번호
 
@@ -82,3 +71,23 @@ function confirmAlert(tit, txt) {
 	});
 }
 
+//로그아웃
+	async function logout(){
+		//nlogout();
+		console.log("로그아웃 작동");
+        await csrf_axios({
+            method: 'POST',
+            url: '/logout'
+        })
+            .catch(err => console.log(err));
+	}
+	
+//네이버 로그아웃
+function nlogout(){
+	let naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "IUFmLIwupwmkJxh3eacH"
+		}
+	);
+		naverLogin.logout(); // 네이버 로그아웃 처리
+}

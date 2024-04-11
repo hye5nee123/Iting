@@ -149,9 +149,9 @@ public class CommonController {
 		return "common/login";
 	}
 	
-	@GetMapping("/naverAcconut")
+	@GetMapping("/naveraccount")
 	public String naverAccForm() {
-		return "common/naverAcconut";
+		return "common/naverAccount";
 	}
 
 	// 회원가입 페이지 이동

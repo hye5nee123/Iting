@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- CSRF -->
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
+
+<link rel="stylesheet" href="/css/member/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet" href="/css/member/nice-select.css"
+	type="text/css">
+<link rel="stylesheet" href="/css/member/style.css" type="text/css">
+
+<link rel="stylesheet" href="/css/member/slicknav.min.css"
+	type="text/css">
+<!-- 네이버 로그인 -->
+<script src="/js/join/naverlogin.js"></script>
+
+<script src="/js/common.js"></script>
+<title>추가 정보 입력</title>
 </head>
 <body>
 
 </body>
 <script>
-/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
-function setLoginStatus() {
-	let naverPhone = naverLogin.user.getMobile();
-	let naverEmail = naverLogin.user.getEmail();
-	let token = naverLogin.accessToken.accessToken;
-	location.replace('/naverAcconut'); //추가정보입력창
-}
+	/* (6) 로그인 상태가 "true" 인 경우 사용자 정보를 출력합니다. */
+	naverLogin.init();
+	console.log(naverLogin);
+	console.log(naverLogin.user);
+	function setLoginStatus() {
+		let naverPhone = naverLogin.user.getMobile();
+		let naverEmail = naverLogin.user.getEmail();
+		let token = naverLogin.accessToken.accessToken;
+	}
 </script>
 </html>
