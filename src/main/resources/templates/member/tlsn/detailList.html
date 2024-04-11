@@ -20,11 +20,12 @@
 		</div>
 	</div>
 	
-	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info">
+	<div th:each="tlsn, stat: ${tlsn}" class="info tlsn_info">
 		<div class="top">
 			<div class="left">
 				<i th:text="${tlsn.ltCateCd}"></i>
 				<p th:text="${tlsn.ltTtl}"></p>
+				<span><i th:text="${tlsn.name}"></i> 강사님</span>
 			</div>
 			<div class="graph">
 				<span>그래프</span>
@@ -36,7 +37,7 @@
 		</div>
 	</div>
 	<div class="btn_box">
-		<a th:href="@{/member/mycalss/list}" class="go_list">내강의실 목록가기</a>
+		<a th:href="@{/member/tlsn/list}" class="go_list">수강중인 강의가기</a>
 	</div>
 </section>
 

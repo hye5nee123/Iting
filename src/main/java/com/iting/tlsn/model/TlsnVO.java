@@ -15,5 +15,10 @@ public class TlsnVO {
 	private String ltTtl;
 	private String ltCateCd;
 	private String lecturerNum;
+	private String id;
+	private String addr;
+	private String detailAddr;
+	private String mail;
+	private String phone;
 	private String name;
 }

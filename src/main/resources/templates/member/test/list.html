@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<title>쪽지시험</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section layout:fragment="content">
+
+	<div class="test_modal">
+		<div class="text">
+			<h3>쪽지시험</h3>
+			<button class="btn_close"><i class='bx bx-x'></i></button>
+		</div>
+	</div>
+	<div class="row lecture_info">
+		<div class="col-lg-12">
+			<div class="section-title">
+			    <h2>쪽지시험</h2>
+			</div>
+		</div>
+	</div>
+	
+	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info test_info">
+		<div class="top">
+			<div class="left">
+				<div class="top">				
+					<i th:text="${tlsn.ltCateCd}"></i>
+					<span>/ <i th:text="${tlsn.name}"></i> 강사님</span>
+				</div>
+				<p th:text="${tlsn.ltTtl}"></p>
+				<p th:text="${tlsn.ltNum}" class="hidden"></p>
+				
+			</div>
+			<button class="go_link modal_btn">문제풀기 ></button>
+		</div>
+	</div>
+	<div class="btn_box test_btn">
+		<a th:href="@{/member/myclass/list}" class="go_list">내강의실가기</a>
+	</div>
+<script>
+	const modal = document.querySelector('.test_modal');
+	const modalOpen = document.querySelector('.modal_btn');
+	const modalClose = document.querySelector('.btn_close');
+	
+	modalOpen.addEventListener('click',function(){
+	    modal.classList.add('on');
+	});
+	modalClose.addEventListener('click',function(){
+	    modal.classList.remove('on');
+	});
+</script>
+</section>
+</body>
+</html>
