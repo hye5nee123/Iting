@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/teacher/layout}">
+	layout:decorate="~{layout/admin/layout}">
 <head>
 <meta charset="UTF-8">
-<title>강의 목록</title>
+<title>강의승인 페이지</title>
 <script th:inline="javascript">
 function move(ltNum){
 	location.href='/lecture/info1/'+ ltNum
 }
+
+
+
+
 
 
 </script>
@@ -29,11 +33,11 @@ function move(ltNum){
 	<div id="container" layout:fragment="container">
 		<div class="card">
 			<h4 class="card-header">
-				강의목록
-				<button type="button" id="asd" onclick="location.href='/teacher/lecture/insert'">등록하기</button>
+				승인 목록
 			
+
 			</h4>
-			
+
 
 			<div class="table-responsive text-nowrap">
 				<table class="table">
@@ -47,33 +51,28 @@ function move(ltNum){
 							<th>강의키워드</th>
 							<th>강사번호</th>
 							<th>승인여부</th>
-							<th>커리큘럼</th>
-							
-							</tr>
-							
-						
+							<th>승인</th>
+
+						</tr>
+
+
 					</thead>
 					<tbody>
-						<tr th:each="ltb, stat: ${getLectureList}"
-							th:onclick="move([[${ltb.ltNum}]])">
-							<td th:text="${ltb.ltNum}"></td>
-							<td th:text="${ltb.ltTtl}"></td>
-							<td th:text="${ltb.ltIntro}"></td>
-							<td th:text="${#dates.format(ltb.frDt,'yyyy-MM-dd')}"></td>
-							<td th:text="${ltb.ltDifCd}"></td>
-							<td th:text="${ltb.ltKeywordCd}"></td>
-							<td th:text="${ltb.lecturerNum}"></td>
-							<td th:text="${ltb.accpYnCd}"></td>
-							<td onclick="event.cancelBubble = true;">
-							<a class="btn btn-success" th:href="|/teacher/curri/list/${ltb.ltNum}|">커리큘럼</a>
-							</td>
-							
+						<tr th:each="endq, stat: ${endLectureList}"
+							th:onclick="move([[${endq.ltNum}]])">
+							<td th:text="${endq.ltNum}"></td>
+							<td th:text="${endq.ltTtl}"></td>
+							<td th:text="${endq.ltIntro}"></td>
+							<td th:text="${#dates.format(endq.frDt,'yyyy-MM-dd')}"></td>
+							<td th:text="${endq.ltDifCd}"></td>
+							<td th:text="${endq.ltKeywordCd}"></td>
+							<td th:text="${endq.lecturerNum}"></td>
+							<td th:text="${endq.accpYnCd}"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-	
 	</div>
 </body>
 

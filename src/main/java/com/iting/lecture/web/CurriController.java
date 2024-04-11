@@ -24,8 +24,9 @@ public class CurriController {
 	@Autowired
 	CurriService curriService;
 	//커리 목록조회
-	@GetMapping("/teacher/curri/list")
-	public String list(Model model, CurriVO vo) {
+	@GetMapping("/teacher/curri/list/{ltNum}")
+	public String list(@PathVariable String ltNum, Model model, CurriVO vo) {
+		vo.setLtNum(ltNum);
 		model.addAttribute("list", curriService.getCurriList(vo));
 		return "/teacher/curri/list";
 	}

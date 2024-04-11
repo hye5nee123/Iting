@@ -12,6 +12,7 @@
 		,LT_TM
 		,LT_NUM
 		FROM CURRI
+		WHERE LT_NUM = #{ltNum}
 	</select>
 	
 	<!-- 커리상세 -->

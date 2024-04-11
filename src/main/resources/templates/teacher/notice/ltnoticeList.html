@@ -46,7 +46,7 @@ function move(ltNoticeNum){
 							</tr>
 					</thead>
 					<tbody>
-						<tr th:each="list, stat: ${getLtNoticeList}"
+						<tr th:each="list, stat: ${ltnoticeList}"
 							th:onclick="move([[${list.ltNoticeNum}]])">
 							<td th:text="${list.ltNoticeNum}"></td>
 							<td th:text="${list.ltNoticeTtl}"></td>
