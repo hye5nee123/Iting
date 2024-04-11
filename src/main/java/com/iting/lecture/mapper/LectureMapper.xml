@@ -55,17 +55,17 @@
 	<!-- 수강상세 -->
 	<select id="getLectureInfo" resultType="LectureVO">
 		SELECT LT_NUM
-		, LT_ST_CD
+		, find_code(LT_ST_CD) LT_ST_CD
 		,
 		LT_TTL
 		, LT_IMG
 		, LT_INTRO
-		, LT_CATE_CD
+		, find_code(LT_CATE_CD) LT_CATE_CD
 		, FR_DT
-		, LT_DIF_CD
+		, find_code(LT_DIF_CD) LT_DIF_CD
 		, LECTURER_NUM
 		,
-		LT_KEYWORD_CD
+		find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
 	</select>
@@ -140,6 +140,38 @@
 		le.LECTURER_NUM =
 		#{lecturerNum}
 	</select>
+
+	<!-- 강의 + 커리큘럼 -->
+	<select id="getCurriList" resultType="LectureVO">
+		SELECT l.LT_NUM
+		, find_code(LT_ST_CD) LT_ST_CD
+		, l.LT_TTL
+		, l.LT_IMG
+		, l.LT_INTRO
+		, find_code(LT_CATE_CD) LT_CATE_CD
+		, l.FR_DT
+		, find_code(LT_DIF_CD) LT_DIF_CD
+		, l.LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+        , c.RND_NUM
+        , c.RND_TTL
+        , c.ATCH_NUM
+        , c.LT_TM
+		FROM LT l JOIN CURRI c
+                    ON l.LT_NUM = c.LT_NUM
+		WHERE l.LT_NUM = #{ltNum}
+	</select>
+	
+	<!-- 커리큘럼 -->
+	<select id="getCurriAll" resultType="LectureVO">
+		SELECT COUNT(c.LT_NUM) CNT 
+        , SUM(c.LT_TM) SUM
+		FROM CURRI c JOIN LT l
+                    ON c.LT_NUM = l.LT_NUM
+		WHERE l.LT_NUM = #{ltNum}
+	</select>
+	
+	
 
 	<!-- 도승민 -->
 	<!-- 강의 등록 -->

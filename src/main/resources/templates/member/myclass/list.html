@@ -20,8 +20,8 @@
 		<div class="info lt_info">
 			<h3>수강 중인 강의</h3>
 			<a th:href="@{/member/tlsn/list}" class="go_link">전체보기 ></a>
-			<ul th:each="tlsn, stat: ${tlsnList}">
-				<li>
+			<ul>
+				<li th:each="tlsn, stat: ${tlsnList}">
 					<div class="box">
 						<div class="top">
 							<div class="left">
@@ -48,8 +48,8 @@
 				<div>
 					<h3>쪽지시험</h3>
 					<a th:href="@{/member/test/list}" class="go_link">전체보기 ></a>
-					<ul th:each="tlsn, stat: ${tlsnList}">
-						<li>
+					<ul>
+						<li th:each="tlsn, stat: ${tlsnList}">
 							<a href="#"><i class='bx bx-edit'></i>
 								<span th:text="${tlsn.ltTtl}"></span>
 								<em><i th:text="${tlsn.name}"></i> 강사님</em>
@@ -80,37 +80,37 @@
 	</div>
 	
 	<div class="row lecture_calendar">
-		<h3 class="related-title">학습캘린더 <span>2024년 4월 1째주</span></h3>
+		<h3 class="related-title">학습캘린더 <span>2024년 4월 5째주</span></h3>
 		<a href="#" class="go_link">전체보기 ></a>
 		<div class="list">
 			<ul>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 03.31</p>
+					<p><i class='bx bx-calendar-alt' ></i> 04.28</p>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 04.01</p>
+					<p><i class='bx bx-calendar-alt' ></i> 04.29</p>
 					<span>프로그래밍언어 공부하기</span>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 04.02</p>
+					<p><i class='bx bx-calendar-alt' ></i> 04.30</p>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 04.03</p>
+					<p><i class='bx bx-calendar-alt' ></i> 05.01</p>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 04.04</p>
+					<p><i class='bx bx-calendar-alt' ></i> 05.02</p>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 04.05</p>
+					<p><i class='bx bx-calendar-alt' ></i> 05.03</p>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 				<li>
-					<p><i class='bx bx-calendar-alt' ></i> 04.06</p>
+					<p><i class='bx bx-calendar-alt' ></i> 05.04</p>
 					<span>프로그래밍언어 공부하기</span>
 				</li>
 			</ul>
