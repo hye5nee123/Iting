@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <title>강의상세 페이지</title>
 <link rel="stylesheet" href="/css/member/content.css" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -53,15 +51,33 @@
             <div class="row" id="lectureList">
                          
             </div>
-            <div class="product__pagination">
-            	<a href="#"><i class='bx bxs-chevron-left' ></i></a>
-                <a class="active" href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <span>...</span>
-                <a href="#">21</a>
-            	<a href="#"><i class='bx bxs-chevron-right' ></i></a>
+            
+            
+            
+            <!-- 페이징 시작 -->
+            <div id="navs">        
             </div>
+            
+            
+			<!-- disabled : 비활성화 
+			<nav aria-label="Page navigation example" id="navs">
+				<ul class="pagination">
+					<li class="page-item" th:if="${paging.startPage} > 1">
+						<a class="page-link" th:href="|javascript:gopage(${paging.startPage-1})|">Previous</a>
+					</li>
+	
+					<li th:each="num : *{#numbers.sequence(paging.startPage, paging.endPage)}"
+						class="page-item" th:addclass="${num} == ${paging.page} ? active">
+						<a class="page-link" th:href="|javascript:gopage(${num})|" th:text="${num}">2</a>
+					</li>
+	
+					<li class="page-item" th:classappend="${paging.endPage} >= ${paging.lastPage} ? disabled">
+						<a class="page-link" th:href="|javascript:gopage(${paging.endPage+1})|">Next</a>
+					</li>
+				</ul>
+			</nav>-->
+			<!-- 페이징 종료 -->
+			
         </div>
 		
 		<script src="/js/member/allList.js"></script>
@@ -69,6 +85,15 @@
 			console.log("즉시 실행 함수 목록 : " , lectureService);
 		
 			lectureService.ltListReq();
+			
+			function gopage(p){
+				lectureService.ltListReq(p);
+			}
+			
+			// 상세페이지로 이동
+			function goInfo(ltNum) {
+				location.href = "/member/lecture/info/" + ltNum;
+			}
 			
 		</script>
 	</section>
