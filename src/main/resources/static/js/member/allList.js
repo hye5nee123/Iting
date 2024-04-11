@@ -29,8 +29,9 @@ var lectureService = (function(){
 		}
 		
 		// 페이징
-		//navs.innerHTML = makePage(res.paging);
+		navs.innerHTML = makePage(data.paging);
 	}
+	
 	
 	function makeDiv(lecture) {
 		
@@ -43,7 +44,7 @@ var lectureService = (function(){
 	                        </div>
 	                        <div class="product__item__text">
 	                            <h6><span>${lecture.name}</span> 선생님</h6>
-	                            <a href="#" class="add-cart">상세보기</a>
+	                            <a href="http://localhost:8081/member/lecture/info/${lecture.ltNum}" class="add-cart">상세보기</a>
 	                            <div class="rating">
 	                                <i class='bx bxs-star'></i>
 									<i class='bx bxs-star'></i>
@@ -51,7 +52,7 @@ var lectureService = (function(){
 									<i class='bx bxs-star'></i>
 									<i class='bx bx-star' ></i>
 	                            </div>
-	                            <h5>${lecture.ltTtl}</h5>
+	                            <h5 onclick="goInfo(${lecture.ltNum})">${lecture.ltTtl}</h5>
 	                            <span>${lecture.ltCateCd}</span>
 	                            <span>${lecture.ltKeywordCd}</span>
 	                            
@@ -60,6 +61,33 @@ var lectureService = (function(){
 	                </div>`;
 		return newTag;
 	}
+	
+	function makePage(paging) {
+		console.log(paging)
+
+		let tag = `<nav aria-label="...">
+		  <ul class="pagination">`;
+		
+		// 이전 버튼
+		if(paging.startPage > 1) {
+			tag += `<li class="page-item">
+		        <a class="page-link" href="javascript:gopage(${paging.startPage-1})">Previous</a></li>`;
+		}
+		// 페이지 번호
+		for(i=paging.startPage; i <= paging.endPage; i++) {
+			tag += `<li class="page-item">
+				<a class="page-link" href="javascript:gopage(${i})">${i}</a></li>`;
+		}
+		// 다음 버튼
+		if(paging.endPage <= paging.lastPage) {
+			tag += `<li class="page-item">
+				<a class="page-link" href="javascript:gopage(${paging.endPage + 1})">Next</a></li>`;
+		    tag += `</ul>
+		    	</nav>`;
+		}
+		return tag;
+	}
+	
 	
 	
 	
