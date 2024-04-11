@@ -62,7 +62,7 @@ public class LectureController {
 	public String info(@PathVariable String ltNum, LectureVO vo, Model model) {
 		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
 		model.addAttribute("curriList", lectureService.getCurriList(vo));
-		model.addAttribute("curriList", lectureService.getCurriInfo(vo));
+		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
 		return "member/lecture/info";
 	}
 

@@ -163,8 +163,8 @@
 	</select>
 	
 	<!-- 커리큘럼 -->
-	<select id="getCurriInfo" resultType="LectureVO">
-		COUNT(l.LT_NUM) CNT 
+	<select id="getCurriAll" resultType="LectureVO">
+		SELECT COUNT(c.LT_NUM) CNT 
         , SUM(c.LT_TM) SUM
 		FROM CURRI c JOIN LT l
                     ON c.LT_NUM = l.LT_NUM

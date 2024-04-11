@@ -17,7 +17,7 @@ public interface LectureMapper {
 	// 신수지
 	public List<LectureVO> getTcList(String lecturerNum);	
 	public List<LectureVO> getCurriList(LectureVO vo);
-	public LectureVO getCurriInfo(String ltNum);
+	public LectureVO getCurriAll(String ltNum);
 	
   
 	//도승민

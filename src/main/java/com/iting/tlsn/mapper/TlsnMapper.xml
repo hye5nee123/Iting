@@ -24,7 +24,7 @@
 		              ON t.MEM_NUM = m.MEM_NUM
 		            JOIN LECTURER e
 		              ON l.LECTURER_NUM = e.LECTURER_NUM
-		ORDER BY t.APPL_DT
+		ORDER BY t.APPL_DT DESC
 	</select>
 	
 	<select id="getTlsnDetailList">
@@ -44,6 +44,6 @@
 		              ON t.MEM_NUM = m.MEM_NUM
 		            JOIN LECTURER e
 		              ON l.LECTURER_NUM = e.LECTURER_NUM
-		ORDER BY t.APPL_DT
+		ORDER BY t.APPL_DT DESC
 	</select>
 </mapper>

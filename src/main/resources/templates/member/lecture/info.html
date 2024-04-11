@@ -32,7 +32,7 @@
 					<li><i class='bx bx-spreadsheet'></i>
 						<div>
 							<p>커리큘럼 수</p>
-							<span>커리큘럼 수</span>
+							<span>총 <em th:text="${cur.cnt}"></em>개</span>
 						</div></li>
 					<li><i class='bx bx-bar-chart-alt'></i>
 						<div>
@@ -51,13 +51,17 @@
 		</div>
 
 		<div class="row lecture_list">
-			<div class="left"></div>
+			<div class="left">
+				<video controls width="500" autoplay muted>	
+				  <source src="/video/html의이해_intro.mp4" type="video/mp4" />
+				</video>
+			</div>
 			<div class="right">
 				<h3>
 					<i class='bx bx-slideshow'></i>
 					<span th:text="${lecture.ltTtl}"></span>
 				</h3>
-				<span class="target">로드맵 목표</span> <span class="txt" th:text="${lecture.rdmCateCd}">프로그래밍
+				<span class="target">로드맵 목표</span> <span class="txt">프로그래밍
 					시대에 맞는 인재 되기</span>
 				<p>
 					<span><i class='bx bx-user'></i> <i>22,789</i>명 수강</span>
@@ -77,10 +81,10 @@
 			<h3 class="related-title">커리큘럼</h3>
 			<ul>
 				<li><p class="total">
-						<i class='bx bx-caret-right-circle'></i> 총 강의 <i th:text="${lecture.rdmCateCd}"></i>개
+						<i class='bx bx-caret-right-circle'></i> 총 강의 <i th:text="${cur.cnt}"></i>개
 					</p></li>
 				<li><p class="total">
-						<i class='bx bx-stopwatch'></i> 영상시간 <i>35분</i>
+						<i class='bx bx-stopwatch'></i> 영상시간 <i th:text="${cur.sum}"></i>분
 					</p></li>
 			</ul>
 

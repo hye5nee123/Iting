@@ -48,8 +48,8 @@ public class LectureServiceImpl implements LectureService {
 	}
 	
 	@Override
-	public LectureVO getCurriInfo(String ltNum) {
-		return lectureMapper.getCurriInfo(ltNum);
+	public LectureVO getCurriAll(String ltNum) {
+		return lectureMapper.getCurriAll(ltNum);
 	}
   
 	// 도승민
