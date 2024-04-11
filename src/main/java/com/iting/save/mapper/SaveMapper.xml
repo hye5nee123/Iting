@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.cnq.mapper.SaveMapper">
+<insert id="saveInsert" parameterType="SaveVO">
+		<selectKey keyProperty="ltCnqNum" order="BEFORE"
+			resultType="string">
+			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) +
+			1, 5, '0') AS LT_CNQ_NUM
+			FROM lt_cnq
+		</selectKey>
+		INSERT INTO lt_Cnq (
+		LT_CNQ_NUM
+		, TTL
+		, CNTN
+		, DRWUP_DT
+		, MEM_NUM
+		, LT_NUM
+		, HIT
+		)
+		VALUES (
+		#{ltCnqNum}
+		, #{ttl}
+		, #{cntn}
+		, sysDate
+		, #{memNum}
+		, #{ltNum}
+		, 0
+		)
+	</insert>
+</mapper>
