@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/teacher/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>커리등록</title>
 <style>
 .btn_box {
 	text-align: center;
@@ -53,8 +53,8 @@
 								class="form-control" type="text" name="ltTm" id="ltTm">
 						</div>
 						<div class="mb-3 test_list">
-							<label for="frDt" class="form-label">강의번호</label> <input
-								class="form-control" type="text" name="ltNum" id="ltNum" th:value="${session.ltNum}" readonly>
+							<label for="ltNum" class="form-label">강의번호</label> <input
+								class="form-control" type="text" name="ltNum" id="ltNum" th:value="${ltNum}" readonly>
 						</div>
 						</div>
 					
@@ -97,16 +97,12 @@
 		// 등록 응답
 		function saveRes(res) {
 			console.log(res);
-			alert('문제가 등록되었습니다.');
-			window.location.href = "/teacher/curri/list";
-			
+			alert('등록되었습니다.');
+			window.location.href = "/lecture/lecture";
 		}
-
 		//버튼 클릭 시 함수 호출.
 		saveBtn.addEventListener("click", e => {
 			saveReq();
-			
-			
 		})
 
 

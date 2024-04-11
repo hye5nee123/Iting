@@ -10,7 +10,19 @@ function move(ltNum){
 	location.href='/lecture/info1/'+ ltNum
 }
 
+let endLectureList = [[${endLectureList}]]
 
+function gopage(p){
+	frmSearch.page.value = p;
+	frmSearch.submit();
+}
+function init(){
+	frmSearch.rndTtl.value = "";
+	frmSearch.rndCntn.value = "";
+}
+function move(ltNum{
+	location.href='/lecture/info1/'+ ltNum
+}		
 
 
 
@@ -34,11 +46,8 @@ function move(ltNum){
 		<div class="card">
 			<h4 class="card-header">
 				승인 목록
-			
-
 			</h4>
-
-
+			<p>검색</p>
 			<div class="table-responsive text-nowrap">
 				<table class="table">
 					<thead>

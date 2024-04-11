@@ -29,8 +29,8 @@ public class CurriServiceImpl implements CurriService{
 
 
 	@Override
-	public int CurriInsert(CurriVO vo) {
-		return curriMapper.CurriInsert(vo);
+	public int curriInsert(CurriVO vo) {
+		return curriMapper.curriInsert(vo);
 	}
 
 }

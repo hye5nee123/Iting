@@ -8,24 +8,7 @@
 
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <!-- Demo styles -->
-  <script>
- 
-  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
 
-  ChannelIO('boot', {
-    "pluginKey": "0e4565f7-9e3e-4b55-a0d4-b02dc2c809bf"
-  });
-  
-  
- 
-  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
-
-  ChannelIO('boot', {
-    "pluginKey": "0e4565f7-9e3e-4b55-a0d4-b02dc2c809bf"
-  });
-
-
-  </script>
   <style>
     html,
     body {
@@ -74,11 +57,7 @@
 <body>
 <section layout:fragment="content">
 
- <p>메인 자리</p>
-<h1>엑셀 업로드 테스트</h1>
-    <form th:action="@{/test/addExcel}" method="POST" enctype="multipart/form-data">
-      <input type="file" name="file">
-      <input th:type="submit" value="업로드 하기" />
+ 
     </form>
     <!-- 
     <form method="post" enctype="multipart/form-data" id="imgForm" name="imgForm">
@@ -105,6 +84,12 @@
 		<p>이미지 다운로드 예시</p> 
 		<img th:src="@{/download/cats.jpg}"></img>
 		<button th:onclick="|location.href='@{/download/첨부파일테스용.xlsx}'|">엑셀파일 다운로드 테스트</button>
+	</div>
+	
+	<div class="row">
+		<video controls width="500">	
+		  <source src="/video/html의이해_2차시.mp4" type="video/mp4" />
+		</video>
 	</div>
 	
 	<script>

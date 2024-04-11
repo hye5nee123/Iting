@@ -31,24 +31,24 @@
 	<insert id="curriInsert" parameterType="CurriVO">
 	<selectKey keyProperty="rndNum" order="BEFORE"
 			resultType="string">
-			SELECT 'rndNum' || LPAD(NVL(MAX(SUBSTR(RND_NUM, -5)), 0) +
+			SELECT 'cu' || LPAD(NVL(MAX(SUBSTR(RND_NUM, -5)), 0) +
 			1, 5, '0') AS RND_NUM
 			FROM CURRI
 		</selectKey>
 		INSERT INTO CURRI (
-		 SELECT RND_NUM
+		 	   RND_NUM
               ,RND_TTL
               ,ATCH_NUM
               ,RND_CNTN
               ,LT_TM
               ,LT_NUM)
 		VALUES(
-		#{RND_NUM}
-		,#{RND_TTL}
-		,#{ATCH_NUM}
-		,#{RND_CNTN}
-		,#{LT_TM}
-		,#{LT_NUM}
+		#{rndNum}
+		,#{rndTtl}
+		,#{atchNum}
+		,#{rndCntn}
+		,#{ltTm}
+		,#{ltNum}
 		)
 	</insert>
 
