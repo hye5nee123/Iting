@@ -2,6 +2,8 @@ package com.iting.review.model;
 
 import java.util.Date;
 
+import lombok.Data;
+@Data
 public class ReviewVO {
 	private String reviewNum;
 	private String ttl;

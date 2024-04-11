@@ -23,7 +23,7 @@ public class ReviewController {
 
 	// list 전체 조회.
 	@RequestMapping("/member/review/list")
-	public String cnqList(Model model, ReviewVO vo, RSearchVO svo, PagingVO pvo) {
+	public String reviewList(Model model, ReviewVO vo, RSearchVO svo, PagingVO pvo) {
 		// paging처리.
 		pvo.setPageUnit(5); // 데이터수
 		pvo.setPageSize(3); // 페이지번호
