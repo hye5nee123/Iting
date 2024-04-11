@@ -10,4 +10,5 @@ import com.iting.member.model.MemberVO;
 public interface MemberMapper {
 	public List<MemberVO> getMemberList();
 	public List<MemberVO> getMemberLtsn();
+	public MemberVO getMemberInfo(String memNum);
 }

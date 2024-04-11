@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.getMemberLtsn();
 	}
 
+	@Override
+	public MemberVO getMemberInfo(String memNum) {
+		return memberMapper.getMemberInfo(memNum);
+	}
+
 
 
 

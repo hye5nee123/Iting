@@ -23,4 +23,12 @@
 		AND t.LT_NUM LIKE 'lt00014'
 		AND t.TLSN_ST_CD LIKE 'j2'
 	</select>
+	
+	<select id="getMemberInfo">
+		SELECT MEM_NUM
+			   , ID
+		       , NAME
+		FROM mem_lec_view
+		WHERE MEM_NUM = #{memNum}
+	</select>
 </mapper>
