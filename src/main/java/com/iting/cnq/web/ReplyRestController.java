@@ -3,6 +3,7 @@ package com.iting.cnq.web;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iting.cnq.model.CSearchVO;
@@ -34,5 +35,12 @@ public class ReplyRestController {
 
 		return map;
 
+	}
+
+	// 댓글 등록.
+	@PostMapping("/member/cnq/rInsert")
+	public CnqVO save(CnqVO vo) {
+		replyService.register(vo);
+		return vo;
 	}
 }

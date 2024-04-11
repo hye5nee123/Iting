@@ -27,4 +27,10 @@ public class ReplyServiceImpl implements ReplyService {
 		return map;
 	}
 
+	@Override
+	public int register(CnqVO vo) {
+		
+		return replyMapper.insertReply(vo);
+	}
+
 }

@@ -14,4 +14,7 @@ public interface ReplyMapper {
 
 	// 개수 계산.
 	public long getCount(CnqVO vo);
+
+	// 등록.
+	public int insertReply(CnqVO vo);
 }

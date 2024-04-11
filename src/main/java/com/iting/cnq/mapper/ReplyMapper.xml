@@ -21,5 +21,25 @@
 		select count(*)
 		from cmt
 	</select>
-
+	<insert id="insertReply" parameterType="ReplyVO">
+		<selectKey keyProperty="cmtNum" order="BEFORE"
+			resultType="string">
+			SELECT 'cm' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) +
+			1, 5, '0') AS CMT_NUM
+			FROM cmt
+		</selectKey>
+		INSERT into cmt(
+								CMT_NUM,
+								CNTN,
+								DRWUP_DT,
+								LT_CNQ_NUM,
+								DRWUPR
+		) values (
+								,#{cmtNum}
+								,#{cntn}
+								,#{drwupDt}
+								,#{ltCnqNum}
+								,#{drwupr}
+		) 
+	</insert>
 </mapper>
