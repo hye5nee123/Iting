@@ -26,26 +26,20 @@
 		SELECT * FROM ( SELECT ROWNUM AS rn, a.* FROM (
 
 		SELECT l.lt_num
-		,
-		find_code(l.lt_st_cd) lt_st_cd
+		, find_code(l.lt_st_cd) lt_st_cd
 		, l.lt_ttl
 		, l.lt_img
 		, l.lt_intro
-		,
-		find_code(l.lt_cate_cd) lt_cate_cd
+		, find_code(l.lt_cate_cd) lt_cate_cd
 		, l.fr_dt
-		, find_code(l.accp_yn_cd)
-		accp_yn_cd
+		, find_code(l.accp_yn_cd) accp_yn_cd
 		, find_code(l.lt_dif_cd) lt_dif_cd
 		, l.lecturer_num
-		,
-		find_code(l.lt_keyword_cd) lt_keyword_cd
-		, find_code(l.rdm_cate_cd)
-		rdm_cate_cd
+		, find_code(l.lt_keyword_cd) lt_keyword_cd
+		, find_code(l.rdm_cate_cd) rdm_cate_cd
 		, lec.name
 		FROM lt l JOIN lecturer lec
-		ON l.lecturer_num =
-		lec.lecturer_num
+					ON l.lecturer_num = lec.lecturer_num
 		<include refid="condition"></include>
 		ORDER BY lt_num DESC
 		
