@@ -30,6 +30,13 @@ public class LectureVO {
 	private String mail; 		// 강사 메일
 	private String phone; 		// 강사 연락처
 	
+	private String rndNum;
+	private String rndTtl;
+	private String atchNum;
+	private String ltTm;
+	private String cnt;
+	private String sum;
+	
 	//페이징
 	int start = 1;
 	int end = 10;

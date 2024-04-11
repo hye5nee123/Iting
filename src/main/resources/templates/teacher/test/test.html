@@ -48,10 +48,15 @@
 	     </div>
 	     <div class="demo-inline-spacing btn_box">
    			<a th:href="@{/teacher/test/update/{no}(no=${test.prblNum})}" class="btn btn-outline-warning">문제수정</a>
-   			<a th:href="@{/teacher/test/delete/{no}(no=${test.prblNum})}" class="btn btn-outline-secondary">문제삭제</a>
+   			<a th:href="@{/teacher/test/delete/{no}(no=${test.prblNum})}" id="BtnDel" class="btn btn-outline-secondary">문제삭제</a>
    		</div>
 	</div>
   </div>
+  <script>
+  $('#BtnDel').on('click', function(){
+      alert("문제가 삭제되었습니다.");
+});
+  </script>
 </div>
 </body>
 </html>

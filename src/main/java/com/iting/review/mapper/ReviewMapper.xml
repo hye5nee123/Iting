@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.review.mapper.ReviewMapper">
+	<select id="getReviewList"  resultType="map">
+		SELECT * from (select ROWNUM as rn, a.* from (
+		SELECT r.REVIEW_NUM,
+				r.TTL,
+				r.CNTN,
+				r.DRWUP_DT,
+				r.STAR,
+				r.MEM_NUM,
+				t.TLSN_NUM,
+				l.lt_num,
+				m.name
+
+		FROM review r, tlsn t, lt l ,mem m
+		WHERE r.TLSN_NUM = t.TLSN_NUM
+		AND t.lt_num = l.lt_num
+		AND r.mem_num = m.mem_num
+		ORDER by 
+	</select>
+	<select id="getCount" resultType="Long">
+		select count(*)
+		from review
+	</select>
+</mapper>

@@ -23,8 +23,8 @@
 		<div class="row lecture_info">
 			<div class="col-lg-12">
 				<div class="section-title">
-					<span>프로그래밍 언어</span>
-					<h2>프로그래밍언어 이해하기</h2>
+					<span th:text="${lecture.ltCateCd}"></span>
+					<h2 th:text="${lecture.ltTtl}"></h2>
 				</div>
 			</div>
 			<div class="info">
@@ -32,31 +32,34 @@
 					<li><i class='bx bx-spreadsheet'></i>
 						<div>
 							<p>커리큘럼 수</p>
-							<span>10</span>
+							<span>총 <em th:text="${cur.cnt}"></em>개</span>
 						</div></li>
 					<li><i class='bx bx-bar-chart-alt'></i>
 						<div>
 							<p>난이도</p>
-							<span>입문</span>
+							<span th:text="${lecture.ltDifCd}"></span>
 						</div></li>
 					<li><i class='bx bx-pencil'></i>
 						<div>
 							<p>키워드</p>
-							<span>키워드</span>
+							<span th:text="${lecture.ltKeywordCd}"></span>
 						</div></li>
 				</ul>
 				<button>수강하기</button>
 			</div>
-			<p class="text">프로그래밍 공부, 어떻게 시작해야 할지 막막하시다구요? 입문자도 쉽게 배울 수 있는
-				파이썬과 함께 시작해 보세요! 이번 토픽을 통해 기초를 탄탄히 쌓고 나면, '프로그래밍 생각보다 별 거 아니네?' 이런
-				생각이 들 거예요.</p>
+			<p class="text" th:text="${lecture.ltIntro}"></p>
 		</div>
 
 		<div class="row lecture_list">
-			<div class="left"></div>
+			<div class="left">
+				<video controls width="500" autoplay muted>	
+				  <source src="/video/html의이해_intro.mp4" type="video/mp4" />
+				</video>
+			</div>
 			<div class="right">
 				<h3>
-					<i class='bx bx-slideshow'></i> 프로그래밍언어 이해하기
+					<i class='bx bx-slideshow'></i>
+					<span th:text="${lecture.ltTtl}"></span>
 				</h3>
 				<span class="target">로드맵 목표</span> <span class="txt">프로그래밍
 					시대에 맞는 인재 되기</span>
@@ -78,21 +81,19 @@
 			<h3 class="related-title">커리큘럼</h3>
 			<ul>
 				<li><p class="total">
-						<i class='bx bx-caret-right-circle'></i> 총 강의 <i>5</i>개
+						<i class='bx bx-caret-right-circle'></i> 총 강의 <i th:text="${cur.cnt}"></i>개
 					</p></li>
 				<li><p class="total">
-						<i class='bx bx-stopwatch'></i> 영상시간 <i>35분</i>
+						<i class='bx bx-stopwatch'></i> 영상시간 <i th:text="${cur.sum}"></i>분
 					</p></li>
 			</ul>
 
 			<div class="list">
-				<ul>
+				<ul th:each="curri, stat: ${curriList}">
 					<li><div>
-							<a><span>1</span>파이썬 첫 걸음</a>
-						</div></li>
-					<li><div>
-							<a><span>2</span>파이썬 첫 걸음</a>
-						</div></li>
+							<a><span th:text="${stat.count}"></span><i th:text="${curri.rndTtl}"></i></a>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>

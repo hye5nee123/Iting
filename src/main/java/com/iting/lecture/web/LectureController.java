@@ -21,6 +21,7 @@ import com.iting.common.FileUtil;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.service.CurriService;
 import com.iting.lecture.service.LectureService;
 
 @Controller
@@ -57,9 +58,11 @@ public class LectureController {
 	}
 
 	// 강의 단건 조회
-	@GetMapping("lecture/info/{ltNum}")
-	public String info(@PathVariable String ltNum, Model model) {
+	@GetMapping("member/lecture/info/{ltNum}")
+	public String info(@PathVariable String ltNum, LectureVO vo, Model model) {
 		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
+		model.addAttribute("curriList", lectureService.getCurriList(vo));
+		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
 		return "member/lecture/info";
 	}
 

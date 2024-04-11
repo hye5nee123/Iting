@@ -38,8 +38,8 @@ public class CurriController {
 		return "/teacher/curri/info";
 	}
 	//커리등록페이지
-	@GetMapping("/teacher/curri/insert")
-	public ModelAndView list() {
+	@GetMapping("/teacher/curri/insert/{ltNum}")
+	public ModelAndView list(@PathVariable String ltNum) {
 		ModelAndView mv = new ModelAndView("/teacher/curri/insert");
 		return mv;
 	}
@@ -47,9 +47,9 @@ public class CurriController {
 	@ResponseBody
 	@PostMapping("/teacher/curri/insert1")
 	public String curriInsert(@RequestBody CurriVO vo,MultipartFile uFile) throws IllegalStateException, IOException {
-		curriService.CurriInsert(vo);
 		FileVO fvo = FileUtil.uploadFile(uFile);
-		return "";
+		curriService.curriInsert(vo);
+		return "redirect:/teacher/curri/list";
 	}
 
 }
