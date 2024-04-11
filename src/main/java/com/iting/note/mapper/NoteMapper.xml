@@ -74,6 +74,7 @@
 						, NOTE_TTL
 						, NOTE_CNTN
 						, SENT_DT
+						, REC_DT
 						, SENT_PS
 						, REC_PS
 						)
@@ -81,6 +82,7 @@
 				  #{noteNum}
 				, #{noteTtl}
 				, #{noteCntn}
+				, sysdate
 				, sysdate
 				, #{sentPs}
 				, #{recPs}

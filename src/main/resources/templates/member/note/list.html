@@ -25,10 +25,10 @@
                      <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab" th:classappend="${param.gb} == null ? 'active':_">쪽지보내기</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_">받은쪽지함</a>
+                     <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_">받은쪽지함</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab" th:classappend="${#strings.equals(param.gb , 'rec')}? 'active':_">보낸쪽지함</a>
+                     <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab" th:classappend="${#strings.equals(param.gb , 'sent')}? 'active':_">보낸쪽지함</a>
                  </li>
              </ul>
              <div class="tab-content">
@@ -62,27 +62,27 @@
 		            </table>
 		           </div>
                  </div>
-                 <div class="tab-pane" id="tabs-6" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_" role="tabpanel">
+                 <div class="tab-pane" id="tabs-6" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_" role="tabpanel">
                      <div class="product__details__tab__content">
                          <ul>
-                         	<li th:each="sent, stat: ${sentList}" th:onclick="link('sent',[[${sent.noteNum}]])">
-			            		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
-			            		<span th:text="${sent.id}"></span>
-			            		<span th:text="${sent.name}"></span>
-			            		<i th:text="${#dates.format(sent.sentDt, 'yyyy-MM-dd')}"></i>
-			            	</li>
-                         </ul>
-                     </div>
-                 </div>
-                 <div class="tab-pane" id="tabs-7" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_"  role="tabpanel">
-                     <div class="product__details__tab__content">
-                    
-                        <ul>
                          	<li th:each="rec, stat: ${recList}" th:onclick="link('rec',[[${rec.noteNum}]])">
 			            		<a href="#" th:text="${rec.noteTtl}" class="new"></a>
 			            		<span th:text="${rec.id}"></span>
 			            		<span th:text="${rec.name}"></span>
 			            		<i th:text="${#dates.format(rec.recDt, 'yyyy-MM-dd')}"></i>
+			            	</li>
+                         </ul>
+                     </div>
+                 </div>
+                 <div class="tab-pane" id="tabs-7" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  role="tabpanel">
+                     <div class="product__details__tab__content">
+                    
+                        <ul>
+                         	<li th:each="sent, stat: ${sentList}" th:onclick="link('rec',[[${sent.noteNum}]])">
+			            		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
+			            		<span th:text="${sent.id}"></span>
+			            		<span th:text="${sent.name}"></span>
+			            		<i th:text="${#dates.format(sent.sentDt, 'yyyy-MM-dd')}"></i>
 			            	</li>
                          </ul>
                      </div>
