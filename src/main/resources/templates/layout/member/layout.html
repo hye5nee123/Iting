@@ -57,7 +57,28 @@
     
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+ 
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+  ChannelIO('boot', {
+    "pluginKey": "0e4565f7-9e3e-4b55-a0d4-b02dc2c809bf"
+  });
+  
+  
+ 
+
+
+
+  </script>
     
+    <style>
+
+#iting {
+    max-width: 15%;
+}
+
+    </style>
 </head>
 
 <body>
@@ -104,6 +125,10 @@
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
                             <p>어서오세요 <span th:text="${session.userId}"></span>님</p>
+
+                        </div>
+                        <div class="main_btn">
+                            <a href="/member/main"><img src="/img/member/main/아이팅.png" id="iting"></a>
 
                         </div>
 
