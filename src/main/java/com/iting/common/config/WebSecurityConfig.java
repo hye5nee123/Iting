@@ -16,12 +16,18 @@ import com.iting.common.security.CustomAccessDeniedHandler;
 import com.iting.common.security.CustomAuthFailureHandler;
 import com.iting.common.security.CustomLoginSuccessHandler;
 import com.iting.common.security.CustomLogoutSuccessHandler;
+import com.iting.common.service.CustomOAuth2UserService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 	
 	@Autowired UserDetailsService detailService;
+	
+//	private final CustomOAuth2UserService customOAuth2UserService;
 	
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
@@ -44,7 +50,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				(requests) -> requests
-				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/common/**", "/lecture/**", "/download/**", "/upload/**", "/js/*").permitAll()
+				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/video/**", "/common/**", "/lecture/**", "/download/**", "/upload/**", "/js/*").permitAll()
 				.antMatchers("/admin/**").hasRole("B2")
 				.antMatchers("/teacher/**").hasRole("D1")
 				.anyRequest().authenticated())
@@ -61,11 +67,19 @@ public class WebSecurityConfig {
 				.failureHandler(loginFailureHandler())
 				.permitAll()
 				.and()
+				
 //				.logout((logout) -> logout.permitAll());
 				.logout()
 				.logoutUrl("/logout")
 				.logoutSuccessHandler(logoutSuccessHandler())
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
+				//
+//				.and()
+//				.oauth2Login()
+//				.userInfoEndpoint()
+//				.userService(customOAuth2UserService)
+//				.and()
+				//
 //				.logoutSuccessHandler((request, response, authentication) -> {
 //	                response.sendRedirect("/member/main");
 //				})
@@ -75,6 +89,7 @@ public class WebSecurityConfig {
 				.frameOptions()
 				.sameOrigin()
 				.and()
+				
 				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
 				.exceptionHandling(handler -> handler
 						.accessDeniedHandler(accessDeniedHandler()))

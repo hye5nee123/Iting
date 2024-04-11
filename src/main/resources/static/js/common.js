@@ -72,22 +72,11 @@ function confirmAlert(tit, txt) {
 }
 
 //로그아웃
-	async function logout(){
-		//nlogout();
+	function logout(){
 		console.log("로그아웃 작동");
-        await csrf_axios({
+        csrf_axios({
             method: 'POST',
             url: '/logout'
         })
             .catch(err => console.log(err));
 	}
-	
-//네이버 로그아웃
-function nlogout(){
-	let naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "IUFmLIwupwmkJxh3eacH"
-		}
-	);
-		naverLogin.logout(); // 네이버 로그아웃 처리
-}

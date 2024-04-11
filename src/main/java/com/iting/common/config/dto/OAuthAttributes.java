@@ -24,7 +24,7 @@ public class OAuthAttributes {
         this.phone = phone;
     }
 
-    public static OAuthAttributes of(String registrationId, Map<String, Object> attributes) {
+    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
             return ofNaver("id", attributes);
     }
 
@@ -40,7 +40,7 @@ public class OAuthAttributes {
 
     public User toEntity() {
         return User.builder()
-        		
+        		.mail(mail)
                 .phone(phone)
                 .role(Role.MEMBER)
                 .build();
