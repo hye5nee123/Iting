@@ -63,7 +63,7 @@ public class NoteController {
 		System.out.println(user);
 		model.addAttribute("recList", noteService.getRecList(user));
 		model.addAttribute("sentList", noteService.getSentList(user));
-		model.addAttribute("tlsnList", tlsnService.getTlsnList());
+		model.addAttribute("tlsnList", tlsnService.getTlsnList(user));
 		return "member/note/list";
 	}
 

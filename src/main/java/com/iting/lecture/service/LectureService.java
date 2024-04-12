@@ -16,6 +16,7 @@ public interface LectureService {
 	public List<LectureVO> getTcList(String ltNum);
 	public List<LectureVO> getCurriList(LectureVO vo);
 	public LectureVO getCurriAll(String ltNum);
+	public LectureVO getTcInfo(String ltNum, String lecturerNum);
 
   
 	// 도승민

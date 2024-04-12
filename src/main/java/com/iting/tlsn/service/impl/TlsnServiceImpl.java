@@ -16,13 +16,19 @@ public class TlsnServiceImpl implements TlsnService {
 	TlsnMapper tlsnMapper;
 	
 	@Override
-	public List<TlsnVO> getTlsnList() {
-		return tlsnMapper.getTlsnList();
+	public List<TlsnVO> getTlsnList(String user) {
+		return tlsnMapper.getTlsnList(user);
 	}
 
 	@Override
-	public List<TlsnVO> getTlsnDetailList(String ltNum) {
-		return tlsnMapper.getTlsnDetailList(ltNum);
+	public List<TlsnVO> getTlsnDetailList(String ltNum, String user) {
+		return tlsnMapper.getTlsnDetailList(ltNum, user);
 	}
+
+	@Override
+	public TlsnVO getTlsnInfo(TlsnVO vo) {
+		return tlsnMapper.getTlsnInfo(vo);
+	}
+
 	
 }

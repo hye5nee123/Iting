@@ -5,6 +5,7 @@ import java.util.List;
 import com.iting.tlsn.model.TlsnVO;
 
 public interface TlsnService {
-	public List<TlsnVO> getTlsnList();
-	public List<TlsnVO> getTlsnDetailList(String ltNum);
+	public List<TlsnVO> getTlsnList(String user);
+	public List<TlsnVO> getTlsnDetailList(String ltNum, String user);
+	public TlsnVO getTlsnInfo(TlsnVO vo);
 }

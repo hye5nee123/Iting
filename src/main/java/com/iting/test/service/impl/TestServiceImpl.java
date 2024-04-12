@@ -16,8 +16,8 @@ public class TestServiceImpl implements TestService {
 	TestMapper testMapper;
 
 	@Override
-	public List<TestVO> getTestList() {
-		return testMapper.getTestList();
+	public List<TestVO> getTestList(String ltNum) {
+		return testMapper.getTestList(ltNum);
 	}
 	
 	@Override
@@ -39,4 +39,18 @@ public class TestServiceImpl implements TestService {
 	public int deleteTest(String prblNum) {
 		return testMapper.deleteTest(prblNum);
 	}
+
+	@Override
+	public List<TestVO> insertExam(TestVO vo) {
+		// 문제가 있으면 삭제
+		testMapper.deleteExamDetail(vo);
+		testMapper.deleteExam(vo);
+		// 문제등록
+		testMapper.insertExam(vo); // detail 정보등록
+		testMapper.insertExamDetail(vo);
+		
+		// 문제조회
+		return testMapper.getExamList(vo);
+	}
+
 }

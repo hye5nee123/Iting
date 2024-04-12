@@ -51,6 +51,11 @@ public class LectureServiceImpl implements LectureService {
 	public LectureVO getCurriAll(String ltNum) {
 		return lectureMapper.getCurriAll(ltNum);
 	}
+	
+	@Override
+	public LectureVO getTcInfo(String ltNum, String lecturerNum) {
+		return lectureMapper.getTcInfo(ltNum, lecturerNum);
+	}
   
 	// 도승민
 	@Override
@@ -74,6 +79,8 @@ public List<LectureVO> ingLectureList(LectureVO vo) {
 	
 	return lectureMapper.ingLectureList(vo);
 }
+
+
 
 
 

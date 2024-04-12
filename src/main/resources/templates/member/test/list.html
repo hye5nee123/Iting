@@ -16,30 +16,10 @@
 			<h3>쪽지시험</h3>
 			<button class="btn_close"><i class='bx bx-x'></i></button>
 			<div class="test_box">
-				<div>
-					<p>제목</p>
-					<ul>
-						<li>
-							<input type="radio" id="test1" name="test" value="test1" checked />
-    						<label for="test1">
-    							<span class="checkmark"></span>테스트
-    						</label>
-    					</li>
-						<li>
-							<input type="radio" id="test2" name="test" value="test2" checked />
-    						<label for="test2">테스트</label>
-    					</li>
-						<li>
-							<input type="radio" id="test3" name="test" value="test3" checked />
-    						<label for="test3">테스트</label>
-    					</li>
-						<li>
-							<input type="radio" id="test4" name="test" value="test4" checked />
-    						<label for="test4">테스트</label>
-    					</li>
-					</ul>
-					<button type="button">정답확인</button>
-				</div>
+				
+			</div>
+			<div class="btn_box">
+				<button type="button" id="saveBtn" class="btn_form">제출하기</button>
 			</div>
 		</div>
 	</div>
@@ -62,7 +42,7 @@
 				<p th:text="${tlsn.ltNum}" class="hidden"></p>
 				
 			</div>
-			<button class="go_link modal_btn">문제풀기 ></button>
+			<button type="button" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
 		</div>
 	</div>
 	<div class="btn_box test_btn">
@@ -70,15 +50,89 @@
 	</div>
 <script>
 	const modal = document.querySelector('.test_modal');
-	const modalOpen = document.querySelector('.modal_btn');
 	const modalClose = document.querySelector('.btn_close');
 	
-	modalOpen.addEventListener('click',function(){
-	    modal.classList.add('on');
-	});
+	// 문제풀기 버튼클릭시
+	function modalOpen(ltNum){
+	
+		fetch (`/member/test/list/${ltNum}`)
+		.then(res => res.json())
+		.then(res => {
+			saveTest(res);
+	    	modal.classList.add('on');
+		})
+	};
+	
 	modalClose.addEventListener('click',function(){
 	    modal.classList.remove('on');
 	});
+	
+	function saveTest(res) {
+		let box = document.querySelector('.test_box');		
+		for(let i = 0; i < res.length; i++) {
+		let text = `<div>
+		<p>${res[i].prblCntn}</p>
+		<ul>
+			<li>
+				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
+				<label for="test${i}">${res[i].ques1}</label>
+			</li>
+			<li>
+				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
+				<label for="test${i}">${res[i].ques2}</label>
+			</li>
+			<li>
+				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
+				<label for="test${i}">${res[i].ques3}</label>
+			</li>
+			<li>
+				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
+				<label for="test${i}">${res[i].ques4}</label>
+			</li>
+		</ul>
+	</div>`
+			box.insertAdjacentHTML("beforeend", text);
+		}
+	}
+	
+	// 문제제출하기
+	function saveReq() {
+		const applexamNum = noteForm.applexamNum.value;
+		const memNum = noteForm.memNum.value;
+		let param = {applexamNum, memNum}
+		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/note/insert',
+				data: JSON.stringify(param)
+			
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		alert('메세지가 전송되었습니다.');
+		window.location.href = "/member/note/list";
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		saveReq();
+	})
+	
+	function goBack() {
+		window.history.back();
+	}
+	
+	
 </script>
 </section>
 </body>

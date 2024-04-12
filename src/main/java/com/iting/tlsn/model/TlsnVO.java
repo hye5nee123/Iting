@@ -21,4 +21,7 @@ public class TlsnVO {
 	private String mail;
 	private String phone;
 	private String name;
+	private String rndNum;
+	private String rndTtl;
+	private String ltTm;
 }

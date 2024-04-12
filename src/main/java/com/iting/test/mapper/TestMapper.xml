@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.test.mapper.TestMapper">
-	<!-- 전체조회 -->
+	<!-- 강사 문제전체조회 -->
 	<select id="getTestList" resultType="TestVO">
 		SELECT PRBL_NUM
                , PRBL_CNTN
@@ -14,10 +14,11 @@
                , CTY
                , LT_NUM
 		FROM PRBL
+		WHERE LT_NUM = #{ltNum}
 		ORDER BY PRBL_NUM DESC
 	</select>
 	
-	<!-- 단건조회 -->
+	<!-- 강사 문제단건조회 -->
 	<select id="getTestInfo" resultType="TestVo">
 		SELECT PRBL_NUM
                , PRBL_CNTN
@@ -32,7 +33,7 @@
 		WHERE PRBL_NUM = #{prblNum}
 	</select>
 	
-	<!-- 등록 -->
+	<!-- 강사 문제등록 -->
 	<insert id="insertTest" parameterType="TestVO">	
 		<selectKey keyProperty="prblNum"
 					order="BEFORE"
@@ -62,7 +63,7 @@
 				)
 	</insert>
 	
-	<!-- 수정 -->
+	<!-- 강사 문제수정 -->
 	<update id="updateTest">
 		UPDATE PRBL
 		SET PRBL_CNTN = #{prblCntn}
@@ -75,9 +76,77 @@
 		WHERE PRBL_NUM = #{prblNum}
 	</update>
 	
-	<!-- 삭제 -->
+	<!-- 강사 문제삭제 -->
 	<delete id="deleteTest">
 		DELETE FROM PRBL
 		WHERE PRBL_NUM = #{prblNum}
 	</delete>
+	
+	<!-- 학생 문제응시 -->
+	<insert id="insertExam" parameterType="TestVO">
+		<selectKey keyProperty="applexamNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'ap' || LPAD(NVL(MAX(SUBSTR(APPLEXAM_NUM, -5)), 0) + 1, 5, '0') AS APPLEXAM_NUM
+			FROM APPLEXAM
+		</selectKey>
+		INSERT INTO APPLEXAM (APPLEXAM_NUM, MEM_NUM, LT_NUM)
+		VALUES (
+			#{applexamNum}
+			, #{memNum}
+			, #{ltNum}
+		)
+	</insert>
+	
+	<!-- 문제삭제 -->
+	<delete id="deleteExam">
+		DELETE FROM APPLEXAM
+		WHERE MEM_NUM = #{memNum}
+		AND LT_NUM = #{ltNum}
+	</delete>
+	
+	<!-- 문제삭제 -->
+	<delete id="deleteExamDetail">
+		DELETE FROM APPLEXAM_DETAIL
+		WHERE APPLEXAM_NUM = (SELECT APPLEXAM_NUM
+                                         FROM APPLEXAM
+                                      WHERE MEM_NUM = #{memNum}
+		AND LT_NUM = #{ltNum})
+	</delete>
+	
+	<!-- 문제생성 -->
+	<insert id="insertExamDetail" parameterType="TestVO">
+		INSERT INTO APPLEXAM_DETAIL (PRBL_NUM, 
+		                   			PRBL_ORD_NUM,
+		                   			APPLEXAM_NUM)
+		select A.PRBL_NUM, 
+		       RANK() OVER(ORDER BY A.PRBL_NUM DESC) , 
+		       #{applexamNum}
+		  FROM ( 
+				SELECT * from PRBL
+				order by DBMS_RANDOM.RANDOM
+		  ) A
+		 <![CDATA[ WHERE ROWNUM < 11 ]]>
+	</insert>
+	
+	<!-- 문제조회 -->
+	<select id="getExamList">
+		SELECT a.ANSWER
+			    , a.APPLEXAM_NUM
+				, a.PRBL_NUM
+				, a.PRBL_ORD_NUM
+				, a.MRK_RSLT
+                , p.PRBL_CNTN
+                , p.QUES1
+                , p.QUES2
+                , p.QUES3
+                , p.QUES4
+                , p.ANS
+                , p.CTY
+                , p.LT_NUM
+		FROM APPLEXAM_DETAIL a JOIN PRBL p
+                               ON a.PRBL_NUM = p.PRBL_NUM
+		WHERE APPLEXAM_NUM = #{applexamNum}
+		ORDER BY PRBL_ORD_NUM
+	</select>
 </mapper>
