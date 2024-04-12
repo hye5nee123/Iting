@@ -12,16 +12,22 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import com.iting.common.config.auth.CustomOAuth2UserService;
 import com.iting.common.security.CustomAccessDeniedHandler;
 import com.iting.common.security.CustomAuthFailureHandler;
 import com.iting.common.security.CustomLoginSuccessHandler;
 import com.iting.common.security.CustomLogoutSuccessHandler;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 	
 	@Autowired UserDetailsService detailService;
+	
+	private final CustomOAuth2UserService customOAuth2UserService;
 	
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
@@ -51,21 +57,23 @@ public class WebSecurityConfig {
 //				.formLogin((form) -> form
 //						.loginPage("/login")
 //						.permitAll())
-				.formLogin().loginPage("/login")
+				.formLogin().loginPage("/commonlogin")
 				.usernameParameter("userId")
 //				.passwordParameter("password")
 				.loginProcessingUrl("/userlogin")
 				.successHandler(authenticationSuccessHandler())
-//				.failureForwardUrl("/login")
-//				.failureUrl("/login")
+//				.failureForwardUrl("/commonlogin")
+//				.failureUrl("/commonlogin")
 				.failureHandler(loginFailureHandler())
 				.permitAll()
 				.and()
+				
 //				.logout((logout) -> logout.permitAll());
 				.logout()
 				.logoutUrl("/logout")
 				.logoutSuccessHandler(logoutSuccessHandler())
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
+				
 //				.logoutSuccessHandler((request, response, authentication) -> {
 //	                response.sendRedirect("/member/main");
 //				})
@@ -75,12 +83,17 @@ public class WebSecurityConfig {
 				.frameOptions()
 				.sameOrigin()
 				.and()
+				
 				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
 				.exceptionHandling(handler -> handler
 						.accessDeniedHandler(accessDeniedHandler()))
 				//.csrf().disable()
 				.userDetailsService(detailService)
 				;
+		http.oauth2Login()
+		.userInfoEndpoint()
+		.userService(customOAuth2UserService)
+		;
 		return http.build();
 	}
 

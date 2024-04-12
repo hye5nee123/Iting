@@ -11,8 +11,6 @@
 	type="text/css">
 <link rel="stylesheet" href="/css/member/style.css" type="text/css">
 
-<!-- 네이버 로그인 -->
-<script src="/js/join/naverlogin.js"></script>
 
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -31,7 +29,7 @@
 	width: 150px;
 }
 
-.naverbtn {
+.naverBtn {
 	width: 200px;
 }
 </style>
@@ -64,11 +62,14 @@
 					href="/account">회원가입</a>
 			</div>
 			<div class="col-lg-6" id="naverIdLogin">
-				<a id="naverIdLogin_loginButton" role="button"></a>
+				<a href="/oauth2/authorization/naver" id="naverIdLogin_loginButton" role="button"><img alt="nloginbutton" class="naverBtn" src="/img/common/btnG_완성형.png"></a>
 			</div>
 		</div>
 	</section>
 	<script>
+	/* window.addEventlistener('load',(e)={
+		alert(${response.loginFailMsg});
+	}) */
 		frm.addEventListener("submit", (e) => {
 			e.preventDefault();
 			let id = frm.userId.value;
@@ -83,34 +84,7 @@
 				frm.submit();
 			}
 		});
-			/* (5) 현재 로그인 상태를 확인 */
-			/* window.addEventListener('load', function () {
-					if (status) {
-						Swal.fire({
-							icon: "error",
-							title: "이미 로그인되어 있습니다.",
-							confirmButtonText: "확인",
-							confirmButtonColor: "#205cdc"
-						}).then((res) => {
-			  				if (res.isConfirmed
-			  						|| res.isDismissed
-			  						) {
-								location.href = "/member/main";
-			  				}
-		  				});
-	  				} 
-				}); */
-			/* let naverLog = new naver.LoginWithNaverId(
-					{
-						clientId: "IUFmLIwupwmkJxh3eacH",
-						callbackUrl: "http://" + window.location.hostname + ((location.port==""||location.port==undefined)?"":":" + location.port) + "/naveraccount",
-						isPopup: false,
-						loginButton: {color: "green", type: 3, height: 50}
-					}
-			);
-			naverLog.init();
-			console.log(naverLog);
-			console.log(naverLog.user); */
+		
 	</script>
 </body>
 
