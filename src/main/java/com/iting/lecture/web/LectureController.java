@@ -161,7 +161,7 @@ public class LectureController {
 		pvo.setFirst(0);
 		pvo.setLast(5);
 		Map<String, Object> map = new HashMap<String, Object>();
-		pvo.setTotalRecord((long) map.get("count"));
+		pvo.setTotalRecord(lectureService.getCount(vo));
 
 		List<LectureVO> list = lectureService.endLectureList(vo, pvo);
 
