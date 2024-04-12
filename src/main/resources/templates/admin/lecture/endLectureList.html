@@ -65,7 +65,7 @@ function move(ltNum){
 	//함수 호출.
 	listReq(1);
 	
-	//controller에서 주소 따옴.
+	//controller에서 주소 따옴.//
 	function listReq(page) {
 		fetch("/admin/lecture/endLectureList?page="+page)
 		.then(res => res.json())
