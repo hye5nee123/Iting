@@ -22,6 +22,10 @@ public class LtNoticeServiceImpl implements LtNoticeService{
 	public int ltNoticeInsert(LtNoticeVO vo) {
 		return ltnoticeMapper.ltNoticeInsert(vo);
 	}
+	@Override
+	public LtNoticeVO getLtNoticeInfo(String ltNoticeNum) {
+		return ltnoticeMapper.getLtNoticeInfo(ltNoticeNum);
+	}
 
 
 

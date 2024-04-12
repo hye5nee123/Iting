@@ -87,7 +87,7 @@ public class LectureController {
 
 	/* 강사 -도승민 */
 	// 강의 목록 조회
-	@GetMapping("/teacher/lecture/lecture")
+	@GetMapping("/teacher/lecture/getLectureList")
 	public String getLectureList(Model model, LectureVO vo, HttpSession session) {
 		vo.setLecturerNum((String) session.getAttribute("usernum"));
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
@@ -132,17 +132,44 @@ public class LectureController {
 
 	// 승인 대기 목록
 	@GetMapping("/admin/lecture/ingLectureList")
-	public String ingLectureList(Model model, LectureVO vo) {
+	public String ingLectureList(Model model,String ltNum, LectureVO vo) {
 		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
 		return "/admin/lecture/ingLectureList";
 
 	}
 
-	// 승인 완료 목록
+	@GetMapping("/teacher/main")
+	public String ingLectureList1(Model model,String ltNum, LectureVO vo) {
+		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
+		return "/teacher/main";
+
+	}
+	
+	@RequestMapping("/admin/lecture/allendLectureList")
+	public ModelAndView allendLectureList() {
+		ModelAndView mv = new ModelAndView("/admin/lecture/endLectureList");
+		return mv;
+	}
+	
+	//승인 완료 목록
+	@ResponseBody
 	@GetMapping("/admin/lecture/endLectureList")
-	public String endLectureList(Model model, LectureVO vo) {
-		model.addAttribute("endLectureList", lectureService.endLectureList(vo));
-		return "/admin/lecture/endLectureList";
+	public Map<String, Object> endLectureList(LectureVO vo, PagingVO pvo) {
+		
+		pvo.setPageUnit(5);
+		pvo.setPageSize(5);
+		pvo.setFirst(0);
+		pvo.setLast(5);
+		Map<String, Object> map = new HashMap<String, Object>();
+		pvo.setTotalRecord((long) map.get("count"));
+
+		List<LectureVO> list = lectureService.endLectureList(vo, pvo);
+
+		map.put("data", list);
+		map.put("paging", pvo);
+
+		return map;
+
 	}
 
 	// 승인수정 기능

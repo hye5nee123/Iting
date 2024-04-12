@@ -33,4 +33,13 @@ FROM LT_NOTICE
       		  ,#{ltNoticeRegDt}
       )
 </insert>
+<!-- 공지사항 상세 -->
+<select id="getLtNoticeInfo" resultType="LtNoticeVO">
+SELECT LT_NOTICE_NUM
+      ,LT_NOTICE_TTL
+      ,LT_NOTICE_CNTN
+      ,LT_NOTICE_REG_DT
+FROM LT_NOTICE
+WHERE LT_NOTICE_NUM =#{ltNoticeNum}
+</select>
 </mapper>

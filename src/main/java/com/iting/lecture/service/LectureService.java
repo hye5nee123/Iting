@@ -24,8 +24,10 @@ public interface LectureService {
 	//수정(승인여부)
 	public int update(LectureVO vo);
 	//승인
-	public List<LectureVO> endLectureList(LectureVO vo);
+	public List<LectureVO> endLectureList(LectureVO vo, PagingVO pvo);
 	//미승인
 	public List<LectureVO> ingLectureList(LectureVO vo);
+	//개수 
+	public long getCount(LectureVO vo);
 }
 

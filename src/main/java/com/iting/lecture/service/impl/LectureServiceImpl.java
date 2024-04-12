@@ -21,11 +21,13 @@ public class LectureServiceImpl implements LectureService {
 		return lectureMapper.getAllLectureList(vo, pvo);
 	}
 
+	//도승민
+	//조회
 	@Override
 	public List<LectureVO> getLectureList(LectureVO vo) {
 		return lectureMapper.getLectureList(vo);
 	}
-
+	//상세
 	@Override
 	public LectureVO getLectureInfo(String ltNum) {
 		return lectureMapper.getLectureInfo(ltNum);
@@ -64,15 +66,25 @@ public int update(LectureVO vo) {
 	return lectureMapper.update(vo);
 }
 
-@Override
-public List<LectureVO> endLectureList(LectureVO vo) {
-	return lectureMapper.endLectureList(vo);
-}
 
 @Override
 public List<LectureVO> ingLectureList(LectureVO vo) {
 	
 	return lectureMapper.ingLectureList(vo);
+}
+
+
+
+@Override
+public List<LectureVO> endLectureList(LectureVO vo, PagingVO pvo) {
+	
+	return lectureMapper.getAllLectureList(vo, pvo);
+}
+
+@Override
+public long getCount(LectureVO vo) {
+	
+	return lectureMapper.getCount(vo);
 }
 
 
