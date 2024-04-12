@@ -73,4 +73,7 @@
 				, #{token}
 				)
 	</insert>
+	<select id="getUserNum" resultType="string">
+		SELECT 'me' || LPAD(NVL(MAX(SUBSTR(mem_num, -5)), 0) + 1, 5, '0') AS mem_num FROM mem
+	</select>
 </mapper>

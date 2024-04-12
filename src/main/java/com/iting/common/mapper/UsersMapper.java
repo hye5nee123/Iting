@@ -11,4 +11,5 @@ import com.iting.common.model.UsersVO;
 public interface UsersMapper {
 	UsersVO getUserInfo(String userid);
 	int insertUser(AccountVO acvo);
+	String getUserNum();
 }

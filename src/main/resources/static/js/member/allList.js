@@ -7,6 +7,7 @@ var lectureService = (function(){
 
 	// 강의 전체목록 요청
 	function ltListReq() {
+		//axios.get("/member/lecture/allSelect/{keyWord}")
 		axios.get("/member/lecture/allSelect")
 			 .then(res => ltListRes(res.data))
 	}
@@ -37,7 +38,8 @@ var lectureService = (function(){
 		
 		let newTag = `<div class="col-3">
 	                    <div class="product__item">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/html.png">
+	                        <div class="product__item__pic set-bg">
+	                        	<img src="/img/member/main/front_썸네일.jpeg">
 	                            <ul class="product__hover">
 	                                <li><a href="#"><img src="/img/member/main/heart.png" alt="찜하기버튼"></a></li>
 	                            </ul>
