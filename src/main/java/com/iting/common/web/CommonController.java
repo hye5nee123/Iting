@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.common.ExcelView;
 import com.iting.common.FileUtil;
+import com.iting.common.config.auth.dto.SessionUser;
 import com.iting.common.model.AccountVO;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
@@ -37,6 +40,9 @@ public class CommonController {
 	
 	@Autowired
 	CommonService commonService;
+	
+	@Autowired
+	HttpSession httpSession;
 	
 	/* 메인이동 */
 	// 관리자
@@ -143,16 +149,15 @@ public class CommonController {
 
 	// 페이지 권한 없을때
 	@GetMapping("/accessError")
-	public String accessDenied(Authentication auth, Model model) {
+	public void accessDenied(Authentication auth, Model model) {
 		log.info("access denied :" + auth);
-		model.addAttribute("msg", "access denied");
-		return "common/accessError";
+		model.addAttribute("msg", "Access denied");
 	}
 
 	/* 로그인 및 로그아웃 */
 
 	// 로그인 페이지 이동
-	@GetMapping("/login")
+	@GetMapping("/commonlogin")
 	public String loginForm() {
 		return "common/login";
 	}
@@ -188,4 +193,11 @@ public class CommonController {
 		int ckcnt = userservice.insertUser(vo);
 		return ckcnt;
 	}
+	
+	//
+	
+	@GetMapping("/")
+    public String index() {
+        return "member/main";
+    }
 }

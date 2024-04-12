@@ -1,4 +1,4 @@
-package com.iting.common.service;
+package com.iting.common.config.auth;
 
 import java.util.Collections;
 
@@ -13,10 +13,11 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.iting.common.config.domain.user.User;
+import com.iting.common.config.auth.dto.OAuthAttributes;
+import com.iting.common.config.auth.dto.SessionUser;
+import com.iting.common.config.domain.user.Mem;
 import com.iting.common.config.domain.user.UserRepository;
-import com.iting.common.config.dto.OAuthAttributes;
-import com.iting.common.config.dto.SessionUser;
+import com.iting.common.mapper.UsersMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
 	
 	private final UserRepository userRepository;
+	private final UsersMapper mapper;
 	private final HttpSession httpSession;
 	
 	@Override
@@ -38,9 +40,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes()); //OAuth2User의 attribute를 담음
 
-        User user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(user));
-
+        Mem user = saveOrUpdate(attributes);
+        httpSession.setAttribute("userId", new SessionUser(user).getMail());
+        httpSession.setAttribute("usernum", new SessionUser(user).getMemNum());
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRoleKey())),
                 attributes.getAttributes(),
@@ -48,8 +50,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
 
-    private User saveOrUpdate(OAuthAttributes attributes) {
-        User user = userRepository.findByMail(attributes.getMail())
+    private Mem saveOrUpdate(OAuthAttributes attributes) {
+    	String memnum = mapper.getUserNum();
+    	
+    	Mem user = userRepository.findByMailAndMemNum(attributes.getMail(), memnum)
                 .map(entity -> entity.update(attributes.getPhone()))
                 .orElse(attributes.toEntity());
 

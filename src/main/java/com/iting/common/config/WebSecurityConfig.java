@@ -12,11 +12,11 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import com.iting.common.config.auth.CustomOAuth2UserService;
 import com.iting.common.security.CustomAccessDeniedHandler;
 import com.iting.common.security.CustomAuthFailureHandler;
 import com.iting.common.security.CustomLoginSuccessHandler;
 import com.iting.common.security.CustomLogoutSuccessHandler;
-import com.iting.common.service.CustomOAuth2UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 	
 	@Autowired UserDetailsService detailService;
 	
-//	private final CustomOAuth2UserService customOAuth2UserService;
+	private final CustomOAuth2UserService customOAuth2UserService;
 	
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
@@ -57,13 +57,13 @@ public class WebSecurityConfig {
 //				.formLogin((form) -> form
 //						.loginPage("/login")
 //						.permitAll())
-				.formLogin().loginPage("/login")
+				.formLogin().loginPage("/commonlogin")
 				.usernameParameter("userId")
 //				.passwordParameter("password")
 				.loginProcessingUrl("/userlogin")
 				.successHandler(authenticationSuccessHandler())
-//				.failureForwardUrl("/login")
-//				.failureUrl("/login")
+//				.failureForwardUrl("/commonlogin")
+//				.failureUrl("/commonlogin")
 				.failureHandler(loginFailureHandler())
 				.permitAll()
 				.and()
@@ -73,13 +73,7 @@ public class WebSecurityConfig {
 				.logoutUrl("/logout")
 				.logoutSuccessHandler(logoutSuccessHandler())
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
-				//
-//				.and()
-//				.oauth2Login()
-//				.userInfoEndpoint()
-//				.userService(customOAuth2UserService)
-//				.and()
-				//
+				
 //				.logoutSuccessHandler((request, response, authentication) -> {
 //	                response.sendRedirect("/member/main");
 //				})
@@ -96,6 +90,10 @@ public class WebSecurityConfig {
 				//.csrf().disable()
 				.userDetailsService(detailService)
 				;
+		http.oauth2Login()
+		.userInfoEndpoint()
+		.userService(customOAuth2UserService)
+		;
 		return http.build();
 	}
 
