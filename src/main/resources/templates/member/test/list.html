@@ -12,7 +12,7 @@
 <section layout:fragment="content">
 
 	<div class="test_modal">
-		<div class="text">
+		<form class="text">
 			<h3>쪽지시험</h3>
 			<button class="btn_close"><i class='bx bx-x'></i></button>
 			<div class="test_box">
@@ -21,7 +21,7 @@
 			<div class="btn_box">
 				<button type="button" id="saveBtn" class="btn_form">제출하기</button>
 			</div>
-		</div>
+		</form>
 	</div>
 	<div class="row lecture_info">
 		<div class="col-lg-12">
@@ -95,8 +95,22 @@
 		}
 	}
 	
+	
+	// 문제체크
+	function checkReq() {
+		const check = document.querySelector('input[type=radio]');
+		for(let i = 0; i < check.length; i++) {
+			if(check[i].checked){
+				alert('문제를 제출할까요?');
+			} else {
+				alert('풀지 않은 문제가 있습니다.');
+				
+			}
+		}
+	}
+	
 	// 문제제출하기
-	function saveReq() {
+	function saveReq() {	
 		const applexamNum = noteForm.applexamNum.value;
 		const memNum = noteForm.memNum.value;
 		let param = {applexamNum, memNum}
@@ -125,6 +139,7 @@
 	
 	//버튼 클릭 시 함수 호출.
 	saveBtn.addEventListener("click", e => {
+		checkReq();
 		saveReq();
 	})
 	
