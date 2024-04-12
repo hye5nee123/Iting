@@ -71,23 +71,23 @@
 		let box = document.querySelector('.test_box');		
 		for(let i = 0; i < res.length; i++) {
 		let text = `<div>
-		<p>${res[i].prblCntn}</p>
+		<p>${i+1}. ${res[i].prblCntn}</p>
 		<ul>
 			<li>
-				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
-				<label for="test${i}">${res[i].ques1}</label>
+				<input type="radio" name="${res[i].prblNum}" value="1"/>
+				<label for="${res[i].prblNum}">${res[i].ques1}</label>
 			</li>
 			<li>
-				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
-				<label for="test${i}">${res[i].ques2}</label>
+				<input type="radio" name="${res[i].prblNum}" value="2"/>
+				<label for="${res[i].prblNum}">${res[i].ques2}</label>
 			</li>
 			<li>
-				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
-				<label for="test${i}">${res[i].ques3}</label>
+				<input type="radio" name="${res[i].prblNum}" value="3"/>
+				<label for="${res[i].prblNum}">${res[i].ques3}</label>
 			</li>
 			<li>
-				<input type="radio" id="test${i}" name="test${i}" value="test${i}"/>
-				<label for="test${i}">${res[i].ques4}</label>
+				<input type="radio" name="${res[i].prblNum}" value="4"/>
+				<label for="${res[i].prblNum}">${res[i].ques4}</label>
 			</li>
 		</ul>
 	</div>`
