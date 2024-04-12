@@ -7,5 +7,6 @@ import com.iting.tlsn.model.TlsnVO;
 public interface TlsnService {
 	public List<TlsnVO> getTlsnList(String user);
 	public List<TlsnVO> getTlsnDetailList(String ltNum, String user);
-	public TlsnVO getTlsnInfo(TlsnVO vo);
+	public int tlsnInsert(TlsnVO vo); //수강신청(등록)
+	public TlsnVO getTlsnInfo(TlsnVO vo); //수강 단건조회 
 }

@@ -1,9 +1,10 @@
 package com.iting.lecture.web;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +22,23 @@ import com.iting.common.FileUtil;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
-import com.iting.lecture.service.CurriService;
 import com.iting.lecture.service.LectureService;
+import com.iting.review.model.ReviewVO;
+import com.iting.review.service.ReviewService;
 
+/**
+ * 
+ * @author 장효은,도승민 강의관리(회원,강사,관리자)
+ * 
+ */
 @Controller
 public class LectureController {
+
 	@Autowired
 	LectureService lectureService;
+
+	@Autowired
+	ReviewService reviewService;
 
 	/* 회원 */
 	// 강의 전체목록 페이지 이동
@@ -39,12 +50,16 @@ public class LectureController {
 
 	// 강의 전체목록 조회처리 - 장효은
 	@GetMapping("/member/lecture/allSelect")
+	//@GetMapping("/member/lecture/allSelect/{keyWord}")
 	@ResponseBody
+	//public Map<String, Object> allList(LectureVO vo, PagingVO pvo, @PathVariable String keyWord) {
 	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
 		pvo.setPageUnit(16);
 		pvo.setPageSize(16);
 		pvo.setFirst(0);
 		pvo.setLast(5);
+		
+		//vo.setLtTtl(keyWord);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -59,46 +74,52 @@ public class LectureController {
 
 	// 강의 단건 조회
 	@GetMapping("member/lecture/info/{ltNum}")
-	public String info(@PathVariable String ltNum, LectureVO vo, Model model) {
+	public String info(@PathVariable String ltNum, LectureVO vo, Model model, ReviewVO rvo) {
+		vo.setLtNum(ltNum);
+		rvo.setLtNum(ltNum);
 		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
 		model.addAttribute("curriList", lectureService.getCurriList(vo));
 		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
+		List<ReviewVO> map = reviewService.getReviewList(rvo);
+		model.addAttribute("reviewList", map);
 		return "member/lecture/info";
 	}
 
-	/* 강사 */
+	/* 강사 -도승민 */
 	// 강의 목록 조회
-	@GetMapping("lecture/lecture")
-	public String getLectureList(Model model, LectureVO vo) {
-		vo.setLecturerNum("le00002");
+	@GetMapping("/teacher/lecture/getLectureList")
+	public String getLectureList(Model model, LectureVO vo, HttpSession session) {
+		vo.setLecturerNum((String) session.getAttribute("usernum"));
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
 		return "teacher/lecture/getLectureList";
 	}
 
 	// 강의 단건 조회
-	@GetMapping("lecture/info1/{ltNum}")
+	@GetMapping("/teacher/lecture/info/{ltNum}")
 	public String info1(@PathVariable String ltNum, Model model) {
 		model.addAttribute("lecture", lectureService.getLectureInfo1(ltNum));
-		return "teacher/lecture/info1";
+		return "teacher/lecture/info";
 	}
 	// 강의 수정
 
 	// 강의 등록페이지 이동
 	@GetMapping("/teacher/lecture/insert")
-	public ModelAndView list() {
-		ModelAndView mv = new ModelAndView("teacher/lecture/insert");
-		return mv;
+	public void insertForm() {
 	}
 
 	// 등록기능
 	@ResponseBody
-	@PostMapping("/teacher/lecture/insert1")
-	public String ltInsert(@RequestBody LectureVO vo, MultipartFile uFile) throws IllegalStateException, IOException {
+	@PostMapping("/teacher/lecture/insert")
+	public String ltInsert(@RequestBody LectureVO vo, MultipartFile uFile) {
 		System.out.println(vo + "===============");
-		lectureService.ltInsert(vo);
 		FileVO fvo = FileUtil.uploadFile(uFile);
-		return "redirect:/admin/lecture/list";
+		if (fvo != null) {
+			vo.setAtchNum(fvo.getAtchNum());
+		}
+		lectureService.ltInsert(vo);
+		return "redirect:/teacher/lecture/list";
 	}
+
 	/* 관리자 */
 	// 강의 수정
 
@@ -109,26 +130,54 @@ public class LectureController {
 		return "/admin/lecture/list";
 	}
 
-	//승인 대기 목록
-	
+	// 승인 대기 목록
 	@GetMapping("/admin/lecture/ingLectureList")
-	public String ingLectureList(Model model, LectureVO vo) {
+	public String ingLectureList(Model model,String ltNum, LectureVO vo) {
 		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
 		return "/admin/lecture/ingLectureList";
 
 	}
+
+	@GetMapping("/teacher/main")
+	public String ingLectureList1(Model model,String ltNum, LectureVO vo) {
+		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
+		return "/teacher/main";
+
+	}
+	
+	@RequestMapping("/admin/lecture/allendLectureList")
+	public ModelAndView allendLectureList() {
+		ModelAndView mv = new ModelAndView("/admin/lecture/endLectureList");
+		return mv;
+	}
+	
 	//승인 완료 목록
+	@ResponseBody
 	@GetMapping("/admin/lecture/endLectureList")
-	public String endLectureList(Model model, LectureVO vo) {
-		model.addAttribute("endLectureList", lectureService.endLectureList(vo));
-		return "/admin/lecture/endLectureList";
+	public Map<String, Object> endLectureList(LectureVO vo, PagingVO pvo) {
+		
+		pvo.setPageUnit(5);
+		pvo.setPageSize(5);
+		pvo.setFirst(0);
+		pvo.setLast(5);
+		Map<String, Object> map = new HashMap<String, Object>();
+		pvo.setTotalRecord((long) map.get("count"));
+
+		List<LectureVO> list = lectureService.endLectureList(vo, pvo);
+
+		map.put("data", list);
+		map.put("paging", pvo);
+
+		return map;
+
 	}
 
 	// 승인수정 기능
 	@ResponseBody
-	@GetMapping("/admin/lecture/update/{ltNum}")
-	public LectureVO update(LectureVO vo, @PathVariable String ltNum) {
+	@GetMapping("/admin/lecture/update/{ltNum}/{accpYnCd}")
+	public LectureVO update(LectureVO vo, @PathVariable String ltNum, @PathVariable String accpYnCd) {
 		vo.setLtNum(ltNum);
+		vo.setAccpYnCd(accpYnCd);
 		lectureService.update(vo);
 		return vo;
 	}

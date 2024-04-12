@@ -78,6 +78,12 @@
 						<th style="padding: 20px;">내용</th>
 						<td th:text="${cnq.cntn}" colspan="3" style="padding: 20px;"></td>
 					</tr>
+					<tr >
+						<th style="padding: 20px;">첨부파일</th>
+						<td  colspan="3" style="padding: 20px;">
+						   <div th:each="file:${files}" th:text="${file.atchTtl}" ></div>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

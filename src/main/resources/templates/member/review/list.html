@@ -19,11 +19,12 @@
 		</div>
 		<br>
 		<div>
-			<button>최신순</button>
+			<button onclick="cd == 'drwupDt'">최신순</button>
 			<button>별점순</button>
 		</div>
 		<table class="table table-striped">
 			<thead>
+		
 				<tr>
 					<th>제목</th>
 					<th>내용</th>
@@ -32,39 +33,16 @@
 					<th>작성자</th>
 				</tr>
 			<tbody>
-
 				<tr th:each="review, stat: ${reviewList}">
 					<td th:text="${review.ttl}"></td>
 					<td th:text="${review.cntn}"></td>
 					<td th:text="${#dates.format(review.drwupDt,'yyyy/MM/dd')}"></td>
 					<td th:text="${review.star}"></td>
 					<td th:text="${review.name}"></td>
+					
 				</tr>
 			</tbody>
 		</table>
-		<!-- 페이징 시작 -->
-		<!-- disabled : 비활성화 -->
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item" th:if="${paging.startPage} > 1"><a
-					class="page-link"
-					th:href="|javascript:gopage(${paging.startPage-1})|">Previous</a></li>
-
-				<li
-					th:each="num : *{#numbers.sequence(paging.startPage, paging.endPage)}"
-					class="page-item" th:addclass="${num} == ${paging.page} ? active">
-					<a class="page-link" th:href="|javascript:gopage(${num})|"
-					th:text="${num}">2</a>
-				</li>
-
-				<li class="page-item"
-					th:classappend="${paging.endPage} >= ${paging.lastPage} ? disabled">
-					<a class="page-link"
-					th:href="|javascript:gopage(${paging.endPage+1})|">Next</a>
-				</li>
-			</ul>
-		</nav>
-		<!-- 페이징 종료 -->
 	</div>
 </section>
 </html>

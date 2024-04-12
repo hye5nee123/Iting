@@ -2,6 +2,7 @@ package com.iting.common.security;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +32,11 @@ public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
 			request.setAttribute("loginFailMsg", "잠긴 계정입니다..");
 		} 
 		
-//		// 로그인 페이지로 다시 포워딩
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
-//		dispatcher.forward(request, response);
+		// 로그인 페이지로 다시 포워딩
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/commonlogin");
+		dispatcher.forward(request, response);
 
-		response.sendRedirect("/login");
+		response.sendRedirect("/commonlogin");
 	}
 
 }

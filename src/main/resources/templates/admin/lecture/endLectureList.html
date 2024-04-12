@@ -7,27 +7,11 @@
 <title>강의승인 페이지</title>
 <script th:inline="javascript">
 function move(ltNum){
-	location.href='/lecture/info1/'+ ltNum
+	location.href='/teacher/lecture/info/'+ ltNum
 }
-
-let endLectureList = [[${endLectureList}]]
-
-function gopage(p){
-	frmSearch.page.value = p;
-	frmSearch.submit();
-}
-function init(){
-	frmSearch.rndTtl.value = "";
-	frmSearch.rndCntn.value = "";
-}
-function move(ltNum{
-	location.href='/lecture/info1/'+ ltNum
-}		
-
-
-
 
 </script>
+
 <style>
 #asd {
 	float: right;
@@ -45,10 +29,12 @@ function move(ltNum{
 	<div id="container" layout:fragment="container">
 		<div class="card">
 			<h4 class="card-header">
-				승인 목록
+				강의 목록
 			</h4>
-			<p>검색</p>
-			<div class="table-responsive text-nowrap">
+				<div class="input-group">
+                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                          <input type="text" class="form-control" placeholder="찾으시는게 무엇...">
+                        </div>
 				<table class="table">
 					<thead>
 						<tr>
@@ -60,29 +46,86 @@ function move(ltNum{
 							<th>강의키워드</th>
 							<th>강사번호</th>
 							<th>승인여부</th>
-							<th>승인</th>
-
 						</tr>
-
 
 					</thead>
-					<tbody>
-						<tr th:each="endq, stat: ${endLectureList}"
-							th:onclick="move([[${endq.ltNum}]])">
-							<td th:text="${endq.ltNum}"></td>
-							<td th:text="${endq.ltTtl}"></td>
-							<td th:text="${endq.ltIntro}"></td>
-							<td th:text="${#dates.format(endq.frDt,'yyyy-MM-dd')}"></td>
-							<td th:text="${endq.ltDifCd}"></td>
-							<td th:text="${endq.ltKeywordCd}"></td>
-							<td th:text="${endq.lecturerNum}"></td>
-							<td th:text="${endq.accpYnCd}"></td>
-						</tr>
+					<tbody id="endLectureList">
+						
 					</tbody>
 				</table>
+				<div id="navs"></div>
 			</div>
+			
+<script th:inline="javascript">
+
+	
+	//함수 호출.
+	listReq(1);
+	
+	//controller에서 주소 따옴.
+	function listReq() {
+		fetch("/admin/lecture/endLectureList")
+		.then(res => res.json())
+		.then(res => listRes(res))
+	}
+	
+	//list 응답.
+	function listRes(res) {
+		endLectureList.innerHTML = '';
+		console.log(res);
+		// 목록출력
+		for( obj of res.data) {
+			endLectureList.innerHTML += makeTr(obj);
+		}
+		
+		//paging 출력
+		navs.innerHTML = makePage(res.paging);
+	}
+	//tr 생성.
+	function makeTr(obj) {
+		let newTag = `<tr>
+			<td>${obj.ltNum}</td>
+			<td>${obj.ltTtl}</td>
+			<td>${obj.ltIntro}</td>
+			<td>${obj.frDt}</td>
+			<td>${obj.ltDifCd}</td>
+			<td>${obj.ltKeywordCd}</td>
+			<td>${obj.lecturerNum}</td>
+			<td>${obj.accpYnCd}</td>
+		</tr>`
+		console.log(newTag);
+		return newTag;
+	}
+		
+	function makePage(paging) {
+		console.log(paging)
+
+		let tag = `<nav aria-label="...">
+		  <ul class="pagination">`;
+		
+		// 이전 버튼
+		if(paging.startPage > 1) {
+			tag += `<li class="page-item">
+		        <a class="page-link" href="javascript:gopage(${paging.startPage-1})">Previous</a></li>`;
+		}
+		// 페이지 번호
+		for(i=paging.startPage; i <= paging.endPage; i++) {
+			tag += `<li class="page-item">
+				<a class="page-link" href="javascript:gopage(${i})">${i}</a></li>`;
+		}
+		// 다음 버튼
+		if(paging.endPage <= paging.lastPage) {
+			tag += `<li class="page-item">
+				<a class="page-link" href="javascript:gopage(${paging.endPage + 1})">Next</a></li>`;
+		    tag += `</ul>
+		    	</nav>`;
+		}
+		return tag;
+	}
+</script>
 		</div>
-	</div>
+		 <div id="navs">        
+            </div>
 </body>
 
 </html>

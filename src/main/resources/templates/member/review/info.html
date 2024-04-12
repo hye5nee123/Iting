@@ -1,0 +1,133 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/blank}">
+<meta charset="UTF-8">
+<section layout:fragment="content">
+
+	<style>
+#cntn th {
+	background: #EFEFFB
+}
+
+#cntn {
+	border: 1px solid;
+	border-color: #E0ECF8;
+	border-radius: 30px;
+	width: 100%;
+}
+
+#cntn th, td {
+	border: 1px solid;
+	border-color: #E0ECF8;
+}
+
+.info {
+	background: #E0ECF8
+}
+
+.info li {
+	font-weight: bolder;
+	list-style: none;
+}
+
+.cnq_reset {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	color: #fff;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	border-radius: 5px;
+}
+</style>
+	<h2 class="related-title">글정보</h2>
+	<!-- form 시작. -->
+	<form method="post" name="frm">
+		<div>
+			<table id="review">
+				<colgroup>
+					<col style="width: 20%;">
+					<col style="width: 30%;">
+					<col style="width: 20%;">
+					<col style="width: 30%;">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th style="padding: 20px;">작성자</th>
+						<td th:text="${review.name}" style="padding: 20px;"></td>
+						<th style="padding: 20px;">등록일자</th>
+						<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"
+							style="padding: 20px;"></td>
+					</tr>
+					<tr>
+						<th style="padding: 20px;">제목</th>
+						<td colspan="3"><h5 th:text="${cnq.ttl}"
+								style="padding: 20px;"></h5></td>
+					</tr>
+					<tr>
+						<th style="padding: 20px;">내용</th>
+						<td th:text="${cnq.cntn}" colspan="3" style="padding: 20px;"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
+				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+			<button class="cnq_reset" type="button" id="cnq_insertBtn"
+				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
+		</div>
+	</form>
+	<!-- 댓글   -->
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>내용</th>
+					<th>작성일자</th>
+					<th>작성자</th>
+				</tr>
+			</thead>
+			<tbody id="replyList">
+			</tbody>
+		</table>
+	</div>
+	<script th:inline="javascript">
+	const ltCnqNum = [[${cnq.ltCnqNum}]]
+	//함수 호출.
+	listReq(1);
+	
+	//controller에서 주소 따옴.
+	function listReq() {
+		fetch("/member/cnq/rList?ltCnqNum=" + ltCnqNum)
+		.then(res => res.json())
+		.then(res => listRes(res))
+	}
+	
+	//list 응답.
+	function listRes(res) {
+		replyList.innerHTML = '';
+	console.log(res);
+	// 목록출력
+	for( obj of res.data) {
+		replyList.innerHTML += makeTr(obj);
+	}
+}
+	//tr 생성.
+	function makeTr(obj) {
+	let newTag = `<tr>
+		<td>${obj.cmtNum}</td>
+		<td>${obj.cntn}</td>
+		<td>${obj.drwupDt}</td>
+		<td>${obj.drwupr}</td>
+	</tr>`
+	console.log(newTag);
+	return newTag;
+}
+	
+	
+	</script>
+</section>
+</html>

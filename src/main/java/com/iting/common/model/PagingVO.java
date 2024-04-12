@@ -78,6 +78,8 @@ public class PagingVO {
 		endPage = (page - 1) / pageSize * pageSize + pageSize;
 		if (endPage > getLastPage())
 			endPage = getLastPage();
+		if (endPage == 0 )
+			endPage = 1;
 		return endPage;
 	}
 

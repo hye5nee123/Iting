@@ -2,8 +2,12 @@ package com.iting.common.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.common.ExcelView;
 import com.iting.common.FileUtil;
+import com.iting.common.config.auth.dto.SessionUser;
 import com.iting.common.model.AccountVO;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
@@ -37,6 +42,9 @@ public class CommonController {
 	
 	@Autowired
 	CommonService commonService;
+	
+	@Autowired
+	HttpSession httpSession;
 	
 	/* 메인이동 */
 	// 관리자
@@ -61,7 +69,7 @@ public class CommonController {
 	}
 
 	/* 첨부 파일 업로드 - 테스트용*/
-	@RequestMapping("upload/file")
+	@RequestMapping("upload/fileTest")
 	public String uploadFile(MultipartFile[] uploadFiles) throws IllegalStateException, IOException {
 		if (uploadFiles != null) {
 			for (MultipartFile uFile : uploadFiles) {
@@ -109,10 +117,37 @@ public class CommonController {
 	}
 	
 	/* 첨부 파일 업로드 (멀티) */
+	@PostMapping("upload/files")
+	@ResponseBody
+	public List<Map<String, Object>> uploadFileTest(MultipartFile[] uFile, String fileCode) throws IllegalStateException, IOException {
+		int retCode = 0; // 등록 완료 코드
+		
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+		
+		if (uFile != null) {
+			for (MultipartFile file : uFile) {
+				
+				if (!file.isEmpty()) {
+					Map<String, Object> map = new HashMap<String, Object>();
+					
+					FileVO fvo = FileUtil.uploadFile(file);
+					retCode = commonService.fileInsert(fvo);
+					
+					map.put("retCode", retCode);
+					map.put("fvo", fvo);
+					
+					listMap.add(map);
+				}
+			}
+		}
+		
+		return listMap;
+		
+	}
 	
-	
+	// 첨부파일을 클릭하면 -> 첨부파일번호 단건조회 -> 파일 다운로드 받기 -> (싱글 파일 된 후) 다중파일은 zip파일로 변환후 받을 수 있게 해보잡!
 	/* 첨부 파일 다운로드 */
-	@GetMapping("/download/file/{fileNum}")
+	@GetMapping("/downloading/{fileNum}")
 	@ResponseBody
 	public FileVO findFile(@PathVariable String fileNum) {
         return commonService.getFileInfo(fileNum);
@@ -143,16 +178,15 @@ public class CommonController {
 
 	// 페이지 권한 없을때
 	@GetMapping("/accessError")
-	public String accessDenied(Authentication auth, Model model) {
+	public void accessDenied(Authentication auth, Model model) {
 		log.info("access denied :" + auth);
-		model.addAttribute("msg", "access denied");
-		return "common/accessError";
+		model.addAttribute("msg", "Access denied");
 	}
 
 	/* 로그인 및 로그아웃 */
 
 	// 로그인 페이지 이동
-	@GetMapping("/login")
+	@GetMapping("/commonlogin")
 	public String loginForm() {
 		return "common/login";
 	}
@@ -188,4 +222,11 @@ public class CommonController {
 		int ckcnt = userservice.insertUser(vo);
 		return ckcnt;
 	}
+	
+	//
+	
+	@GetMapping("/")
+    public String index() {
+        return "member/main";
+    }
 }

@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>강의 공지사항</title>
+
 <script th:inline="javascript">
-function move(ltNoticeNum){
-	location.href='/lecture/info/'+ ltNoticeNum
-}
-
-
+	function move(ltNoticeNum){
+		location.href='/teacher/notice/info/'+ ltNoticeNum
+	}
 </script>
+
 <style>
 #asd {
 	float: right;
@@ -42,6 +42,7 @@ function move(ltNoticeNum){
 							<th>공지사항 번호</th>
 							<th>공지사항 제목</th>
 							<th>내용</th>
+							<th>강의 번호</th>
 							<th>공지날짜</th>
 							</tr>
 					</thead>
@@ -51,6 +52,7 @@ function move(ltNoticeNum){
 							<td th:text="${list.ltNoticeNum}"></td>
 							<td th:text="${list.ltNoticeTtl}"></td>
 							<td th:text="${list.ltNoticeCntn}"></td>
+							<td th:text="${list.ltNum}"></td>
 							<td th:text="${#dates.format(list.ltNoticeRegDt,'yyyy-MM-dd')}"></td>
 							
 						</tr>

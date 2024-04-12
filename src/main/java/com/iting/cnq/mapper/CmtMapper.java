@@ -8,7 +8,7 @@ import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 
 @Mapper
-public interface ReplyMapper {
+public interface CmtMapper {
 	// 목록 출력.
 	public List<CnqVO> getListWithPaging(CnqVO vo, CSearchVO svo);
 

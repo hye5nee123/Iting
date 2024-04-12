@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iting.lecture.model.CurriVO;
 import com.iting.lecture.service.CurriService;
@@ -51,5 +54,41 @@ public class TlsnController {
 		model.addAttribute("tlsnInfo", tlsnService.getTlsnInfo(vo));
 		System.out.println(vo);
 		return "member/tlsn/detailList";
+	}
+	
+	// 수강신청(등록)
+	@PostMapping("member/tlsn/insert")
+	@ResponseBody
+	public TlsnVO tlsnInsert(@RequestBody TlsnVO vo) {
+		
+		TlsnVO tvo = tlsnService.getTlsnInfo(vo);
+		
+		System.out.println(tvo + "=============================");
+		
+		String stat = "";
+		
+		if(tvo != null) {
+			
+			stat = tvo.getTlsnStCd(); //수강 상태 코드
+			
+			if(stat.equals("j1")) { // 회원이 '수강중'이면 수강신청 X, 알려주기
+				
+				tvo.setRetCode("ING");
+				
+				return tvo;
+				
+			} else { // 회원이 '수강종료'이면 수강신청 X, 알려주기
+				
+				tvo.setRetCode("FIN");
+				
+				return tvo;
+			}
+			
+		} else { // 회원이 '수강전'이면 수강신청하기
+			
+			tlsnService.tlsnInsert(vo);
+			
+			return vo;
+		}
 	}
 }

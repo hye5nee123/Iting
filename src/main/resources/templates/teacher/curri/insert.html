@@ -22,12 +22,7 @@
 				<form id="formAccountSettings" method="POST" name="testForm"
 					onsubmit="return false">
 					<div class="row">
-						<div class="mb-3">
-
-							<h5 class="tit">회차번호.</h5>
-
-							<input class="form-control" type="text" id="rndNum" name="rndNum">
-						</div>
+				
 						<hr class="my-0">
 				
 						<div class="mb-3 test_list">
@@ -37,11 +32,9 @@
 				
 						
 						<div class="mb-3 test_list">
-							<label for="ltIntro" class="form-label">첨부파일 번호</label>
-							<input class="form-control" type="file" name="atchNum"
-								id="atchNum"></input>
-							<br>첨부파일 동시 테스트 <input class="form-control" type="file" name="uFile" multiple="multiple">
-							<br>파일유형코드 : 숨김 <input type="hidden" name="typCode" th:value="k2">
+							<label for="ltIntro" class="form-label">첨부파일</label>
+							<input class="form-control" type="file" name="uFile">
+							<input type="hidden" name="typCode" th:value="k2">
 							<br><button type="button" onclick="uploadFileReq(testForm.typCode.value, testForm)">등록</button>
 						</div>
 						<div class="mb-3 test_list">
@@ -50,7 +43,7 @@
 						</div>
 						<div class="mb-3 test_list">
 							<label for="frDt" class="form-label">강의시간</label> <input
-								class="form-control" type="text" name="ltTm" id="ltTm">
+								class="form-control" type="number" name="ltTm" id="ltTm">
 						</div>
 						<div class="mb-3 test_list">
 							<label for="ltNum" class="form-label">강의번호</label> <input
@@ -67,16 +60,12 @@
 		<input type="hidden" th:value="${session.usernum}" name="tnum">
 		<script>
 		function saveReq() {
-			const rndNum = testForm.rndNum.value;
 			const rndTtl = testForm.rndTtl.value;
-			const atchNum = testForm.atchNum.value;
 			const rndCntn = testForm.rndCntn.value;
 			const ltTm = testForm.ltTm.value;
-			const ltNum = testForm.ltNum.value;
+			const ltNum = testForm.ltNum.value;  
 			
-			
-			
-			let param = { rndNum, rndTtl, atchNum, rndCntn, ltTm,ltNum}
+			let param = {rndTtl, rndCntn, ltTm,ltNum, atchNum:fileNum}
 			console.log(param);
 			
 			/*
@@ -86,7 +75,7 @@
 			
 			csrf_axios({
 					method: 'POST',
-					url: '/teacher/curri/insert1', 
+					url: '/teacher/curri/insert', 
 					data: param
 				
 					})
@@ -98,7 +87,7 @@
 		function saveRes(res) {
 			console.log(res);
 			alert('등록되었습니다.');
-			window.location.href = "/lecture/lecture";
+			window.location.href = "/teacher/lecture/lecture";
 		}
 		//버튼 클릭 시 함수 호출.
 		saveBtn.addEventListener("click", e => {

@@ -15,8 +15,8 @@
 			<div class="row">
 				<h4 class="col-8">전체 강의</h4>
 				<div class="shop__sidebar__search col-4">
-					<input type="text" placeholder="강의명을 검색해주세요.">
-		            <button type="submit"><i class='bx bx-search-alt-2'></i>검색</button>
+					<input type="text" placeholder="강의명을 검색해주세요." name="lectSearch" id="searchKeyWord">
+		            <button type="button" onclick="searchLect()"><i class='bx bx-search-alt-2'></i>검색</button>
 				</div>
 			</div>
             <div class="shop__product__option">
@@ -93,6 +93,11 @@
 			// 상세페이지로 이동
 			function goInfo(ltNum) {
 				location.href = "/member/lecture/info/" + ltNum;
+			}
+			
+			function searchLect() {
+				console.log(searchKeyWord.value);
+				//lectureService.ltListReq(searchKeyWord.value);
 			}
 			
 		</script>

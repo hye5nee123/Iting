@@ -90,19 +90,18 @@
 	<!-- 강의 상세 -->
 	<select id="getLectureInfo1" resultType="LectureVO">
 		SELECT LT_NUM
-		, LT_ST_CD
+		, find_code(LT_ST_CD) LT_ST_CD
 		, LT_TTL
 		, LT_IMG
 		, LT_INTRO
-		, LT_CATE_CD
+		, find_code(LT_CATE_CD) LT_CATE_CD
 		, FR_DT
-		, find_code(LT_DIF_CD)
-		LT_DIF_CD
+		, find_code(LT_DIF_CD) LT_DIF_CD
 		, LECTURER_NUM
 		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
-		,
-		find_code(ACCP_YN_CD) ACCP_YN_CD
+		, find_code(ACCP_YN_CD) ACCP_YN_CD	
 		, find_code(RDM_CATE_CD) RDM_CATE_CD
+		 
 
 		FROM LT
 		WHERE LT_NUM = #{ltNum}
@@ -181,7 +180,6 @@
 		WHERE l.LT_NUM = #{ltNum}
 	</select>
 	
-	
 
 	<!-- 도승민 -->
 	<!-- 강의 등록 -->
@@ -225,10 +223,11 @@
 
 	<update id="update">
 		UPDATE lt
-		SET ACCP_YN_CD = 'd1'
+		SET ACCP_YN_CD = #{accpYnCd}
 		WHERE lt_num = #{ltNum}
 
 	</update>
+	
 	<!-- 승인 목록출력 -->
 	<select id="endLectureList" resultType="LectureVO">
 	
@@ -244,13 +243,11 @@
 		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
 		, find_code(ACCP_YN_CD) ACCP_YN_CD
 		, find_code(RDM_CATE_CD) RDM_CATE_CD
+		
 		FROM LT
 		WHERE ACCP_YN_CD = 'd1'
 		
-	
 	</select>
-
-
 
 	<!-- 미승인 -->
 	<select id="ingLectureList" resultType="LectureVO">
@@ -271,9 +268,6 @@
 		WHERE ACCP_YN_CD = 'd2'
 
 	</select>
-
-
-
-
+	
 
 </mapper>
