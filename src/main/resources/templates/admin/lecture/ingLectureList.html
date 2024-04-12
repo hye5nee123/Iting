@@ -5,27 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>강의승인 페이지</title>
+
 <script th:inline="javascript">
+
 function move(ltNum){
-	location.href='/lecture/info1/'+ ltNum
+	location.href='/admin/lecture/info/'+ ltNum
 }
+
 //등록버튼 이벤트 핸들러
-function update(ltNum){
-	fetch(`/admin/lecture/update/${ltNum}`)
+function update(ltNum,accpYnCd){
+	fetch(`/admin/lecture/update/${ltNum}/${accpYnCd}`)
 	.then(res => res.json())
 	.then(res =>{
 		location.href="/admin/lecture/endLectureList"
-	
 	})
-	
-	
 }
-
-
-
-
-
 </script>
+
 <style>
 #asd {
 	float: right;
@@ -78,8 +74,10 @@ function update(ltNum){
 							<td th:text="${ing.lecturerNum}"></td>
 							<td th:text="${ing.accpYnCd}"></td>
 							<td onclick="event.cancelBubble = true;">
-								<button type="button" id="saveBtn"
-									th:onclick="update([[${ing.ltNum}]])">등록하기</button>
+								<button type="button"
+									th:onclick="update([[${ing.ltNum}]],'d1')">승인</button>
+								<button type="button" 
+									th:onclick="update([[${ing.ltNum}]],'d3')">취소</button>
 							</td>
 
 						</tr>

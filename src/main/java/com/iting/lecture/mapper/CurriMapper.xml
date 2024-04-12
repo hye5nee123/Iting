@@ -19,7 +19,7 @@
 	<select id="getCurriInfo" resultType="CurriVO">
 		SELECT RND_NUM
 		,RND_TTL
-		,ATCH_NUM
+		,(SELECT ATCH_MARK_TTL FROM ATCH WHERE ATCH_NUM = CURRI.ATCH_NUM AND ROWNUM = 1 ) ATCH_NUM
 		,RND_CNTN
 		,LT_TM
 		,LT_NUM

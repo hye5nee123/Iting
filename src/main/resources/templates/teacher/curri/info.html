@@ -38,10 +38,13 @@ float: right;
 					</div>
 				</div>
 				<div class="mb-3 row">
-					<label class="col-md-2 col-form-label">첨부파일번호</label>
+					<label class="col-md-2 col-form-label">강의영상</label>
 					<div class="col-md-10">
-						<input th:value="${curri.atchNum}"
-							class="col-md-10 form-control" type="file" readonly>
+						<video controls width="250">
+							  <!-- <source src="/media/cc0-videos/flower.webm" type="video/webm" /> -->							
+							  <source th:src="|/download/${curri.atchNum}|" type="video/mp4" />
+						</video>
+
 					</div>
 				</div>
 				<div class="mb-3 row">

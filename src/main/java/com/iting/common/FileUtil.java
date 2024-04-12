@@ -21,7 +21,7 @@ public class FileUtil {
 	CommonService commonService;
 	
 	/* 파일업로드 메소드 */
-	public static FileVO uploadFile(MultipartFile uFile) throws IllegalStateException, IOException {
+	public static FileVO uploadFile(MultipartFile uFile)  {
 		
 		FileVO fvo = null;
 		
@@ -39,19 +39,20 @@ public class FileUtil {
 			// 파일 생성 (저장 경로, 파일이름)
 			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
 			// 파일저장
-			uFile.transferTo(file);
-			
-			
-			System.out.println("파일명 : " + uFile.getOriginalFilename());
-			System.out.println("파일크기 : " + uFile.getSize());
-			
-			// 첨부파일 DB에 저장하기
-			fvo = FileVO.builder()
-								.atchTtl(origFileName)
-								.atchMarkTtl(newFile)
-								// 파일 경로 구분 할 경우 파일 경로 들어가야 함.
-								//.atchPath(filePath)
-								.build();
+			try {
+				uFile.transferTo(file);
+				System.out.println("파일명 : " + uFile.getOriginalFilename());
+				System.out.println("파일크기 : " + uFile.getSize());
+				// 첨부파일 DB에 저장하기
+				fvo = FileVO.builder()
+						.atchTtl(origFileName)
+						.atchMarkTtl(newFile)
+						// 파일 경로 구분 할 경우 파일 경로 들어가야 함.
+						//.atchPath(filePath)
+						.build();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
 					
 		}
 		return fvo;

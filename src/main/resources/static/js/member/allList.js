@@ -44,7 +44,7 @@ var lectureService = (function(){
 	                        </div>
 	                        <div class="product__item__text">
 	                            <h6><span>${lecture.name}</span> 선생님</h6>
-	                            <a href="http://localhost:8081/member/lecture/info/${lecture.ltNum}" class="add-cart">상세보기</a>
+	                            <a href="/member/lecture/info/${lecture.ltNum}" class="add-cart">상세보기</a>
 	                            <div class="rating">
 	                                <i class='bx bxs-star'></i>
 									<i class='bx bxs-star'></i>

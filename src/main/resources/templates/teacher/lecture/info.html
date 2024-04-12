@@ -10,6 +10,20 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
+	
+	<style>
+	#qqq{
+	width:auto !important;
+	float: right;
+    padding: 12px 40px;
+    font-size: 16px;
+    border: 0;
+    letter-spacing: -1px;
+    background: #ff8a00;
+    color: #fff;
+    border-radius: 5px;	
+	}
+	</style>
 </head>
 <body>
 	<div id="container" layout:fragment="container">
@@ -32,7 +46,7 @@
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">강의소개</label>
 					<div class="col-md-10">
-						<input  th:value="${lecture.ltIntro}" class="col-md-10 form-control" readonly>
+						<textarea  th:text="${lecture.ltIntro}" class="col-md-10 form-control" readonly rows="5"></textarea>
 					</div>
 				</div>
 				<div class="mb-3 row">
@@ -56,7 +70,7 @@
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">시작날짜</label>
 					<div class="col-md-10">
-						<input  th:value="${#dates.format(frDt,'yyyy-MM-dd')}" class="col-md-10 form-control" readonly>
+						<input  th:value="${#dates.format(lecture.frDt,'yyyy-MM-dd')}" class="col-md-10 form-control" readonly>
 					</div>
 						
 				</div>
@@ -88,6 +102,10 @@
 					</div>
 			</div>
 		</div>
+		<a href="/teacher/lecture/lecture" class="col-md-2 col-form-label" id="qqq">목록가기</a>
+									
+	</div>
+	</div>
 	</div>
 </body>
 </html>
