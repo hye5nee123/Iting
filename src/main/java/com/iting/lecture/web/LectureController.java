@@ -1,6 +1,5 @@
 package com.iting.lecture.web;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,18 +23,22 @@ import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
 import com.iting.lecture.service.LectureService;
+import com.iting.review.model.ReviewVO;
+import com.iting.review.service.ReviewService;
 
 /**
  * 
- * @author 장효은,도승민
- * 강의관리(회원,강사,관리자)
+ * @author 장효은,도승민 강의관리(회원,강사,관리자)
  * 
  */
 @Controller
 public class LectureController {
-	
+
 	@Autowired
 	LectureService lectureService;
+
+	@Autowired
+	ReviewService reviewService;
 
 	/* 회원 */
 	// 강의 전체목록 페이지 이동
@@ -69,21 +72,24 @@ public class LectureController {
 
 	}
 
-	
 	// 강의 단건 조회
 	@GetMapping("member/lecture/info/{ltNum}")
-	public String info(@PathVariable String ltNum, LectureVO vo, Model model) {
+	public String info(@PathVariable String ltNum, LectureVO vo, Model model, ReviewVO rvo) {
+		vo.setLtNum(ltNum);
+		rvo.setLtNum(ltNum);
 		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
 		model.addAttribute("curriList", lectureService.getCurriList(vo));
 		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
+		List<ReviewVO> map = reviewService.getReviewList(rvo);
+		model.addAttribute("reviewList", map);
 		return "member/lecture/info";
 	}
 
-	/* 강사  -도승민*/
+	/* 강사 -도승민 */
 	// 강의 목록 조회
 	@GetMapping("/teacher/lecture/lecture")
 	public String getLectureList(Model model, LectureVO vo, HttpSession session) {
-		vo.setLecturerNum((String)session.getAttribute("usernum"));
+		vo.setLecturerNum((String) session.getAttribute("usernum"));
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
 		return "teacher/lecture/getLectureList";
 	}
@@ -98,7 +104,8 @@ public class LectureController {
 
 	// 강의 등록페이지 이동
 	@GetMapping("/teacher/lecture/insert")
-	public void insertForm() {	}
+	public void insertForm() {
+	}
 
 	// 등록기능
 	@ResponseBody
@@ -106,17 +113,16 @@ public class LectureController {
 	public String ltInsert(@RequestBody LectureVO vo, MultipartFile uFile) {
 		System.out.println(vo + "===============");
 		FileVO fvo = FileUtil.uploadFile(uFile);
-		if(fvo != null ) {
+		if (fvo != null) {
 			vo.setAtchNum(fvo.getAtchNum());
 		}
 		lectureService.ltInsert(vo);
 		return "redirect:/teacher/lecture/list";
 	}
-	
+
 	/* 관리자 */
 	// 강의 수정
 
-	
 	// 강의 리스트
 	@GetMapping("/admin/lecture/list")
 	public String list(Model model, LectureVO vo) {
@@ -124,15 +130,15 @@ public class LectureController {
 		return "/admin/lecture/list";
 	}
 
-	//승인 대기 목록	
+	// 승인 대기 목록
 	@GetMapping("/admin/lecture/ingLectureList")
 	public String ingLectureList(Model model, LectureVO vo) {
 		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
 		return "/admin/lecture/ingLectureList";
 
 	}
-	
-	//승인 완료 목록
+
+	// 승인 완료 목록
 	@GetMapping("/admin/lecture/endLectureList")
 	public String endLectureList(Model model, LectureVO vo) {
 		model.addAttribute("endLectureList", lectureService.endLectureList(vo));

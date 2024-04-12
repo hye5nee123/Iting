@@ -2,12 +2,10 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
-<section layout:fragment="content" >
+<section layout:fragment="content">
 
 	<script th:inline="javascript">
-
-		let cnqlist = [[${cnqlist}]]
-		
+		let ltNum =  [[${cnqVO.ltNum}]]
 		function gopage(p){
 			frmSearch.page.value = p;
 			frmSearch.submit();
@@ -19,20 +17,27 @@
 		function move(ltCnqNum){
 			location.href='/member/cnq/info/'+ ltCnqNum
 		}		
+
+		window.addEventListener("load", function (event) {
+			insertBtn.addEventListener("click", e=>{
+				location.href=`/member/cnq/insert/${ltNum}`
+			})
+		});
+		
+
 	</script>
-
-
 	<h3 class="related-title">커뮤니티</h3>
 	<br>
 	<!-- 검색 폼 시작 -->
-	<form name="frmSearch" th:object="${cnqVO}" style="display: inline-block;">
-		<input type="hidden" name="page" >
-		제목 <input name="ttl" th:value="*{ttl}"> 
-		작성자 <input name="name" th:value="*{name}"> 
-		<a href="#" onclick="gopage(1)" class="search-switch"> 
-		<img src="/img/member/main/search.png" alt="searchBtn"></a>
-			 <a href="#" onclick="init()" class="search-switch"> 
-			 <img src="/img/member/main/resetBtn.png" alt="searchBtn"></a>
+	<form name="frmSearch" th:object="${cnqVO}"
+		style="display: inline-block;">
+		<input type="hidden" name="page"> 제목 <input name="ttl"
+			th:value="*{ttl}"> 작성자 <input name="name" th:value="*{name}">
+		<a href="#" onclick="gopage(1)" class="search-switch"> <img
+			src="/img/member/main/search.png" alt="searchBtn"></a> 
+			<a href="#"
+			onclick="init()" class="search-switch"> <img
+			src="/img/member/main/resetBtn.png" alt="searchBtn"></a>
 	</form>
 	<!-- 검색 폼 끝 -->
 	<!-- 댓글 출력 -->
@@ -48,8 +53,10 @@
 					<th>번호</th>
 					<th>제목</th>
 					<th>날짜</th>
+					<th>첨부파일</th>
 					<th>조회수</th>
 					<th>작성자</th>
+					
 				</tr>
 			<tbody>
 
@@ -58,6 +65,9 @@
 					<td th:text="${cnq.ltCnqNum}"></td>
 					<td th:text="${cnq.ttl}"></td>
 					<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
+					<td> <span th:if = "${not #strings.isEmpty(cnq.atchNum)}" 
+                               th:text="'icon자리'"></span></td>
+					
 					<td th:text="${cnq.hit}"></td>
 					<td th:text="${cnq.name}"></td>
 				</tr>
@@ -88,10 +98,5 @@
 		<!-- 페이징 종료 -->
 	</div>
 
-	<script>
-	insertBtn.addEventListener("click", e=>{
-		location.href='/member/cnq/insert'
-	})
-	</script>
 </section>
 </html>
