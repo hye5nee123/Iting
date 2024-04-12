@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iting.cnq.mapper.ReplyMapper;
+import com.iting.cnq.mapper.CmtMapper;
 import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.ReplyService;
@@ -17,20 +17,20 @@ import lombok.Setter;
 public class ReplyServiceImpl implements ReplyService {
 
 	@Setter(onMethod_ = @Autowired)
-	private ReplyMapper replyMapper;
+	private CmtMapper cmtMapper;
 
 	@Override
 	public Map<String, Object> getList(CnqVO vo, CSearchVO svo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data", replyMapper.getListWithPaging(vo, svo));
-		map.put("count", replyMapper.getCount(vo));
+		map.put("data", cmtMapper.getListWithPaging(vo, svo));
+		map.put("count", cmtMapper.getCount(vo));
 		return map;
 	}
 
 	@Override
 	public int register(CnqVO vo) {
 		
-		return replyMapper.insertReply(vo);
+		return cmtMapper.insertReply(vo);
 	}
 
 }

@@ -45,4 +45,17 @@
        	FROM atch
        	WHERE atch_num = #{atchNum}
 	</select>
+	
+	<!-- 첨부파일 여러건  -->
+	<select id="getFileInfoList">
+		SELECT atch_num
+             <if test="atchPath != null and atchPath != ''">
+             , atch_path		                
+             </if>
+             , atch_ttl
+             , atch_typ_cd
+             , atch_mark_ttl
+       	FROM atch
+       	WHERE atch_num = #{atchNum}
+	</select>
 </mapper>

@@ -15,5 +15,7 @@ public class ReviewVO {
 	private String tlsnNum;
 	private String ltNum;
 	private String name;
-	private String cd;  //mapper.xml과 화면단에서 동적쿼리에 쓰일 변수.
+	private String cd;// mapper.xml과 화면단에서 동적쿼리에 쓰일 변수.
+	private String tlsn;
+
 }

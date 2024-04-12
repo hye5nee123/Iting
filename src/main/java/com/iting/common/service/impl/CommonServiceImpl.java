@@ -1,5 +1,7 @@
 package com.iting.common.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public FileVO getFileInfo(String fileNum) {
 		return commonMapper.getFileInfo(fileNum);
+	}
+
+	@Override
+	public List<FileVO> getFileInfoList(String fileNum) {
+		return commonMapper.getFileInfoList(fileNum);
 	}
 
 }
