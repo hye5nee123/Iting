@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.review.mapper.ReviewMapper">
-	<select id="getReviewList"  resultType="map">
-		SELECT * from (select ROWNUM as rn, a.* from (
+	<!-- 전체조회 -->
+	<select id="getReviewList" resultType="ReviewVO">
 		SELECT r.REVIEW_NUM,
 				r.TTL,
 				r.CNTN,
@@ -13,13 +13,32 @@
 				t.TLSN_NUM,
 				l.lt_num,
 				m.name
-
 		FROM review r, tlsn t, lt l ,mem m
 		WHERE r.TLSN_NUM = t.TLSN_NUM
-		AND t.lt_num = l.lt_num
-		AND r.mem_num = m.mem_num
+			AND t.lt_num = l.lt_num
+			AND r.mem_num = m.mem_num
 		ORDER by 
+		<choose>
+		<when test="vo.cd == 'drwupDt'">drwup_dt DESC</when>
+		<when test="vo.cd == 'star'">star DESC</when>
+		<otherwise>REVIEW_NUM</otherwise>
+		</choose>
 	</select>
+	<!-- 상세조회 -->
+	<select id="getReviewInfo" parameterType="String"
+		resultType="ReviewVO">
+		SELECT
+				c.lt_cnq_num,
+				c.ttl,
+				c.cntn,
+				c.drwup_dt,
+				c.hit,
+				m.name
+		FROM 	lt_cnq c JOIN mem m
+			on c.mem_num = m.mem_num
+		WHERE 	lt_cnq_num = #{ltCnqNum}
+	</select>
+	
 	<select id="getCount" resultType="Long">
 		select count(*)
 		from review
