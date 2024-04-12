@@ -47,12 +47,16 @@ public class LectureController {
 
 	// 강의 전체목록 조회처리 - 장효은
 	@GetMapping("/member/lecture/allSelect")
+	//@GetMapping("/member/lecture/allSelect/{keyWord}")
 	@ResponseBody
+	//public Map<String, Object> allList(LectureVO vo, PagingVO pvo, @PathVariable String keyWord) {
 	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
 		pvo.setPageUnit(16);
 		pvo.setPageSize(16);
 		pvo.setFirst(0);
 		pvo.setLast(5);
+		
+		//vo.setLtTtl(keyWord);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 

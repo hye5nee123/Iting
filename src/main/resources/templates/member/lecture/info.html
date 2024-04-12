@@ -67,7 +67,7 @@
 					<span><i class='bx bx-user'></i> <i>22,789</i>명 수강</span>
 				</p>
 				<div class="btn">
-					<button>
+					<button type="button" th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">
 						<i class='bx bx-check'></i> 수강하기
 					</button>
 					<button>
@@ -107,7 +107,7 @@
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#tabs-6" role="tab">커뮤니티</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-7" role="tab">추천강의</a></li>
+							href="#tabs-7" role="tab">강의 공지사항</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-5" role="tabpanel">

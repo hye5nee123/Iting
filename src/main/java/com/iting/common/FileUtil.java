@@ -32,7 +32,7 @@ public class FileUtil {
 			// 확장자
 			String exetension = FilenameUtils.getExtension(origFileName);
 			
-			// 새 파일명 (중복 덮어쓰기 방지) => 수정필요(240409)
+			// 새 파일명 (중복 덮어쓰기 방지)
 			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds() + "." +  exetension;
 			
 			
