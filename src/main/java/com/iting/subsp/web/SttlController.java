@@ -45,7 +45,7 @@ public class SttlController {
 	//@Scheduled(cron="0 0/2 * * * ?")
 	@GetMapping("/member/test")
     public HttpEntity<String> getPostTest(){
-		return ReqPaymentSchedulerTest.test();
+		return ReqPaymentSchedulerTest.setPayScheduleTest();
        
     }
 	
