@@ -1,6 +1,5 @@
 package com.iting.lecture.web;
 
-import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.iting.common.FileUtil;
-import com.iting.common.model.FileVO;
 import com.iting.lecture.model.CurriVO;
 import com.iting.lecture.service.CurriService;
 import com.iting.lecture.service.LectureService;

@@ -160,7 +160,6 @@
 		WHERE l.LT_NUM = #{ltNum}
 	</select>
 	
-	
 
 	<!-- 도승민 -->
 	<!-- 강의 등록 -->
@@ -208,6 +207,7 @@
 		WHERE lt_num = #{ltNum}
 
 	</update>
+	
 	<!-- 승인 목록출력 -->
 	<select id="endLectureList" resultType="LectureVO">
 	
@@ -223,13 +223,11 @@
 		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
 		, find_code(ACCP_YN_CD) ACCP_YN_CD
 		, find_code(RDM_CATE_CD) RDM_CATE_CD
+		
 		FROM LT
 		WHERE ACCP_YN_CD = 'd1'
 		
-	
 	</select>
-
-
 
 	<!-- 미승인 -->
 	<select id="ingLectureList" resultType="LectureVO">
@@ -250,9 +248,6 @@
 		WHERE ACCP_YN_CD = 'd2'
 
 	</select>
-
-
-
-
+	
 
 </mapper>

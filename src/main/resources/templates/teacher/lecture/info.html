@@ -81,12 +81,13 @@
 					<div class="col-md-10">
 						<input  th:value="${lecture.ltKeywordCd}" class="col-md-10 form-control" readonly>
 					</div>
+					</div>
 						<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">로드맵 코드</label>
 				<div class="col-md-10">
 						<input  th:value="${lecture.rdmCateCd}" class="col-md-10 form-control" readonly>
 					</div>
-
+		
 				</div>
 				<div class="mb-3 row">
 					<label for="html5-file-input" class="col-md-2 col-form-label">이미지</label>
@@ -102,10 +103,11 @@
 					</div>
 			</div>
 		</div>
-		<a href="/teacher/lecture/lecture" class="col-md-2 col-form-label" id="qqq">목록가기</a>
-									
+		<div>
+		<a href="/teacher/lecture/getLectureList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
+		</div>						
 	</div>
 	</div>
-	</div>
+	
 </body>
 </html>
