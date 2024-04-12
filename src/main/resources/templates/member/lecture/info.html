@@ -32,7 +32,8 @@
 					<li><i class='bx bx-spreadsheet'></i>
 						<div>
 							<p>커리큘럼 수</p>
-							<span>총 <em th:text="${cur.cnt}"></em>개</span>
+							<span>총 <em th:text="${cur.cnt}"></em>개
+							</span>
 						</div></li>
 					<li><i class='bx bx-bar-chart-alt'></i>
 						<div>
@@ -52,14 +53,13 @@
 
 		<div class="row lecture_list">
 			<div class="left">
-				<video controls width="500" autoplay muted>	
-				  <source src="/video/html의이해_intro.mp4" type="video/mp4" />
+				<video controls width="500" autoplay muted>
+					<source src="/video/html의이해_intro.mp4" type="video/mp4" />
 				</video>
 			</div>
 			<div class="right">
 				<h3>
-					<i class='bx bx-slideshow'></i>
-					<span th:text="${lecture.ltTtl}"></span>
+					<i class='bx bx-slideshow'></i> <span th:text="${lecture.ltTtl}"></span>
 				</h3>
 				<span class="target">로드맵 목표</span> <span class="txt">프로그래밍
 					시대에 맞는 인재 되기</span>
@@ -67,7 +67,8 @@
 					<span><i class='bx bx-user'></i> <i>22,789</i>명 수강</span>
 				</p>
 				<div class="btn">
-					<button type="button" th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">
+					<button type="button"
+						th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">
 						<i class='bx bx-check'></i> 수강하기
 					</button>
 					<button>
@@ -81,7 +82,8 @@
 			<h3 class="related-title">커리큘럼</h3>
 			<ul>
 				<li><p class="total">
-						<i class='bx bx-caret-right-circle'></i> 총 강의 <i th:text="${cur.cnt}"></i>개
+						<i class='bx bx-caret-right-circle'></i> 총 강의 <i
+							th:text="${cur.cnt}"></i>개
 					</p></li>
 				<li><p class="total">
 						<i class='bx bx-stopwatch'></i> 영상시간 <i th:text="${cur.sum}"></i>분
@@ -91,9 +93,9 @@
 			<div class="list">
 				<ul th:each="curri, stat: ${curriList}">
 					<li><div>
-							<a><span th:text="${stat.count}"></span><i th:text="${curri.rndTtl}"></i></a>
-						</div>
-					</li>
+							<a><span th:text="${stat.count}"></span><i
+								th:text="${curri.rndTtl}"></i></a>
+						</div></li>
 				</ul>
 			</div>
 		</div>
@@ -115,15 +117,16 @@
 								<div class="product__details__tab__content__item">
 									<h5>평균 만족도 4.9점의 생생한 후기</h5>
 									<ul class="review">
-										<li  th:each="review, stat:${reviewList}"> 
+										<li th:each="review, stat:${reviewList}">
 											<div>
 												<span class="img"></span>
 												<p class="id" th:text="${review.name}">아이디</p>
-												<div class="star" th:text="${review.star}">
-													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i>	
+												<div class="star">
+													<span th:each="i : ${#numbers.sequence(1, review.star)}">
+														<i class="bx bxs-star"></i>
+													</span>
 												</div>
+
 												<p class="text" th:text="${review.cntn}"></p>
 											</div>
 										<li>
@@ -135,7 +138,8 @@
 						<div class="tab-pane" id="tabs-6" role="tabpanel">
 							<div class="product__details__tab__content">
 								<div class="product__details__tab__content__item">
-									<iframe th:src="|/member/cnq/list/${lecture.ltNum}|" id="cnq" scrolling="no"></iframe>
+									<iframe th:src="|/member/cnq/list/${lecture.ltNum}|" id="cnq"
+										scrolling="no"></iframe>
 								</div>
 							</div>
 						</div>
