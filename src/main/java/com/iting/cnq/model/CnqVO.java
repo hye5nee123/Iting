@@ -17,4 +17,5 @@ public class CnqVO {
 	private String image;
 	private String cmtNum;
 	private String drwupr;
+	private String atchNum;
 }

@@ -1,6 +1,7 @@
 package com.iting.review.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,20 @@ import com.iting.review.service.ReviewService;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	@Autowired
-	ReviewMapper reviewMapper; 
-	@Override
-	public Map<String, Object> getReviewList(ReviewVO vo, RSearchVO svo) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data", reviewMapper.getReviewList(vo, svo));
-		map.put("count", reviewMapper.getCount(vo, svo));
-		return map;
-	}
+	ReviewMapper reviewMapper;
+
+
+
 	@Override
 	public long getCount(ReviewVO vo, RSearchVO svo) {
-		
+
 		return reviewMapper.getCount(vo, svo);
+	}
+
+	@Override
+	public List<ReviewVO> getReviewList(ReviewVO vo) {
+		
+		return reviewMapper.getReviewList(vo);
 	}
 
 }

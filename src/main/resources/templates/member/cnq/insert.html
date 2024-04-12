@@ -12,6 +12,7 @@
 		<div class="checkout__input contact__form">
 			<h3 class="related-title">글등록</h3>
 			<form name="cnqForm" method="post">
+			
 				제목 : <input name="ttl"> 내용 :
 				<textarea name="cntn"></textarea>
 				<br> 작성자 : <input name="name">
@@ -19,6 +20,7 @@
 					type="file" name="uFile" multiple="multiple"> 
 					<!-- k1:이미지 -->
 				<input type="hidden" name="typCode" th:value="k1"> <br>
+				<input type="hidden" name="ltNum" th:value="${ltNum}">
 				<button type="button" onclick="uploadFileReq(cnqForm.typCode.value, cnqForm)">첨부파일 등록</button>
 				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
 				<button class="cnq_reset" type="button" id="listBtn"
@@ -33,7 +35,8 @@
 		const ttl = cnqForm.ttl.value;
 		const cntn = cnqForm.cntn.value;
 		const name = cnqForm.name.value;
-		let param = { ttl, cntn, name}
+		const ltNum = cnqForm.ltNum.value;
+		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum}
 		console.log(param);
 		
 		/*
@@ -53,7 +56,9 @@
 	// 등록 응답
 	function saveRes(res) {
 		console.log(res);
+		const ltNum = cnqForm.ltNum.value;
 		alert('게시글 등록 완료!');
+		location.href=`/member/cnq/list/${ltNum}`
 	}
 	
 	//버튼 클릭 시 함수 호출.

@@ -11,12 +11,14 @@
 		c.cntn,
 		c.drwup_dt,
 		c.hit,
-		m.name
+		m.name,
+		atch_num
+		
 		FROM lt_cnq c JOIN mem m
 		on c.mem_num = m.mem_num
-		<where>
+		WHERE LT_NUM = #{vo.ltNum}
 			<if test="vo.ttl != null and vo.ttl != ''">
-				TTL like '%' || #{vo.ttl} || '%'
+				AND TTL like '%' || #{vo.ttl} || '%'
 			</if>
 			<if test="vo.cntn != null and vo.cntn != ''">
 				AND CNTN like '%' || #{vo.cntn} || '%'
@@ -24,8 +26,7 @@
 			<if test="vo.name != null and vo.name != ''">
 				AND NAME like '%' || #{vo.name} || '%'
 			</if>
-		</where>
-		ORDER by LT_CNQ_NUM
+		ORDER by LT_CNQ_NUM DESC
 	<![CDATA[
 	) a where ROWNUM <= #{svo.end}) b where rn >= #{svo.start}
 	]]>
@@ -40,7 +41,8 @@
 				c.cntn,
 				c.drwup_dt,
 				c.hit,
-				m.name
+				m.name,
+				c.atch_num
 		FROM 	lt_cnq c JOIN mem m
 			on c.mem_num = m.mem_num
 		WHERE 	lt_cnq_num = #{ltCnqNum}
@@ -55,23 +57,25 @@
 			FROM lt_cnq
 		</selectKey>
 		INSERT INTO lt_Cnq (
-		LT_CNQ_NUM
-		, TTL
-		, CNTN
-		, DRWUP_DT
-		, MEM_NUM
-		, LT_NUM
-		, HIT
-		)
+					LT_CNQ_NUM
+					, TTL
+					, CNTN
+					, DRWUP_DT
+					, MEM_NUM
+					, LT_NUM
+					, HIT
+					, ATCH_NUM
+					)
 		VALUES (
-		#{ltCnqNum}
-		, #{ttl}
-		, #{cntn}
-		, sysDate
-		, #{memNum}
-		, #{ltNum}
-		, 0
-		)
+					#{ltCnqNum}
+					, #{ttl}
+					, #{cntn}
+					, sysDate
+					, #{memNum}
+					, #{ltNum}
+					, 0
+					,#{atchNum}
+				)
 	</insert>
 
 	<delete id="deleteCnq">
@@ -89,7 +93,18 @@
 	<select id="getCount" resultType="Long">
 		select count(*)
 		from lt_cnq
+		WHERE LT_NUM = #{vo.ltNum}
+			<if test="vo.ttl != null and vo.ttl != ''">
+				AND TTL like '%' || #{vo.ttl} || '%'
+			</if>
+			<if test="vo.cntn != null and vo.cntn != ''">
+				AND CNTN like '%' || #{vo.cntn} || '%'
+			</if>
+			<if test="vo.name != null and vo.name != ''">
+				AND NAME like '%' || #{vo.name} || '%'
+			</if>
 	</select>
+	
 	<update id="updateHit">
 		UPDATE lt_cnq 
 			SET hit = hit + 1 

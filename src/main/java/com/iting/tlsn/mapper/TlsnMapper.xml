@@ -29,21 +29,62 @@
 	
 	<select id="getTlsnDetailList">
 		SELECT l.LT_NUM
-		       , l.LT_TTL
-		       , find_code(LT_CATE_CD) LT_CATE_CD
-		       , l.LECTURER_NUM
-		       , m.MEM_NUM
-		       , t.TLSN_NUM
-		       , t.TLSN_ST_CD
-		       , t.CETE_YN_CD
-		       , t.APPL_DT
-		       , e.NAME
-		FROM TLSN t JOIN LT l
-		              ON t.LT_NUM = l.LT_NUM
-		            JOIN MEM m
-		              ON t.MEM_NUM = m.MEM_NUM
-		            JOIN LECTURER e
-		              ON l.LECTURER_NUM = e.LECTURER_NUM
-		ORDER BY t.APPL_DT DESC
+		, find_code(LT_ST_CD) LT_ST_CD
+		, l.LT_TTL
+		, find_code(LT_CATE_CD) LT_CATE_CD
+		, l.FR_DT
+		, find_code(LT_DIF_CD) LT_DIF_CD
+		, l.LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+        , c.RND_NUM
+        , c.RND_TTL
+        , c.ATCH_NUM
+        , c.LT_TM
+        , t.TLSN_NUM
+        , t.MEM_NUM
+		FROM LT l JOIN CURRI c
+                    ON l.LT_NUM = c.LT_NUM
+                  JOIN TLSN t
+                    ON t.LT_NUM = c.LT_NUM
+		WHERE l.LT_NUM = #{ltNum}
+        AND t.MEM_NUM = #{user}
+	</select>
+	
+	<insert id="tlsnInsert" parameterType="TlsnVO">
+		<selectKey keyProperty="tlsnNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'tl' || LPAD(NVL(MAX(SUBSTR(tlsn_num, -5)), 0) + 1, 5, '0') 
+			FROM tlsn
+		</selectKey>
+		INSERT INTO tlsn (
+						  tlsn_num
+						, tlsn_st_cd
+						, mem_num
+						, lt_num
+						, cete_yn_cd
+						, appl_dt
+                  		 )
+		VALUES (
+		          #{tlsnNum}
+		        , #{tlsnStCd}
+		        , #{memNum}
+		        , #{ltNum}
+		        , #{ceteYnCd}
+		        , SYSDATE
+		        )
+	</insert>
+	
+	<!-- 수강 단건조회 -->
+	<select id="getTlsnInfo" parameterType="TlsnVO">
+		SELECT tlsn_num
+		        , tlsn_st_cd
+		        , mem_num
+		        , lt_num
+		        , cete_yn_cd
+		        , appl_dt
+		FROM tlsn
+		WHERE mem_num = #{memNum}
+		AND lt_num = #{ltNum}
 	</select>
 </mapper>

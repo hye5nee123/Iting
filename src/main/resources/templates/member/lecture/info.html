@@ -67,7 +67,7 @@
 					<span><i class='bx bx-user'></i> <i>22,789</i>명 수강</span>
 				</p>
 				<div class="btn">
-					<button>
+					<button type="button" th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">
 						<i class='bx bx-check'></i> 수강하기
 					</button>
 					<button>
@@ -107,7 +107,7 @@
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#tabs-6" role="tab">커뮤니티</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-7" role="tab">추천강의</a></li>
+							href="#tabs-7" role="tab">강의 공지사항</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-5" role="tabpanel">
@@ -115,84 +115,18 @@
 								<div class="product__details__tab__content__item">
 									<h5>평균 만족도 4.9점의 생생한 후기</h5>
 									<ul class="review">
-										<li>
+										<li  th:each="review, stat:${reviewList}"> 
 											<div>
 												<span class="img"></span>
-												<p class="id">아이디</p>
-												<div class="star">
+												<p class="id" th:text="${review.name}">아이디</p>
+												<div class="star" th:text="${review.star}">
 													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
 														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i>
+														class='bx bxs-star'></i>	
 												</div>
-												<p class="text">비전공자라면 꼭!! 들어야 하는 필수 강의라고 생각합니다! 진로 선택에
-													많은 도움이 되었던 강의!</p>
+												<p class="text" th:text="${review.cntn}"></p>
 											</div>
-										</li>
 										<li>
-											<div>
-												<span class="img"></span>
-												<p class="id">아이디</p>
-												<div class="star">
-													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i>
-												</div>
-												<p class="text">비전공자라면 꼭!! 들어야 하는 필수 강의라고 생각합니다! 진로 선택에
-													많은 도움이 되었던 강의!</p>
-											</div>
-										</li>
-										<li>
-											<div>
-												<span class="img"></span>
-												<p class="id">아이디</p>
-												<div class="star">
-													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i>
-												</div>
-												<p class="text">비전공자라면 꼭!! 들어야 하는 필수 강의라고 생각합니다! 진로 선택에
-													많은 도움이 되었던 강의!</p>
-											</div>
-										</li>
-										<li>
-											<div>
-												<span class="img"></span>
-												<p class="id">아이디</p>
-												<div class="star">
-													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i>
-												</div>
-												<p class="text">비전공자라면 꼭!! 들어야 하는 필수 강의라고 생각합니다! 진로 선택에
-													많은 도움이 되었던 강의!</p>
-											</div>
-										</li>
-										<li>
-											<div>
-												<span class="img"></span>
-												<p class="id">아이디</p>
-												<div class="star">
-													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i>
-												</div>
-												<p class="text">비전공자라면 꼭!! 들어야 하는 필수 강의라고 생각합니다! 진로 선택에
-													많은 도움이 되었던 강의!</p>
-											</div>
-										</li>
-										<li>
-											<div>
-												<span class="img"></span>
-												<p class="id">아이디</p>
-												<div class="star">
-													<i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-														class='bx bx-star'></i>
-												</div>
-												<p class="text">비전공자라면 꼭!! 들어야 하는 필수 강의라고 생각합니다! 진로 선택에
-													많은 도움이 되었던 강의!</p>
-											</div>
-										</li>
 									</ul>
 								</div>
 							</div>
@@ -201,7 +135,7 @@
 						<div class="tab-pane" id="tabs-6" role="tabpanel">
 							<div class="product__details__tab__content">
 								<div class="product__details__tab__content__item">
-									<iframe src="/member/cnq/list" id="cnq" scrolling="no"></iframe>
+									<iframe th:src="|/member/cnq/list/${lecture.ltNum}|" id="cnq" scrolling="no"></iframe>
 								</div>
 							</div>
 						</div>
