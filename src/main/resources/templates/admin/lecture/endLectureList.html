@@ -31,10 +31,13 @@ function move(ltNum){
 			<h4 class="card-header">
 				강의 목록
 			</h4>
-				<div class="input-group">
-                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                          <input type="text" class="form-control" placeholder="찾으시는게 무엇...">
-                        </div>
+				<form name="frmSearch" class="input-group" >
+                          <span th:object="${LectureVO}" class="input-group-text">
+                          <i class="tf-icons bx bx-search" ></i></span>
+                          <input type="text" class="form-control" placeholder="제목을 입력해주세요."
+                           name="ltTtl" th:value="*{ltTtl}">
+                          
+                        </form>
 				<table class="table">
 					<thead>
 						<tr>
@@ -63,12 +66,19 @@ function move(ltNum){
 	listReq(1);
 	
 	//controller에서 주소 따옴.
-	function listReq() {
-		fetch("/admin/lecture/endLectureList")
+	function listReq(page) {
+		fetch("/admin/lecture/endLectureList?page="+page)
 		.then(res => res.json())
 		.then(res => listRes(res))
 	}
 	
+	function gopage(p){
+		//검색 기능 하면 다시 살리기
+		frmSearch.page.value = p;
+		frmSearch.submit();
+		listReq(p);
+	}
+	 
 	//list 응답.
 	function listRes(res) {
 		endLectureList.innerHTML = '';

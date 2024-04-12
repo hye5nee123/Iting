@@ -248,6 +248,11 @@
 		WHERE ACCP_YN_CD = 'd2'
 
 	</select>
-	
+	<!-- 개수  -->
+		<select id="getCount" resultType="Long">
+		select count(*)
+		from lt
+		WHERE ACCP_YN_CD = 'd1'
+	</select>
 
 </mapper>
