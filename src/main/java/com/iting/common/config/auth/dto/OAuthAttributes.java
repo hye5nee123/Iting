@@ -55,8 +55,9 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public Mem toEntity() {
+    public Mem toEntity(String memnum) {
         return Mem.builder()
+        		.memNum(memnum)
         		.mail(mail)
                 .phone(phone)
                 .role(Role.b1)

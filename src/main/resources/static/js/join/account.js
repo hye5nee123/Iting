@@ -41,10 +41,12 @@ function usertypeForm(num) {
 	else if (num == '2') {
 		actype = 'd2';
 		form = `<div class="checkout__input">
-				<form action="upload/onefile" method="post" enctype="multipart/form-data">
-					<p>이력서 첨부 <span>*</span></p>
-					</div>
-					<input type="file" accept=".pdf, .xlsx, .hwp" id="file" name="file"/>
+				<p>이력서 첨부 <span>*</span></p>
+				</div>
+				<form method="post" enctype="multipart/form-data" name="frm">
+					<input type="file" accept=".pdf, .xlsx, .hwp" name="uFile" multiple="multiple"/>
+					<input type="hidden" name="typCode" th:value="k1">
+					<button type="button" onclick="uploadFileReq(typCode.value, frm)">첨부파일 등록</button>
 				</form>
 				`;
 	}
