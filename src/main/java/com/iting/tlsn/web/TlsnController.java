@@ -61,7 +61,7 @@ public class TlsnController {
 	@ResponseBody
 	public TlsnVO tlsnInsert(@RequestBody TlsnVO vo) {
 		
-		TlsnVO tvo = tlsnService.getTlsnInfo(vo);
+		TlsnVO tvo = tlsnService.getTlsnInfoMem(vo);
 		
 		System.out.println(tvo + "=============================");
 		
