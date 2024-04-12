@@ -53,9 +53,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private Mem saveOrUpdate(OAuthAttributes attributes) {
     	String memnum = mapper.getUserNum();
     	
-    	Mem user = userRepository.findByMailAndMemNum(attributes.getMail(), memnum)
+    	Mem user = userRepository.findByMail(attributes.getMail())
                 .map(entity -> entity.update(attributes.getPhone()))
-                .orElse(attributes.toEntity());
+                .orElse(attributes.toEntity(memnum));
 
         return userRepository.save(user);
     }

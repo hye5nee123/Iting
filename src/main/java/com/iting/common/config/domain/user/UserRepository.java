@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<Mem, Long> {
 
-    Optional<Mem> findByMailAndMemNum(String mail, String memnum);
+    Optional<Mem> findByMail(String mail);
 }

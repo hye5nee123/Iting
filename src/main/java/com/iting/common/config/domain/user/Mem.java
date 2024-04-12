@@ -39,15 +39,17 @@ public class Mem {
 	private Role memFgCd;
 
 	@Builder
-	public Mem(String mail, String phone, Role role) {
-		this.id = this.mail = mail;
+	public Mem(String memNum, String mail, String phone, Role role) {
+		this.memNum = memNum;
+		this.id = 
+		this.mail = mail;
 		this.phone = phone.replaceAll("-", "");
 		this.memFgCd = role;
 		this.loginTypCd = "a2";
 	}
 
 	public Mem update(String phone) {
-		this.phone = phone;
+		this.phone = phone.replaceAll("-", "");
 
 		return this;
 	}
