@@ -1,6 +1,10 @@
 package com.iting.test.web;
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iting.test.model.TestVO;
 import com.iting.test.service.TestService;
 import com.iting.tlsn.service.TlsnService;
+
+/**
+ * 
+ * @author 신수지
+ * 강사와 학생의 문제은행
+ */
 
 @Controller
 public class TestController {
@@ -26,25 +35,20 @@ public class TestController {
 	@Autowired
 	TlsnService tlsnService;
 	
-	// 강의조회
-//	@RequestMapping("test/list")
-//	public String getTestList(Model model, TestVO vo) {
-//		model.addAttribute("testList", testService.getTestList());
-//		return "teacher/test/list";
-//	}
 
-	// 목록조회
-	@RequestMapping("teacher/test/list")
-	public String getTestList(Model model, TestVO vo) {
-		model.addAttribute("testList", testService.getTestList());
+	// 강사 문제은행 목록조회
+	@RequestMapping("teacher/test/list/{ltNum}")
+	public String getTestList(@PathVariable String ltNum, Model model) {
+		model.addAttribute("testList", testService.getTestList(ltNum));
 		return "teacher/test/test";
 	}
 	
-	// 학생 목록조회
+	// 학생 문제은행 목록조회
 	@RequestMapping("member/test/list")
-	public String getTestMemList(Model model, TestVO vo) {
-		model.addAttribute("testList", testService.getTestList());
-		model.addAttribute("tlsnList", tlsnService.getTlsnList());
+	public String getTestMemList(String ltNum, Model model, TestVO vo, HttpSession session) {
+		String user = (String) session.getAttribute("usernum");
+		// model.addAttribute("testList", testService.getTestList(ltNum));
+		model.addAttribute("tlsnList", tlsnService.getTlsnList(user));
 		return "member/test/list";
 	}
 	
@@ -85,5 +89,16 @@ public class TestController {
 		System.out.println("prblNum : " + prblNum);
 		testService.deleteTest(prblNum);
 		return "redirect:/teacher/test/list";
+	}
+	
+	// 문제 응시등록
+	@ResponseBody
+	@GetMapping("member/test/list/{ltNum}")
+	public List<TestVO> insertExam(@PathVariable String ltNum, TestVO vo, HttpSession session) {
+		String user = (String) session.getAttribute("usernum");
+		vo.setLtNum(ltNum);
+		vo.setMemNum(user);
+		
+		return testService.insertExam(vo);
 	}
 }

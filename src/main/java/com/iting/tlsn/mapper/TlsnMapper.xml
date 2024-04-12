@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.tlsn.mapper.TlsnMapper">
+	<!-- 전체수강목록 -->
 	<select id="getTlsnList">
 		SELECT l.LT_NUM
 		       , l.LT_TTL
@@ -24,30 +25,18 @@
 		              ON t.MEM_NUM = m.MEM_NUM
 		            JOIN LECTURER e
 		              ON l.LECTURER_NUM = e.LECTURER_NUM
+		WHERE m.MEM_NUM = #{user}
 		ORDER BY t.APPL_DT DESC
 	</select>
 	
-	<select id="getTlsnDetailList">
+	<select id="getTlsnInfo" parameterType="TlsnVO" resultType="TlsnVO">
 		SELECT l.LT_NUM
-		, find_code(LT_ST_CD) LT_ST_CD
 		, l.LT_TTL
-		, find_code(LT_CATE_CD) LT_CATE_CD
-		, l.FR_DT
-		, find_code(LT_DIF_CD) LT_DIF_CD
 		, l.LECTURER_NUM
-		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
-        , c.RND_NUM
-        , c.RND_TTL
-        , c.ATCH_NUM
-        , c.LT_TM
-        , t.TLSN_NUM
-        , t.MEM_NUM
-		FROM LT l JOIN CURRI c
-                    ON l.LT_NUM = c.LT_NUM
-                  JOIN TLSN t
-                    ON t.LT_NUM = c.LT_NUM
+        , e.NAME
+		FROM LT l JOIN LECTURER e
+                    ON l.LECTURER_NUM = e.LECTURER_NUM
 		WHERE l.LT_NUM = #{ltNum}
-        AND t.MEM_NUM = #{user}
 	</select>
 	
 	<insert id="tlsnInsert" parameterType="TlsnVO">

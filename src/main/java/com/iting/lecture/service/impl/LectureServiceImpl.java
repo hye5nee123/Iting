@@ -53,6 +53,11 @@ public class LectureServiceImpl implements LectureService {
 	public LectureVO getCurriAll(String ltNum) {
 		return lectureMapper.getCurriAll(ltNum);
 	}
+	
+	@Override
+	public LectureVO getTcInfo(String ltNum, String lecturerNum) {
+		return lectureMapper.getTcInfo(ltNum, lecturerNum);
+	}
   
 	// 도승민
 	@Override
@@ -86,6 +91,8 @@ public long getCount(LectureVO vo) {
 	
 	return lectureMapper.getCount(vo);
 }
+
+
 
 
 
