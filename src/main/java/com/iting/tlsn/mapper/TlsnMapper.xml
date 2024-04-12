@@ -65,7 +65,7 @@
 	</insert>
 	
 	<!-- 수강 단건조회 -->
-	<select id="getTlsnInfo" parameterType="TlsnVO">
+	<select id="getTlsnInfoMem" parameterType="TlsnVO">
 		SELECT tlsn_num
 		        , tlsn_st_cd
 		        , mem_num

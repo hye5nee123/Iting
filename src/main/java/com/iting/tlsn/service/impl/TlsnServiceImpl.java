@@ -34,5 +34,10 @@ public class TlsnServiceImpl implements TlsnService {
 	public int tlsnInsert(TlsnVO vo) {
 		return tlsnMapper.tlsnInsert(vo);
 	}
+
+@Override
+public TlsnVO getTlsnInfoMem(TlsnVO vo) {
+	return tlsnMapper.getTlsnInfoMem(vo);
+}
 	
 }
