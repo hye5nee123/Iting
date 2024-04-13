@@ -16,8 +16,7 @@ public class SmsController {
 
 	final DefaultMessageService messageService;
 
-	public SmsController(@Value("${COOL-SMS-KEY}") String key, @Value("${COOL-SMS-SECRET}") String secret) {		
-		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
+	public SmsController(@Value("${COOL-SMS-KEY}") String key, @Value("${COOL-SMS-SECRET}") String secret) {
 		this.messageService = NurigoApp.INSTANCE.initialize(key, secret,
 				"https://api.coolsms.co.kr");
 	}
@@ -92,7 +91,7 @@ public class SmsController {
 		message.setText(nums.getNumkey());
 		
 //		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-//		return response;
+//		return response; // 문자 보내기 (리턴 받는 메소드 타입 변경해줘야함)
 	}
 
 //	    /**

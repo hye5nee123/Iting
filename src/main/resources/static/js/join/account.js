@@ -43,11 +43,7 @@ function usertypeForm(num) {
 		form = `<div class="checkout__input">
 				<p>이력서 첨부 <span>*</span></p>
 				</div>
-				<form method="post" enctype="multipart/form-data" name="frm">
-					<input type="file" accept=".pdf, .xlsx, .hwp" name="uFile" multiple="multiple"/>
-					<input type="hidden" name="typCode" th:value="k1">
-					<button type="button" onclick="uploadFileReq(typCode.value, frm)">첨부파일 등록</button>
-				</form>
+				<input type="file" accept=".pdf, .xlsx, .hwp" id="uFile" name="uFile" multiple="multiple"/>
 				`;
 	}
 	document.getElementsByClassName('radios')[0].innerHTML = form;
@@ -151,6 +147,7 @@ function fileCheck() {
 
 function chkAccount() {
 	// 유효성검사
+	console.log();
 	if (idv == '') {
 		alert("아이디를 입력해주세요");
 		return;
@@ -186,7 +183,7 @@ function chkAccount() {
 		alert("휴대전화번호를 인증해주세요");
 		return;
 	}
-	if (filev && actype == 'd2') {
+	if (filev == '' && actype == 'd2') {
 		alert("이력서를 첨부해주세요");
 		return;
 	}
@@ -197,68 +194,77 @@ function chkAccount() {
 	}
 	insertAccount();
 }
-async function insertAccount(){
+async function insertAccount() {
+	let formData = new FormData();
 	let nickv = nick.value;
 	let addrv = sample6_address.value;
 	let dadrv = sample6_detailAddress.value;
 	let logCd = 'a1';
 	let token = '';
-	let intorfile = '';
-	if(actype == 'b1'){
-		intorfile = ocmenu.value;
+
+	let intr = '';
+	if (actype == 'b1') {
+		intr = ocmenu.value;
 	} else {
-		intorfile = file.value;
+		formData.append("fileData", uFile);
 	}
+	
 	let param = {
-		idv,
-		pwv,
-		nickv,
-		addrv,
-		dadrv,
-		mailv,
-		phonev,
-		logCd,
-		token,
-		actype,
-		intorfile};
-	let result = await csrf_axios({
+		idv: idv,
+		pwv: pwv,
+		nickv: nickv,
+		addrv: addrv,
+		dadrv: dadrv,
+		mailv: mailv,
+		phonev: phonev,
+		logCd: logCd,
+		token: token,
+		actype: actype,
+		intr: intr
+	};
+	formData.append("vo", new Blob([JSON.stringify(param)], {type: "application/json"}));
+	console.log(formData);
+	let result = await axios.create({
+		headers: {
+			[header]: token
+		},
 		method: 'post',
 		url: '/insertaccount',
-		data: param,
+		contentType: false,
+		processData: false,
+		data: formData,
 	})
 		.then(res => res.data);
-		if(result == 1){
-			if(actype == 'b1'){
-				Swal.fire({
-					icon: "success",
-					title: "회원가입이 완료되었습니다",
-					showDenyButton: true,
-					confirmButtonText: "메인으로",
-					 denyButtonText: "로그인화면으로",
-					confirmButtonColor: "#205cdc"
-				}).then((rest) => {
-	  				if (rest.isConfirmed) {
-						location.href = "/member/main";
-	  				} else if (rest.isDenied) {
-	 					location.href = "/login";
-	  				}
-				});
-			} else if(actype == 'd2'){
-				Swal.fire({
-					icon: "success",
-					title: "가입신청이 완료되었습니다",
-					test: "*검토 후 연락예정",
-					confirmButtonText: "메인으로",
-					confirmButtonColor: "#205cdc"
-				}).then((rest) => {
-	  				if (rest.isConfirmed) {
-						location.href = "/member/main";
-					}
-				});
+	if (actype == 'b1' && result == 1) {
+		Swal.fire({
+			icon: "success",
+			title: "회원가입이 완료되었습니다",
+			showDenyButton: true,
+			confirmButtonText: "메인으로",
+			denyButtonText: "로그인화면으로",
+			confirmButtonColor: "#205cdc"
+		}).then((rest) => {
+			if (rest.isConfirmed) {
+				location.href = "/member/main";
+			} else if (rest.isDenied) {
+				location.href = "/login";
 			}
-		} else {
-			errorAlert("회원가입 실패", "관리자에게 문의바랍니다");
-		}
+		});
+	} else if (actype == 'd2' && result == 2) {
+		Swal.fire({
+			icon: "success",
+			title: "가입신청이 완료되었습니다",
+			text: "*검토 후 연락예정",
+			confirmButtonText: "메인으로",
+			confirmButtonColor: "#205cdc"
+		}).then((rest) => {
+			if (rest.isConfirmed) {
+				location.href = "/member/main";
+			}
+		});
+	} else {
+		errorAlert("회원가입 실패", "관리자에게 문의바랍니다");
 	}
+}
 
 

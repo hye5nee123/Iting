@@ -1,6 +1,7 @@
 package com.iting.common.model;
 
 
+
 import lombok.Data;
 
 @Data
@@ -16,5 +17,8 @@ public class AccountVO {
 	private String logCd;
 	private String token;
 	private String actype;
-	private String intorfile;
+	private String intr;
+	
+	private String fileName;
+	private String newFileName;
 }
