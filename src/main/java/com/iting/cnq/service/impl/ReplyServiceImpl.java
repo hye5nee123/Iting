@@ -11,12 +11,10 @@ import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.ReplyService;
 
-import lombok.Setter;
-
 @Service
 public class ReplyServiceImpl implements ReplyService {
 
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private CmtMapper cmtMapper;
 
 	@Override
@@ -26,11 +24,10 @@ public class ReplyServiceImpl implements ReplyService {
 		map.put("count", cmtMapper.getCount(vo));
 		return map;
 	}
-
+	//등록(ajax)
 	@Override
-	public int register(CnqVO vo) {
-		
-		return cmtMapper.insertReply(vo);
+	public int cmtInsert(CnqVO vo) {
+		return cmtMapper.cmtInsert(vo);
 	}
 
 }

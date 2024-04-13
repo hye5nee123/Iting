@@ -71,14 +71,14 @@
 					</tr>
 					<tr>
 						<th style="padding: 20px;">제목</th>
-						<td colspan="3"><h5 th:text="${cnq.ttl}"
-								style="padding: 20px;"></h5></td>
+						<td colspan="3">
+						<h5 th:text="${cnq.ttl}" style="padding: 20px;"></h5></td>
 					</tr>
 					<tr>
 						<th style="padding: 20px;">내용</th>
 						<td th:text="${cnq.cntn}" colspan="3" style="padding: 20px;"></td>
 					</tr>
-					<tr >
+					<tr>
 						<th style="padding: 20px;">첨부파일</th>
 						<td  colspan="3" style="padding: 20px;">
 						   <div th:each="file:${files}" th:text="${file.atchTtl}" th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
@@ -90,12 +90,14 @@
 		<div>
 			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+			<button class="cnq_insertBtn" type="button" id="listBtn">목록</button>
 			<button class="cnq_reset" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
 		</div>
 	</form>
-	<!-- 댓글   -->
+	<!-- 댓글  시작-->
 	<div>
+	<button>등록</button>
 		<table>
 			<thead>
 				<tr>
@@ -141,7 +143,10 @@
 	console.log(newTag);
 	return newTag;
 }
-	
+	//이전 page로 돌아가기 (완전 구현은 아님 수정 필요.)
+	listBtn.addEventListener("click", e=>{
+		location.href="javascript:history.back();"
+	})
 	
 	</script>
 </section>
