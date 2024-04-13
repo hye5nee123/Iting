@@ -24,6 +24,7 @@ public class CnqServiceImpl implements CnqService {
 		return map;
 	}
 
+	//등록(ajax)
 	@Override
 	public int cnqInsert(CnqVO vo) {
 
