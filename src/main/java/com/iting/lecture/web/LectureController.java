@@ -50,14 +50,14 @@ public class LectureController {
 
 	// 강의 전체목록 조회처리 - 장효은
 	@GetMapping("/member/lecture/allSelect")
-	//@GetMapping("/member/lecture/allSelect/{keyWord}")
 	@ResponseBody
-	//public Map<String, Object> allList(LectureVO vo, PagingVO pvo, @PathVariable String keyWord) {
 	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
-		pvo.setPageUnit(16);
-		pvo.setPageSize(16);
+		pvo.setPageUnit(5);
+		pvo.setPageSize(5);
 		pvo.setFirst(0);
 		pvo.setLast(5);
+		
+		pvo.setTotalRecord(lectureService.getCount(vo));
 		
 		//vo.setLtTtl(keyWord);
 
@@ -161,7 +161,7 @@ public class LectureController {
 		pvo.setFirst(0);
 		pvo.setLast(5);
 		Map<String, Object> map = new HashMap<String, Object>();
-		pvo.setTotalRecord((long) map.get("count"));
+		pvo.setTotalRecord(lectureService.getCount(vo));
 
 		List<LectureVO> list = lectureService.endLectureList(vo, pvo);
 

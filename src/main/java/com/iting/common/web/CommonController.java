@@ -3,12 +3,14 @@ package com.iting.common.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +18,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.common.ExcelView;
 import com.iting.common.FileUtil;
-import com.iting.common.config.auth.dto.SessionUser;
 import com.iting.common.model.AccountVO;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
@@ -217,36 +218,31 @@ public class CommonController {
 	// 회원가입 등록
 	@ResponseBody
 	@PostMapping("/insertaccount")
-	public int insertAccount(@RequestBody AccountVO vo) {
-		//if(vo.getActype() == "b1") {
-			System.out.println(vo);
-			int ckcnt = userservice.insertUser(vo);
-			return ckcnt;
-		//}
+	public int insertAccount(@RequestPart(value = "vo") AccountVO vo,
+            @RequestPart(value = "fileData", required = false) MultipartFile uFile) throws IllegalStateException, IOException {
+		if(vo.getActype() == "d2" && uFile != null) {
+			String origFileName = uFile.getOriginalFilename();
+			vo.setFileName(origFileName);
+			// 확장자
+			String exetension = FilenameUtils.getExtension(origFileName);
+			// 새 파일명 (중복 덮어쓰기 방지)
+			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds() + "." +  exetension;
+			vo.setNewFileName(newFile);
+			// 파일 경로 및 이름 정의
+			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
+			// 정의된 값으로 파일 저장
+			try {
+				uFile.transferTo(file);
+				System.out.println("파일명 : " + uFile.getOriginalFilename());
+				System.out.println("파일크기 : " + uFile.getSize());
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
+		int ckcnt = userservice.insertUser(vo);
+		return ckcnt;
 	}
-//	// 회원가입 강사
-//	@ResponseBody
-//	@PostMapping("upload/insertaccount")
-//	public Map<String, Object> uploadAccount(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
-//		int retCode = 0; // 등록 완료 코드
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		
-//		FileVO fvo = FileUtil.uploadFile(uFile);
-//		if(fvo != null) {
-//			// 달라 질수 있는 로직
-//			retCode = commonService.fileInsert(fvo);
-//			
-//			map.put("retCode", retCode);
-//			map.put("fvo", fvo);
-//		}
-//		return map;
-//		
-//	}
-//		
-//		return listMap;
-//		
-//	}
+	
 	//회원 메인
 	@GetMapping("/")
     public String index() {

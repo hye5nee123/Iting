@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.common.mapper.UsersMapper">
+
 	<select id="getUserInfo" parameterType="string"
 		resultType="UsersVO">
 		select m.mem_num AS num_cd
@@ -18,7 +19,12 @@
         from lecturer l
         where id = #{userid}
 	</select>
+	
+	
+	
+	
 	<insert id="insertUser" parameterType="AccountVO">
+	
 		<selectKey keyProperty="accnum"
 				order="BEFORE"
 				resultType="string">
@@ -31,12 +37,7 @@
 				FROM lecturer
 			</if>
 		</selectKey>
-		<selectKey keyProperty="filenum"
-				order="BEFORE"
-				resultType="string">
-				SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') AS atch_num
-				FROM atch
-		</selectKey>
+		
 		<if test='actype == "b1"'>
 		insert
 		into mem
@@ -53,10 +54,11 @@
 		) 
 		values
 		(
-		#{filenum}
-		, #{atchTtl}
-		, #{atchTypCd}
-		, #{atchMarkTtl}
+		(SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') AS atch_num
+				FROM atch)
+		, #{fileName}
+		, 'k3'
+		, #{newFileName}
 		)
 		into lecturer(
 		lecturer_num
@@ -78,7 +80,13 @@
 		(
 		#{accnum}
 		, #{actype}
-		, #{intorfile}
+		<if test='actype == "b1"'>
+		, #{intr}
+		</if>
+		<if test='actype == "d2"'>
+		, (SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') AS atch_num
+				FROM atch)
+		</if>
 		, #{idv}
 		, #{pwv}
 		, #{nickv}
@@ -93,8 +101,14 @@
 		<if test='actype == "d2"'>
 		select * from dual
 		</if>
+		
 	</insert>
+	
+	
+	
+	
 	<select id="getUserNum" resultType="string">
 		SELECT 'me' || LPAD(NVL(MAX(SUBSTR(mem_num, -5)), 0) + 1, 5, '0') AS mem_num FROM mem
 	</select>
+	
 </mapper>
