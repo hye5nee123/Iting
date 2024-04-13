@@ -218,13 +218,36 @@ public class CommonController {
 	@ResponseBody
 	@PostMapping("/insertaccount")
 	public int insertAccount(@RequestBody AccountVO vo) {
-		System.out.println(vo);
-		int ckcnt = userservice.insertUser(vo);
-		return ckcnt;
+		//if(vo.getActype() == "b1") {
+			System.out.println(vo);
+			int ckcnt = userservice.insertUser(vo);
+			return ckcnt;
+		//}
 	}
-	
-	//
-	
+//	// 회원가입 강사
+//	@ResponseBody
+//	@PostMapping("upload/insertaccount")
+//	public Map<String, Object> uploadAccount(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
+//		int retCode = 0; // 등록 완료 코드
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		FileVO fvo = FileUtil.uploadFile(uFile);
+//		if(fvo != null) {
+//			// 달라 질수 있는 로직
+//			retCode = commonService.fileInsert(fvo);
+//			
+//			map.put("retCode", retCode);
+//			map.put("fvo", fvo);
+//		}
+//		return map;
+//		
+//	}
+//		
+//		return listMap;
+//		
+//	}
+	//회원 메인
 	@GetMapping("/")
     public String index() {
         return "member/main";

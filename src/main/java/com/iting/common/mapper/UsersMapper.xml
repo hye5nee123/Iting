@@ -31,17 +31,34 @@
 				FROM lecturer
 			</if>
 		</selectKey>
-		insert into 
+		<selectKey keyProperty="filenum"
+				order="BEFORE"
+				resultType="string">
+				SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') AS atch_num
+				FROM atch
+		</selectKey>
 		<if test='actype == "b1"'>
-		mem
+		insert
+		into mem
 		(
 		mem_num
 		, mem_fg_cd
 		, int_cd
 		</if>
 		<if test='actype == "d2"'>
-		lecturer
+		insert all
+		into atch
 		(
+		atch_num, atch_ttl, atch_typ_cd, atch_mark_ttl
+		) 
+		values
+		(
+		#{filenum}
+		, #{atchTtl}
+		, #{atchTypCd}
+		, #{atchMarkTtl}
+		)
+		into lecturer(
 		lecturer_num
 		, accp_yn_cd
 		, atch_num
@@ -57,21 +74,25 @@
 		, login_typ_cd
 		, token
 		)
-		values(
-				#{accnum}
-				, #{actype}
-				, #{intorfile}
-				, #{idv}
-				, #{pwv}
-				, #{nickv}
-				, #{addrv}
-				, #{dadrv}
-				, #{mailv}
-				, #{phonev}
-				, sysdate
-				, #{logCd}
-				, #{token}
-				)
+		values
+		(
+		#{accnum}
+		, #{actype}
+		, #{intorfile}
+		, #{idv}
+		, #{pwv}
+		, #{nickv}
+		, #{addrv}
+		, #{dadrv}
+		, #{mailv}
+		, #{phonev}
+		, sysdate
+		, #{logCd}
+		, #{token}
+		)
+		<if test='actype == "d2"'>
+		select * from dual
+		</if>
 	</insert>
 	<select id="getUserNum" resultType="string">
 		SELECT 'me' || LPAD(NVL(MAX(SUBSTR(mem_num, -5)), 0) + 1, 5, '0') AS mem_num FROM mem

@@ -1,8 +1,7 @@
 package com.iting.common.web;
 
-import java.util.Random;
 
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,19 +10,24 @@ import com.iting.common.model.SMSVO;
 
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
-import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @RestController
 public class SmsController {
+	
+	@Value("${coolsms.api.key}")
+	private String apiKey;
+	@Value("${coolsms.api.secret}")
+	private String apiSecretKey;
 
 	final DefaultMessageService messageService;
 
+	
 	public SmsController() {
+		System.out.println(apiKey);
+		System.out.println(apiSecretKey);
 		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-		this.messageService = NurigoApp.INSTANCE.initialize("NCSXXVEQTCYDMJAO", "P9WP8AEG19HZOGOWRAIGTIY0IW1Z4IDJ",
-				"https://api.coolsms.co.kr");
+		this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecretKey, "https://api.coolsms.co.kr");
 	}
 
 //	    /**
@@ -96,7 +100,7 @@ public class SmsController {
 		message.setText(nums.getNumkey());
 		
 //		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-//		return response;
+//		return response; // 문자 보내기 (리턴 받는 메소드 타입 변경해줘야함)
 	}
 
 //	    /**
