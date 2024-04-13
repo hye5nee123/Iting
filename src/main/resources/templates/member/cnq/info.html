@@ -81,7 +81,7 @@
 					<tr >
 						<th style="padding: 20px;">첨부파일</th>
 						<td  colspan="3" style="padding: 20px;">
-						   <div th:each="file:${files}" th:text="${file.atchTtl}" ></div>
+						   <div th:each="file:${files}" th:text="${file.atchTtl}" th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
 						</td>
 					</tr>
 				</tbody>
