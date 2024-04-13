@@ -4,68 +4,25 @@
       layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
-<title>쪽지시험</title>
+<title>쪽지시험결과</title>
 <link rel="stylesheet" href="/css/member/content.css" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 <section layout:fragment="content">
-
-	<div class="test_modal">
-		<form method="POST" name="testForm" class="text">
-			<h3>쪽지시험</h3>
-			<button class="btn_close"><i class='bx bx-x'></i></button>
-			<div class="test_box">
-				
-			</div>
-			<div class="btn_box">
-				<button type="button" id="saveBtn" class="btn_form">제출하기</button>
-			</div>
-		</form>
-	</div>
 	<div class="row lecture_info">
 		<div class="col-lg-12">
 			<div class="section-title">
-			    <h2>쪽지시험</h2>
+			    <h2>쪽지시험결과</h2>
 			</div>
 		</div>
 	</div>
 	
-	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info test_info">
-		<div class="top">
-			<div class="left">
-				<div class="top">				
-					<i th:text="${tlsn.ltCateCd}"></i>
-					<span>/ <i th:text="${tlsn.name}"></i> 강사님</span>
-				</div>
-				<p th:text="${tlsn.ltTtl}"></p>
-				<p th:text="${tlsn.ltNum}" class="hidden"></p>
-				
-			</div>
-			<button type="button" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
-		</div>
-	</div>
+	
 	<div class="btn_box test_btn">
 		<a th:href="@{/member/myclass/list}" class="go_list">내강의실가기</a>
 	</div>
 <script>
-	const modal = document.querySelector('.test_modal');
-	const modalClose = document.querySelector('.btn_close');
-	
-	// 문제풀기 버튼클릭시
-	function modalOpen(ltNum){
-	
-		fetch (`/member/test/list/${ltNum}`)
-		.then(res => res.json())
-		.then(res => {
-			saveTest(res);
-	    	modal.classList.add('on');
-		})
-	};
-	
-	modalClose.addEventListener('click',function(){
-	    modal.classList.remove('on');
-	});
 	
 	function saveTest(res) {
 		let box = document.querySelector('.test_box');		
@@ -131,7 +88,7 @@
 		
 		csrf_axios({
 				method: 'POST',
-				url: `/member/test/list/${ltNum}`,
+				url: '/member/test/list',
 				data: JSON.stringify(param)
 			
 				})
@@ -142,7 +99,7 @@
 	function saveRes(res) {
 		console.log(res);
 		alert('답안이 제출되었습니다.');
-		window.location.href = "/member/test/result/{applexamNum}";
+		window.location.href = "/member/test/result";
 	}
 	
 	//버튼 클릭 시 함수 호출.

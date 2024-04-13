@@ -149,4 +149,25 @@
 		WHERE APPLEXAM_NUM = #{applexamNum}
 		ORDER BY PRBL_ORD_NUM
 	</select>
+	
+	<!-- 문제풀기 -->
+	<update id="updateExam">
+		UPDATE APPLEXAM_DETAIL
+		SET ANSWER = #{answer}
+            , MRK_RSLT = #{mrkRslt}
+		WHERE APPLEXAM_NUM = #{applexamNum}
+	</update>
+	
+	<!-- 문제결과 -->
+	<select id="getExamResult">
+		SELECT a.ANSWER
+		       , a.APPLEXAM_NUM
+		       , a.PRBL_NUM
+		       , a.PRBL_ORD_NUM
+		       , a.MRK_RSLT
+		       , p.MEM_NUM
+		FROM APPLEXAM_DETAIL a JOIN APPLEXAM p
+		                       ON a.APPLEXAM_NUM = p.APPLEXAM_NUM
+		WHERE a.APPLEXAM_NUM = #{applexamNum}
+	</select>
 </mapper>

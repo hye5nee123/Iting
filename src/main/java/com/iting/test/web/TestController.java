@@ -101,4 +101,13 @@ public class TestController {
 		
 		return testService.insertExam(vo);
 	}
+	
+	// 문제결과
+	@RequestMapping("member/test/result/{applexamNum}")
+	public String getExamResult(@PathVariable String applexamNum, Model model, TestVO vo) {
+		model.addAttribute("testResult", testService.getExamResult(vo));
+		return "member/test/result";
+	}
+	
+	
 }

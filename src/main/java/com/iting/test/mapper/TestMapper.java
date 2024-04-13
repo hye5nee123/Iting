@@ -21,4 +21,6 @@ public interface TestMapper {
 	public int deleteExam(TestVO vo);
 	public int deleteExamDetail(TestVO vo);
 	public List<TestVO> getExamList(TestVO vo);
+	public int updateExam(TestVO testVO);
+	public List<TestVO> getExamResult(TestVO vo);
 }

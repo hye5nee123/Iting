@@ -53,4 +53,10 @@ public class TestServiceImpl implements TestService {
 		return testMapper.getExamList(vo);
 	}
 
+	// 문제결과
+	@Override
+	public List<TestVO> getExamResult(TestVO vo) {
+		return testMapper.getExamResult(vo);
+	}
+
 }
