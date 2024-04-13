@@ -6,10 +6,17 @@
 var lectureService = (function(){
 
 	// 강의 전체목록 요청
-	function ltListReq() {
-		//axios.get("/member/lecture/allSelect/{keyWord}")
-		axios.get("/member/lecture/allSelect")
+	function ltListReq(page) {
+		
+		const param = `?page=${page}`;
+			
+		axios.get("/member/lecture/allSelect" + param)
 			 .then(res => ltListRes(res.data))
+	}
+	
+	function gopage(page){
+		//frmSearch.submit();
+		ltListReq(page);
 	}
 	
 	// 강의 전체목록 응답
@@ -23,6 +30,7 @@ var lectureService = (function(){
 	
 	// 리스트 응답
 	function listRes(data) {
+		lectureList.innerHTML = '';
 		//console.log(data)
 		// 목록 출력
 		for(let lecture of data.lectList) {
