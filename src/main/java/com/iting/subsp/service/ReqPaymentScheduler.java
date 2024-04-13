@@ -24,9 +24,15 @@ public class ReqPaymentScheduler {
 	@Value("${IAMPORT-KEY}")
 	private String apiKey;
 	
+	@Value("${COOL-SMS-KEY}")
+	private String key;
+	
+	
 	String paymentId =  "iting_1month_" + new Date().getTime();
 	
 	public HttpEntity<String> setPayScheduleTest() {
+		
+		System.out.println(key + "확인!!!");
 		
 		// URL 생성
 		URI url = UriComponentsBuilder
