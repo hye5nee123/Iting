@@ -102,6 +102,15 @@ public class TestController {
 		return testService.insertExam(vo);
 	}
 	
+	// 수정처리
+	@ResponseBody
+	@PostMapping("member/test/list")
+	public String updateExam(@RequestBody List<TestVO> vo) {
+		testService.updateExam(vo);
+		System.out.println("들어와" + vo);
+		return "redirect:member/test/list";
+	}
+	
 	// 문제결과
 	@RequestMapping("member/test/result/{applexamNum}")
 	public String getExamResult(@PathVariable String applexamNum, Model model, TestVO vo) {

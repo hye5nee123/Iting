@@ -70,7 +70,7 @@
 	function saveTest(res) {
 		let box = document.querySelector('.test_box');		
 		for(let i = 0; i < res.length; i++) {
-		let text = `<div class="test_list">
+		let text = `<div class="test_list" data-num="${res[i].applexamNum}" data-order="${res[i].prblOrdNum}" data-prbl="${res[i].prblNum}">
 		<p>${i+1}. ${res[i].prblCntn}</p>
 		<ul>
 			<li>
@@ -107,7 +107,7 @@
 			} 
 		}
 		if(chk){
-			if(confirm('문제를 제출할까요?')) {
+			if(confirm('답안을 제출할까요?')) {
 				saveReq();	
 			}
 		} else{
@@ -116,12 +116,16 @@
 	}
 	
 	// 문제제출하기
-	function saveReq() {	
-		const applexamNum = testForm.applexamNum.value;
-		const prblOrdNum = testForm.prblOrdNum.value;
-		const answer = testForm.answer.value;
-		const prblNum = testForm.prblNum.value;
-		let param = {applexamNum, prblOrdNum, answer, prblNum}
+	function saveReq() {
+		const posi = document.querySelectorAll('.test_list');
+		let param = [];  //[{APPLEXAM_NUM : 66, ANSWER : 답}]
+		for(let i = 0; i < posi.length; i++) {
+			let applexamNum = posi[i].dataset.num;
+			let prblOrdNum = posi[i].dataset.order;
+			let prblNum = posi[i].dataset.prbl;
+			const answer = posi[i].querySelector('input[type=radio]:checked').value
+				param.push({applexamNum, prblOrdNum, prblNum, answer});
+		}
 		console.log(param);
 		
 		/*
@@ -131,7 +135,7 @@
 		
 		csrf_axios({
 				method: 'POST',
-				url: `/member/test/list/${ltNum}`,
+				url: `/member/test/list`,
 				data: JSON.stringify(param)
 			
 				})
