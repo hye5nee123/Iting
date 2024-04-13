@@ -149,4 +149,41 @@
 		WHERE APPLEXAM_NUM = #{applexamNum}
 		ORDER BY PRBL_ORD_NUM
 	</select>
+	
+	<!-- 문제정답입력 -->
+	<update id="updateExam">
+	UPDATE APPLEXAM_DETAIL
+	SET ANSWER = #{answer}
+	WHERE PRBL_NUM = #{prblNum}
+	AND APPLEXAM_NUM = #{applexamNum}
+	</update>
+	
+	<!-- 문제채점 -->
+	<update id="updateResult">
+	UPDATE APPLEXAM_DETAIL
+	SET MRK_RSLT = CASE WHEN #{answer} = (SELECT ANS
+                                 FROM PRBL
+                                WHERE PRBL_NUM = #{prblNum}) 
+                         THEN 1
+                         <![CDATA[WHEN #{answer} <> (SELECT ANS
+                                 FROM PRBL
+                                WHERE PRBL_NUM = #{prblNum})]]>
+                         THEN 0
+						 END
+       WHERE PRBL_NUM = #{prblNum}
+       AND APPLEXAM_NUM = #{applexamNum}
+	</update>
+	
+	<!-- 문제결과 -->
+	<select id="getExamResult">
+		SELECT a.ANSWER
+		       , a.APPLEXAM_NUM
+		       , a.PRBL_NUM
+		       , a.PRBL_ORD_NUM
+		       , a.MRK_RSLT
+		       , p.MEM_NUM
+		FROM APPLEXAM_DETAIL a JOIN APPLEXAM p
+		                       ON a.APPLEXAM_NUM = p.APPLEXAM_NUM
+		WHERE a.APPLEXAM_NUM = #{applexamNum}
+	</select>
 </mapper>

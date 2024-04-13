@@ -12,6 +12,7 @@ public class TestVO {
 	private String ques3;
 	private String ques4;
 	private int ans;
+	private int answer;
 	private String cty;
 	private String ltNum;
 	private String applexamNum;
