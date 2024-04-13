@@ -2,15 +2,22 @@ package com.iting.common.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriUtils;
 
 import com.iting.common.ExcelView;
 import com.iting.common.FileUtil;
-import com.iting.common.config.auth.dto.SessionUser;
 import com.iting.common.model.AccountVO;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
@@ -145,12 +152,21 @@ public class CommonController {
 		
 	}
 	
-	// 첨부파일을 클릭하면 -> 첨부파일번호 단건조회 -> 파일 다운로드 받기 -> (싱글 파일 된 후) 다중파일은 zip파일로 변환후 받을 수 있게 해보잡!
+	// 첨부파일을 클릭하면 -> 첨부파일번호 단건조회 -> 파일 다운로드 받기 -> (싱글 파일 된 후) 다중파일은 zip파일로 변환후 받을 수 있게 해보잡! zip 만들어서 add해서 내려받기
 	/* 첨부 파일 다운로드 */
 	@GetMapping("/downloading/{fileNum}")
 	@ResponseBody
-	public FileVO findFile(@PathVariable String fileNum) {
-        return commonService.getFileInfo(fileNum);
+	public ResponseEntity<Resource> download(@PathVariable String fileNum, HttpServletRequest req) throws Exception{
+		FileVO fvo = commonService.getFileInfo(fileNum);
+		
+		String fileName = fvo.getAtchTtl();
+        String filePath = "D:" + File.separator + "iting_webstorage" + File.separator + fileName;
+
+        Resource resource = new UrlResource(Paths.get(filePath).toUri());
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + UriUtils.encode(fileName, "UTF-8") + "\"")
+                .body(resource);
     }
 	
 	

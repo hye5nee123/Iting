@@ -1,19 +1,17 @@
 package com.iting.common;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
+
+import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iting.common.model.FileVO;
 import com.iting.common.service.CommonService;
-
-import okio.Path;
 
 public class FileUtil {
 	
@@ -58,6 +56,25 @@ public class FileUtil {
 		return fvo;
 		
 	}
+	
+	
+	
+	
+	public static MediaType getMediaTypeForFileName(ServletContext servletContext, String filename) {
+        
+        String minType = servletContext.getMimeType(filename);
+        
+        try {
+            MediaType mediaType = MediaType.parseMediaType(minType);
+            return mediaType;
+        } catch (Exception e) {
+            return MediaType.APPLICATION_OCTET_STREAM;
+        }
+        
+        
+    }
+	
+	
 	
 	/* 첨부파일 다운로드 메소드 
 	public Resource readFileResurce(FileVO vo) {
