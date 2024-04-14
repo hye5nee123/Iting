@@ -72,7 +72,8 @@
 					<tr>
 						<th style="padding: 20px;">제목</th>
 						<td colspan="3">
-						<h5 th:text="${cnq.ttl}" style="padding: 20px;"></h5></td>
+							<h5 th:text="${cnq.ttl}" style="padding: 20px;"></h5>
+						</td>
 					</tr>
 					<tr>
 						<th style="padding: 20px;">내용</th>
@@ -80,8 +81,9 @@
 					</tr>
 					<tr>
 						<th style="padding: 20px;">첨부파일</th>
-						<td  colspan="3" style="padding: 20px;">
-						   <div th:each="file:${files}" th:text="${file.atchTtl}" th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
+						<td colspan="3" style="padding: 20px;">
+							<div th:each="file:${files}" th:text="${file.atchTtl}"
+								th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -97,7 +99,31 @@
 	</form>
 	<!-- 댓글  시작-->
 	<div>
-	<button>등록</button>
+		<div class="comment-box">
+			<form name="replyForm" method="post">
+				<div class="comment-name">
+					<span class="anonym">작성자 : <input type="text"
+						class="form-control" id="com_writer" placeholder="이름"
+						name="com_writer" value='${login.userId}' readonly
+						style="width: 100px; border: none;">
+					</span>
+				</div>
+				내용 :
+				<textarea name="cntn"></textarea>
+				<br> 작성자 : <input name="name" th:value="${session.userId}"
+					readonly> <br>첨부파일 동시 테스트 <input type="file"
+					name="uFile" multiple="multiple">
+				<!-- k1:이미지 -->
+				<input type="hidden" name="typCode" th:value="k1"> <br>
+				<input type="hidden" name="ltNum" th:value="${ltNum}">
+				<button type="button"
+					onclick="uploadFileReq(cnqForm.typCode.value, cnqForm)">첨부파일
+					등록</button>
+				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
+				<button class="cnq_reset" type="button" id="listBtn"
+					onclick="location.href='/member/cnq/list'">글목록으로</button>
+			</form>
+		</div>
 		<table>
 			<thead>
 				<tr>
@@ -143,11 +169,19 @@
 	console.log(newTag);
 	return newTag;
 }
-	//이전 page로 돌아가기 (완전 구현은 아님 수정 필요.)
 	listBtn.addEventListener("click", e=>{
 		location.href="javascript:history.back();"
 	})
-	
+	//댓글
+		//등록요청.
+		
+	function saveReq() {
+		const ttl = cnqForm.ttl.value;
+		const cntn = cnqForm.cntn.value;
+		const name = cnqForm.name.value;
+		const ltNum = cnqForm.ltNum.value;
+		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum}
+		console.log(param);
 	</script>
 </section>
 </html>
