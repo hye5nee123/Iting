@@ -110,20 +110,11 @@
 				</div>
 				내용 :
 				<textarea name="cntn"></textarea>
-				<br> 작성자 : <input name="name" th:value="${session.userId}"
-					readonly> <br>첨부파일 동시 테스트 <input type="file"
-					name="uFile" multiple="multiple">
-				<!-- k1:이미지 -->
-				<input type="hidden" name="typCode" th:value="k1"> <br>
-				<input type="hidden" name="ltNum" th:value="${ltNum}">
-				<button type="button"
-					onclick="uploadFileReq(cnqForm.typCode.value, cnqForm)">첨부파일
-					등록</button>
+				<br> 
 				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
-				<button class="cnq_reset" type="button" id="listBtn"
-					onclick="location.href='/member/cnq/list'">글목록으로</button>
 			</form>
 		</div>
+		<!-- 댓글 등록 끝 -->
 		<table>
 			<thead>
 				<tr>
@@ -169,19 +160,52 @@
 	console.log(newTag);
 	return newTag;
 }
-	listBtn.addEventListener("click", e=>{
-		location.href="javascript:history.back();"
-	})
-	//댓글
-		//등록요청.
-		
 	function saveReq() {
 		const ttl = cnqForm.ttl.value;
 		const cntn = cnqForm.cntn.value;
 		const name = cnqForm.name.value;
 		const ltNum = cnqForm.ltNum.value;
+		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum};
+	}
+	listBtn.addEventListener("click",
+			e=>{location.href="javascript:history.back();"})
+	//댓글
+	
+		//등록요청.
+		function saveReq() {
+		const ttl = replyForm.ttl.value;
+		const cntn = replyForm.cntn.value;
+		const name = replyForm.name.value;
+		const ltNum = replyForm.ltNum.value;
 		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum}
 		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/cnq/insert',
+				data: param
+			
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		const ltNum = cnqForm.ltNum.value;
+		alert('게시글 등록 완료!');
+		location.href=`/member/cnq/list/${ltNum}`
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		saveReq();
+	})
 	</script>
 </section>
 </html>
