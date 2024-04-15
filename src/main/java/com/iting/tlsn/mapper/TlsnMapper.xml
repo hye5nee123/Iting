@@ -19,8 +19,12 @@
 		       , e.DETAIL_ADDR
 		       , e.MAIL
 		       , e.PHONE
+		       , c.RND_NUM
+		       , (SELECT LT_NUM FROM APPLEXAM e WHERE e.MEM_NUM = t.MEM_NUM AND e.LT_NUM = t.LT_NUM) AS EXAM_YN
 		FROM TLSN t JOIN LT l
 		              ON t.LT_NUM = l.LT_NUM
+		            JOIN CURRI c
+                      ON t.LT_NUM = c.LT_NUM 
 		            JOIN MEM m
 		              ON t.MEM_NUM = m.MEM_NUM
 		            JOIN LECTURER e

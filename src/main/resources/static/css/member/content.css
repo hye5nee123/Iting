@@ -133,6 +133,8 @@
 .btn_box{margin-top:30px; text-align:center;}
 .btn_box [class^="go_"]{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .tlsn_title h2{float:left;}
+.tlsn_title em{display:block; font-style:normal; float:left; margin:13px 10px 0; color:#888;}
+.tlsn_title span{display:block; float:left; margin-top:16px;}
 .tlsn_title .message{margin-left:10px; border:0; background:none; padding:0; float:left;}
 .tlsn_title .message i{margin-top:9px; color:#205cdc; font-size:35px;}
 .tlsn_title:after{content:''; display:block; clear:both;}
@@ -172,7 +174,10 @@
 /* 쪽지시험 */
 .test_info .left .top span{margin-left:5px;}
 .test_info .left .top > i{color:#ff8a00;}
-.test_info .go_link{right:30px; background:#ff8a00; transform:translateY(-50%);}
+.test_info .btn_cont{position:absolute; right:30px; top:50%; transform:translateY(-50%);}
+.test_info .go_link{display:block; width:88px; float:none; position:relative; top:auto; left:auto; background:#ff8a00;}
+.test_info .go_link.gray{background:#888;}
+.test_info button + button{margin-top:10px;}
 .test_btn [class^="go_"]{background:#ff8a00;}
 
 /* 모달 */
@@ -191,13 +196,43 @@
 .test_modal .test_box li label{margin-bottom:0; font-size:15px; padding-left:5px; color:#777; font-weight:400;}
 .test_modal .btn_box{margin-top:15px; text-align:center;}
 .test_modal .btn_form{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
+.test_modal .video_text{height:74.5%; padding-bottom:50px;}
+.test_modal .video_box{padding:0; overflow-y:auto;}
 
+/* 채점결과 */
+.result_info{margin-top:25px; padding:50px 30px; background:rgb(255 138 0 / 5%); border:1px dashed #ffd8a9; border-radius:15px;}
+.result_info .bx_tit{color:#ff8a00;}
+.result_info .tit i{font-size:30px; margin-top:-5px;}
+.result_info .tit{margin-bottom:5px; color:#333; font-size:22px;}
+.result_info p{margin-bottom:0; color:#555; font-size:17px; font-weight:600; text-align:center;}
+.result_info p span,
+.result_info p em{display:inlne-block; font-style:normal; color:#ff8a00; font-size:24px; font-weight:700;}
+.result_info .btn_box{margin-top:30px;}
+.result_info .btn_box .go_gray{background:#999;}
 
-
-
-
-
-
+.result_list{display:flex; flex-flow:wrap; gap:4%; justify-content:space-between; margin-top:50px; border:1px solid #ddd; border-radius:10px; padding:30px;}
+.result_list > div{position:relative; padding-bottom:50px; flex:1 1 48%;}
+.result_list > div:nth-child(even):before{content:''; display:block; position:absolute; left:-22px; top:0; width:1px; height:100%; border-left:1px dashed #ddd;}
+.result_list > div .tit{color:#555; margin-bottom:10px; font-size:16px; font-weight:700; word-break:keep-all;}
+.result_list > div .tit span,
+.result_list > div .tit i{position:relative; font-style:normal;}
+.result_list > div .tit span:before{content:''; display:block; position:absolute; top:-4px; left:-29px; width:30px; height:35px; background-image:url(/img/member/test/no.png); background-repeat:no-repeat; background-size:cover;}
+.result_list > div .tit.ok span:before{left:-35px; top:-4px; width:40px; height:40px; background-image:url(/img/member/test/ok.png);}
+.result_list > div li span{display:block; float:left; color:#555; margin-right:5px;}
+.result_list > div li p{float:left; width:calc(100% - 30px); word-break:keep-all; margin-bottom:0; font-size:15px; padding-left:5px; color:#777; font-weight:400;}
+.result_list ul{list-style:none;}
+.result_list li{margin-top:5px;}
+.result_list li:after{content:''; display:block; clear:both;}
+.result_list .res{margin-top:20px; background:#f9f9f9; padding:15px; border-radius:10px;}
+.result_list .cty{margin-bottom:0;}
+.result_list .cty *{display:block; font-style:normal;}
+.result_list .cty span{color:#555; font-size:15px; letter-spacing:-1px; word-break:keep-all;}
+.result_list i.txt{display:inline-block; font-style:normal; margin-bottom:5px; color:#205cdc; font-size:12px; line-height:1.3rem; padding:0 15px; border:1px solid #205cdc; text-align:center; border-radius:50px;}
+.result_list .answer{padding-bottom:10px; border-bottom:1px dashed #ddd;}
+.result_list .answer i.txt{color:#ff8a00; border:1px solid #ff8a00;}
+.result_list .ans{margin-bottom:0;}
+.result_list .answer span,
+.result_list .ans span{margin-left:5px; color:#111; font-weight:600;}
 
 
 
