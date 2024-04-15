@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iting.cnq.model.CSearchVO;
@@ -39,7 +40,7 @@ public class ReplyRestController {
 
 	// 등록
 	@PostMapping("/member/cnq/rinsert")
-	public CnqVO replyInsert(CnqVO vo) {
+	public CnqVO replyInsert(@RequestBody CnqVO vo) {
 		replyService.cmtInsert(vo);
 		return vo;
 	}

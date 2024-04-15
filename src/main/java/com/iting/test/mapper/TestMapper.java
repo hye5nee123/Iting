@@ -22,8 +22,11 @@ public interface TestMapper {
 	public List<TestVO> getExamList(TestVO vo);
 	public int updateExam(TestVO testVO);
 	public int updateResult(TestVO testVO);
-	public List<TestVO> getExamResult(TestVO vo);
 	
 	// 채점
-	public int updateScore(TestVO vo);
+	public int updateScore(String applexamNum);
+	
+	// 결과
+	public TestVO getExamResult(String applexamNum);
+	public List<TestVO> getResultList(TestVO vo);
 }

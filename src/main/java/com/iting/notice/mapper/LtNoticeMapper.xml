@@ -17,7 +17,7 @@ FROM LT_NOTICE
 <insert id="ltNoticeInsert" parameterType="LtNoticeVO">
 <selectKey keyProperty="ltNoticeNum" order="BEFORE"
 			resultType="string">
-			SELECT 'ltNoticeNum' || LPAD(NVL(MAX(SUBSTR(LT_NOTICE_NUM, -5)), 0) +
+			SELECT 'ln' || LPAD(NVL(MAX(SUBSTR(LT_NOTICE_NUM, -5)), 0) +
 			1, 5, '0') AS LT_NOTICE_NUM
 			FROM LT_NOTICE
 		</selectKey>

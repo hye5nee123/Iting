@@ -34,7 +34,7 @@ public class LtNoticeController {
 	}
 	//등록기능
 	@ResponseBody
-	@PostMapping("/teacher/notice/insert1")
+	@PostMapping("/teacher/notice/insert")
 	public String ltNoticeInsert(@RequestBody LtNoticeVO vo){
 		
 		ltnoticeService.ltNoticeInsert(vo);
@@ -44,9 +44,9 @@ public class LtNoticeController {
 	//단건조회
 	@GetMapping("/teacher/notice/info/{ltNoticeNum}")
 	public String info(@PathVariable String ltNoticeNum, Model model) {
-		model.addAttribute("ltnotice",ltnoticeService.getLtNoticeInfo(ltNoticeNum));
+		model.addAttribute("lno",ltnoticeService.getLtNoticeInfo(ltNoticeNum));
 		ltnoticeService.getLtNoticeInfo(ltNoticeNum);
-		return "teacher/notice/info";
+		return "/teacher/notice/info";
 	}
 	
 }

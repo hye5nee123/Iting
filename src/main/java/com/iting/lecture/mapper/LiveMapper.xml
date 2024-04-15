@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.iting.lecture.mapper.LiveMapper">
+ 
+ <select id="getLiveList" resultType="LiveVO">
+SELECT SPLT_NUM,
+       SPLT_TTL,
+       SPLT_CNTN,
+       SPLT_DT,
+       LECTURER_NUM,
+       find_code(ACCP_YN_CD) ACCP_YN_CD
+FROM LIVE_SPLT
+ </select>
+ 
+ </mapper>

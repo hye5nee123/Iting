@@ -44,14 +44,17 @@ public class TlsnController {
 	
 	
 	// 수강목록상세
-	@RequestMapping("member/tlsn/detailList/{ltNum}")
-	public String getTlsnDetailList(@PathVariable String ltNum, Model model, TlsnVO vo) {
+	@RequestMapping("member/tlsn/detailList/{ltNum}/{rndNum}")
+	public String getTlsnDetailList(@PathVariable String ltNum, @PathVariable String rndNum, Model model, TlsnVO vo) {
 		// 커리큘럼 정보
 		CurriVO cvo = new CurriVO();
 		cvo.setLtNum(ltNum);
 		model.addAttribute("tlsn", curriService.getCurriList(cvo));
+		model.addAttribute("curri", curriService.getCurriInfo(rndNum));
 		// 강사정보
 		model.addAttribute("tlsnInfo", tlsnService.getTlsnInfo(vo));
+		
+		curriService.getCurriInfo(rndNum);
 		System.out.println(vo);
 		return "member/tlsn/detailList";
 	}

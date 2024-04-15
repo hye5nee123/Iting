@@ -114,7 +114,8 @@ public class TestController {
 	// 문제결과
 	@RequestMapping("member/test/result/{applexamNum}")
 	public String getExamResult(@PathVariable String applexamNum, Model model, TestVO vo) {
-		model.addAttribute("testResult", testService.getExamResult(vo));
+		model.addAttribute("testResult", testService.getExamResult(applexamNum));
+		model.addAttribute("resultList", testService.getResultList(vo));
 		return "member/test/result";
 	}
 	

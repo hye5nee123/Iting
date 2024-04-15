@@ -17,4 +17,6 @@ public class TestVO {
 	private String ltNum;
 	private String applexamNum;
 	private String memNum;
+	private int score;
+	private String passYnCd;
 }
