@@ -22,6 +22,7 @@ import com.iting.common.FileUtil;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.model.LiveVO;
 import com.iting.lecture.service.LectureService;
 import com.iting.review.model.ReviewVO;
 import com.iting.review.service.ReviewService;
@@ -117,11 +118,12 @@ public class LectureController {
 			vo.setAtchNum(fvo.getAtchNum());
 		}
 		lectureService.ltInsert(vo);
-		return "redirect:/teacher/lecture/list";
+		return "teacher/lecture/getLectureList";
 	}
+	
 
 	/* 관리자 */
-	// 강의 수정
+	
 
 	// 강의 리스트
 	@GetMapping("/admin/lecture/list")
@@ -181,5 +183,7 @@ public class LectureController {
 		lectureService.update(vo);
 		return vo;
 	}
+	
+	
 
 }
