@@ -26,7 +26,7 @@
 
 							<h5 class="tit">공지번호.</h5>
 
-							<input class="form-control" type="text" id="ltNoticeNum" name="ltNoticeNum" readonly>
+							<input class="form-control" type="number" id="ltNoticeNum" name="ltNoticeNum" readonly>
 						</div>
 						<hr class="my-0">
 				
@@ -39,6 +39,7 @@
 							<label for="cntn" class="form-label">내용</label> <textarea
 								class="form-control"  name="ltNoticeCntn" id="ltNoticeCntn"></textarea>
 						</div>
+				
 						<div class="mb-3 test_list">
 							<label for="frDt" class="form-label">등록날짜</label> <input
 								class="form-control" type="Date" name="ltNoticeRegDt" id="ltNoticeRegDt">
@@ -60,7 +61,8 @@
 			
 			
 			
-			let param = { ltNoticeNum, ltNoticeTtl, ltNoticeCntn, ltNoticeRegDt}
+			
+			let param = { ltNoticeTtl, ltNoticeCntn, ltNoticeRegDt}
 			console.log(param);
 			
 			/*
@@ -70,7 +72,7 @@
 			
 			csrf_axios({
 					method: 'POST',
-					url: '/teacher/notice/insert1', 
+					url: '/teacher/notice/insert', 
 					data: param
 				
 					})
@@ -81,15 +83,14 @@
 		// 등록 응답
 		function saveRes(res) {
 			console.log(res);
-			alert('문제가 등록되었습니다.');
-			window.location.href = "/teacher/notice/LtNoticeList";
+			alert('공지가 등록되었습니다.');
+			window.location.href = "/teacher/notice/ltnoticeList";
 			
 		}
 
 		//버튼 클릭 시 함수 호출.
 		saveBtn.addEventListener("click", e => {
 			saveReq();
-			
 			
 		})
 

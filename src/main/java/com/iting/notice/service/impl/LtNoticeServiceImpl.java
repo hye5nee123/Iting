@@ -18,10 +18,12 @@ public class LtNoticeServiceImpl implements LtNoticeService{
 	public List<LtNoticeVO> getLtNoticeList(LtNoticeVO vo) {
 		return ltnoticeMapper.getLtNoticeList(vo);
 	}
+	//등록
 	@Override
 	public int ltNoticeInsert(LtNoticeVO vo) {
 		return ltnoticeMapper.ltNoticeInsert(vo);
 	}
+	//상세
 	@Override
 	public LtNoticeVO getLtNoticeInfo(String ltNoticeNum) {
 		return ltnoticeMapper.getLtNoticeInfo(ltNoticeNum);

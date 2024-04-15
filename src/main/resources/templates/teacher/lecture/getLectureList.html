@@ -57,7 +57,6 @@ text-overflow: ellipsis;
 							<th>승인여부</th>
 							<th>커리큘럼</th>
 							</tr>
-							
 					</thead>
 					<tbody>
 						<tr th:each="ltb, stat: ${getLectureList}"
@@ -75,11 +74,9 @@ text-overflow: ellipsis;
 							<td onclick="event.cancelBubble = true;">
 							<a class="btn btn-success" th:href="|/teacher/curri/list/${ltb.ltNum}|">커리큘럼</a>
 							</td>
-							
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
 		</div>
 	</div>

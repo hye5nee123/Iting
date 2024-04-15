@@ -33,41 +33,35 @@
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">공지사항 번호</label>
 					<div class="col-md-10">
-						<input  th:text="${list.ltNoticeNum}" class="col-md-10 form-control" readonly>
+						<input th:value="${lno.ltNoticeNum}" class="col-md-10 form-control" readonly>
 					</div>
 				</div>
 				
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">제목</label>
 					<div class="col-md-10">
-						<input  th:text="${list.ltNoticeTtl}" class="col-md-10 form-control" readonly>
+						<input th:value="${lno.ltNoticeTtl}" class="col-md-10 form-control" readonly>
 					</div>
 				</div>
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">내용</label>
 					<div class="col-md-10">
-						<textarea  th:text="${list.ltNoticeCntn}" class="col-md-10 form-control" readonly rows="5"></textarea>
+						<textarea th:text="${lno.ltNoticeCntn}" class="col-md-10 form-control" readonly rows="5"></textarea>
 					</div>
 				</div>
 			
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">공지날짜</label>
 					<div class="col-md-10">
-						<input  th:text="${#dates.format(list.ltNoticeRegDt,'yyyy-MM-dd')}" class="col-md-10 form-control" readonly>
+						<input th:value="${#dates.format(lno.ltNoticeRegDt,'yyyy-MM-dd')}" class="col-md-10 form-control" readonly>
 					</div>
 						
 				</div>
 			
-				<div class="mb-3 row">
-					<label for="html5-datetime-local-input"
-						class="col-md-2 col-form-label">강의번호</label>
-					<div class="col-md-10">
-						<input  th:text="${list.ltNum}" class="col-md-10 form-control" readonly>
-					</div>
-			</div>
+			
 		</div>
 		<div>
-		<a href="/teacher/lecture/getLectureList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
+		<a href="/teacher/notice/ltnoticeList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
 		</div>						
 	</div>
 	</div>

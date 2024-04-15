@@ -69,8 +69,7 @@
 	<select id="getLectureList" resultType="LectureVO">
 		SELECT LT_NUM
 		, LT_ST_CD
-		,
-		LT_TTL
+		, LT_TTL
 		, LT_IMG
 		, LT_INTRO
 		, LT_CATE_CD
@@ -247,6 +246,7 @@
 		
 		FROM LT
 		WHERE ACCP_YN_CD = 'd1'
+	
 		
 	</select>
 
@@ -275,5 +275,7 @@
 		from lt
 		WHERE ACCP_YN_CD = 'd1'
 	</select>
+	
+
 
 </mapper>
