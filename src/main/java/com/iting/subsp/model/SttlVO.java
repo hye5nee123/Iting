@@ -14,6 +14,7 @@ public class SttlVO {
 	private int allSttlPrice; 	// 총 결제 금액
 	private String subspNum; 	// 구독 번호
 	private String memNum; 		// 회원 번호
-	private String cardAccpNum; // 카드 승인 번호
-	private String billingKey; 	// 빌링키
+	private String sttlAccpNum; // 결제 승인 번호
+	private String sttlRnd;		// 결제 회차
+	
 }

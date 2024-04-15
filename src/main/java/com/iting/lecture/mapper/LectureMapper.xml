@@ -5,20 +5,21 @@
 	<!-- 장효은 -->
 	<!-- 검색조건 : 키워드, 난이도, 강의제목검색, 강사명 -->
 	<sql id="condition">
-		<where>
-			<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">\
-				AND find_code(l.lt_keyword_cd) = #{vo.ltKeywordCd}
-			</if>
-			<if test="vo.ltDifCd != null and vo.ltDifCd != ''">\
-				AND find_code(l.lt_dif_cd) = #{vo.ltDifCd}
-			</if>
-			<if test="vo.ltTtl != null and vo.ltTtl != ''">\
-				AND l.lt_ttl LIKE '%' || #{vo.ltTtl} || '%'
-			</if>
-			<if test="vo.name != null and vo.name != ''">\
-				AND lec.name LIKE '%' || #{vo.name} || '%'
-			</if>
-		</where>
+		<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">
+			AND find_code(l.lt_keyword_cd) = #{vo.ltKeywordCd}
+		</if>
+		<if test="vo.ltDifCd != null and vo.ltDifCd != ''">
+			AND find_code(l.lt_dif_cd) = #{vo.ltDifCd}
+		</if>
+		<if test="vo.ltTtl != null and vo.ltTtl != 'null' and vo.ltTtl != 'undefined'">
+			AND l.lt_ttl LIKE '%' || #{vo.ltTtl} || '%'
+		</if>
+		<if test="vo.name != null and vo.name != 'null' and vo.name != 'undefined'">
+			AND lec.name LIKE '%' || #{vo.name} || '%'
+		</if>
+		<if test="vo.ltCateCd != null and vo.ltCateCd != 'null' and vo.ltCateCd != ''">
+			AND l.lt_cate_cd = #{vo.ltCateCd}
+		</if>
 	</sql>
 
 	<!-- 강의 전체 목록 -->
@@ -40,7 +41,7 @@
 		, lec.name
 		FROM lt l JOIN lecturer lec
 					ON l.lecturer_num = lec.lecturer_num
-		WHERE find_code(l.accp_yn_cd) = '승인'
+		WHERE l.ACCP_YN_CD = 'd1'
 		<include refid="condition"></include>
 		ORDER BY lt_num DESC
 		
@@ -272,8 +273,10 @@
 	<!-- 개수  -->
 		<select id="getCount" resultType="Long">
 		select count(*)
-		from lt
-		WHERE ACCP_YN_CD = 'd1'
+		FROM lt l JOIN lecturer lec
+					ON l.lecturer_num = lec.lecturer_num
+		WHERE l.ACCP_YN_CD = 'd1'
+		<include refid="condition"></include>
 	</select>
 
 </mapper>

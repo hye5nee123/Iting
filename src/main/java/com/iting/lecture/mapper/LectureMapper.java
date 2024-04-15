@@ -33,6 +33,6 @@ public interface LectureMapper {
 	public List<LectureVO> endLectureList(LectureVO vo);
 	public List<LectureVO> ingLectureList(LectureVO vo);
 	//개수 
-	public long getCount(LectureVO vo);
+	public long getCount(LectureVO vo, PagingVO pvo );
 	
 }

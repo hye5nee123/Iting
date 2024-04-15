@@ -23,4 +23,9 @@ public class SubspServiceImpl implements SubspService {
 		return subspMapper.getSubspInfo(memNum);
 	}
 
+	@Override
+	public int subspUpdate(SubspVO vo) {
+		return subspMapper.subspUpdate(vo);
+	}
+
 }

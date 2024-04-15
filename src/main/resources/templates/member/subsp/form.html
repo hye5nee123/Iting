@@ -4,9 +4,20 @@
      layout:decorate="~{layout/member/layout}" >
 <head>
 <meta charset="UTF-8">
-<title>구독하기</title>
+<title>아이팅 구독하기</title>
 
-<link rel="stylesheet" href="/css/member/content.css" />
+<style>
+.subsp_detail {  display: flex; flex-direction: row; justify-content: space-between; background:#FFEDD7; border: .1rem solid #ff8a00; border-radius: .8rem; padding: 1.6rem 2.4rem; margin: 10px 0; }
+.subsp_detail div { width: 14rem; display: flex; flex-direction: column; row-gap: .4rem; column-gap: 1.2rem }
+.subsp_detail img { width: 140px; margin: 0 auto;}
+.subspInfo > h4 { border-bottom: 1px dashed #ddd; margin-bottom: 20px; padding: 25px}
+.subspForm { margin-top:50px; text-align:center; padding:40px 20px 30px; border-radius:15px; box-sizing:border-box; box-shadow:0 0 5px 1px rgba(0, 0, 0, 0.1);}
+#subspMonthlyFrm { width: 100%; margin: 30px auto; padding:10px; border-top: 1px dashed #ddd; }
+#subspMonthlyFrm input { height: 20px; width: 20px; margin-bottom: 0; vertical-align: middle; }
+.subspTit { border-bottom: 1px dashed #ddd; padding: 25px 0; }
+.pay_radio { margin: 20px 0; text-align:left; }
+.subspForm button { width:143px; padding:10px 5px; font-size:15px; letter-spacing:-1px; border:1px solid #ff8a00; background:#ff8a00; color:#fff; border-radius:5px; }
+</style>
 
 </head>
 <body>
@@ -27,59 +38,112 @@
 	            <div class="tab-content">
 	            	<!-- 월간 구독 -->
 	                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-	                    <div class="product__details__tab__content">
+	                    <div class="product__details__tab__content subspForm">
 	                        <div class="product__details__tab__content__item checkout__input">
-	                        	<h5>아이팅 1개월 구독권</h5>
-	                            <form method="post" id="subspMonthlyFrm">
-	                            	<!-- 월간 -->
-									<input type="hidden" value="n1" name="subspTypCd">월간
-
-									<!-- 회원번호 -->
-									<input type="hidden" value="m1" name="subspStCd">
-									
-									<p>가격</p>
-									<input type="number" name="subspPrice" value="39800" disabled="disabled">
-
-									<input type="hidden" value="me00001" name="memNum">
-									
-									<input type="radio" value="o1" name="sttlTypCd">카카오페이
-									
-									<button type="button" id="payBtn" class="btn btn-primary">결제하기</button>
-									<button type="button" id="payBtnTest" class="btn btn-primary">빌링키결제하기</button>
-								</form>
-								
-								<p>
-								구독 주의사항 : 1개월권은 결제일로 부터 30일간 유효하며, 별도로 구독해지를 하지 않을 경우 최초 결제일로 부터 매달 자동으로 결제됩니다.
-								</p>
+	                        	<div class="col-12 subspInfo">
+	                        		<div class="subspTit">
+		                        		<h4>아이팅 1개월 구독권</h4>
+		                        		<h5 class="text-left mt-3">결제 금액</h5>
+		                            	<h5 class="text-left">39,800원/월</h5>
+	                        		</div>
+	                            	<h5 class="text-left mt-5">아이팅 구독시 혜택</h5>
+	                            	<div class="subsp_detail">
+	                            		<div>
+		                            		<img src="/img/member/subsp/subsp_info_1.png" alt="구독하기 아이콘1">
+		                            		<p>1개 강의 가격으로 무제한 수강!</p>
+	                            		</div>
+	                            		<div>
+		                            		<img src="/img/member/subsp/subsp_info_2.png" alt="구독하기 아이콘2">
+		                            		<p>빠른 피드백, 코드잇 커뮤니티</p>
+	                            		</div>
+	                            		<div>
+		                            		<img src="/img/member/subsp/subsp_info_3.png" alt="구독하기 아이콘3">
+		                            		<p>온라인 모의고사로 실력 UP!!</p>
+	                            		</div>
+	                            	</div>
+	                        	
+		                            <form method="post" id="subspMonthlyFrm">
+		                            	
+		                            	<!-- 월간 -->
+										<input type="hidden" value="n1" name="subspTypCd">
+										<!-- 회원번호 -->
+										<input type="hidden" value="m1" name="subspStCd">
+										<!-- 가격 -->
+										<input type="hidden" name="subspPrice" value="39800" disabled="disabled">
+										<h5 class="text-left mt-3">결제수단</h5>
+										<div class="pay_radio">
+											<input type="radio" value="o1" name="sttlTypCd">
+											<img src="/img/member/subsp/kakaopay_logo.PNG" style="width:100px;">
+										</div>
+										<div class="pay_radio">
+											<input type="radio" value="o2" name="sttlTypCd">
+											<span>카드결제</span>
+										</div>
+										
+										<button type="button" id="payBtn">결제하기</button>
+									</form>
+									<div class="warning">
+										<h6 class="font-weight-bold text-left">구독 주의사항</h6>
+										<p class="text-left mt-2">
+										1개월권은 결제일로 부터 30일간 유효하며, 별도로 구독해지를 하지 않을 경우 최초 결제일로 부터 매달 자동으로 결제됩니다.
+										</p>
+									</div>
+							</div>
 	                        </div>
 	                    </div>
 	                </div>
 	                <!-- 연간 구독 -->
 	                <div class="tab-pane" id="tabs-2" role="tabpanel">
-	                    <div class="product__details__tab__content">
+	                    <div class="product__details__tab__content subspForm">
 	                        <div class="product__details__tab__content__item checkout__input">
-	                            <form method="post" id="subspYearlyFrm">
-									<input type="hidden" value="n2" name="subspTypCd">연간
-									<br>
-									<p>구독시작일자</p>
-									<input type="date" name="subspFrDt" value="2024-04-01">
-									<br>
-									<p>구독마감일자</p>
-									<input type="date" name="subspToDt" value="2024-05-01">
-									<br>
-									<input type="hidden" value="m1" name="subspStCd">
-									<br>
-									가격
-									<input type="number" name="subspPrice" value="39800" disabled="disabled">
-									<br>
-									<input type="hidden" value="me00001" name="memNum">
-									
-									<input type="radio" value="o1" name="sttlTypCd">카카오페이
-									<input type="radio" value="o2" name="sttlTypCd">일반결제
-									
-									<button type="button" id="saveBtns" class="btn btn-primary">결제하기</button>
-									<button type="button" id="getBills" class="btn btn-primary">빌링키 테스트</button>
-								</form>
+	                        	<div class="col-12 subspInfo">
+	                            	<div class="subspTit">
+		                        		<h4>아이팅 12개월 구독권</h4>
+		                        		<h5 class="text-left mt-3">결제 금액</h5>
+		                            	<h5 class="text-left">359,000원/년</h5>
+	                        		</div>
+	                            	<div class="subsp_detail">
+	                            		<div>
+		                            		<img src="/img/member/subsp/subsp_info_1.png" alt="구독하기 아이콘1">
+		                            		<p>1개 강의 가격으로 무제한 수강!</p>
+	                            		</div>
+	                            		<div>
+		                            		<img src="/img/member/subsp/subsp_info_2.png" alt="구독하기 아이콘2">
+		                            		<p>빠른 피드백, 코드잇 커뮤니티</p>
+	                            		</div>
+	                            		<div>
+		                            		<img src="/img/member/subsp/subsp_info_3.png" alt="구독하기 아이콘3">
+		                            		<p>온라인 모의고사로 실력 UP!!</p>
+	                            		</div>
+	                            	</div>
+	                        	
+		                            <form method="post" id="subspYearlyFrm">
+		                            	
+		                            	<!-- 월간 -->
+										<input type="hidden" value="n1" name="subspTypCd">
+										<!-- 회원번호 -->
+										<input type="hidden" value="m1" name="subspStCd">
+										<!-- 가격 -->
+										<input type="hidden" name="subspPrice" value="39800" disabled="disabled">
+										<h5 class="text-left mt-3">결제수단</h5>
+										<div class="pay_radio">
+											<input type="radio" value="o1" name="sttlTypCd">
+											<img src="/img/member/subsp/kakaopay_logo.PNG" style="width:100px;">
+										</div>
+										<div class="pay_radio">
+											<input type="radio" value="o2" name="sttlTypCd">
+											<span>카드결제</span>
+										</div>
+										
+										<button type="button" id="payYearlyBtn">결제하기</button>
+									</form>
+									<div class="warning">
+										<h6 class="font-weight-bold text-left">구독 주의사항</h6>
+										<p class="text-left mt-2">
+										1개월권은 결제일로 부터 30일간 유효하며, 별도로 구독해지를 하지 않을 경우 최초 결제일로 부터 매달 자동으로 결제됩니다.
+										</p>
+									</div>
+							</div>
 	                        </div>
 	                    </div>
 	                </div>
@@ -90,8 +154,12 @@
 	
 	</div>
 
-<script src="/js/payment.js" type="module"></script>
+<script>
+//로그인한 회원번호
+let memNum = "[[ ${session.usernum} ]]";
+</script>
 
+<script src="/js/payment.js" type="module"></script>
 
 
 </section>

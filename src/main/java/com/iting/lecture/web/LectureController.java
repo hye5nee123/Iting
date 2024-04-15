@@ -43,7 +43,7 @@ public class LectureController {
 	/* 회원 */
 	// 강의 전체목록 페이지 이동
 	@RequestMapping("/member/lecture/allList")
-	public ModelAndView allList() {
+	public ModelAndView allList(LectureVO vo) {
 		ModelAndView mv = new ModelAndView("/member/lecture/allList");
 		return mv;
 	}
@@ -52,7 +52,7 @@ public class LectureController {
 	@GetMapping("/member/lecture/allSelect")
 	@ResponseBody
 	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
-		pvo.setPageUnit(5);
+		pvo.setPageUnit(8);
 		pvo.setPageSize(5);
 		pvo.setFirst(0);
 		pvo.setLast(5);
