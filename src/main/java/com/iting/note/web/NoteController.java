@@ -46,8 +46,8 @@ public class NoteController {
 	private HttpSession httpSession;
 
 	// 강사 목록조회
-	@RequestMapping("teacher/note/list")
-	public String getNoteList(Model model, NoteVO vo) {
+	@RequestMapping("teacher/note/list/{ltNum}")
+	public String getNoteList(@PathVariable String ltNum, Model model, NoteVO vo) {
 		String user = (String) httpSession.getAttribute("usernum");
 		System.out.println(user);
 		model.addAttribute("recList", noteService.getRecList(user));
