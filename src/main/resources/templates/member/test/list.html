@@ -42,7 +42,11 @@
 				<p th:text="${tlsn.ltNum}" class="hidden"></p>
 				
 			</div>
-			<button type="button" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
+			<div class="btn_cont">			
+			 	<button type="button" th:if="${tlsn.examYn == null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
+			 	<button type="button" th:if="${tlsn.examYn != null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">재응시 ></button>
+			 	<button type="button" th:if="${tlsn.examYn != null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link gray">오답노트 ></button>
+			</div>
 		</div>
 	</div>
 	<div class="btn_box test_btn">
@@ -116,9 +120,9 @@
 	}
 	
 	// 문제제출하기
+	let param = [];  //[{APPLEXAM_NUM : 66, ANSWER : 답}]
 	function saveReq() {
 		const posi = document.querySelectorAll('.test_list');
-		let param = [];  //[{APPLEXAM_NUM : 66, ANSWER : 답}]
 		for(let i = 0; i < posi.length; i++) {
 			let applexamNum = posi[i].dataset.num;
 			let prblOrdNum = posi[i].dataset.order;
@@ -126,7 +130,6 @@
 			const answer = posi[i].querySelector('input[type=radio]:checked').value
 				param.push({applexamNum, prblOrdNum, prblNum, answer});
 		}
-		console.log(param);
 		
 		/*
 		axios.post("/member/subsp/insert", param)
@@ -137,7 +140,6 @@
 				method: 'POST',
 				url: `/member/test/list`,
 				data: JSON.stringify(param)
-			
 				})
 				.then(res => saveRes(res.data))
 	}
@@ -146,7 +148,7 @@
 	function saveRes(res) {
 		console.log(res);
 		alert('답안이 제출되었습니다.');
-		window.location.href = "/member/test/result/{applexamNum}";
+		window.location.href = `/member/test/result/${param[0].applexamNum}`;
 	}
 	
 	//버튼 클릭 시 함수 호출.

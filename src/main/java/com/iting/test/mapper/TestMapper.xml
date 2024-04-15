@@ -110,8 +110,8 @@
 		DELETE FROM APPLEXAM_DETAIL
 		WHERE APPLEXAM_NUM = (SELECT APPLEXAM_NUM
                                          FROM APPLEXAM
-                                      WHERE MEM_NUM = #{memNum}
-		AND LT_NUM = #{ltNum})
+                                      WHERE MEM_NUM = #{memNum}                            
+									AND LT_NUM = #{ltNum})
 	</delete>
 	
 	<!-- 문제생성 -->
@@ -124,7 +124,7 @@
 		       #{applexamNum}
 		  FROM ( 
 				SELECT * from PRBL
-				order by DBMS_RANDOM.RANDOM
+				ORDER BY DBMS_RANDOM.RANDOM
 		  ) A
 		 <![CDATA[ WHERE ROWNUM < 11 ]]>
 	</insert>
@@ -147,7 +147,6 @@
 		FROM APPLEXAM_DETAIL a JOIN PRBL p
                                ON a.PRBL_NUM = p.PRBL_NUM
 		WHERE APPLEXAM_NUM = #{applexamNum}
-		ORDER BY PRBL_ORD_NUM
 	</select>
 	
 	<!-- 문제정답입력 -->
@@ -176,23 +175,48 @@
 	
 	<!-- 문제결과 -->
 	<select id="getExamResult">
-		SELECT a.ANSWER
-		       , a.APPLEXAM_NUM
-		       , a.PRBL_NUM
-		       , a.PRBL_ORD_NUM
-		       , a.MRK_RSLT
-		       , p.MEM_NUM
-		FROM APPLEXAM_DETAIL a JOIN APPLEXAM p
-		                       ON a.APPLEXAM_NUM = p.APPLEXAM_NUM
-		WHERE a.APPLEXAM_NUM = #{applexamNum}
+		SELECT APPLEXAM_NUM
+		       , SCORE
+		       , find_code(PASS_YN_CD) PASS_YN_CD
+		       , LT_NUM
+		       , MEM_NUM
+		FROM APPLEXAM
+		WHERE APPLEXAM_NUM = #{applexamNum}
 	</select>
 	
 	<!-- 총점 -->
 	<update id="updateScore">
 		UPDATE APPLEXAM
-		SET find_code(PASS_YN_CD) PASS_YN_CD = #{passYnCd}
-			, SCORE = #{score}
-			, APPLEXAM_DT = sysdate
+		SET  SCORE = (SELECT SUM(MRK_RSLT) * 10
+		               FROM APPLEXAM_DETAIL
+		               WHERE APPLEXAM_NUM = #{applexamNum})
+		    , PASS_YN_CD = <![CDATA[CASE WHEN (SELECT SUM(MRK_RSLT) * 10
+								               FROM APPLEXAM_DETAIL
+								               WHERE APPLEXAM_NUM = #{applexamNum}) >= 60 THEN 't1'
+					                     ELSE 't2'
+					                     END]]>
+		    , APPLEXAM_DT = sysdate
 		WHERE APPLEXAM_NUM = #{applexamNum}
 	</update>
+	
+	<!-- 문제리스트 -->
+	<select id="getResultList">
+		SELECT p.PRBL_NUM
+		       , a.ANSWER
+		       , p.ANS
+		       , a.PRBL_ORD_NUM
+		       , a.MRK_RSLT
+		       , p.LT_NUM
+		       , p.PRBL_CNTN
+		       , p.QUES1
+		       , p.QUES2
+		       , p.QUES3
+		       , p.QUES4
+		       , p.CTY
+		       , p.LT_NUM
+		FROM APPLEXAM_DETAIL a JOIN PRBL p
+		                         ON a.PRBL_NUM = p.PRBL_NUM
+		WHERE APPLEXAM_NUM = #{applexamNum}
+		ORDER BY a.PRBL_ORD_NUM
+	</select>
 </mapper>
