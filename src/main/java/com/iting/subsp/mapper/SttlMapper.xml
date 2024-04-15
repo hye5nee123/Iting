@@ -22,8 +22,8 @@
 							, all_sttl_price
 							, subsp_num
 							, mem_num
-							, card_accp_num
-							, billing_key
+							, sttl_accp_num
+							, sttl_rnd
 			                )
 			VALUES (
 					#{sttlNum}
@@ -36,9 +36,9 @@
 			        , #{allSttlPrice}
 			        , #{subspNum}
 			        , #{memNum}
-			        , #{cardAccpNum}
-			        , #{billingKey}
+			        , #{sttlAccpNum}
+			        , #{sttlRnd}
 			        )
 	</insert>
-
+	
 </mapper>

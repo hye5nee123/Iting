@@ -86,7 +86,7 @@ public class LectureServiceImpl implements LectureService {
 	
 	@Override
 	public long getCount(LectureVO vo) {
-		return lectureMapper.getCount(vo);
+		return lectureMapper.getCount(vo, null);
 	}
 
 

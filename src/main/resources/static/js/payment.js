@@ -12,33 +12,19 @@ const subspTypCd = subspMonthlyFrm.subspTypCd.value;
 const subspStCd = subspMonthlyFrm.subspStCd.value;
 const subspPrice = subspMonthlyFrm.subspPrice.value;
 
+
+
 const paymentId =  'iting_1month_' + new Date().getTime();
 
 let subspNum = "";
 
-
-// 로그인한 회원번호
-const memNum = "[[ ${session.usernum} ]]";
-//console.log(memNum);
-
-
 // 결제하기 버튼 클릭 시
 payBtn.addEventListener("click", e => {
 	if(memNum == "") {
-		errorAlert("로그인이 필요합니다.", "");
+		errorAlert("로그인이 필요합니다.");
 	} else {
-		//reqSubspInfo(memNum); // 0.구독 DB 조회
-		
-		getBillingKey(memNum); // 1.빌링키 발급
-				
-		// 3. 구독 DB 등록
-		// subspInsertReq(); // 구독 등록 요청
-		
-		// 4. 결제 DB 등록
-		
+		reqSubspInfo(memNum); // 0.구독 DB 조회 및 구독 DB 등록				
 	}
-	
-	
 })
 
 
@@ -55,12 +41,13 @@ function reqSubspInfo(memNum) {
 
 //구독 정보 단건조회 응답
 function resSubspInfo(res) {
-	if(res.data.subspStCd == "구독중"){
+	if(res.data.subspStCd == "구독 중"){
 		errorAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
 	}
 	else {
 		console.log("구독정보 없음, 구독 단건 조회", res.data);
-		subspInsertReq() // 구독정보 등록
+		
+		subspInsertReq() // 1.구독정보 등록
 	}
 }
 
@@ -80,51 +67,54 @@ function subspInsertReq() {
 // 등록 응답
 function subspInsertRes(data) {
 	subspNum = data.subspNum;
-	console.log('구독 등록 : ', data);
+	
 	if(data.retCode == "OK") {
-		alert("구독등록완료");
+		console.log("구독등록완료");
+		
+		getBillingKey(); // 2.빌링키 발급
 	}
 }
 
 
 /* 1.빌링키 발급 */
 // 빌링키 발급 (최초결제)
-async function getBillingKey(memNum) {
+async function getBillingKey() {
 	const issueResponse = await PortOne.requestIssueBillingKey({
 	  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
 	  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
 	  billingKeyMethod: "EASY_PAY",
 	  issueName: monthTlt
 	});
-	// 빌링키가 제대로 발급되지 않은 경우 에러 코드가 존재
+	
 	if (issueResponse.code != null) {
 	  return alert(issueResponse.message);
 	}
 	
-	console.log("=======빌링키======" + issueResponse.billingKey)
-	
-	// 서버에 빌링키를 전달
+	// 구독 DB 빌링키 저장
 	await csrf_axios({
-	  method: "POST",
-	  url : "/member/sttl/billing",
+	  method: "PUT",
+	  url : "/member/subsp/billing",
 	  data: {
 	    billingKey: issueResponse.billingKey,
+	    subspNum,
 	    memNum
 	  },
 	}).then(res => {
-		//console.log(res.data.billingKey)
+		console.log(res.data.billingKey)
 		if(res.data.billingKey != "") {
 			billingPayReq(res.data.billingKey) /* 2.빌링키로 결제 */	
 		} else{
-			alert("빌링키가 없습니다.");
+			console.log("빌링키가 없습니다.");
 		}
 		
 	});
 	
 }
+
+
 /* 2.빌링키로 결제 */
 // 빌링키 결제 요청
-async function billingPayReq() {
+async function billingPayReq(billingKey) {
 	// 포트원 빌링키 결제 API 호출
 	const paymentResponse = await csrf_axios(
 	  {
@@ -134,44 +124,87 @@ async function billingPayReq() {
 	      "Authorization": `PortOne ${iamportApikey}`
 	    },
 	    data: {
-	      billingKey : "billing-key-018ecb06-11b1-a11b-b0e9-50f245bb2b19",
+	      billingKey,
 	      orderName: monthTlt,
 	      amount: {
-	        total: subspPrice,
+	        total: Number(subspPrice)
 	      },
 	      currency: "KRW"
 	    },
 	  },
 	);
-	if (!paymentResponse.ok) console.log(paymentResponse);
+	if (!paymentResponse.ok) {
+		sttlInsertReq(paymentId) // 3.결제 DB에 저장
+	};
 }
 
 
-payBtnTest.addEventListener("click", e => {
-	billingPayReq();
+/* 3.결제 DB에 저장 */
+// 결제 DB 등록 요청
+function sttlInsertReq(payId) {
+	console.log("클릭됨")
+	// 포트원 결제 단건조회 API 호출
+	csrf_axios({
+		ethod: "GET",
+	    url : `https://api.portone.io/payments/${payId}`,
+	    headers: {
+	      "Authorization": `PortOne ${iamportApikey}`
+	    }
+	})
+	.then(res => sttlInsetRes(res.data))
 
-});
-
-
-/* 결제 연동 테스트 */
-// 결제 요청 (테스트)
-async function TestPayRes() {
-	const response = await PortOne.requestPayment({
-		  // Store ID 설정
-		  storeId: "store-10763d2e-c1c0-48c6-896a-adb1563480ac",
-		  // 채널 키 설정
-		  channelKey: "channel-key-dcae4478-0c7f-4678-a1ee-d4f875495fe6",
-		  paymentId: paymentId,
-		  orderName: monthTlt,
-		  totalAmount: subspPrice,
-		  currency: "CURRENCY_KRW",
-		  payMethod: "EASY_PAY"
-		});
+}
+// 결제 DB 등록 응답
+function sttlInsetRes(data) {
+	let sttlTypCd = "";
+	if(data.method.pgProvider == "KAKAOPAY") {
+		sttlTypCd = "o1";
+	} else {
+		sttlTypCd = "o2";
+	}
 	
-	console.log("====결제결과=====" + response);
+	const sttlDt = data.paidAt.substr(0, 10); // "2024-04-15T02:50:53.579937042Z"
 	
-	 if (response.code != null) {
-	    // 오류 발생
-	    return alert(response.message);
-	 }
+	let sttlStCd = "";
+	if(data.status == "PAID") {
+		sttlStCd = "p1";
+	}else {
+		sttlStCd = "p2";
+	}
+	
+	const allSttlPrice = data.amount.paid;
+	const sttlAccpNum = data.id; // "iting_1month_1713149435799"
+	const sttlRnd = 1;
+	
+	let param = {sttlTypCd, sttlDt, sttlStCd, allSttlPrice, subspNum, memNum, sttlAccpNum, sttlRnd}
+	
+	csrf_axios({
+	  method: "POST",
+	  url : "/member/sttl/insert",
+	  data: param
+	})
+	.then(res => {
+		if(res.data.sttlNum != "") {
+			
+			// 최종 결제 완료 시 알림
+			Swal.fire({
+			  title: "구독 결제가 완료되었습니다.",
+			  text: "",
+			  icon: "success",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "수강하기",
+			  cancelButtonText: "결제내역"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    location.href = "/member/lecture/allList";
+			  } else {
+			  	location.href = "/member/main";
+			  }
+			});
+		}
+		console.log("결제DB입력값" ,res.data);
+	})
+
 }

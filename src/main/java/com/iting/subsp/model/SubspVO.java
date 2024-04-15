@@ -13,6 +13,7 @@ public class SubspVO {
 	private String subspTypCd;
 	private int subspPrice;
 	private String memNum;
+	private String billingKey; 	// 빌링키
 	
 	private String retCode;
 }

@@ -6,9 +6,9 @@
 var lectureService = (function(){
 
 	// 강의 전체목록 요청
-	function ltListReq(page) {
+	function ltListReq(page, ltTtl) {
 		
-		const param = `?page=${page}`;
+		const param = `?page=${page}&ltCateCd=${ltCateCd}&ltTtl=${ltTtl}`;
 			
 		axios.get("/member/lecture/allSelect" + param)
 			 .then(res => ltListRes(res.data))
@@ -89,7 +89,7 @@ var lectureService = (function(){
 				<a class="page-link" href="javascript:gopage(${i})">${i}</a></li>`;
 		}
 		// 다음 버튼
-		if(paging.endPage <= paging.lastPage) {
+		if(paging.endPage < paging.lastPage) {
 			tag += `<li class="page-item">
 				<a class="page-link" href="javascript:gopage(${paging.endPage + 1})">Next</a></li>`;
 		    tag += `</ul>
