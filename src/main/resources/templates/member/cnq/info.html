@@ -102,16 +102,18 @@
 		<div class="comment-box">
 			<form name="replyForm" method="post">
 				<div class="comment-name">
-					<span class="anonym">작성자 : <input type="text"
-						class="form-control" id="com_writer" placeholder="이름"
-						name="com_writer" value='${login.userId}' readonly
+					<span class="anonym">작성자 : 
+					<input type="text" class="form-control" id="DRWUPR" placeholder="이름"
+						name="DRWUPR" th:value="${session.userId}" readonly
 						style="width: 100px; border: none;">
 					</span>
+					<input type="hidden" name="ltCnqNum" th:value="${cnq.ltCnqNum}">
 				</div>
 				내용 :
 				<textarea name="cntn"></textarea>
 				<br> 
-				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
+				<button type="button" id="saveRBtn" class="cnq_insertBtn">등록</button>
+				
 			</form>
 		</div>
 		<!-- 댓글 등록 끝 -->
@@ -169,15 +171,15 @@
 	}
 	listBtn.addEventListener("click",
 			e=>{location.href="javascript:history.back();"})
+			
 	//댓글
 	
 		//등록요청.
-		function saveReq() {
-		const ttl = replyForm.ttl.value;
+		function saveRReq() {
+		const drwupr = replyForm.DRWUPR.value;
 		const cntn = replyForm.cntn.value;
-		const name = replyForm.name.value;
-		const ltNum = replyForm.ltNum.value;
-		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum}
+		const ltCnqNum = replyForm.ltCnqNum.value;
+		let param = { drwupr,cntn,ltCnqNum};
 		console.log(param);
 		
 		/*
@@ -187,24 +189,24 @@
 		
 		csrf_axios({
 				method: 'POST',
-				url: '/member/cnq/insert',
+				url: '/member/cnq/rinsert',
 				data: param
 			
 				})
-				.then(res => saveRes(res.data))
+				.then(res => saveRRes(res.data))
 	}
 	
 	// 등록 응답
-	function saveRes(res) {
+	function saveRRes(res) {
 		console.log(res);
-		const ltNum = cnqForm.ltNum.value;
+		const ltCnqNum = replyForm.ltCnqNum.value;
 		alert('게시글 등록 완료!');
-		location.href=`/member/cnq/list/${ltNum}`
+		
 	}
 	
 	//버튼 클릭 시 함수 호출.
-	saveBtn.addEventListener("click", e => {
-		saveReq();
+	saveRBtn.addEventListener("click", e => {
+		saveRReq();
 	})
 	</script>
 </section>
