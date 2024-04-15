@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.model.LiveVO;
 
 public interface LectureService {
 	// 장효은
@@ -30,5 +31,6 @@ public interface LectureService {
 	public List<LectureVO> ingLectureList(LectureVO vo);
 	//개수 
 	public long getCount(LectureVO vo);
+
 }
 

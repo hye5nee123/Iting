@@ -22,6 +22,7 @@ import com.iting.common.FileUtil;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.model.LiveVO;
 import com.iting.lecture.service.LectureService;
 import com.iting.review.model.ReviewVO;
 import com.iting.review.service.ReviewService;
@@ -43,7 +44,7 @@ public class LectureController {
 	/* 회원 */
 	// 강의 전체목록 페이지 이동
 	@RequestMapping("/member/lecture/allList")
-	public ModelAndView allList() {
+	public ModelAndView allList(LectureVO vo) {
 		ModelAndView mv = new ModelAndView("/member/lecture/allList");
 		return mv;
 	}
@@ -52,7 +53,7 @@ public class LectureController {
 	@GetMapping("/member/lecture/allSelect")
 	@ResponseBody
 	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
-		pvo.setPageUnit(5);
+		pvo.setPageUnit(8);
 		pvo.setPageSize(5);
 		pvo.setFirst(0);
 		pvo.setLast(5);
@@ -117,11 +118,12 @@ public class LectureController {
 			vo.setAtchNum(fvo.getAtchNum());
 		}
 		lectureService.ltInsert(vo);
-		return "redirect:/teacher/lecture/list";
+		return "teacher/lecture/getLectureList";
 	}
+	
 
 	/* 관리자 */
-	// 강의 수정
+	
 
 	// 강의 리스트
 	@GetMapping("/admin/lecture/list")
@@ -181,5 +183,7 @@ public class LectureController {
 		lectureService.update(vo);
 		return vo;
 	}
+	
+	
 
 }

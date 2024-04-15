@@ -12,7 +12,7 @@
 <section layout:fragment="content">
 
 	<div class="test_modal">
-		<form class="text">
+		<form method="POST" name="testForm" class="text">
 			<h3>쪽지시험</h3>
 			<button class="btn_close"><i class='bx bx-x'></i></button>
 			<div class="test_box">
@@ -42,7 +42,11 @@
 				<p th:text="${tlsn.ltNum}" class="hidden"></p>
 				
 			</div>
-			<button type="button" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
+			<div class="btn_cont">			
+			 	<button type="button" th:if="${tlsn.examYn == null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
+			 	<button type="button" th:if="${tlsn.examYn != null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">재응시 ></button>
+			 	<button type="button" th:if="${tlsn.examYn != null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link gray">오답노트 ></button>
+			</div>
 		</div>
 	</div>
 	<div class="btn_box test_btn">
@@ -70,7 +74,7 @@
 	function saveTest(res) {
 		let box = document.querySelector('.test_box');		
 		for(let i = 0; i < res.length; i++) {
-		let text = `<div>
+		let text = `<div class="test_list" data-num="${res[i].applexamNum}" data-order="${res[i].prblOrdNum}" data-prbl="${res[i].prblNum}">
 		<p>${i+1}. ${res[i].prblCntn}</p>
 		<ul>
 			<li>
@@ -98,23 +102,34 @@
 	
 	// 문제체크
 	function checkReq() {
-		const check = document.querySelector('input[type=radio]');
-		for(let i = 0; i < check.length; i++) {
-			if(check[i].checked){
-				alert('문제를 제출할까요?');
-			} else {
-				alert('풀지 않은 문제가 있습니다.');
-				
+		const posi = document.querySelectorAll('.test_list');
+		let chk = true;
+		for(let i = 0; i < posi.length; i++) {
+			const check =  posi[i].querySelectorAll('input[type=radio]:checked');
+			if(check.length == 0){
+				chk = false;
+			} 
+		}
+		if(chk){
+			if(confirm('답안을 제출할까요?')) {
+				saveReq();	
 			}
+		} else{
+			alert('풀지 않은 문제가 있습니다.');
 		}
 	}
 	
 	// 문제제출하기
-	function saveReq() {	
-		const applexamNum = noteForm.applexamNum.value;
-		const memNum = noteForm.memNum.value;
-		let param = {applexamNum, memNum}
-		console.log(param);
+	let param = [];  //[{APPLEXAM_NUM : 66, ANSWER : 답}]
+	function saveReq() {
+		const posi = document.querySelectorAll('.test_list');
+		for(let i = 0; i < posi.length; i++) {
+			let applexamNum = posi[i].dataset.num;
+			let prblOrdNum = posi[i].dataset.order;
+			let prblNum = posi[i].dataset.prbl;
+			const answer = posi[i].querySelector('input[type=radio]:checked').value
+				param.push({applexamNum, prblOrdNum, prblNum, answer});
+		}
 		
 		/*
 		axios.post("/member/subsp/insert", param)
@@ -123,9 +138,8 @@
 		
 		csrf_axios({
 				method: 'POST',
-				url: '/member/note/insert',
+				url: `/member/test/list`,
 				data: JSON.stringify(param)
-			
 				})
 				.then(res => saveRes(res.data))
 	}
@@ -133,14 +147,13 @@
 	// 등록 응답
 	function saveRes(res) {
 		console.log(res);
-		alert('메세지가 전송되었습니다.');
-		window.location.href = "/member/note/list";
+		alert('답안이 제출되었습니다.');
+		window.location.href = `/member/test/result/${param[0].applexamNum}`;
 	}
 	
 	//버튼 클릭 시 함수 호출.
 	saveBtn.addEventListener("click", e => {
 		checkReq();
-		saveReq();
 	})
 	
 	function goBack() {

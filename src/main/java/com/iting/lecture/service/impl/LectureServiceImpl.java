@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.mapper.LectureMapper;
 import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.model.LiveVO;
 import com.iting.lecture.service.LectureService;
 
 @Service
@@ -85,7 +86,8 @@ public class LectureServiceImpl implements LectureService {
 	
 	@Override
 	public long getCount(LectureVO vo) {
-		return lectureMapper.getCount(vo);
+		return lectureMapper.getCount(vo, null);
 	}
+
 
 }

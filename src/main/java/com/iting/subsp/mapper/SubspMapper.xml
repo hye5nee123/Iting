@@ -45,5 +45,11 @@
 			        , #{memNum}
 			        )
 	</insert>
+	
+	<update id="subspUpdate">
+		UPDATE subsp
+		SET billing_key = #{billingKey}
+		WHERE subsp_num = #{subspNum}
+	</update>
 
 </mapper>

@@ -13,7 +13,10 @@
 	<section layout:fragment="content">
 		<div class="container">
 			<div class="row">
-				<h4 class="col-8">전체 강의</h4>
+				<!-- 강의 카테고리별 제목 넣기 -->
+				<h4 class="col-8" th:if="${ltCateCd} == ''">전체 강의</h4>
+				<h4 class="col-8" th:if="${ltCateCd} == 'f1'">전체 강의</h4>
+				<h4 class="col-8" th:if="${ltCateCd} == 'f2'">기초강의</h4>
 				<div class="shop__sidebar__search col-4">
 					<input type="text" placeholder="강의명을 검색해주세요." name="lectSearch" id="searchKeyWord">
 		            <button type="button" onclick="searchLect()"><i class='bx bx-search-alt-2'></i>검색</button>
@@ -59,6 +62,12 @@
             </div>
 			
         </div>
+        	
+		<script th:inline="javascript">
+			var ltCateCd = [[${lectureVO.ltCateCd}]]
+			var ltTtl = [[${lectureVO.ltTtl}]]
+			var name = [[${lectureVO.name}]]
+		</script>
 		
 		<script src="/js/member/allList.js"></script>
 		<script>
@@ -77,7 +86,7 @@
 			
 			function searchLect() {
 				console.log(searchKeyWord.value);
-				//lectureService.ltListReq(searchKeyWord.value);
+				lectureService.ltListReq(1, searchKeyWord.value);
 			}
 			
 		</script>

@@ -71,17 +71,19 @@
 					</tr>
 					<tr>
 						<th style="padding: 20px;">제목</th>
-						<td colspan="3"><h5 th:text="${cnq.ttl}"
-								style="padding: 20px;"></h5></td>
+						<td colspan="3">
+							<h5 th:text="${cnq.ttl}" style="padding: 20px;"></h5>
+						</td>
 					</tr>
 					<tr>
 						<th style="padding: 20px;">내용</th>
 						<td th:text="${cnq.cntn}" colspan="3" style="padding: 20px;"></td>
 					</tr>
-					<tr >
+					<tr>
 						<th style="padding: 20px;">첨부파일</th>
-						<td  colspan="3" style="padding: 20px;">
-						   <div th:each="file:${files}" th:text="${file.atchTtl}" ></div>
+						<td colspan="3" style="padding: 20px;">
+							<div th:each="file:${files}" th:text="${file.atchTtl}"
+								th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -90,12 +92,31 @@
 		<div>
 			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+			<button class="cnq_insertBtn" type="button" id="listBtn">목록</button>
 			<button class="cnq_reset" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
 		</div>
 	</form>
-	<!-- 댓글   -->
+	<!-- 댓글  시작-->
 	<div>
+		<div class="comment-box">
+			<form name="replyForm" method="post">
+				<div class="comment-name">
+					<span class="anonym">작성자 : 
+					<input type="text" class="form-control" id="DRWUPR" placeholder="이름"
+						name="DRWUPR" th:value="${session.userId}" readonly
+						style="width: 100px; border: none;">
+					</span>
+					<input type="hidden" name="ltCnqNum" th:value="${cnq.ltCnqNum}">
+				</div>
+				내용 :
+				<textarea name="cntn"></textarea>
+				<br> 
+				<button type="button" id="saveRBtn" class="cnq_insertBtn">등록</button>
+				
+			</form>
+		</div>
+		<!-- 댓글 등록 끝 -->
 		<table>
 			<thead>
 				<tr>
@@ -141,8 +162,52 @@
 	console.log(newTag);
 	return newTag;
 }
+	function saveReq() {
+		const ttl = cnqForm.ttl.value;
+		const cntn = cnqForm.cntn.value;
+		const name = cnqForm.name.value;
+		const ltNum = cnqForm.ltNum.value;
+		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum};
+	}
+	listBtn.addEventListener("click",
+			e=>{location.href="javascript:history.back();"})
+			
+	//댓글
 	
+		//등록요청.
+		function saveRReq() {
+		const drwupr = replyForm.DRWUPR.value;
+		const cntn = replyForm.cntn.value;
+		const ltCnqNum = replyForm.ltCnqNum.value;
+		let param = { drwupr,cntn,ltCnqNum};
+		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/cnq/rinsert',
+				data: param
+			
+				})
+				.then(res => saveRRes(res.data))
+	}
 	
+	// 등록 응답
+	function saveRRes(res) {
+		console.log(res);
+		const ltCnqNum = replyForm.ltCnqNum.value;
+		alert('게시글 등록 완료!');
+		
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveRBtn.addEventListener("click", e => {
+		saveRReq();
+	})
 	</script>
 </section>
 </html>

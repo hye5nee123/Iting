@@ -8,6 +8,7 @@ import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.model.LiveVO;
 
 @Mapper
 public interface LectureMapper {
@@ -33,6 +34,5 @@ public interface LectureMapper {
 	public List<LectureVO> endLectureList(LectureVO vo);
 	public List<LectureVO> ingLectureList(LectureVO vo);
 	//개수 
-	public long getCount(LectureVO vo);
-	
+	public long getCount(LectureVO vo, PagingVO pvo );
 }

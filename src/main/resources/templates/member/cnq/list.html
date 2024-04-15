@@ -34,8 +34,7 @@
 		<input type="hidden" name="page"> 제목 <input name="ttl"
 			th:value="*{ttl}"> 작성자 <input name="name" th:value="*{name}">
 		<a href="#" onclick="gopage(1)" class="search-switch"> <img
-			src="/img/member/main/search.png" alt="searchBtn"></a> 
-			<a href="#"
+			src="/img/member/main/search.png" alt="searchBtn"></a> <a href="#"
 			onclick="init()" class="search-switch"> <img
 			src="/img/member/main/resetBtn.png" alt="searchBtn"></a>
 	</form>
@@ -48,6 +47,7 @@
 		</div>
 		<br>
 		<table class="table table-striped">
+		
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -56,18 +56,17 @@
 					<th>첨부파일</th>
 					<th>조회수</th>
 					<th>작성자</th>
-					
-				</tr>
-			<tbody>
 
+				</tr>
+				
+			<tbody>
 				<tr th:each="cnq, stat: ${cnqList}"
 					th:onclick="move([[${cnq.ltCnqNum}]])">
 					<td th:text="${cnq.ltCnqNum}"></td>
 					<td th:text="${cnq.ttl}"></td>
 					<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
-					<td> <span th:if = "${not #strings.isEmpty(cnq.atchNum)}" 
-                               th:text="'icon자리'"></span></td>
-					
+					<td><span th:if="${not #strings.isEmpty(cnq.atchNum)}"
+						th:text="'icon자리'"></span></td>
 					<td th:text="${cnq.hit}"></td>
 					<td th:text="${cnq.name}"></td>
 				</tr>

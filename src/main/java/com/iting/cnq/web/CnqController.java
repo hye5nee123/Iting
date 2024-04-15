@@ -91,6 +91,7 @@ public class CnqController {
 	@ResponseBody
 	@PostMapping("/member/cnq/insert")
 	// jsonType 을 받기 위해서 @RequestBody붙임.
+	//usernum을 받아오기 위해서 session 값 가져옴.
 	public CnqVO cnqInsert(@RequestBody CnqVO vo, HttpSession session) {
 		vo.setMemNum((String) session.getAttribute("usernum"));
 		System.out.println(vo + "====================");

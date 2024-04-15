@@ -13,4 +13,9 @@ public interface TestService {
 	
 	// 회원 문제응시
 	public List<TestVO> insertExam(TestVO vo);
+	public int updateExam(List<TestVO> testVO);
+	
+	// 응시결과
+	public TestVO getExamResult(String applexamNum);
+	public List<TestVO> getResultList(TestVO vo);
 }

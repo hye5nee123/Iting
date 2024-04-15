@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,9 +53,19 @@ public class SubspController {
 	// 구독정보 단건 조회
 	@GetMapping("/member/subsp/{memNum}")
 	public SubspVO memInfo(@PathVariable String memNum) {
-		System.out.println(memNum);
 		return subspService.getSubspInfo(memNum);
 	}
+	
+	// 구독 빌링키 등록 (수정)
+	@PutMapping("/member/subsp/billing")
+	public SubspVO subpUpdate(@RequestBody SubspVO vo) {
+		System.out.println(vo);
+		subspService.subspUpdate(vo);
+		
+		return vo;
+	}
+	
+	
 	
 	
 	/* 강사 */

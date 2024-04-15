@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.iting.common.model.PagingVO;
 import com.iting.test.model.TestVO;
 
 @Mapper
@@ -21,4 +20,13 @@ public interface TestMapper {
 	public int deleteExam(TestVO vo);
 	public int deleteExamDetail(TestVO vo);
 	public List<TestVO> getExamList(TestVO vo);
+	public int updateExam(TestVO testVO);
+	public int updateResult(TestVO testVO);
+	
+	// 채점
+	public int updateScore(String applexamNum);
+	
+	// 결과
+	public TestVO getExamResult(String applexamNum);
+	public List<TestVO> getResultList(TestVO vo);
 }
