@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<title>마이페이지</title>
+<style>
+.mypage {
+	display: inline;
+}
+
+.aside {
+	width: 200px;
+}
+
+ul {
+	list-style: none;
+}
+
+.nice-select {
+	width: 200px;
+}
+.mycontent{
+	border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="mypage">
+			<div class="aside">
+				<ul>
+					<h3>마이페이지</h3>
+					<li><a href="/member/mypage" role="button">
+							<h4>회원정보</h4>
+					</a></li>
+					<li><a href="/member/mypage/sttlList" role="button">
+							<h4>결제정보</h4>
+					</a></li>
+					<li><a href="#" role="button">
+							<h4>커뮤니티 활동</h4>
+					</a></li>
+					<li><a href="#" role="button">
+							<h4>알림 설정</h4>
+					</a></li>
+				</ul>
+			</div>
+			<div class="mycontent" layout:fragment="mycontent">
+				<!-- 마이페이지 본문 -->
+			</div>
+		</div>
+		<script>
+		</script>
+	</section>
+</body>
+</html>

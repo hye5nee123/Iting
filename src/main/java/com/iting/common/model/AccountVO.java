@@ -14,8 +14,7 @@ public class AccountVO {
 	private String dadrv;
 	private String mailv;
 	private String phonev;
-	private String logCd;
-	private String token;
+	//private String token;
 	private String actype;
 	private String intr;
 	
