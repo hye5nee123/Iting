@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{member/mypage/myMain}">
+<head>
+<meta charset="UTF-8">
+<title>마이페이지 - 회원정보</title>
+<script src="/js/join/inputChk.js"></script>
+</head>
+<body>
+	<section layout:fragment="mycontent">
+		<div class="checkout__form">
+			<div class="checkout__input col-lg-4">
+				<p>아이디</p>
+				<input type="text" id="myid" name="myid" readonly>
+				<p>이메일</p>
+				<input type="text" id="email" name="email" readonly>
+				<p>비밀번호</p>
+				<input type="password" id="nowpw" name="nowpw" value="a" readonly>
+				<div class="changepw">
+					<!-- 비밀번호 변경시 내용 -->
+					<button type="button" class="site-btn" onclick="newPw()">변경</button>
+				</div>
+				<p>휴대전화번호</p>
+				<div class="changephone">
+					<!-- 전화번호 변경시 내용 -->
+					<input type="tel" id="nowphone" name="nowphone" readonly>
+					<button type="button" class="site-btn" onclick="newPhone()">변경</button>
+				</div>
+				<div class="smschk">
+					<!-- 인증번호 입력란 -->
+				</div>
+				<p>이름(닉네임)</p>
+				<input type="text" id="nick" name="nick">
+			</div>
+			<div class="checkout__input col-lg-4">
+				<p>주소</p>
+			</div>
+			<div class="checkout__input col-lg-2">
+				<input type="text" id="sample6_postcode" placeholder="우편번호" readonly>
+				<button type="button" class="site-btn"
+					onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+			</div>
+			<div class="checkout__input col-lg-4">
+				<input type="text" id="sample6_address" name="addr" readonly>
+			</div>
+			<div class="checkout__input col-lg-6">
+				<p>상세주소</p>
+				<input type="text" id="sample6_detailAddress" name="detailaddr">
+			</div>
+			<div class="checkout__input">
+				<p>관심사</p>
+			</div>
+			<select id="ocmenu" name="ocmenu">
+				<option value="">선택</option>
+				<option value="c1">프로그래밍 언어</option>
+				<option value="c2">컴퓨터공학 전공</option>
+				<option value="c3">웹 개발</option>
+				<option value="c4">데이터 분석</option>
+				<option value="c5">IT 자격증</option>
+			</select>
+			<button type="button" class="site-btn" id="update"
+				onclick="updateInfo()">수정</button>
+		</div>
+		<script>
+		let pwFormOn = false;
+		let phoneFormOn = false;
+		let nowPwAccep = true;
+		function newPw(){
+			nowpw.hidden = true;
+			pwFormOn = true;
+			nowPwAccep = false;
+		const pwForm = `
+		<input type="password" id="nowpwchk" name="nowpwchk"
+			placeholder="현재 비밀번호" onblur="nowPwChk()">
+		<div class="nowpwchkstr"></div>
+		<input type="password" id="pw"
+			name="pw" placeholder="새 비밀번호" onblur="pwCheck()">
+		<div class="pwchkstr"></div>
+		<input type="password" id="pwchk" name="pwchk"
+			placeholder="새 비밀번호 확인" onblur="pwCheck()">
+		<div class="pwchkchkstr"></div>`;
+			document.getElementsByClassName('changepw')[0].innerHTML = pwForm;
+		};
+		function nowPwChk(){
+			if (nowpwchk.value == nowpw.value) {
+				nowPwAccep = true;
+			} else {
+				nowPwAccep = false;
+			}
+		};
+		function newPhone(){
+			phoneFormOn = true;
+			const phoneForm = `<input type="tel" id="phone" name="phone" placeholder="'-'제외하고 입력"
+			onblur="phoneCheck()">
+			<button type="button" class="site-btn" id="sendsms"
+				onclick="sendSMS(phone.value)">인증</button>
+			<div class="phonechkstr"></div>`;
+			document.getElementsByClassName('changephone')[0].innerHTML = phoneForm;
+		};
+		function updateInfo(){
+			let actype = 'b1';
+			chkInput();
+			setValue();
+			
+		}
+		</script>
+	</section>
+</body>
+</html>

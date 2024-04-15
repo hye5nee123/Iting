@@ -6,22 +6,19 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 
 @Getter
 @NoArgsConstructor
 @Entity
 public class Mem {
-	
+
 	@Id
 	@Column(nullable = false)
 	private String memNum;
-	
+
 	@Column(nullable = false)
 	private String id;
 
@@ -41,8 +38,7 @@ public class Mem {
 	@Builder
 	public Mem(String memNum, String mail, String phone, Role role) {
 		this.memNum = memNum;
-		this.id = 
-		this.mail = mail;
+		this.id = this.mail = mail;
 		this.phone = phone.replaceAll("-", "");
 		this.memFgCd = role;
 		this.loginTypCd = "a2";

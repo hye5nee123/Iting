@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,13 +41,13 @@ public class CommonController {
 
 	@Autowired
 	UsersService userservice;
-	
+
 	@Autowired
 	CommonService commonService;
-	
+
 	@Autowired
 	HttpSession httpSession;
-	
+
 	/* 메인이동 */
 	// 관리자
 	@RequestMapping("admin/main")
@@ -69,7 +70,7 @@ public class CommonController {
 		return mv;
 	}
 
-	/* 첨부 파일 업로드 - 테스트용*/
+	/* 첨부 파일 업로드 - 테스트용 */
 	@RequestMapping("upload/fileTest")
 	public String uploadFile(MultipartFile[] uploadFiles) throws IllegalStateException, IOException {
 		if (uploadFiles != null) {
@@ -95,66 +96,67 @@ public class CommonController {
 		return "/member/main";
 
 	}
-	
-	
-	/* 첨부 파일 업로드 (싱글)*/
+
+	/* 첨부 파일 업로드 (싱글) */
 	@PostMapping("upload/file")
 	@ResponseBody
-	public Map<String, Object> uploadFileTest(MultipartFile uFile, String fileCode) throws IllegalStateException, IOException {
+	public Map<String, Object> uploadFileTest(MultipartFile uFile, String fileCode)
+			throws IllegalStateException, IOException {
 		int retCode = 0; // 등록 완료 코드
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		FileVO fvo = FileUtil.uploadFile(uFile);
-		if(fvo != null) {
+		if (fvo != null) {
 			// 달라 질수 있는 로직
 			retCode = commonService.fileInsert(fvo);
-			
+
 			map.put("retCode", retCode);
 			map.put("fvo", fvo);
 		}
 		return map;
-		
+
 	}
-	
+
 	/* 첨부 파일 업로드 (멀티) */
 	@PostMapping("upload/files")
 	@ResponseBody
-	public List<Map<String, Object>> uploadFileTest(MultipartFile[] uFile, String fileCode) throws IllegalStateException, IOException {
+	public List<Map<String, Object>> uploadFileTest(MultipartFile[] uFile, String fileCode)
+			throws IllegalStateException, IOException {
 		int retCode = 0; // 등록 완료 코드
-		
+
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
-		
+
 		if (uFile != null) {
 			for (MultipartFile file : uFile) {
-				
+
 				if (!file.isEmpty()) {
 					Map<String, Object> map = new HashMap<String, Object>();
-					
+
 					FileVO fvo = FileUtil.uploadFile(file);
 					retCode = commonService.fileInsert(fvo);
-					
+
 					map.put("retCode", retCode);
 					map.put("fvo", fvo);
-					
+
 					listMap.add(map);
 				}
 			}
 		}
-		
+
 		return listMap;
-		
+
 	}
-	
-	// 첨부파일을 클릭하면 -> 첨부파일번호 단건조회 -> 파일 다운로드 받기 -> (싱글 파일 된 후) 다중파일은 zip파일로 변환후 받을 수 있게 해보잡!
+
+	// 첨부파일을 클릭하면 -> 첨부파일번호 단건조회 -> 파일 다운로드 받기 -> (싱글 파일 된 후) 다중파일은 zip파일로 변환후 받을 수
+	// 있게 해보잡!
 	/* 첨부 파일 다운로드 */
 	@GetMapping("/downloading/{fileNum}")
 	@ResponseBody
 	public FileVO findFile(@PathVariable String fileNum) {
-        return commonService.getFileInfo(fileNum);
-    }
-	
-	
+		return commonService.getFileInfo(fileNum);
+	}
+
 	/* 첨부 파일 다운로드 - 테스트용 */
 	@GetMapping("/downfile")
 	public ModelAndView downLoadFile(String fileName) {
@@ -191,7 +193,7 @@ public class CommonController {
 	public String loginForm() {
 		return "common/login";
 	}
-	
+
 	@GetMapping("/naveraccount")
 	public String naverAccForm() {
 		return "common/naverAccount";
@@ -215,37 +217,44 @@ public class CommonController {
 		return "common/send-email";
 	}
 
-	// 회원가입 등록
+	// 회원 등록
 	@ResponseBody
-	@PostMapping("/insertaccount")
-	public int insertAccount(@RequestPart(value = "vo") AccountVO vo,
-            @RequestPart(value = "fileData", required = false) MultipartFile uFile) throws IllegalStateException, IOException {
-		if(vo.getActype() == "d2" && uFile != null) {
-			String origFileName = uFile.getOriginalFilename();
-			vo.setFileName(origFileName);
+	@PostMapping("/insertLecturer")
+	public int insertLecturer(@RequestPart(value = "vo", required = false) AccountVO vo,
+			@RequestPart(value = "fileData", required = false) MultipartFile fileData)
+			throws IllegalStateException, IOException {
+			System.out.println(fileData.getOriginalFilename());
+			String origFileName = fileData.getOriginalFilename();
+			vo.setFileName(fileData.getOriginalFilename());
 			// 확장자
 			String exetension = FilenameUtils.getExtension(origFileName);
 			// 새 파일명 (중복 덮어쓰기 방지)
-			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds() + "." +  exetension;
+			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" + new Date().getSeconds()
+					+ "." + exetension;
 			vo.setNewFileName(newFile);
 			// 파일 경로 및 이름 정의
-			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
+			File file = new File("D:/iting_webstorage/", fileData.getOriginalFilename());
 			// 정의된 값으로 파일 저장
 			try {
-				uFile.transferTo(file);
-				System.out.println("파일명 : " + uFile.getOriginalFilename());
-				System.out.println("파일크기 : " + uFile.getSize());
+				fileData.transferTo(file);
+				System.out.println("파일명 : " + fileData.getOriginalFilename());
+				System.out.println("파일크기 : " + fileData.getSize());
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
-		}
+			}
+		int ckcnt = userservice.insertUser(vo);
+		return ckcnt;
+	}
+	@ResponseBody
+	@PostMapping("/insertMember")
+	public int insertMember(@RequestBody AccountVO vo) {
 		int ckcnt = userservice.insertUser(vo);
 		return ckcnt;
 	}
 	
-	//회원 메인
+	// 회원 메인
 	@GetMapping("/")
-    public String index() {
-        return "member/main";
-    }
+	public String index() {
+		return "member/main";
+	}
 }

@@ -95,8 +95,8 @@
 		, #{mailv}
 		, #{phonev}
 		, sysdate
-		, #{logCd}
-		, #{token}
+		, 'a1'
+		, ''
 		)
 		<if test='actype == "d2"'>
 		select * from dual
