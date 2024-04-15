@@ -152,24 +152,24 @@
 	
 	<!-- 문제정답입력 -->
 	<update id="updateExam">
-	UPDATE APPLEXAM_DETAIL
-	SET ANSWER = #{answer}
-	WHERE PRBL_NUM = #{prblNum}
-	AND APPLEXAM_NUM = #{applexamNum}
+		UPDATE APPLEXAM_DETAIL
+		SET ANSWER = #{answer}
+		WHERE PRBL_NUM = #{prblNum}
+		AND APPLEXAM_NUM = #{applexamNum}
 	</update>
 	
 	<!-- 문제채점 -->
 	<update id="updateResult">
-	UPDATE APPLEXAM_DETAIL
-	SET MRK_RSLT = CASE WHEN #{answer} = (SELECT ANS
+		UPDATE APPLEXAM_DETAIL
+		SET MRK_RSLT = CASE WHEN #{answer} = (SELECT ANS
                                  FROM PRBL
                                 WHERE PRBL_NUM = #{prblNum}) 
-                         THEN 1
-                         <![CDATA[WHEN #{answer} <> (SELECT ANS
-                                 FROM PRBL
-                                WHERE PRBL_NUM = #{prblNum})]]>
-                         THEN 0
-						 END
+	                         THEN 1
+	                         <![CDATA[WHEN #{answer} <> (SELECT ANS
+	                                 FROM PRBL
+	                                WHERE PRBL_NUM = #{prblNum})]]>
+	                         THEN 0
+							 END
        WHERE PRBL_NUM = #{prblNum}
        AND APPLEXAM_NUM = #{applexamNum}
 	</update>
@@ -186,4 +186,13 @@
 		                       ON a.APPLEXAM_NUM = p.APPLEXAM_NUM
 		WHERE a.APPLEXAM_NUM = #{applexamNum}
 	</select>
+	
+	<!-- 총점 -->
+	<update id="updateScore">
+		UPDATE APPLEXAM
+		SET find_code(PASS_YN_CD) PASS_YN_CD = #{passYnCd}
+			, SCORE = #{score}
+			, APPLEXAM_DT = sysdate
+		WHERE APPLEXAM_NUM = #{applexamNum}
+	</update>
 </mapper>

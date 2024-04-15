@@ -23,4 +23,7 @@ public interface TestMapper {
 	public int updateExam(TestVO testVO);
 	public int updateResult(TestVO testVO);
 	public List<TestVO> getExamResult(TestVO vo);
+	
+	// 채점
+	public int updateScore(TestVO vo);
 }

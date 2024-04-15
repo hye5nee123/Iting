@@ -61,6 +61,7 @@ public class TestServiceImpl implements TestService {
 			testMapper.updateResult(list.get(i));
 		}
 		// 총점 업데이트 : 응시번호 기준으로 정답(1)인 친구들을 뽑아서 응시테이블에 시험점수와 합격여부를 삽입
+		// testMapper.updateScore();
 		return 1;
 	}
 	
@@ -69,6 +70,4 @@ public class TestServiceImpl implements TestService {
 	public List<TestVO> getExamResult(TestVO vo) {
 		return testMapper.getExamResult(vo);
 	}
-
-
 }
