@@ -19,14 +19,14 @@
 	</select>
 <!-- 댓글 등록 -->
 <insert id="cmtInsert" parameterType="CnqVO">
-		<selectKey keyProperty="CMT_NUM" order="BEFORE"
+		<selectKey keyProperty="cmtNum" order="BEFORE"
 			resultType="string">
 				SELECT 'cm' || LPAD(NVL(MAX(SUBSTR(CMT_NUM, -5)), 0) +
 			1, 5, '0') AS CMT_NUM
-			FROM lt_cnq
+			FROM cmt
 			</selectKey>
 	INSERT INTO cmt (
-					CM_NUM,
+					CMT_NUM,
                     CNTN,
                     DRWUP_DT,
                     LT_CNQ_NUM,
@@ -34,7 +34,7 @@
 					)
 		VALUES (
 					#{cmtNum}
-					, #{CNTN}
+					, #{cntn}
 					, sysDate
 					, #{ltCnqNum}
 					, #{drwupr}

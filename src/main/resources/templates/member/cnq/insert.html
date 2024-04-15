@@ -13,7 +13,8 @@
 			<h3 class="related-title">글등록</h3>
 			<form name="cnqForm" method="post">
 
-				제목 : <input name="ttl"> 내용 :
+				제목 : <input name="ttl"> 
+				내용 :
 				<textarea name="cntn"></textarea>
 				<br> 작성자 : <input name="name" th:value="${session.userId}" readonly> 
 					<br>첨부파일 동시 테스트 <input type="file" name="uFile" multiple="multiple">
