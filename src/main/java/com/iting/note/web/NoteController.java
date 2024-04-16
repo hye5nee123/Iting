@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
+import com.iting.lecture.model.LectureVO;
+import com.iting.lecture.service.LectureService;
 import com.iting.member.model.MemberVO;
 import com.iting.member.service.MemberService;
 import com.iting.note.model.NoteVO;
@@ -44,6 +46,9 @@ public class NoteController {
 	
 	@Autowired
 	TeacherService teacherService;
+	
+	@Autowired
+	LectureService lectureService;
 
 	@Autowired
 	private HttpSession httpSession;
@@ -78,7 +83,9 @@ public class NoteController {
 
 	// 강사 단건조회
 	@GetMapping("teacher/note/info/{noteNum}/{gb}")
-	public String info(@PathVariable String noteNum, @PathVariable String gb, Model model) {
+	public String info(@PathVariable String noteNum, @PathVariable String ltNum, @PathVariable String gb, Model model, LectureVO vo) {
+		model.addAttribute("curriList", lectureService.getCurriList(vo));
+		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
 		model.addAttribute("note", noteService.getRecInfo(noteNum));
 		model.addAttribute("gb", gb);
 		return "teacher/note/info";

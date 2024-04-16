@@ -76,7 +76,7 @@
                      <div class="product__details__tab__content">
                     
                         <ul>
-                         	<li th:each="sent, stat: ${sentList}" th:onclick="link('rec',[[${sent.noteNum}]])">
+                         	<li th:each="sent, stat: ${sentList}" th:onclick="link('sent',[[${sent.noteNum}]])">
 			            		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
 			            		<span th:text="${sent.id}"></span>
 			            		<span th:text="${sent.name}"></span>
@@ -92,7 +92,7 @@
 		<a th:href="@{/member/tlsn/detailList/{no}(no=${ltNum})}" class="go_list">목록가기</a> <!-- {ltNum}(ltNum=${tlsn.ltNum}) -->
 	</div>
 <script th:inline="javascript">
-function link(gb,noteNum){
+function link(gb, noteNum){
 	location.href=`/member/note/info/${noteNum}/${gb}`
 }
 function tab_select() {

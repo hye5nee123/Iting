@@ -27,4 +27,5 @@ public class TlsnVO {
 	private String examYn;
 	
 	private String retCode;
+	private String cnt;
 }

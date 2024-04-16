@@ -55,6 +55,7 @@
 		       , n.SENT_DT
 		       , n.REC_DT
 		       , n.CFM_YN_CD
+               , n.LT_NUM
 		       , e.ID as SENT_PS
 		       , m.ID as REC_PS
 		FROM NOTE n JOIN mem_lec_view m
