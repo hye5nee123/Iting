@@ -61,7 +61,7 @@ var lectureService = (function(){
 	                        </div>
 	                        <div class="product__item__text lectList">
 	                            <span class="lectSpan">${lecture.ltCateCd}</span>
-	                            <h6 class="mb-2"><span>${lecture.name}</span> 선생님</h6>
+	                            <h6 class="mb-2"><span>${lecture.name}</span> 강사님</h6>
 	                            <div class="rating">`;
 	          // 별점에 따라 별그리기            
               switch (lecture.reviewAvg) {

@@ -43,9 +43,11 @@
 				<h3 th:text="${tlsn.rndTtl}"></h3>
 				<button class="btn_close"><i class='bx bx-x'></i></button>
 				<div class="test_box video_box">
-					<video controls width="100%" autoplay>							
-						<!--  <source th:src="|/download/${tlsn.atchNum}|" type="video/mp4" /> -->
-						<source src="/download/html의이해_2차시.mp4" type="video/mp4" />
+					<video controls width="100%" autoplay>
+													
+						<source th:if="${tlsn.atchNum != null}" th:src="|/download/${tlsn.atchNum}|" type="video/mp4" />
+						<!-- 동영상이 다운X보이게 -->
+						<source th:if="${tlsn.atchNum == null}" src="/download/html의이해_2차시.mp4" type="video/mp4" />
 					</video>
 				</div>
 			</div>
