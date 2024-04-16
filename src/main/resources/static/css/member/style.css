@@ -955,9 +955,9 @@ ol {
 }
 
 .product__item:hover .product__item__pic .product__hover {
-	top: 0px;
-	right: 0px;
-	opacity: 1;
+	top: 10%;
+    right: 10%;
+    opacity: 1;
 }
 
 /*
@@ -997,7 +997,7 @@ ol {
 	top: 20px;
 }
 
-/* 이미지 hover 추가 */
+/* �씠誘몄� hover 異붽� */
 .product__item__pic:hover {
 	cursor: pointer;
 }
@@ -1057,6 +1057,7 @@ ol {
 	background: #ffffff;
 	padding: 10px;
 	display: inline-block;
+	height: auto;
 }
 
 .product__item__text {
@@ -1403,7 +1404,7 @@ ol {
 
 .shop__sidebar__accordion .card-heading a:after,
 .shop__sidebar__accordion .card-heading>a.active[aria-expanded=false]:after {
-	content: "";
+	content: "�꼪";
 	font-family: "FontAwesome";
 	font-size: 24px;
 	font-weight: 700;
@@ -1415,7 +1416,7 @@ ol {
 }
 
 .shop__sidebar__accordion .card-heading.active a:after {
-	content: "";
+	content: "�꼪";
 	font-family: "FontAwesome";
 	font-size: 24px;
 	font-weight: 700;
@@ -1584,7 +1585,7 @@ ol {
 	position: absolute;
 	right: -14px;
 	top: 0;
-	content: "";
+	content: "�꼨";
 	font-family: "FontAwesome";
 }
 
@@ -2086,7 +2087,7 @@ ol {
 	position: absolute;
 	right: -14px;
 	top: 0;
-	content: "";
+	content: "�꼨";
 	font-family: "FontAwesome";
 }
 

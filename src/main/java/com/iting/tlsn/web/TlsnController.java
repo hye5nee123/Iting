@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.iting.lecture.model.CurriVO;
 import com.iting.lecture.service.CurriService;
 import com.iting.lecture.service.LectureService;
+import com.iting.tlsn.model.TlsnDetailVO;
 import com.iting.tlsn.model.TlsnVO;
 import com.iting.tlsn.service.TlsnService;
 
@@ -75,5 +76,18 @@ public class TlsnController {
 		}
 		
 		return tlsnService.tlsnInsert(vo);
+	}
+	
+	// 수강 상세 등록
+	@PostMapping("/member/tlsn/detail/insert")
+	@ResponseBody
+	public TlsnDetailVO tlsnDetailInsert(@RequestBody TlsnDetailVO vo) {
+		
+		// 수강상세 진행률 중복되지 않게 들어가야함
+		
+		tlsnService.tlsnDetailInsert(vo);
+		
+		return vo;
+		
 	}
 }

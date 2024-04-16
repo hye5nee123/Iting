@@ -40,15 +40,15 @@
 		
 		<div class="test_modal">
 			<div class="text video_text">
-				<h3 th:text="${tlsn.rndTtl}"></h3>
+				<h3 th:text="${tlsn.rndTtl}" th:data-ltNum="${tlsn.ltNum}" id="dataLtNum"></h3>
 				<button class="btn_close"><i class='bx bx-x'></i></button>
 				<div class="test_box video_box">
-					<video controls width="100%" autoplay>
-													
-						<source th:if="${tlsn.atchNum != null}" th:src="|/download/${tlsn.atchNum}|" type="video/mp4" />
-						<!-- 동영상이 다운X보이게 -->
-						<source th:if="${tlsn.atchNum == null}" src="/download/html의이해_2차시.mp4" type="video/mp4" />
+					<video id="lectVideo" controls width="100%" autoplay muted>			
+						<source th:src="|/downloading/${tlsn.atchNum}" type="video/mp4"/>
 					</video>
+				</div>
+				<div class="test">
+					<h5></h5>
 				</div>
 			</div>
 		</div>
@@ -63,10 +63,74 @@ const modalClose = document.querySelector('.btn_close');
 
 modalOpen.addEventListener('click',function(){
     modal.classList.add('on');
+    // 진도율에 따라 재생시작
 });
 modalClose.addEventListener('click',function(){
     modal.classList.remove('on');
+    
+ 	// 현재 진행률 계산
+	var percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(2);
+    
+    // 강의를 닫으면 진도율 저장
+    insertDetailReq(percent);
 });
+
+let finPlayTime = 0;
+let totalPlayTime = 0;
+
+// 현재 재생위치 변경시 이벤트발생
+/*
+lectVideo[0].addEventListener('timeupdate', e => {
+	// 현재 재생 시간 (초 단위 절삭)
+	var testPlaytime = Math.floor(lectVideo[0].currentTime);
+	// 전체 재생 시간 (초 단위 절삭)
+	var testTotal = Math.floor(lectVideo[0].duration);
+	// 상태 표시
+	$(".test").html(testPlaytime + " / " + testTotal);
+	}, false);
+*/
+
+// 영상 일시정지 시 이벤트 발생
+lectVideo[0].addEventListener('pause', e => {
+	// 현재 재생 시간
+	finPlayTime = Math.floor(lectVideo[0].currentTime);
+	// 전체 재생 시간
+	totalPlayTime = Math.floor(lectVideo[0].duration);
+	
+	var percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(2);
+	
+	// 화면에 표시 테스트
+	$(".test").html(finPlayTime + " / " + totalPlayTime + " 진행률 : " + percent + "%");
+});
+
+// 퍼센트 계산 함수
+function calculatorPercent(parts, whole) {
+	return (parts / whole) * 100;
+}
+
+//등록요청.
+function insertDetailReq(percent) {
+	console.log("함수 호출됨")
+	const ltNum = dataLtNum[0].dataset.ltnum;
+	const rndPrgre = percent;
+	
+	// 수강번호(tlsnNum)도 넘겨야함
+	let param = { ltNum, rndPrgre, tlsnNum : 'tl00006' }
+	console.log(param)
+	csrf_axios({
+			method: 'POST',
+			url: '/member/tlsn/detail/insert',
+			data: param
+		
+			})
+			.then(res => insertDetailRes(res.data))
+}
+
+// 등록 응답
+function insertDetailRes(data) {
+	console.log(data);
+}
+
 </script>
 	
 </section>

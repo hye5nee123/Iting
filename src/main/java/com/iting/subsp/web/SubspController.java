@@ -13,6 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.iting.subsp.model.SubspVO;
 import com.iting.subsp.service.SubspService;
 
+/**
+ * 구독 컨트롤 클래스
+ * 
+ * @author 장효은
+ * @version 1.0
+ */
+
 @RestController
 public class SubspController {
 	@Autowired

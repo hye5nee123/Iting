@@ -46,7 +46,7 @@
 							<span th:text="${lecture.ltKeywordCd}"></span>
 						</div></li>
 				</ul>
-				<button>수강하기</button>
+				<button type="button" th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">수강하기</button>
 			</div>
 			<p class="text" th:text="${lecture.ltIntro}"></p>
 		</div>

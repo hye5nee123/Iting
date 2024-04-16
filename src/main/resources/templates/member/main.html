@@ -57,246 +57,189 @@
 <body>
 <section layout:fragment="content">
 
- 
-    </form>
-    <!-- 
-    <form method="post" enctype="multipart/form-data" id="imgForm" name="imgForm">
-		<br>이미지첨부파일<input type="file" name="uFile" multiple="multiple">
-		<br><button type="button" onclick="uploadFileReq('k1')">등록</button>
-	</form>
-	 -->
-	<!-- 첨부파일 예시 -->
-	<form method="post" id="subspMonthlyFrm" enctype="multipart/form-data" name="TestForm">
-		<br>첨부파일 동시 테스트 <input type="file" name="uFile" multiple="multiple">
-		<br>파일유형코드 : 숨김 <input type="hidden" name="typCode" th:value="k1">
-		<br><button type="button" onclick="uploadFileReq(TestForm.typCode.value, TestForm)">첨부파일 등록</button>
-		<br>
-		<br>
-		<!-- 월간 -->
-		<input type="hidden" value="n1" name="subspTypCd">월간
-	
-		<!-- 회원번호 -->
-		<input type="hidden" value="me00001" name="memNum">
-		<button type="button" id="payBtn" class="btn btn-primary">구독등록</button>
-	</form>
-	
-	<div>
-		<p>이미지 다운로드 예시</p> 
-		<img th:src="@{/download/cats.jpg}"></img>
-		<button th:onclick="|location.href='@{/download/첨부파일테스용.xlsx}'|">엑셀파일 다운로드 테스트</button>
+	<!-- 메인 슬라이드 -->
+	<div class="swiper mySwiper mt-5">
+	  <div class="swiper-wrapper">
+	    <div class="swiper-slide"><img src="/img/member/main/노드.jpg"></div>
+	    <div class="swiper-slide"><img src="/img/member/main/스프링.jpg"></div>
+	    <div class="swiper-slide"><img src="/img/member/main/혼공자.png"></div>
+	    <div class="swiper-slide"><img src="/img/member/main/자바.jpg"></div>
+	  </div>
+	  <div class="swiper-button-next"></div>
+	  <div class="swiper-button-prev"></div>
+	  <div class="swiper-pagination"></div>
 	</div>
+
+	<!-- Swiper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	
-	<div class="row">
-		<video controls width="500">	
-		  <source src="/video/html의이해_2차시.mp4" type="video/mp4" />
-		</video>
-	</div>
-	
+	<!-- Initialize Swiper -->
 	<script>
-	const subspTypCd = TestForm.subspTypCd.value;
-	const memNum = TestForm.memNum.value;
-	
-	payBtn.addEventListener("click", e => {
-		let params = { subspTypCd, memNum }
-		
-		csrf_axios({
-				method: 'POST',
-				url: '/member/subsp/insert',
-				data: params,
-			
-				})
-				.then(res => console.log("구독등록 완료", res.data))
-			
-	});
-	</script>
-	    
-	
-
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="/img/member/main/노드.jpg"></div>
-      <div class="swiper-slide"><img src="/img/member/main/스프링.jpg"></div>
-      <div class="swiper-slide"><img src="/img/member/main/혼공자.png"></div>
-      <div class="swiper-slide"><img src="/img/member/main/자바.jpg"></div>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 1,
-      spaceBetween: 30,
-      loop: true,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
+	  var swiper = new Swiper(".mySwiper", {
+	    slidesPerView: 1,
+	    spaceBetween: 30,
+	    loop: true,
+	    pagination: {
+	      el: ".swiper-pagination",
+	      clickable: true,
+	    },
+	    navigation: {
+	      nextEl: ".swiper-button-next",
+	      prevEl: ".swiper-button-prev",
+	    },
+	  });
   
    
     
   </script>
-            
- <div class="SectionTitle_container__PcXfF left size-28"><p class="SectionTitle_label__cEYNl default size-28"></p>
- <p class="SectionTitle_title__iqOHl default size-40"></p>
- <p class="SectionTitle_description__3Deqx default size-28"></p>
- <div class="SectionTitle_button__vZ_Mf size-28"></div>
- </div>
- <section class="product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="filter__controls">
-                        <li class="active" data-filter="*">추천강의</li>
-                        <li data-filter=".new-arrivals">진행중인 강의</li>
-                        <li data-filter=".hot-sales">COMMING SOON</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row product__filter" id="MixItUpE49582">
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00002">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/리눅스.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                             <h6>예담</h6>
-                            <h6>리눅스</h6>
-                            <h6>서강중</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00003">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/스프링.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                             <h6>NODE.JS, SPRING</h6>
-                            <h6>강의2</h6>
-                            <h6>김유미</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00004">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/혼공자.png">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                           
-                             <h6>예담</h6>
-                            <h6>JAVA</h6>
-                            <h6>이창호</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00005">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/plsql.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-								<h6>예담</h6>
-								<h6>PL/SQL</h6>
-                            <h6>권미진</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00006">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/자바.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                            <h6>예담</h6>
-                            <h6>HTML/CSS</h6>
-                            <h6>권정남</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00007">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/sql.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                             <h6>예담</h6>
-                            <h6>SQL</h6>
-                            <h6>권현미</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00008">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/노드.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                             <h6>예담</h6>
-                            <h6>NODE.JS</h6>
-                            <h6>김지영</h6>
-                        </div>
-                    </div>
-                </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                    <div class="product__item">
-                    <a href="/member/lecture/info/lt00009">
-                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/qb.jpg">
-                        </div>
-                        </a>
-                        <div class="product__item__text">
-                            <h6>예담</h6>
-                            <h6>VIEW</h6>
-                            <h6>송선희</h6>
-                        
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-   
-                
-            </div>
-            
-        </div>
-        </section>
- <section class="module-medium" id="demos">
-            <h3>로드맵</h3>
-          <div class="container">
-            <div class="row multi-columns-row">
-              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-                  <div class="content-box-image"><img src="/img/member/main/full.png" alt="풀스택 개발자"></div>
-                  <h3 class="content-box-title font-serif">풀스택 개발자</h3></a></div>
-              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-                  <div class="content-box-image"><img src="/img/member/main/html.png" alt="프론트엔드개발자"></div>
-                  <h3 class="content-box-title font-serif">프론트엔드개발자</h3></a></div>
-              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-                  <div class="content-box-image"><img src="/img/member/main/node.png" alt="백엔드개발자"></div>
-                  <h3 class="content-box-title font-serif">백엔드개발자</h3></a></div>
-            </div>
-          </div>
-        </section>
-
-
- </section>
+     
+     <!-- 삭제해도 되는 부분인것 같아요. 확인부탁드립니다.
+	 <div class="SectionTitle_container__PcXfF left size-28">
+	 	<p class="SectionTitle_label__cEYNl default size-28"></p>
+		<p class="SectionTitle_title__iqOHl default size-40"></p>
+		<p class="SectionTitle_description__3Deqx default size-28"></p>
+	 	<div class="SectionTitle_button__vZ_Mf size-28"></div>
+	 </div>
+	  -->
+	 <section class="product spad">
+	        <div class="container">
+	            <div class="row mt-5">
+	                <div class="col-lg-12">
+	                    <ul class="filter__controls">
+	                        <li class="active" data-filter="*">추천강의</li>
+	                        <li data-filter=".new-arrivals">진행중인 강의</li>
+	                        <li data-filter=".hot-sales">COMMING SOON</li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="row product__filter" id="MixItUpE49582">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00002">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/리눅스.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                             <h6>예담</h6>
+	                            <h6>리눅스</h6>
+	                            <h6>서강중</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00003">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/스프링.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                             <h6>NODE.JS, SPRING</h6>
+	                            <h6>강의2</h6>
+	                            <h6>김유미</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00004">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/혼공자.png">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                           
+	                             <h6>예담</h6>
+	                            <h6>JAVA</h6>
+	                            <h6>이창호</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00005">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/plsql.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+									<h6>예담</h6>
+									<h6>PL/SQL</h6>
+	                            <h6>권미진</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00006">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/자바.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                            <h6>예담</h6>
+	                            <h6>HTML/CSS</h6>
+	                            <h6>권정남</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00007">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/sql.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                             <h6>예담</h6>
+	                            <h6>SQL</h6>
+	                            <h6>권현미</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00008">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/노드.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                             <h6>예담</h6>
+	                            <h6>NODE.JS</h6>
+	                            <h6>김지영</h6>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+	                    <div class="product__item">
+	                    <a href="/member/lecture/info/lt00009">
+	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/qb.jpg">
+	                        </div>
+	                        </a>
+	                        <div class="product__item__text">
+	                            <h6>예담</h6>
+	                            <h6>VIEW</h6>
+	                            <h6>송선희</h6>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            
+	        </div>
+	        </section>
+	 		<section class="module-medium" id="demos">
+	          <h3>로드맵</h3>
+	          <div class="container">
+	            <div class="row multi-columns-row">
+	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
+	                  <div class="content-box-image"><img src="/img/member/main/full.png" alt="풀스택 개발자"></div>
+	                  <h3 class="content-box-title font-serif">풀스택 개발자</h3></a></div>
+	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
+	                  <div class="content-box-image"><img src="/img/member/main/html.png" alt="프론트엔드개발자"></div>
+	                  <h3 class="content-box-title font-serif">프론트엔드개발자</h3></a></div>
+	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
+	                  <div class="content-box-image"><img src="/img/member/main/node.png" alt="백엔드개발자"></div>
+	                  <h3 class="content-box-title font-serif">백엔드개발자</h3></a></div>
+	            </div>
+	          </div>
+	        </section>
+	
+	</section>
  
 
 </body>

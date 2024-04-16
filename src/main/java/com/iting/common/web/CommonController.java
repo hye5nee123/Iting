@@ -42,6 +42,13 @@ import com.iting.common.service.UsersService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * 공용 컨트롤 클래스
+ * 
+ * @author 장효은, 박지웅
+ * 
+ */
+
 @Controller
 @Log4j2
 public class CommonController {
@@ -128,7 +135,7 @@ public class CommonController {
 
 	}
 
-	// 첨부파일을 클릭하면 -> 첨부파일번호 단건조회 -> 파일 다운로드 받기 -> (싱글 파일 된 후) 다중파일은 zip파일로 변환후 받을 수 있게 해보잡! zip 만들어서 add해서 내려받기
+	
 	/* 첨부 파일 다운로드 */
 	@GetMapping("/downloading/{fileNum}")
 	@ResponseBody
