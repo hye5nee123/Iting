@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.mapper.LectureMapper;
 import com.iting.lecture.model.LectureVO;
-import com.iting.lecture.model.LiveVO;
 import com.iting.lecture.service.LectureService;
 
 @Service

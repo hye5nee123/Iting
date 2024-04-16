@@ -29,7 +29,12 @@
 		SELECT l.lt_num
 		, find_code(l.lt_st_cd) lt_st_cd
 		, l.lt_ttl
-		, l.lt_img
+		, (
+            select atch_mark_ttl
+            from atch
+            where atch_num = l.lt_img
+            and rownum = 1
+        ) lt_img 
 		, l.lt_intro
 		, find_code(l.lt_cate_cd) lt_cate_cd
 		, l.fr_dt
@@ -39,6 +44,14 @@
 		, find_code(l.lt_keyword_cd) lt_keyword_cd
 		, find_code(l.rdm_cate_cd) rdm_cate_cd
 		, lec.name
+		, NVL((
+			SELECT ROUND(AVG(r.STAR))
+			FROM  review r JOIN tlsn t ON r.tlsn_num = t.tlsn_num
+		                	JOIN lt ON lt.lt_num = t.lt_num
+		                	JOIN mem m ON r.mem_num = m.mem_num
+		    WHERE lt.lt_num = l.lt_num
+			GROUP BY l.lt_num
+			),0) as review_avg
 		FROM lt l JOIN lecturer lec
 					ON l.lecturer_num = lec.lecturer_num
 		WHERE l.ACCP_YN_CD = 'd1'
@@ -287,7 +300,6 @@
 		
 		<include refid="condition"></include>
 	</select>
-	
 
 
 </mapper>
