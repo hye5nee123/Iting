@@ -13,13 +13,15 @@
 		       , n.CFM_YN_CD
 		       , n.SENT_PS
 		       , n.REC_PS
+		       , n.LT_NUM
 		       , e.ID
 		       , e.NAME
 		FROM NOTE n JOIN mem_lec_view m
                       ON n.REC_PS = m.MEM_NUM
                     JOIN mem_lec_view e
-                      ON n.SENT_PS = e.MEM_NUM
+                      ON n.SENT_PS = e.MEM_NUM       
 		WHERE n.REC_PS = #{user}
+		AND n.LT_NUM = #{ltNum} 
 		ORDER BY n.NOTE_NUM DESC
 	</select>
 	
@@ -77,6 +79,7 @@
 						, REC_DT
 						, SENT_PS
 						, REC_PS
+						, LT_NUM
 						)
 		VALUES ( 
 				  #{noteNum}
@@ -86,6 +89,7 @@
 				, sysdate
 				, #{sentPs}
 				, #{recPs}
+				, #{ltNum}
 				
 				)
 	</insert>
