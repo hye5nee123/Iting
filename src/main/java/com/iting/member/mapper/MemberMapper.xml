@@ -32,6 +32,30 @@
 		WHERE MEM_NUM = #{memNum}
 	</select>
 	
+	<select id="getMyInfo" parameterType="string" resultType="MemberVO">
+		SELECT id
+			, pw
+			, name
+			, addr
+			, detail_addr
+			, mail
+			, phone
+			, int_cd
+		FROM mem
+		WHERE mem_num = #{memNum}
+	</select>
+	
+	<update id="putMyInfo" parameterType="AccountVO">
+		UPDATE mem
+		SET pw = #{pwv}
+			, name = #{nickv}
+			, addr = #{addrv}
+			, detail_addr = #{dadrv}
+			, phone	= #{phonev}
+			, int_cd = #{intr}
+		WHERE mem_num = #{accnum}
+	</update>
+
 	<!-- 회원단건 -->
 	<select id="getMemberNote">
 		SELECT m.MEM_NUM

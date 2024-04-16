@@ -106,7 +106,9 @@ function chkAccount() {
 		alert("아이디가 올바르지 않습니다. 다시 확인해주세요.");
 		return;
 	}
-	chkInput();
+	if(!chkInput()){
+		return;
+	}
 	if (filev == null && actype == 'd2' || filev == '' && actype == 'd2') {
 		alert("이력서를 첨부해주세요");
 		return;
@@ -116,7 +118,7 @@ function chkAccount() {
 		alert("필수 약관에 동의해야합니다.");
 		return;
 	}
-	setValue();
+	let param = setValue();
 	if (actype == 'b1') {
 		insertb1(param);
 	} else if (actype == 'd2') {
@@ -144,7 +146,7 @@ async function insertb1(param) {
 			if (rest.isConfirmed) {
 				location.href = "/member/main";
 			} else if (rest.isDenied) {
-				location.href = "/login";
+				location.href = "/commonlogin";
 			}
 		});
 	} else {

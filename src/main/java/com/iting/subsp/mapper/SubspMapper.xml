@@ -6,7 +6,7 @@
 	<!-- 구독 단건 조회 -->
 	<select id="getSubspInfo" resultType="SubspVO" parameterType="string">
 		SELECT subsp_num
-               , find_code(subsp_st_cd) subsp_st_cd
+               , subsp_st_cd
                , subsp_fr_dt
                , subsp_to_dt
                , find_code(subsp_typ_cd) subsp_typ_cd

@@ -32,7 +32,9 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		CustomUsers user = (CustomUsers)auth.getPrincipal();
 		String numcd = user.getUsersVO().getNumCd();
+		String usercd = user.getUsersVO().getUserCd();
 //		auth.getName(); // 단건조회 필요
+		request.getSession().setAttribute("usertype", usercd);
 		request.getSession().setAttribute("usernum", numcd);
 		request.getSession().setAttribute("userId", auth.getName());
 		

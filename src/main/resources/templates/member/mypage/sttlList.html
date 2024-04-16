@@ -4,11 +4,47 @@
 	layout:decorate="~{member/mypage/myMain}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지 - 결제정보</title>
 </head>
 <body>
 	<section layout:fragment="mycontent">
-		<h1>테스트트22</h1>
+		<div class="subinfo" th:if="${subspinfo.subspStCd} == 'm1'">
+			<div class="subtype">
+				<h3>구독 유형</h3>
+				<h5>[[${subspinfo.subspTypCd}]]</h5>
+			</div>
+			<div class="sublength">
+				<h3>구독 기한</h3>
+				<h5>[[${subspinfo.subspFrDt}]] ~ [[${subspinfo.subspToDt}]]</h5><br>
+				<h5>D-**</h5>
+			</div>
+		</div>
+		<div class="sttllist">
+			<table>
+				<thead>
+					<tr>
+						<th>구독유형</th>
+						<th>구독기간</th>
+						<th>결제유형</th>
+						<th>결제날짜</th>
+						<th>할인금액</th>
+						<th>총결제금액</th>
+						<th>결제회차</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr> -->
+				</tbody>
+			</table>
+		</div>
 	</section>
 </body>
 </html>

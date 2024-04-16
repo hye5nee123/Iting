@@ -63,41 +63,40 @@ function chkInput() {
 	if(pwFormOn){
 		if (pw.value == '') {
 			alert("비밀번호를 입력해주세요");
-			return;
+			return false;
 		}
 		if (pwchk.value != pw.value) {
 			alert("비밀번호가 일치하지 않습니다.");
-			return;
+			return false;
 		} else if (!pwAccep) {
 			alert("비밀번호가 올바르지 않습니다. 다시 확인해주세요.");
-			return;
+			return false;
 		}
 	}
 	/*if (email.value == '') {
 		alert("이메일을 입력해주세요");
-		return;
+		return false;
 	} else if (!mailAccep) {
 		alert("이메일 형식이 올바르지 않습니다. 다시 확인해주세요.");
-		return;
+		return false;
 	}*/
 	if(phoneFormOn){
 		if (phone.value == '') {
 			alert("휴대전화번호를 입력해주세요");
-			return;
+			return false;
 		} else if (!phoneAccep) {
 			alert("휴대전화번호가 올바르지 않습니다. 다시 확인해주세요.");
-			return;
+			return false;
 		} else if (!SMSAccep) {
 			alert("휴대전화번호를 인증해주세요");
-			return;
+			return false;
 		}
 	}
+	return true;
 }
 
 function setValue() {
-	/*let nickv = nick.value;
-	let addrv = sample6_address.value;
-	let dadrv = sample6_detailAddress.value;*/
+	
 
 	let intr = '';
 	if (actype == 'b1') {
@@ -114,4 +113,5 @@ function setValue() {
 		actype: actype,
 		intr: intr
 	};
+	return param;
 }

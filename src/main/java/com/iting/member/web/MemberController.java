@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.iting.common.model.AccountVO;
 import com.iting.member.model.MemberVO;
 import com.iting.member.service.MemberService;
+import com.iting.subsp.service.SttlService;
+import com.iting.subsp.service.SubspService;
 import com.iting.tlsn.service.TlsnService;
 
 @Controller
@@ -20,6 +25,10 @@ public class MemberController {
 	MemberService memberService;
 	@Autowired
 	TlsnService tlsnService;
+	@Autowired
+	SttlService sttlService;
+	@Autowired
+	SubspService subspService;
 	
 	// 내강의실
 	@RequestMapping("member/myclass/list")
@@ -32,14 +41,25 @@ public class MemberController {
 	
 	// 마이페이지 이동
 	@GetMapping("/member/mypage")
-	public ModelAndView goMyMain() {
-		ModelAndView mv = new ModelAndView("member/mypage/userInfo");
-		return mv;
+	public String goMyMain(Model model, HttpSession session) {
+		String usernum = (String) session.getAttribute("usernum");
+		model.addAttribute("myinfo", memberService.getMyInfo(usernum));
+		return "member/mypage/userInfo";
 	}
-	
+	// 마이페이지 결제내역 이동
 	@GetMapping("/member/mypage/sttlList")
-	public ModelAndView goMySttl() {
-		ModelAndView mv = new ModelAndView("member/mypage/sttlList");
-		return mv;
+	public String goMySttl(Model model, HttpSession session) {
+		String usernum = (String) session.getAttribute("usernum");
+		model.addAttribute("sttllist", sttlService.getSttlList(usernum));
+		model.addAttribute("subspinfo", subspService.getSubspInfo(usernum));
+		return "member/mypage/sttlList";
+	}
+	// 마이페이지 회원정보 수정
+	@ResponseBody
+	@PutMapping("/member/updateMyInfo")
+	public int updateMyInfo(@RequestBody AccountVO vo, HttpSession session) {
+			vo.setAccnum((String) session.getAttribute("usernum"));
+			int rescnt = memberService.putMyInfo(vo);
+		return rescnt;
 	}
 }
