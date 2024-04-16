@@ -4,11 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.iting.cnq.model.CSearchVO;
-import com.iting.cnq.model.CnqVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
-import com.iting.lecture.model.LiveVO;
 
 @Mapper
 public interface LectureMapper {
@@ -19,7 +16,7 @@ public interface LectureMapper {
 	public LectureVO getLectureInfo(String ltNum);
 
 	// 신수지
-	public List<LectureVO> getTcList(String lecturerNum);	
+	public List<LectureVO> getTcList(String lecturerNum);
 	public List<LectureVO> getCurriList(LectureVO vo);
 	public LectureVO getCurriAll(String ltNum);
 	public LectureVO getTcInfo(String ltNum, String lecturerNum);

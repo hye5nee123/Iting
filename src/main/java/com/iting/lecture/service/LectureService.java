@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
-import com.iting.lecture.model.LiveVO;
 
 public interface LectureService {
 	// 장효은
@@ -13,6 +12,7 @@ public interface LectureService {
 	public List<LectureVO> getLectureList(LectureVO vo);
 	public LectureVO getLectureInfo(String ltNum);
 	public LectureVO getLectureInfo1(String ltNum);
+	
 	// 신수지
 	public List<LectureVO> getTcList(String ltNum);
 	public List<LectureVO> getCurriList(LectureVO vo);

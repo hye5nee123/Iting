@@ -1,7 +1,7 @@
 package com.iting.common;
 
 import java.io.File;
-import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -18,8 +18,19 @@ public class FileUtil {
 	@Autowired
 	CommonService commonService;
 	
+	
 	/* 파일업로드 메소드 */
 	public static FileVO uploadFile(MultipartFile uFile)  {
+		String uploadDir = "D:/iting_webstorage/";
+		
+		// 디렉터리 생성
+		File uploadPath = new File(uploadDir);
+		
+		if (!uploadPath.exists()) {			
+			uploadPath.mkdir();
+		}
+		
+		String uuid = UUID.randomUUID().toString();
 		
 		FileVO fvo = null;
 		
@@ -31,11 +42,11 @@ public class FileUtil {
 			String exetension = FilenameUtils.getExtension(origFileName);
 			
 			// 새 파일명 (중복 덮어쓰기 방지)
-			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  new Date().getSeconds() + "." +  exetension;
+			String newFile = origFileName.substring(0, origFileName.lastIndexOf('.')) + "_" +  uuid + "." +  exetension;
 			
 			
 			// 파일 생성 (저장 경로, 파일이름)
-			File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
+			File file = new File(uploadDir, newFile);
 			// 파일저장
 			try {
 				uFile.transferTo(file);
@@ -57,9 +68,7 @@ public class FileUtil {
 		
 	}
 	
-	
-	
-	
+	/* 다운로드 미디어타입 세팅 메소드 */
 	public static MediaType getMediaTypeForFileName(ServletContext servletContext, String filename) {
         
         String minType = servletContext.getMimeType(filename);
@@ -70,42 +79,7 @@ public class FileUtil {
         } catch (Exception e) {
             return MediaType.APPLICATION_OCTET_STREAM;
         }
-        
-        
+
     }
-	
-	
-	
-	/* 첨부파일 다운로드 메소드 
-	public Resource readFileResurce(FileVO vo) {
-		
-		vo.getAtchPath();
-		String filename = vo.getAtchMarkTtl(); // 파일명
-				
-		Path filePath = Path.get(uloadpath); // 파일경로
-		
-		Resource resource = new UrlResource();
-		
-		return resource;
-		
-	}*/
-	
-	
-	/*
-	public Resource readFileAsResource(final FileResponse file) {
-        String uploadedDate = file.getCreatedDate().toLocalDate().format(DateTimeFormatter.ofPattern("yyMMdd"));
-        String filename = file.getSaveName();
-        Path filePath = Paths.get(uploadPath, uploadedDate, filename);
-        try {
-            Resource resource = new UrlResource(filePath.toUri());
-            if (resource.exists() == false || resource.isFile() == false) {
-                throw new RuntimeException("file not found : " + filePath.toString());
-            }
-            return resource;
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("file not found : " + filePath.toString());
-        }
-    }
-	 
-	*/
+
 }
