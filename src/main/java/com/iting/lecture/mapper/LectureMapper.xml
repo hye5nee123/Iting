@@ -231,7 +231,7 @@
 	
 	<!-- 승인 목록출력 -->
 	<select id="endLectureList" resultType="LectureVO">
-	
+	select * from (select ROWNUM as rn, a.* from (
 		SELECT LT_NUM
 		, LT_ST_CD
 		, LT_TTL
@@ -247,8 +247,16 @@
 		
 		FROM LT
 		WHERE ACCP_YN_CD = 'd1'
-	
-		
+		<if test="vo.ltNum != null and vo.ltNum != ''">
+				AND LT_NUM like '%' || #{vo.ltNum} || '%'
+			</if>
+			<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">
+				AND LT_KEYWORD_CD like '%' || #{vo.ltKeywordCd} || '%'
+			</if>
+			ORDER BY LT_NUM DESC
+	<![CDATA[
+	) a where ROWNUM <= #{vo.end}) b where rn >= #{vo.start}
+	]]>
 	</select>
 
 	<!-- 미승인 -->
@@ -276,6 +284,7 @@
 		FROM lt l JOIN lecturer lec
 					ON l.lecturer_num = lec.lecturer_num
 		WHERE l.ACCP_YN_CD = 'd1'
+		
 		<include refid="condition"></include>
 	</select>
 	

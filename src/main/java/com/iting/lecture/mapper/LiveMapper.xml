@@ -3,6 +3,17 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.iting.lecture.mapper.LiveMapper">
  
+ <sql id="condition">
+		
+		<if test="vo.spltTtl != null and vo.spltTtl != 'null' and vo.spltTtl != ''">
+			AND l.splt_ttl LIKE '%' || #{vo.spltTtl} || '%'
+		</if>
+	
+		
+	</sql>
+ 
+ 
+ <!--Live 목록  -->
  <select id="getLiveList" resultType="LiveVO">
 SELECT SPLT_NUM,
        SPLT_TTL,
@@ -12,5 +23,93 @@ SELECT SPLT_NUM,
        find_code(ACCP_YN_CD) ACCP_YN_CD
 FROM LIVE_SPLT
  </select>
+ <!-- Live 등록 -->
+ <insert id="spltInsert" parameterType="LiveVO">
+ <selectKey keyProperty="spltNum" order="BEFORE"
+			resultType="string">
+			SELECT 'sn' || LPAD(NVL(MAX(SUBSTR(SPLT_NUM, -5)), 0) + 1,
+			5, '0') AS SPLT_NUM
+			FROM LIVE_SPLT
+		</selectKey>
+		INSERT INTO LIVE_SPLT(
+			 SPLT_NUM,
+       		 SPLT_TTL,
+       		 SPLT_CNTN,
+       		 SPLT_DT,
+       		 LECTURER_NUM,
+       		 ACCP_YN_CD
+						)
+			VALUES(
+			#{spltNum},
+			#{spltTtl},
+			#{spltCntn},
+			#{spltDt},
+			#{lecturerNum},
+			'd2'
+			)
+ 
+ </insert>
+ 
+ <!--Live 미승인 -->
+ <select id="ingLiveList" resultType="LiveVO">
+ SELECT SPLT_NUM,
+        SPLT_TTL,
+        SPLT_CNTN,
+        SPLT_DT,
+        LECTURER_NUM,
+        find_code(ACCP_YN_CD) ACCP_YN_CD
+FROM LIVE_SPLT
+WHERE ACCP_YN_CD = 'd2'
+
+ </select>
+ 
+ <!--Live 승인  -->
+ <select id="endLiveList" resultType="LiveVO">
+ 
+ SELECT SPLT_NUM,
+        SPLT_TTL,
+        SPLT_CNTN,
+        SPLT_DT,
+        LECTURER_NUM,
+        find_code(ACCP_YN_CD) ACCP_YN_CD
+FROM LIVE_SPLT
+WHERE ACCP_YN_CD = 'd1'
+ 
+ </select>
+ <!-- 개수  -->
+		<select id="getCount" resultType="Long">
+		select count(*)
+		FROM LIVE_SPLT l JOIN lecturer lec
+					ON l.lecturer_num = lec.lecturer_num
+		WHERE l.ACCP_YN_CD = 'd1'
+		<include refid="condition"></include>
+	</select>
+	
+		<!-- LIVE강의 전체 목록 -->
+	<select id="getAllLiceList">
+		SELECT * FROM ( SELECT ROWNUM AS rn, a.* FROM (
+
+		SELECT SPLT_NUM,
+	        SPLT_TTL,
+	        SPLT_CNTN,
+	        SPLT_DT,
+	        LECTURER_NUM,
+	        find_code(ACCP_YN_CD) ACCP_YN_CD
+		FROM LIVE_SPLT l JOIN lecturer lec
+					ON l.lecturer_num = lec.lecturer_num
+		WHERE l.ACCP_YN_CD = 'd1'
+		<include refid="condition"></include>
+		ORDER BY lt_num DESC
+		
+	<![CDATA[ ) a WHERE ROWNUM <= #{pvo.last} ) b WHERE rn >= #{pvo.first} ]]>
+	</select>
+	
+	<update id="update">
+	UPDATE LIVE_SPLT
+	SET ACCP_YN_CD = #{accpYnCd}
+	WHERE splt_num =#{spltNum}
+	
+	</update>
+	
  
  </mapper>

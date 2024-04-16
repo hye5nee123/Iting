@@ -40,8 +40,10 @@
 							<textarea class="form-control" name="ltIntro" id="ltIntro"></textarea>
 						</div>
 						<div class="mb-3 test_list">
-							<label for="file" class="form-label">이미지</label> <input
-								class="form-control" type="file" name="ltImg" id="ltImg">
+							<label for="uFile" class="form-label">이미지</label>
+							<input class="form-control" type="file" name="uFile">
+							<input type="hidden" name="typCode" th:value="k1">
+							<br><button type="button" onclick="uploadFileReq(testForm.typCode.value, testForm)">등록</button>
 						</div>
 
 						<div class="mb-3 test_list">
@@ -146,7 +148,6 @@
 			const ltTtl = testForm.ltTtl.value;
 			const accpYnCd = testForm.accpYnCd.value;
 			const ltIntro = testForm.ltIntro.value;
-			const ltImg = testForm.ltImg.value;
 			const frDt = testForm.frDt.value;
 			const ltDifCd = testForm.ltDifCd.value;
 			const lecturerNum = testForm.lecturerNum.value;
@@ -154,11 +155,7 @@
 			const ltKeywordCd = testForm.ltKeywordCd.value;
 			const rdmCateCd = testForm.rdmCateCd.value;
 			
-			
-			
-			
-			
-			let param = { ltTtl, ltIntro, ltImg, frDt, ltDifCd,lecturerNum, ltCateCd,ltKeywordCd,accpYnCd ,rdmCateCd}
+			let param = { ltTtl, ltIntro, ltImg:fileNum, frDt, ltDifCd,lecturerNum, ltCateCd,ltKeywordCd,accpYnCd ,rdmCateCd}
 			console.log(param);
 			
 			/*

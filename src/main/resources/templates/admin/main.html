@@ -3,17 +3,51 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/admin/layout}">
 <head>
- <!-- layout:decorate="~{layout/admin}" -->
 <meta charset="UTF-8">
 <title>관리자 메인페이지</title>
+
+<script th:inline="javascript">
+function move(){
+	location.href='/admin/lecture/ingLectureList'
+}
+
+</script>
 </head>
 <body>
 <div id="container" layout:fragment="container">
-	<div class="row">
+		<div class="row">
 		<div class="col-md-6 col-12 mb-md-0 mb-4">
 			<div class="card">
 			  <h5 class="card-header">강의신청목록</h5>
-			  <div class="card-body"></div>
+			    <table class="table">
+					<thead>
+						<tr>
+							<th>강의제목</th>
+							<th>강의소개</th>
+							<th>시작날짜</th>
+							<th>강의난이도</th>
+							<th>강의키워드</th>
+							<th>강사번호</th>
+							<th>승인여부</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ing, stat: ${ingLectureList}"
+							th:onclick="move([[${ing.ltNum}]])">
+							<td th:text="${ing.ltTtl}"></td>
+							<td th:text="${ing.ltIntro}"></td>
+							<td th:text="${#dates.format(ing.frDt,'yyyy-MM-dd')}"></td>
+							<td th:text="${ing.ltDifCd}"></td>
+							<td th:text="${ing.ltKeywordCd}"></td>
+							<td th:text="${ing.lecturerNum}"></td>
+							<td th:text="${ing.accpYnCd}"></td>
+							</tr>
+							</tbody>
+							</table>
+			  <div class="card-body">
+			
+			  </div>
+			  
 			</div>
 		</div>
 		<div class="col-md-6 col-12">

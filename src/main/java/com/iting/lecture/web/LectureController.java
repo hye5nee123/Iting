@@ -171,7 +171,6 @@ public class LectureController {
 		map.put("paging", pvo);
 
 		return map;
-
 	}
 
 	// 승인수정 기능
