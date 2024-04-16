@@ -21,13 +21,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVO> getMemberLtsn() {
-		return memberMapper.getMemberLtsn();
+	public List<MemberVO> getMemberLtsn(MemberVO vo) {
+		return memberMapper.getMemberLtsn(vo);
 	}
 
 	@Override
 	public MemberVO getMemberInfo(String memNum) {
 		return memberMapper.getMemberInfo(memNum);
+	}
+
+	@Override
+	public MemberVO getMemberNote(MemberVO vo) {
+		return memberMapper.getMemberNote(vo);
 	}
 
 

@@ -10,44 +10,45 @@
 </head>
 <body>
 <section layout:fragment="content">
-
-	<div class="test_modal">
-		<div class="text video_text">
-			<h3 th:text="${curri.rndTtl}"></h3>
-			<button class="btn_close"><i class='bx bx-x'></i></button>
-			<div class="test_box video_box">
-				<video controls width="100%" autoplay>							
-					<!--  <source th:src="|/download/${curri.atchNum}|" type="video/mp4" /> -->
-					<source src="/download/html의이해_2차시.mp4" type="video/mp4" />
-				</video>
-			</div>
-		</div>
-	</div>
 	
 	<div class="row lecture_info">
 		<div class="col-lg-12">
 			<div class="section-title tlsn_title">
 			    <h2 th:text="${tlsnInfo.ltTtl}"></h2><em> / </em><span th:text="${tlsnInfo.name}"></span>
-			    <a th:href="@{/member/note/list}" class="message"><i class='bx bx-envelope'></i></a>
+			    <a th:href="@{/member/note/list/{no}(no=${tlsnInfo.ltNum})}" class="message"><i class='bx bx-envelope'></i></a>
 			    <button class="print">수료증 발급</button>
 			</div>
 		</div>
 	</div>
-	
-	<div th:each="tlsn, stat: ${tlsn}" class="info tlsn_info">
+	<div th:each="tlsn, stat: ${tlsn}" class="info tlsn_info tlsn_box">
 		<div class="top">
 			<div class="left">
-				<i th:text="${tlsn.rndNum}"></i>
-				<p th:text="${tlsn.rndTtl}"></p>
-				<span><i th:text="${tlsn.ltTm}"></i></span>
+				<div class="tit">
+					<i th:text="${tlsn.rndTtl}"></i>
+					<em> / </em>
+					<span><i class="bx bx-stopwatch ico_tlTm"></i><i th:text="${tlsn.ltTm}"></i></span>
+				</div>
+				<p th:text="${tlsn.rndCntn}"></p>
+				<div class="bottom">
+					<a href="#" class="go_link modal_btn">수강하기 ></a>
+				</div>
 			</div>
 			<div class="graph">
 				<span>그래프</span>
 			</div>
 		</div>
-		<div class="bottom">
-			<p><i class="menu-icon tf-icons bx bx-play-circle"></i> 2. 프로그래밍 시작하기</p>
-			<a href="#" class="go_link modal_btn">수강하기 ></a>
+		
+		<div class="test_modal">
+			<div class="text video_text">
+				<h3 th:text="${tlsn.rndTtl}"></h3>
+				<button class="btn_close"><i class='bx bx-x'></i></button>
+				<div class="test_box video_box">
+					<video controls width="100%" autoplay>							
+						<!--  <source th:src="|/download/${tlsn.atchNum}|" type="video/mp4" /> -->
+						<source src="/download/html의이해_2차시.mp4" type="video/mp4" />
+					</video>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="btn_box">

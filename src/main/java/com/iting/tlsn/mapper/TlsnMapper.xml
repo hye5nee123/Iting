@@ -4,32 +4,21 @@
 <mapper namespace="com.iting.tlsn.mapper.TlsnMapper">
 	<!-- 전체수강목록 -->
 	<select id="getTlsnList">
-		SELECT l.LT_NUM
-		       , l.LT_TTL
-		       , find_code(LT_CATE_CD) LT_CATE_CD
-		       , l.LECTURER_NUM
-		       , m.MEM_NUM
-		       , t.TLSN_NUM
+		SELECT t.TLSN_NUM
 		       , t.TLSN_ST_CD
+		       , t.MEM_NUM
+		       , t.LT_NUM
 		       , t.CETE_YN_CD
 		       , t.APPL_DT
-		       , e.NAME
-		       , e.ID
-		       , e.ADDR
-		       , e.DETAIL_ADDR
-		       , e.MAIL
-		       , e.PHONE
-		       , c.RND_NUM
+		       , r.NAME
+		       , find_code(LT_CATE_CD) LT_CATE_CD
+		       , l.LT_TTL
 		       , (SELECT LT_NUM FROM APPLEXAM e WHERE e.MEM_NUM = t.MEM_NUM AND e.LT_NUM = t.LT_NUM) AS EXAM_YN
 		FROM TLSN t JOIN LT l
-		              ON t.LT_NUM = l.LT_NUM
-		            JOIN CURRI c
-                      ON t.LT_NUM = c.LT_NUM 
-		            JOIN MEM m
-		              ON t.MEM_NUM = m.MEM_NUM
-		            JOIN LECTURER e
-		              ON l.LECTURER_NUM = e.LECTURER_NUM
-		WHERE m.MEM_NUM = #{user}
+	             ON t.LT_NUM = l.LT_NUM
+	           JOIN LECTURER r  
+	             ON l.LECTURER_NUM = r.LECTURER_NUM
+		WHERE t.MEM_NUM = #{user}
 		ORDER BY t.APPL_DT DESC
 	</select>
 	

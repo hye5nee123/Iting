@@ -13,7 +13,7 @@
 	<div class="row lecture_info">
 		<div class="col-lg-12">
 			<div class="section-title message_box">
-			    <h2>강의질문 <i>/ 정보처리기사</i></h2>
+			    <h2>강의질문 <em> / </em> <i th:text="${tc.ltTtl}"></i></h2>
 			</div>
 		</div>
 	</div>
@@ -37,26 +37,24 @@
                       <table class="table taC">
 		            	<thead>
 		            		<tr>
+		            			<th>강의명</th>
 		            			<th>강사아이디</th>
 		            			<th>이름</th>
-		            			<th>주소</th>
-		            			<th>상세주소</th>
 		            			<th>이메일</th>
 		            			<th>연락처</th>
 		            			<th>쪽지보내기</th>
 		            		</tr>
 		            	</thead>
 		            	<tbody>
-			            	<tr th:each="tlsn, stat: ${tlsnList}">
-				            	<td th:text="${tlsn.lecturerNum}" class="hidden"></td>
-				            	<td th:text="${tlsn.ltNum}" class="hidden"></td>
-				            	<td th:text="${tlsn.id}"></td>
-				            	<td th:text="${tlsn.name}"></td>
-				            	<td th:text="${tlsn.addr}"></td>
-				            	<td th:text="${tlsn.detailAddr}"></td>
-				            	<td th:text="${tlsn.mail}"></td>
-				            	<td th:text="${tlsn.phone}"></td>
-				            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/member/note/insert/{lecturerNum}(lecturerNum=${tlsn.lecturerNum})}">보내기</a></td>
+			            	<tr>
+				            	<td th:text="${tc.lecturerNum}" class="hidden"></td>
+				            	<td th:text="${tc.ltNum}" class="hidden"></td>
+				            	<td th:text="${tc.ltTtl}"></td>
+				            	<td th:text="${tc.id}"></td>
+				            	<td th:text="${tc.name}"></td>
+				            	<td th:text="${tc.mail}"></td>
+				            	<td th:text="${tc.phone}"></td>
+				            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/member/note/insert/{no}(no=${tc.ltNum})}">보내기</a></td>
 			            	</tr>
 		            	</tbody>
 		            </table>
@@ -91,7 +89,7 @@
       </div>
   </div>
 	<div class="btn_box">
-		<a th:href="@{/member/tlsn/detailList/}" class="go_list">목록가기</a> <!-- {ltNum}(ltNum=${tlsn.ltNum}) -->
+		<a th:href="@{/member/tlsn/detailList/{no}(no=${ltNum})}" class="go_list">목록가기</a> <!-- {ltNum}(ltNum=${tlsn.ltNum}) -->
 	</div>
 <script th:inline="javascript">
 function link(gb,noteNum){

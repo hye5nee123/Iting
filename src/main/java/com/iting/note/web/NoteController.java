@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
-import com.iting.lecture.service.LectureService;
 import com.iting.member.model.MemberVO;
 import com.iting.member.service.MemberService;
 import com.iting.note.model.NoteVO;
 import com.iting.note.service.NoteService;
 import com.iting.socket.model.Greeting;
 import com.iting.socket.model.HelloMessage;
+import com.iting.teacher.service.TeacherService;
 import com.iting.tlsn.service.TlsnService;
 
 @Controller
@@ -41,29 +41,38 @@ public class NoteController {
 
 	@Autowired
 	TlsnService tlsnService;
+	
+	@Autowired
+	TeacherService teacherService;
 
 	@Autowired
 	private HttpSession httpSession;
 
-	// 강사 목록조회
+	// 강사 - 회원 및 쪽지 목록조회
 	@RequestMapping("teacher/note/list/{ltNum}")
 	public String getNoteList(@PathVariable String ltNum, Model model, NoteVO vo) {
 		String user = (String) httpSession.getAttribute("usernum");
 		System.out.println(user);
-		model.addAttribute("recList", noteService.getRecList(user));
-		model.addAttribute("sentList", noteService.getSentList(user));
-		model.addAttribute("ltsnList", memberService.getMemberLtsn());
+		vo.setLtNum(ltNum);
+		vo.setUser(user);
+		MemberVO mvo = new MemberVO();
+		mvo.setLtNum(ltNum);
+		model.addAttribute("recList", noteService.getRecList(vo));
+		model.addAttribute("sentList", noteService.getSentList(vo));
+		model.addAttribute("memList", memberService.getMemberLtsn(mvo));
 		return "teacher/note/list";
 	}
 
-	// 회원 목록조회
-	@RequestMapping("member/note/list")
-	public String getMemNoteList(Model model, NoteVO vo) {
+	// 회원 - 강의 및 쪽지 목록조회
+	@RequestMapping("member/note/list/{ltNum}")
+	public String getMemNoteList(@PathVariable String ltNum, Model model, NoteVO vo) {
 		String user = (String) httpSession.getAttribute("usernum");
 		System.out.println(user);
-		model.addAttribute("recList", noteService.getRecList(user));
-		model.addAttribute("sentList", noteService.getSentList(user));
-		model.addAttribute("tlsnList", tlsnService.getTlsnList(user));
+		vo.setLtNum(ltNum);
+		vo.setUser(user);
+		model.addAttribute("recList", noteService.getRecList(vo));
+		model.addAttribute("sentList", noteService.getSentList(vo));
+		model.addAttribute("tc", teacherService.getTeacherInfo(ltNum));
 		return "member/note/list";
 	}
 
@@ -90,9 +99,10 @@ public class NoteController {
 		return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!"); // 이 내용을 전송하겠다
 	}
 
-	// 강사 등록페이지 이동
-	@GetMapping("teacher/note/insert/{memNum}")
-	public ModelAndView list(@PathVariable String memNum, Model model) {
+	// 강사 - 회원 메세지 등록페이지 이동
+	@GetMapping("teacher/note/insert/{ltNum}/{memNum}")
+	public ModelAndView list(@PathVariable String ltNum, @PathVariable String memNum, Model model) {
+		model.addAttribute("ltNum", ltNum);
 		model.addAttribute("memNum", memNum);
 		ModelAndView mv = new ModelAndView("teacher/note/insert");
 		return mv;
@@ -111,9 +121,10 @@ public class NoteController {
 	}
 
 	// 회원 등록페이지 이동
-	@GetMapping("member/note/insert/{lecturerNum}")
-	public ModelAndView listMem(@PathVariable String lecturerNum, Model model) {
-		model.addAttribute("lecturerNum", lecturerNum);
+	@GetMapping("member/note/insert/{ltNum}")
+	public ModelAndView listMem(@PathVariable String ltNum, Model model) {
+		model.addAttribute("tc", teacherService.getTeacherInfo(ltNum));
+		model.addAttribute("ltNum", ltNum);
 		ModelAndView mv = new ModelAndView("member/note/insert");
 		return mv;
 	}
