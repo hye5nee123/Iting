@@ -22,7 +22,6 @@ import com.iting.common.FileUtil;
 import com.iting.common.model.FileVO;
 import com.iting.common.model.PagingVO;
 import com.iting.lecture.model.LectureVO;
-import com.iting.lecture.model.LiveVO;
 import com.iting.lecture.service.LectureService;
 import com.iting.review.model.ReviewVO;
 import com.iting.review.service.ReviewService;
@@ -59,8 +58,6 @@ public class LectureController {
 		pvo.setLast(5);
 		
 		pvo.setTotalRecord(lectureService.getCount(vo));
-		
-		//vo.setLtTtl(keyWord);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -171,7 +168,6 @@ public class LectureController {
 		map.put("paging", pvo);
 
 		return map;
-
 	}
 
 	// 승인수정 기능

@@ -1,0 +1,120 @@
+<!--  -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>LIVE 강의 등록</title>
+<style>
+.btn_box {
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+	<section layout:fragment="container">
+		<div id="container">
+			<h4 class="fw-bold py-3 mb-4">LIVE 강의등록</h4>
+			<div class="test_insert">
+				<form id="formAccountSettings" method="POST" name="testForm"
+					onsubmit="return false">
+					<div class="row">
+						<div class="mb-3">
+
+							<h5 class="tit">강의명을 입력해주세요.</h5>
+
+							<input class="form-control" type="text" id="spltTtl" name="spltTtl">
+						</div>
+						<hr class="my-0">
+
+						<div class="mb-3 test_list">
+							<label for="lecturerNum" class="form-label">강사번호</label><input
+								th:value="${session.usernum}" class="form-control" type="text"
+								name="lecturerNum" id="lecturerNum" readonly>
+						</div>
+
+						<div class="mb-3 test_list">
+							<label for="file" class="form-label">특강번호</label> <input
+								class="form-control" type="text" name="spltNum" id="spltNum" readonly>
+						</div>
+						<div class="mb-3 test_list">
+							<label for="ltIntro" class="form-label">특강내용</label>
+							<textarea class="form-control" name="spltCntn" id="spltCntn"></textarea>
+						</div>
+
+						<div class="mb-3 test_list">
+							<label for="frDt" class="form-label">특강날짜</label> <input
+								class="form-control" type="Date" name="spltDt" id="spltDt">
+						</div>
+					<br>
+					<div class="mb-3 test_list">
+						<label for="accpYnCd" class="form-label">승인여부</label><input
+							th:value="d2" class="form-control" type="text" name="accpYnCd"
+							id="accpYnCd" readonly>
+					</div>
+				</form>
+			</div>
+			<div class="btn_box demo-inline-spacing">
+				<button type="button" id="saveBtn"
+					class="btn btn-lg btn btn-warning">신청하기</button>
+
+			</div>
+		</div>
+
+		<div></div>
+		<input type="hidden" th:value="${session.usernum}" name="tnum">
+		<script>
+		function saveReq() {
+			/* const ltName = testForm.ltName.value; */
+			const spltCntn = testForm.spltCntn.value;
+			const accpYnCd = testForm.accpYnCd.value;
+			const spltDt = testForm.spltDt.value;
+			const spltNum = testForm.spltNum.value;
+			const lecturerNum = testForm.lecturerNum.value;
+			const spltTtl = testForm.spltTtl.value;
+			
+			
+			
+			
+			
+			let param = { spltCntn, spltDt, spltNum, spltTtl, lecturerNum,accpYnCd }
+			console.log(param);
+			
+			/*
+			axios.post("/member/subsp/insert", param)
+				.then(res => saveRes(res.data))
+			*/
+			
+			csrf_axios({
+					method: 'POST',
+					url: '/teacher/live/insert', 
+					data: param
+				
+					})
+					.then(res => saveRes(res.data))
+		}
+
+
+		// 등록 응답
+		function saveRes(res) {
+			console.log(res);
+			alert('특강이 등록되었습니다.');
+			window.location.href = "/teacher/live/getLiveList";
+			
+		}
+
+		//버튼 클릭 시 함수 호출.
+		saveBtn.addEventListener("click", e => {
+			saveReq();
+			
+			
+		})
+
+
+	
+</script>
+	</section>
+</body>
+</html>

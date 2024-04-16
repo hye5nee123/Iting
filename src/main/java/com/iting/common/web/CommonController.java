@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -78,33 +77,6 @@ public class CommonController {
 		return mv;
 	}
 
-	/* 첨부 파일 업로드 - 테스트용 */
-	@RequestMapping("upload/fileTest")
-	public String uploadFile(MultipartFile[] uploadFiles) throws IllegalStateException, IOException {
-		if (uploadFiles != null) {
-			for (MultipartFile uFile : uploadFiles) {
-				if (!uFile.isEmpty()) { // if(photo.getSize > 0){}
-					// 파일 이름이 중복일 경우 새 이름으로 저장 될 수 있도록
-					String Origin = uFile.getOriginalFilename();
-					// String newFile = Origin + new Date().getSeconds();
-
-					// 파일 생성 (저장 경로, 파일이름)
-					File file = new File("D:/iting_webstorage/", uFile.getOriginalFilename());
-					// 파일저장
-					uFile.transferTo(file);
-
-					System.out.println("파일명 : " + uFile.getOriginalFilename());
-					System.out.println("파일크기 : " + uFile.getSize());
-
-					// 첨부파일 DB에 저장하기
-
-				}
-			}
-		}
-		return "/member/main";
-
-	}
-
 	/* 첨부 파일 업로드 (싱글) */
 	@PostMapping("upload/file")
 	@ResponseBody
@@ -163,7 +135,7 @@ public class CommonController {
 	public ResponseEntity<Resource> download(@PathVariable String fileNum, HttpServletRequest req) throws Exception{
 		FileVO fvo = commonService.getFileInfo(fileNum);
 		
-		String fileName = fvo.getAtchTtl();
+		String fileName = fvo.getAtchMarkTtl();
         String filePath = "D:" + File.separator + "iting_webstorage" + File.separator + fileName;
 
         Resource resource = new UrlResource(Paths.get(filePath).toUri());

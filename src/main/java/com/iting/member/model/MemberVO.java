@@ -18,4 +18,8 @@ public class MemberVO {
 	private String memFgCd;
 	private String loginTypCd;
 	private String token;
+  
+	private String tlsnNum;
+	private String ltNum;
+	private String ltTtl;
 }

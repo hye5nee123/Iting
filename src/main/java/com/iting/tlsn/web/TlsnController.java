@@ -43,18 +43,15 @@ public class TlsnController {
 	}
 	
 	
-	// 수강목록상세
-	@RequestMapping("member/tlsn/detailList/{ltNum}/{rndNum}")
-	public String getTlsnDetailList(@PathVariable String ltNum, @PathVariable String rndNum, Model model, TlsnVO vo) {
+	// 수강목록 상세목록
+	@RequestMapping("member/tlsn/detailList/{ltNum}")
+	public String getTlsnDetailList(@PathVariable String ltNum, Model model, TlsnVO vo) {
 		// 커리큘럼 정보
 		CurriVO cvo = new CurriVO();
 		cvo.setLtNum(ltNum);
 		model.addAttribute("tlsn", curriService.getCurriList(cvo));
-		model.addAttribute("curri", curriService.getCurriInfo(rndNum));
 		// 강사정보
 		model.addAttribute("tlsnInfo", tlsnService.getTlsnInfo(vo));
-		
-		curriService.getCurriInfo(rndNum);
 		System.out.println(vo);
 		return "member/tlsn/detailList";
 	}
@@ -62,36 +59,21 @@ public class TlsnController {
 	// 수강신청(등록)
 	@PostMapping("member/tlsn/insert")
 	@ResponseBody
-	public TlsnVO tlsnInsert(@RequestBody TlsnVO vo) {
+	public int tlsnInsert(@RequestBody TlsnVO vo) {
 		
+		// 단건 조회
 		TlsnVO tvo = tlsnService.getTlsnInfoMem(vo);
 		
-		System.out.println(tvo + "=============================");
-		
-		String stat = "";
-		
 		if(tvo != null) {
+			String stat = tvo.getTlsnStCd(); //수강 상태 코드
 			
-			stat = tvo.getTlsnStCd(); //수강 상태 코드
-			
-			if(stat.equals("j1")) { // 회원이 '수강중'이면 수강신청 X, 알려주기
-				
-				tvo.setRetCode("ING");
-				
-				return tvo;
-				
-			} else { // 회원이 '수강종료'이면 수강신청 X, 알려주기
-				
-				tvo.setRetCode("FIN");
-				
-				return tvo;
+			if(stat.equals("j1")) { // 회원이 '수강중'이거나 '수강종료' 수강신청 X, 알려주기
+				return -1;
+			} else if (stat.equals("j2")) {
+				return -2;
 			}
-			
-		} else { // 회원이 '수강전'이면 수강신청하기
-			
-			tlsnService.tlsnInsert(vo);
-			
-			return vo;
 		}
+		
+		return tlsnService.tlsnInsert(vo);
 	}
 }

@@ -25,13 +25,17 @@ function move(ltNum){
 	color: #fff;
 	border-radius: 5px;
 }
-table td p {
+/* .tt {
+width: 30%;
+} */
+
+/* table td p {
 	
 text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 	width: 80%;
-}
+} */
 </style>
 </head>
 <body>
@@ -48,7 +52,7 @@ text-overflow: ellipsis;
 					<thead>
 						<tr>
 							<th>강의번호</th>
-							<th>강의제목</th>
+							<th class="tt">강의제목</th>
 							<th>강의소개</th>
 							<th>시작날짜</th>
 							<th>강의난이도</th>
@@ -64,7 +68,7 @@ text-overflow: ellipsis;
 							<td th:text="${ltb.ltNum}"></td>
 							<td th:text="${ltb.ltTtl}"></td>
 							<td>
-							<p th:text="${ltb.ltIntro}"></p>
+							<p  class="text-truncate" style="width: 8rem;" th:text="${ltb.ltIntro}"></p>
 							</td>
 							<td th:text="${#dates.format(ltb.frDt,'yyyy-MM-dd')}"></td>
 							<td th:text="${ltb.ltDifCd}"></td>

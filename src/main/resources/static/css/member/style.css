@@ -82,9 +82,10 @@ p {
 	margin: 0 0 15px 0;
 }
 
+/*
 img {
 	max-width: 100%;
-}
+} */
 
 input:focus,
 select:focus,
@@ -954,19 +955,23 @@ ol {
 }
 
 .product__item:hover .product__item__pic .product__hover {
-	right: 20px;
+	top: 0px;
+	right: 0px;
 	opacity: 1;
 }
 
+/*
 .product__item:hover .product__item__text a {
-	top: 22px;
+	top: 0px;
 	opacity: 1;
 	visibility: visible;
 }
 
+
 .product__item:hover .product__item__text h6 {
 	opacity: 0;
 }
+*/
 
 .product__item:hover .product__item__text .product__color__select {
 	opacity: 1;
@@ -990,6 +995,11 @@ ol {
 	position: absolute;
 	left: 0;
 	top: 20px;
+}
+
+/* 이미지 hover 추가 */
+.product__item__pic:hover {
+	cursor: pointer;
 }
 
 .product__item__pic .product__hover {

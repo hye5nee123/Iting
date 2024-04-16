@@ -11,7 +11,8 @@
 .info li i{float:left; color:#205cdc; font-size:30px;}
 .info li:last-child i{font-size:27px;}
 .info li div{float:left; margin-left:15px;}
-.info li p{color:#888; font-size:14px; margin-bottom:0;}
+.info li p,
+.info li a{color:#888; font-size:14px; margin-bottom:0;}
 .info li span{display:block; color:#555; font-size:17px; font-weight:700;}
 .info li span em{font-style:normal;}
 .info button{float:right; padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
@@ -138,8 +139,16 @@
 .tlsn_title .message{margin-left:10px; border:0; background:none; padding:0; float:left;}
 .tlsn_title .message i{margin-top:9px; color:#205cdc; font-size:35px;}
 .tlsn_title:after{content:''; display:block; clear:both;}
+.tlsn_info .top .tit i{display:inline-block;}
+.tlsn_info .top .tit em{display:inline-block; margin:0 5px; color:#ccc; font-size:14px; font-style:normal;}
+.tlsn_info .top .tit span{display:inline-block;}
+.tlsn_info.tlsn_box{padding:25px 30px 30px;}
+.tlsn_info.tlsn_box .bottom{border-top:0; padding-top:0;}
+.tlsn_info.tlsn_box .bottom a{position:relative; top:auto; right:auto;}
+.tlsn_info .top span i.ico_tlTm{font-size:20px !important; font-weight:500; color:#555; vertical-align:middle; margin-right:3px; margin-top:-2px;}
 
 /* 강의질문 */
+.message_box h2 em{font-style:normal; margin-right:5px; font-size:20px; color:#ccc;}
 .message_box h2 i{font-style:normal; color:#b7b7b7; font-size:20px;}
 .message_list{margin-top:30px;}
 .message_list .product__details__tab{margin-top:0; padding-top:0;}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<meta charset="UTF-8">
+<title>LIVE 강의승인 페이지</title>
+<script th:inline="javascript">
+
+
+</script>
+
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+.search {
+  position: relative;
+  width: 300px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+img {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right: 12px;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				강의 목록
+			</h4>
+                 <form name="frmSearch" action="endLectureList">
+                 <input type="hidden" name="page">
+                 <select>
+                 <option value="spltNum">제목
+                 </select>
+                 <input type="search" placeholder="검색어 입력">
+                 <button type="button" onclick="gopage(1)">검색</button>
+                 </form>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>특강 번호</th>
+							<th>특강 제목</th>
+							<th>특강 내용</th>
+							<th>특강 날짜</th>
+							<th>강사 번호</th>
+							<th>승인 여부</th>
+							<th>승인</th>
+						</tr>
+
+					</thead>
+					<tbody id="endLiveList">
+						
+					</tbody>
+				</table>
+				<div id="navs"></div>
+			</div>
+			
+<script th:inline="javascript">
+
+	
+	//함수 호출.
+	listReq(1);
+	
+	//controller에서 주소 따옴.
+	function listReq(page) {
+		fetch("/admin/live/endLiveList?page="+page)
+		.then(res => res.json())
+		.then(res => listRes(res))
+	}
+	
+	function gopage(p){
+		//검색 기능 하면 다시 살리기
+ 		frmSearch.page.value = p;
+		frmSearch.submit();
+		   
+	}
+	
+	 
+	//list 응답.
+	function listRes(res) {
+		endLiveList.innerHTML = '';
+		console.log(res);
+		// 목록출력
+		for( obj of res.data) {
+			endLiveList.innerHTML += makeTr(obj);
+		}
+		
+		//paging 출력
+		navs.innerHTML = makePage(res.paging);
+	}
+	//tr 생성.
+	function makeTr(obj) {
+		let newTag = `<tr>
+			<td>${obj.spltNum}</td>
+			<td>${obj.spltTtl}</td>
+			<td>${obj.spltCntn}</td>
+			<td>${obj.spltDt}</td>
+			<td>${obj.lecturerNum}</td>
+			<td>${obj.accpYnCd}</td>
+		</tr>`
+		console.log(newTag);
+		return newTag;
+	}
+		
+	function makePage(paging) {
+		console.log(paging)
+
+		let tag = `<nav aria-label="...">
+		  <ul class="pagination">`;
+		
+		// 이전 버튼
+		if(paging.startPage > 1) {
+			tag += `<li class="page-item">
+		        <a class="page-link" href="javascript:gopage(${paging.startPage-1})">Previous</a></li>`;
+		}
+		// 페이지 번호
+		for(i=paging.startPage; i <= paging.endPage; i++) {
+			tag += `<li class="page-item">
+				<a class="page-link" href="javascript:gopage(${i})">${i}</a></li>`;
+		}
+		// 다음 버튼
+		if(paging.endPage <= paging.lastPage) {
+			tag += `<li class="page-item">
+				<a class="page-link" href="javascript:gopage(${paging.endPage + 1})">Next</a></li>`;
+		    tag += `</ul>
+		    	</nav>`;
+		}
+		return tag;
+	}
+</script>
+		</div>
+		 <div id="navs">        
+            </div>
+</body>
+
+</html>

@@ -22,7 +22,8 @@
        <div class="mT20">
          <div>
            <input th:value="${session.usernum}" class="form-control hidden" type="text" id="usernum" name="usernum">
-           <input th:value="${lecturerNum}" class="form-control hidden" type="text" id="lecturerNum" name="lecturerNum">
+           <input th:value="${tc.lecturerNum}" class="form-control hidden" type="text" id="lecturerNum" name="lecturerNum">
+           <input th:value="${tc.ltNum}" class="form-control hidden" type="text" id="ltNum" name="ltNum">
            <input class="form-control" type="text" id="noteTtl" name="noteTtl" value="" placeholder="제목을 입력하세요.">
          </div>
          <hr class="my-0">
@@ -44,7 +45,8 @@
 		const noteCntn = noteForm.noteCntn.value;
 		const sentPs = noteForm.usernum.value;
 		const recPs = noteForm.lecturerNum.value;
-		let param = {noteTtl, noteCntn, sentPs, recPs}
+		const ltNum = noteForm.ltNum.value;
+		let param = {noteTtl, noteCntn, sentPs, recPs, ltNum}
 		console.log(param);
 		
 		/*
@@ -65,7 +67,7 @@
 	function saveRes(res) {
 		console.log(res);
 		alert('메세지가 전송되었습니다.');
-		window.location.href = "/member/note/list";
+		window.location.href = `/member/note/list/${res.ltNum}`;
 	}
 	
 	//버튼 클릭 시 함수 호출.

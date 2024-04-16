@@ -7,21 +7,21 @@
 		FROM MEM
 	</select>
 	
+	<!-- 회원목록 -->
 	<select id="getMemberLtsn">
 		SELECT m.MEM_NUM
-			   , m.ID
+		       , m.ID
 		       , m.NAME
-		       , m.ADDR
-		       , m.DETAIL_ADDR
 		       , m.MAIL
 		       , m.PHONE
 		       , t.TLSN_NUM
 		       , t.LT_NUM
+		       , l.LT_TTL
 		FROM MEM m JOIN TLSN t
 		            ON m.MEM_NUM = t.MEM_NUM
-		WHERE m.MEM_NUM LIKE 'me%'
-		AND t.LT_NUM LIKE 'lt00014'
-		AND t.TLSN_ST_CD LIKE 'j2'
+		           JOIN LT l
+		             ON t.LT_NUM = l.LT_NUM
+		WHERE t.LT_NUM = #{ltNum}
 	</select>
 	
 	<select id="getMemberInfo">
@@ -55,4 +55,22 @@
 			, int_cd = #{intr}
 		WHERE mem_num = #{accnum}
 	</update>
+
+	<!-- 회원단건 -->
+	<select id="getMemberNote">
+		SELECT m.MEM_NUM
+		       , m.ID
+		       , m.NAME
+		       , m.MAIL
+		       , m.PHONE
+		       , t.TLSN_NUM
+		       , t.LT_NUM
+		       , l.LT_TTL
+		FROM TLSN t JOIN MEM m
+		            ON m.MEM_NUM = t.MEM_NUM
+		           JOIN LT l
+		             ON t.LT_NUM = l.LT_NUM
+		WHERE t.LT_NUM = #{ltNum}
+		AND m.MEM_NUM = #{memNum}
+	</select>
 </mapper>

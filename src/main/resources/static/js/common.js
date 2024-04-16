@@ -62,6 +62,7 @@ function uploadFileRes(data) {
 
 /* 수강신청 요청 */
 function lectInsertReq(ltNum, memNum) {
+	//console.log(ltNum, memNum)
 	if(memNum != '' && memNum != null){
 		const tlsnStCd = "j1"; // 수강중
 		const ceteYnCd = "t2"; // 수료 여부 코드
@@ -82,10 +83,27 @@ function lectInsertReq(ltNum, memNum) {
 /* 수강신청 응답 */
 function lectInsertRes(data) {
 	console.log(data);
-	if(data.tlsnStCd == "j1") {
+	if(data > 0) {
 		confirmAlert("수강신청이 완료되었습니다.", "내 강의실 - 강의목록에서 수강을 시작해보세요!")
-	} else {
-		errorAlert("수강이 종료된 강의입니다.", "재수강이 불가합니다.")
+	} else if(data == -1) {
+		// 수강 완료 시 알림
+		Swal.fire({
+		  title: "이미 수강중인 강의입니다.",
+		  text: "내강의실로 이동하시겠습니까?",
+		  icon: "info",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "수강하기",
+		  cancelButtonText: "취소"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    location.href = "/member/tlsn/list";
+		  }
+		});
+	}
+	else {
+		errorAlert("수강이 완료된 강의입니다.")
 	}
 }
 

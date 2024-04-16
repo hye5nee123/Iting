@@ -5,10 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>강의승인 페이지</title>
-<script th:inline="javascript">
-
-
-</script>
 
 <style>
 #asd {
@@ -49,15 +45,10 @@ img {
 			<h4 class="card-header">
 				강의 목록
 			</h4>
-                 <form name="frmSearch" action="endLectureList">
-                 <input type="hidden" name="page">
-                 <select>
-                 <option value="ltTtl">제목
-                 <option value="ltKeywoefCd">키워드
-                 </select>
-                 <input type="search" placeholder="검색어 입력">
-                 <button type="button" onclick="gopage(1)">검색</button>
-                 </form>
+        <div class="shop__sidebar__search col-4">
+					<input type="text" placeholder="제목을 검색해주세요." name="lectSearch" id="searchKeyWord">
+		            <button type="button" onclick="searchTtl()"><i class="bx bx-search-alt-2"></i>검색</button>
+				</div>
 				<table class="table">
 					<thead>
 						<tr>
@@ -72,15 +63,16 @@ img {
 						</tr>
 
 					</thead>
-					<tbody id="endLectureList">
-						
+					<tbody  id="endLectureList" >
+					
 					</tbody>
 				</table>
-				<div id="navs"></div>
+				<div id="navs">
+				</div>
 			</div>
 			
 <script th:inline="javascript">
-
+	
 	
 	//함수 호출.
 	listReq(1);
@@ -94,10 +86,16 @@ img {
 	
 	function gopage(p){
 		//검색 기능 하면 다시 살리기
- 		frmSearch.page.value = p;
-		frmSearch.submit();
+	 /* 	frmSearch.page.value = p;
+		frmSearch.submit(); */
+		listReq(p);
 		   
 	}
+	
+	function searchTtl() {
+			console.log(searchltTtl.value);
+			lectureService.endLectureList(1, searchKeyWord.value);
+		}
 	
 	 
 	//list 응답.

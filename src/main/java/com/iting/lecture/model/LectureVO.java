@@ -47,4 +47,6 @@ public class LectureVO {
 	int start = 1;
 	int end = 10;
 	
+	private int reviewAvg;
+	
 }

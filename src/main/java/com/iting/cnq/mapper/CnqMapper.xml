@@ -5,15 +5,16 @@
 
 	<!-- 게시글 전체 조회 -->
 	<select id="getCnqList" resultType="CnqVO">
-		select * from (select ROWNUM as rn, a.* from (
-		SELECT
-		c.lt_cnq_num,
-		c.ttl,
-		c.cntn,
-		c.drwup_dt,
-		c.hit,
-		m.name,
-		atch_num
+		select * from (
+			select ROWNUM as rn, a.* from (
+				SELECT
+					c.lt_cnq_num,
+					c.ttl,
+					c.cntn,
+					c.drwup_dt,
+					c.hit,
+					m.name,
+					atch_num
 		
 		FROM lt_cnq c JOIN mem m
 		on c.mem_num = m.mem_num

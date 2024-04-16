@@ -22,8 +22,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVO> getMemberLtsn() {
-		return memberMapper.getMemberLtsn();
+	public List<MemberVO> getMemberLtsn(MemberVO vo) {
+		return memberMapper.getMemberLtsn(vo);
 	}
 
 	@Override
@@ -39,6 +39,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int putMyInfo(AccountVO vo) {
 		return memberMapper.putMyInfo(vo);
+  }
+    
+  @Override
+	public MemberVO getMemberNote(MemberVO vo) {
+		return memberMapper.getMemberNote(vo);
 	}
 
 

@@ -60,7 +60,7 @@
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
           <div class="app-brand demo">
-            <a href="main" class="app-brand-link logo">
+            <a href="/admin/main" class="app-brand-link logo">
               <img src="/img/common/logo_w.png" alt="아이팅">
             </a>
 
@@ -152,11 +152,22 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-play-circle"></i>
-                <div data-i18n="Misc">LIVE특강</div>
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-videos"></i>
+                <div data-i18n="Layouts">LIVE 강의 관리</div>
               </a>
-            </li>
+
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="/admin/live/ingLiveList" class="menu-link">
+                    <div data-i18n="Without menu">미승인 강의등록</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/admin/live/allendLiveList" class="menu-link">
+                    <div data-i18n="Without navbar">승인 강의 목록</div>
+                  </a>
+                </li>
           <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 843px; right: 4px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 797px;"></div></div></ul>
         </aside>
         <!-- / Menu -->

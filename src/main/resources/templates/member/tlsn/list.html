@@ -18,21 +18,23 @@
 		</div>
 	</div>
 	
-	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info">
+	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info tlsn_box">
 		<div class="top">
 			<div class="left">
-				<i th:text="${tlsn.ltCateCd}"></i>
+				<div class="tit">
+					<i th:text="${tlsn.ltCateCd}"></i>
+					<em> / </em>
+					<span><i th:text="${tlsn.name}"></i> 강사님</span>
+				</div>
 				<p th:text="${tlsn.ltTtl}"></p>
 				<p th:text="${tlsn.ltNum}" class="hidden"></p>
-				<span><i th:text="${tlsn.name}"></i> 강사님</span>
+				<div class="bottom">
+			<a th:href="@{/member/tlsn/detailList/{no}(no=${tlsn.ltNum})}" class="go_link">수강하기 ></a>
+		</div>
 			</div>
 			<div class="graph">
 				<span>그래프</span>
 			</div>
-		</div>
-		<div class="bottom">
-			<p><i class="menu-icon tf-icons bx bx-play-circle"></i> 2. 프로그래밍 시작하기</p>
-			<a th:href="@{/member/tlsn/detailList/{no}/{rno}(no=${tlsn.ltNum}, rno=${tlsn.rndNum})}" class="go_link">수강하기 ></a>
 		</div>
 	</div>
 	<div class="btn_box">
