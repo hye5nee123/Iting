@@ -41,4 +41,19 @@
 			        )
 	</insert>
 	
+	<select id="getSttlList" parameterType="string">
+		SELECT
+			find_code(subsp_typ_cd) AS subsp_typ_cd
+			, subsp_fr_dt
+			, subsp_to_dt
+			, find_code(sttl_typ_cd) AS sttl_typ_cd
+			, sttl_dt
+			, dc_price
+			, all_sttl_price
+			, sttl_rnd
+			FROM sttl st
+			JOIN subsp sb
+			ON (st.subsp_num = sb.subsp_num)
+		WHERE st.mem_num = #{memnum}
+	</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iting.common.model.AccountVO;
 import com.iting.member.mapper.MemberMapper;
 import com.iting.member.model.MemberVO;
 import com.iting.member.service.MemberService;
@@ -28,6 +29,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO getMemberInfo(String memNum) {
 		return memberMapper.getMemberInfo(memNum);
+	}
+
+	@Override
+	public MemberVO getMyInfo(String memNum) {
+		return memberMapper.getMyInfo(memNum);
+	}
+
+	@Override
+	public int putMyInfo(AccountVO vo) {
+		return memberMapper.putMyInfo(vo);
 	}
 
 
