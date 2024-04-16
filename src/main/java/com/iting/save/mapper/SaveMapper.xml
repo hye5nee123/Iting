@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iting.cnq.mapper.SaveMapper">
+<mapper namespace="com.iting.save.mapper.SaveMapper">
 	<insert id="saveInsert" parameterType="SaveVO">
-		INSERT INTO save
-		SET ?
+		insert into save(mem_num,lt_num)
+		VALUES (#{memNum},#{ltNum})
 	</insert>
+	
+	<select id="getMemNum" resultType="String">
+		select mem_num from mem where id = #{id}
+	</select>
 </mapper>

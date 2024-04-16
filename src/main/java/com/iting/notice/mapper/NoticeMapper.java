@@ -11,8 +11,6 @@ import com.iting.notice.model.NoticeVO;
 public interface NoticeMapper {
 
 	// 전체 list 조회.
-	public List<NoticeVO> getNoticeList(NoticeVO vo, CSearchVO svo);
+	public List<NoticeVO> getNoticeList(NoticeVO vo);
 
-	// 글에 대한 개수
-	public long getCount(NoticeVO vo, CSearchVO svo);
 }
