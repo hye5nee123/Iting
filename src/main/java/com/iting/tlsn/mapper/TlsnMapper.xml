@@ -69,4 +69,31 @@
 		WHERE mem_num = #{memNum}
 		AND lt_num = #{ltNum}
 	</select>
+	
+	
+	<!-- 수강상세 등록 -->
+	<insert id="tlsnDetailInsert">
+		<selectKey keyProperty="tlsnRndNum" order="BEFORE" resultType="string">
+			SELECT 'td' || LPAD(NVL(MAX(SUBSTR(tlsn_rnd_num, -5)), 0) + 1, 5, '0') 
+			FROM tlsn_detail
+		</selectKey>
+		
+		INSERT INTO tlsn_detail
+				(
+				tlsn_rnd_num
+				, rnd_ttl
+				, rnd_prgre
+				, lt_num
+				, tlsn_num
+				)
+		VALUES
+			(
+			#{tlsnRndNum}
+			, #{rndTtl}
+			, #{rndPrgre}
+			, #{ltNum}
+			, #{tlsnNum}
+			)
+		
+	</insert>
 </mapper>

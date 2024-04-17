@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iting.tlsn.mapper.TlsnMapper;
+import com.iting.tlsn.model.TlsnDetailVO;
 import com.iting.tlsn.model.TlsnVO;
 import com.iting.tlsn.service.TlsnService;
 
@@ -38,6 +39,11 @@ public class TlsnServiceImpl implements TlsnService {
 @Override
 public TlsnVO getTlsnInfoMem(TlsnVO vo) {
 	return tlsnMapper.getTlsnInfoMem(vo);
+}
+
+@Override
+public int tlsnDetailInsert(TlsnDetailVO vo) {
+	return tlsnMapper.tlsnDetailInsert(vo);
 }
 	
 }

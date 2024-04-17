@@ -5,13 +5,18 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.iting.subsp.model.SttlVO;
 import com.iting.subsp.service.ReqPaymentScheduler;
 import com.iting.subsp.service.SttlService;
+
+/**
+ * 결제 컨트롤 클래스
+ * 
+ * @author 장효은
+ * @version 1.0
+ */
 
 @RestController
 public class SttlController {
