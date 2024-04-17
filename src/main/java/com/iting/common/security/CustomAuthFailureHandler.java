@@ -33,10 +33,9 @@ public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
 		} 
 		
 		// 로그인 페이지로 다시 포워딩
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/commonlogin");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/userlogin");
 		dispatcher.forward(request, response);
-
-		response.sendRedirect("/commonlogin");
+		response.sendRedirect("/userlogin");
 	}
 
 }

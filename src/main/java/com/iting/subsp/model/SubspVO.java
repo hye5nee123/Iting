@@ -8,12 +8,14 @@ import lombok.Data;
 public class SubspVO {
 	private String subspNum;
 	private String subspStCd;
-	private Date subspFrDt;
-	private Date subspToDt;
+	private String subspFrDt;
+	private String subspToDt;
 	private String subspTypCd;
 	private int subspPrice;
 	private String memNum;
 	private String billingKey; 	// 빌링키
+	private int subremain; 	// 남은 기간
+	
 	
 	private String retCode;
 }

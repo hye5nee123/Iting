@@ -2,12 +2,11 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Access Denied Page</title>
+<title>로그인 실패</title>
 </head>
 <body>
-<h2>[[${msg}]]</h2>
 <script>
-alert("접근 권한이 없습니다. 이전페이지로 이동합니다.");
+alert([[${loginFailMsg}]]);
 history.back();
 </script>
 </body>

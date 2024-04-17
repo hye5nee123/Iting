@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,11 @@ public class SaveController {
 			return saveService.memSelect(id);
 		}
 
-	
+		// 마이페이지 내가 찜한 목록 이동
+		@GetMapping("/member/mypage/savelist")
+		public String goMySave(Model model, HttpSession session) {
+			String usernum = (String) session.getAttribute("usernum");
+			model.addAttribute("savelist", saveService.getSaveList(usernum));
+			return "member/mypage/saveList";
+		}
 }

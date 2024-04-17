@@ -10,4 +10,18 @@
 	<select id="getMemNum" resultType="String">
 		select mem_num from mem where id = #{id}
 	</select>
+	
+	<select id="getSaveList" parameterType="string">
+		SELECT lt_st_cd
+				, lt_ttl
+				, lt_num
+				, lt_img
+				, lt_intro
+				, lt_cate_cd
+				, fr_dt
+				, lecturer_name
+				, lt_keyword_cd
+		FROM savelist_view
+		WHERE mem_num = #{memNum}
+	</select>
 </mapper>

@@ -9,11 +9,22 @@
 <title>마이페이지</title>
 <style>
 .mypage {
-	display: inline;
+	display: flex;
+	flex-wrap:nowrap;
 }
 
-.aside {
-	width: 200px;
+.asidemenu {
+	position: relative;
+	width: 30%;
+	top: 5%;
+	left: 5%;
+	
+}
+.mycontent{
+	position: relative;
+	width: 70%;
+	top: 5%;
+	border: 1px solid #000;
 }
 
 ul {
@@ -23,15 +34,13 @@ ul {
 .nice-select {
 	width: 200px;
 }
-.mycontent{
-	border: 1px solid #000;
-}
+
 </style>
 </head>
 <body>
 	<section layout:fragment="content">
 		<div class="mypage">
-			<div class="aside">
+			<div class="asidemenu">
 				<ul>
 					<h3>마이페이지</h3>
 					<li><a href="/member/mypage" role="button">
@@ -40,12 +49,15 @@ ul {
 					<li><a href="/member/mypage/sttlList" role="button">
 							<h4>결제정보</h4>
 					</a></li>
-					<li><a href="#" role="button">
+					<li><a href="/member/mypage/savelist" role="button">
+							<h4>내가 찜한 강의</h4>
+					</a></li>
+					<!-- <li><a href="#" role="button">
 							<h4>커뮤니티 활동</h4>
 					</a></li>
 					<li><a href="#" role="button">
 							<h4>알림 설정</h4>
-					</a></li>
+					</a></li> -->
 				</ul>
 			</div>
 			<div class="mycontent" layout:fragment="mycontent">

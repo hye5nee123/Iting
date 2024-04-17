@@ -177,9 +177,10 @@ public class CommonController {
 
 	// 페이지 권한 없을때
 	@GetMapping("/accessError")
-	public void accessDenied(Authentication auth, Model model) {
+	public String accessDenied(Authentication auth, Model model) {
 		log.info("access denied :" + auth);
 		model.addAttribute("msg", "Access denied");
+		return "common/accessError";
 	}
 
 	/* 로그인 및 로그아웃 */
@@ -253,4 +254,10 @@ public class CommonController {
 	public String index() {
 		return "member/main";
 	}
+	
+	//로그인 실패
+//	@GetMapping("/userlogin")
+//	public String logfail() {
+//		return "common/loginfail";
+//	} 
 }

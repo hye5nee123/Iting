@@ -44,10 +44,10 @@
 	<select id="getSttlList" parameterType="string">
 		SELECT
 			find_code(subsp_typ_cd) AS subsp_typ_cd
-			, subsp_fr_dt
-			, subsp_to_dt
+			, to_char(subsp_fr_dt, 'yyyy-mm-dd hh24:mi:ss') AS subsp_fr_dt
+            , to_char(subsp_to_dt, 'yyyy-mm-dd hh24:mi:ss') AS subsp_to_dt
 			, find_code(sttl_typ_cd) AS sttl_typ_cd
-			, sttl_dt
+			, to_char(sttl_dt, 'yyyy-mm-dd hh24:mi:ss') AS sttl_dt
 			, dc_price
 			, all_sttl_price
 			, sttl_rnd
