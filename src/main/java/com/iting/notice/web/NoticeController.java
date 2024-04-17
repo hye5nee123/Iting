@@ -21,7 +21,7 @@ public class NoticeController {
 
 		}
 		
-		// 공지전체조회(회원).
+		// 공지전체조회(회원)..
 		@RequestMapping("/member/notice/noticeList")
 		public String noticeMemList(Model model, NoticeVO vo) {
 			model.addAttribute("noticeMemList", noticeService.getNoticeList(vo));
