@@ -11,7 +11,7 @@ public class LtNoticeVO {
 	private String ltNoticeNum;
 	private String ltNoticeTtl;
 	private String ltNoticeCntn;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date ltNoticeRegDt;
 	private String ltNum;
 }

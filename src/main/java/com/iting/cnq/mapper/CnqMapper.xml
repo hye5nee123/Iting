@@ -116,4 +116,19 @@
 		WHERE lt_cnq_num = #{ltCnqNum}
 	</update>
 
+
+<!-- 관리자 게시글 전체조회 -->
+	<select id="getAdminCnqList" resultType="CnqVO">
+				SELECT
+					c.lt_cnq_num,
+					c.ttl,
+					c.cntn,
+					c.drwup_dt,
+					c.hit,
+					m.name,
+					atch_num
+		FROM lt_cnq c JOIN mem m
+		on c.mem_num = m.mem_num
+		WHERE LT_NUM = 'lt00001'
+	</select>
 </mapper>

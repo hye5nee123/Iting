@@ -58,6 +58,7 @@
                , n.LT_NUM
 		       , e.ID as SENT_PS
 		       , m.ID as REC_PS
+		       , e.MEM_NUM as MEM_NUM
 		FROM NOTE n JOIN mem_lec_view m
                       ON n.REC_PS = m.MEM_NUM
                     JOIN mem_lec_view e

@@ -136,6 +136,12 @@ public class LectureController {
 		return "/admin/lecture/ingLectureList";
 
 	}
+	//미승인 상세
+	@GetMapping("/admin/lecture/ingInfo/{ltNum}")
+	public String ingInfo(@PathVariable String ltNum, Model model) {
+		model.addAttribute("ing",lectureService.ingInfo(ltNum));
+		return "admin/lecture/ingInfo";
+	}
 
 	@GetMapping("/teacher/main")
 	public String ingLectureList1(Model model,String ltNum, LectureVO vo) {

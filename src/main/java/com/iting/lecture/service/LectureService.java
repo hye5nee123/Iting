@@ -29,8 +29,12 @@ public interface LectureService {
 	public List<LectureVO> endLectureList(LectureVO vo, PagingVO pvo);
 	//미승인
 	public List<LectureVO> ingLectureList(LectureVO vo);
+	//미승인 상세
+	public LectureVO ingInfo(String ltNum);
 	//개수 
 	public long getCount(LectureVO vo);
+
+	
 
 }
 

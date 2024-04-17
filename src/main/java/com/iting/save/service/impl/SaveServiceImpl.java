@@ -1,6 +1,7 @@
 package com.iting.save.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.CnqService;
 import com.iting.save.mapper.SaveMapper;
+import com.iting.save.model.SaveListVO;
 import com.iting.save.model.SaveVO;
 import com.iting.save.service.SaveService;
 
@@ -30,6 +32,12 @@ public class SaveServiceImpl implements SaveService {
 		// TODO Auto-generated method stub
 		return saveMapper.memSelect(id);
 	}
+
+	@Override
+	public List<SaveListVO> getSaveList(String memNum) {
+		return saveMapper.getSaveList(memNum);
+	}
+
 
 	
 

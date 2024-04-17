@@ -4,4 +4,5 @@ import com.iting.teacher.model.TeacherVO;
 
 public interface TeacherService {
 	public TeacherVO getTeacherInfo(String ltNum);
+	public TeacherVO getTeacherMain(TeacherVO vo);
 }

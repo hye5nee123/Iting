@@ -99,7 +99,7 @@
 	</form>
 	<!-- 댓글  시작-->
 	<div>
-		<div class="comment-box">
+		<div class="checkout__input contact__form">
 			<form name="replyForm" method="post">
 				<div class="comment-name">
 					<span class="anonym">작성자 : 
@@ -201,7 +201,7 @@
 		console.log(res);
 		const ltCnqNum = replyForm.ltCnqNum.value;
 		alert('게시글 등록 완료!');
-		window.frames['cnq'].location.reload();
+		history.go(0);
 		
 	}
 	

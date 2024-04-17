@@ -40,14 +40,14 @@ img {
 </style>
 </head>
 <body>
-	<div id="container" layout:fragment="container">
+	<div id="container" layout:fragment="container" name="frmSearch">
 		<div class="card">
 			<h4 class="card-header">
 				강의 목록
 			</h4>
         <div class="shop__sidebar__search col-4">
 					<input type="text" placeholder="제목을 검색해주세요." name="lectSearch" id="searchKeyWord">
-		            <button type="button" onclick="searchTtl()"><i class="bx bx-search-alt-2"></i>검색</button>
+		            <button type="submit" onclick="gopage(1)"><i ></i>검색</button>
 				</div>
 				<table class="table">
 					<thead>
@@ -63,7 +63,7 @@ img {
 						</tr>
 
 					</thead>
-					<tbody  id="endLectureList" >
+					<tbody id="endLectureList">
 					
 					</tbody>
 				</table>
@@ -72,7 +72,7 @@ img {
 			</div>
 			
 <script th:inline="javascript">
-	
+
 	
 	//함수 호출.
 	listReq(1);
@@ -83,25 +83,17 @@ img {
 		.then(res => res.json())
 		.then(res => listRes(res))
 	}
-	
+
 	function gopage(p){
 		//검색 기능 하면 다시 살리기
-	 /* 	frmSearch.page.value = p;
-		frmSearch.submit(); */
-		listReq(p);
-		   
+	     frmSearch.lectSearch.value = p; 
+		 frmSearch.submit();
+		/* listReq(p); */
 	}
 	
-	function searchTtl() {
-			console.log(searchltTtl.value);
-			lectureService.endLectureList(1, searchKeyWord.value);
-		}
-	
-	 
 	//list 응답.
 	function listRes(res) {
 		endLectureList.innerHTML = '';
-		console.log(res);
 		// 목록출력
 		for( obj of res.data) {
 			endLectureList.innerHTML += makeTr(obj);
@@ -116,7 +108,7 @@ img {
 			<td>${obj.ltNum}</td>
 			<td>${obj.ltTtl}</td>
 			<td>${obj.ltIntro}</td>
-			<td>${obj.frDt}</td>
+			<td>${formatDate(obj.frDt)}</td>
 			<td>${obj.ltDifCd}</td>
 			<td>${obj.ltKeywordCd}</td>
 			<td>${obj.lecturerNum}</td>
@@ -125,7 +117,19 @@ img {
 		console.log(newTag);
 		return newTag;
 	}
-		
+	
+	function formatDate(frDt) {
+	    const date = new Date(frDt);
+	    const year = date.getFullYear();
+	    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+	    const day = String(date.getDate()).padStart(2, '0');
+	    return `${year}/${month}/${day}`; // yyyy/MM/dd 형식으로 반환
+	}
+
+	// 사용 예시
+	const formattedDate = formatDate(frDt);
+	console.log(formattedDate); // yyyy/MM/dd 형식으로 변환된 날짜 출력
+	
 	function makePage(paging) {
 		console.log(paging)
 

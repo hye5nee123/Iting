@@ -12,4 +12,5 @@ public class TeacherVO {
 	private String phone;
 	private String ltNum;
 	private String ltTtl;
+	private String user;
 }

@@ -33,16 +33,19 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		CustomUsers user = (CustomUsers)auth.getPrincipal();
 		String numcd = user.getUsersVO().getNumCd();
 		String usercd = user.getUsersVO().getUserCd();
-//		auth.getName(); // 단건조회 필요
+		String name = user.getUsersVO().getName();
+		
+		System.out.println(auth.getPrincipal());
 		request.getSession().setAttribute("usertype", usercd);
 		request.getSession().setAttribute("usernum", numcd);
 		request.getSession().setAttribute("userId", auth.getName());
+		request.getSession().setAttribute("username", name);
 		
-		request.getSession().setAttribute("myLectureList", lectureService.getTcList(numcd));
 		
 		if(roleNames.contains("ROLE_B2")) {
 			response.sendRedirect("/admin/main");
 		} else if(roleNames.contains("ROLE_D1")) {
+			request.getSession().setAttribute("myLectureList", lectureService.getTcList(numcd));
 			response.sendRedirect("/teacher/main");
 		} else {
 			response.sendRedirect("/member/main");

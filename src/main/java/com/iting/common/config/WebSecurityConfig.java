@@ -64,7 +64,7 @@ public class WebSecurityConfig {
 				.successHandler(authenticationSuccessHandler())
 //				.failureForwardUrl("/commonlogin")
 //				.failureUrl("/commonlogin")
-				.failureHandler(loginFailureHandler())
+//				.failureHandler(loginFailureHandler()) // 로그인 실패 핸들러
 				.permitAll()
 				.and()
 				

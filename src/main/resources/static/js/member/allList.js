@@ -151,8 +151,6 @@ var lectureService = (function(){
 	}
 	
 	
-	
-	
 	return {ltListReq}
 	
 })();
