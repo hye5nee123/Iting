@@ -126,4 +126,13 @@ public class CnqController {
 	/* 강사 */
 
 	/* 관리자 */
+	
+	// 강의문답 전체조회. //
+	@RequestMapping("/admin/cnq/list")
+	public String getAdminCnqList(Model model, CnqVO vo) {
+		model.addAttribute("adminCnqList", cnqService.getAdminCnqList(vo));
+		return "admin/community/list";
+
+	}
+
 }

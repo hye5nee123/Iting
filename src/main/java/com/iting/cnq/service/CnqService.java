@@ -1,5 +1,6 @@
 package com.iting.cnq.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.iting.cnq.model.CSearchVO;
@@ -25,4 +26,8 @@ public interface CnqService {
 
 	// 조회수 올리기
 	public int updateHit(String ltCnqNum);
+
+	// 관리자 전체 list 조회.
+	public List<CnqVO> getAdminCnqList(CnqVO vo);
+
 }

@@ -1,6 +1,7 @@
 package com.iting.cnq.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class CnqServiceImpl implements CnqService {
 		return map;
 	}
 
-	//등록(ajax)
+	// 등록(ajax)
 	@Override
 	public int cnqInsert(CnqVO vo) {
 
@@ -59,6 +60,14 @@ public class CnqServiceImpl implements CnqService {
 	public int updateHit(String ltCnqNum) {
 
 		return cnqMapper.updateHit(ltCnqNum);
+	}
+
+
+
+	@Override
+	public List<CnqVO> getAdminCnqList(CnqVO vo) {
+		// TODO Auto-generated method stub
+		return cnqMapper.getAdminCnqList(vo);
 	}
 
 }

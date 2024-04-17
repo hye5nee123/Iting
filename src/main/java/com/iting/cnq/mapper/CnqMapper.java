@@ -23,10 +23,15 @@ public interface CnqMapper {
 
 	// 수정
 	public int updateCnq(CnqVO vo);
-	
-	//삭제
+
+	// 삭제
 	public int deleteCnq(String ltCnqNum);
-	
+
 	// 조회수 올리기
 	public int updateHit(String ltCnqNum);
+
+	// 관리자 전체 list 조회.
+	public List<CnqVO> getAdminCnqList(CnqVO vo);
+
+
 }
