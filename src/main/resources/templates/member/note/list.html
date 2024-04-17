@@ -39,9 +39,8 @@
 		            		<tr>
 		            			<th>강의명</th>
 		            			<th>강사아이디</th>
-		            			<th>이름</th>
+		            			<th>강사명</th>
 		            			<th>이메일</th>
-		            			<th>연락처</th>
 		            			<th>쪽지보내기</th>
 		            		</tr>
 		            	</thead>
@@ -51,35 +50,34 @@
 				            	<td th:text="${tc.ltNum}" class="hidden"></td>
 				            	<td th:text="${tc.ltTtl}"></td>
 				            	<td th:text="${tc.id}"></td>
-				            	<td th:text="${tc.name}"></td>
+				            	<td><span th:text="${tc.name}"></span><i>강사님</i></td>
 				            	<td th:text="${tc.mail}"></td>
-				            	<td th:text="${tc.phone}"></td>
 				            	<td><a class="btn btn-outline-warning btn-sm" th:href="@{/member/note/insert/{no}(no=${tc.ltNum})}">보내기</a></td>
 			            	</tr>
 		            	</tbody>
 		            </table>
 		           </div>
                  </div>
-                 <div class="tab-pane" id="tabs-6" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_" role="tabpanel">
+                 <div class="tab-pane tab_mem" id="tabs-6" th:classappend="${#strings.equals(param.gb , 'rec')} ? 'active':_" role="tabpanel">
                      <div class="product__details__tab__content">
                          <ul>
                          	<li th:each="rec, stat: ${recList}" th:onclick="link('rec',[[${rec.noteNum}]])">
 			            		<a href="#" th:text="${rec.noteTtl}" class="new"></a>
 			            		<span th:text="${rec.id}"></span>
-			            		<span th:text="${rec.name}"></span>
+			            		<span><em th:text="${rec.name}"></em><i>강사님</i></span>
 			            		<i th:text="${#dates.format(rec.recDt, 'yyyy-MM-dd')}"></i>
 			            	</li>
                          </ul>
                      </div>
                  </div>
-                 <div class="tab-pane" id="tabs-7" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  role="tabpanel">
+                 <div class="tab-pane tab_mem" id="tabs-7" th:classappend="${#strings.equals(param.gb , 'sent')} ? 'active':_"  role="tabpanel">
                      <div class="product__details__tab__content">
                     
                         <ul>
                          	<li th:each="sent, stat: ${sentList}" th:onclick="link('sent',[[${sent.noteNum}]])">
 			            		<a href="#" th:text="${sent.noteTtl}" class="new"></a>
 			            		<span th:text="${sent.id}"></span>
-			            		<span th:text="${sent.name}"></span>
+			            		<span><em th:text="${sent.name}"></em><i>강사님</i></span>
 			            		<i th:text="${#dates.format(sent.sentDt, 'yyyy-MM-dd')}"></i>
 			            	</li>
                          </ul>

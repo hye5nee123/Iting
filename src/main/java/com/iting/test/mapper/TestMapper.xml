@@ -213,10 +213,28 @@
 		       , p.QUES3
 		       , p.QUES4
 		       , p.CTY
-		       , p.LT_NUM
 		FROM APPLEXAM_DETAIL a JOIN PRBL p
 		                         ON a.PRBL_NUM = p.PRBL_NUM
 		WHERE APPLEXAM_NUM = #{applexamNum}
 		ORDER BY a.PRBL_ORD_NUM
+	</select>
+	
+	<!-- 오답노트 -->
+	<select id="getOxList">
+		SELECT a.APPLEXAM_NUM
+		       , p.PRBL_NUM
+		       , p.ANS
+		       , a.MRK_RSLT
+		       , p.LT_NUM
+		       , p.PRBL_CNTN
+		       , p.QUES1
+		       , p.QUES2
+		       , p.QUES3
+		       , p.QUES4
+		       , p.CTY 
+		FROM APPLEXAM_DETAIL a JOIN PRBL p
+		                         ON a.PRBL_NUM = p.PRBL_NUM
+		WHERE p.LT_NUM = #{ltNum}
+		AND a.MRK_RSLT = 0 
 	</select>
 </mapper>

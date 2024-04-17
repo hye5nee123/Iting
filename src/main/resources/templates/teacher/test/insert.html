@@ -23,6 +23,7 @@
          <hr class="my-0">
          <div class="mb-3 test_list first_list">
            <label for="ques1" class="form-label">①</label>
+           <input th:value="${ltNum}" class="form-control hidden" type="text" name="ltNum" id="ltNum" value="">
            <input class="form-control" type="text" name="ques1" id="ques1" value="">
          </div>
          <div class="mb-3 test_list">
@@ -51,7 +52,7 @@
     	</form>
     	<div class="btn_box demo-inline-spacing">
            <button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">문제등록하기</button>
-           <button type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" onclick="location.href='/teacher/test/list'">목록가기</button>
+           <a type="button" id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" th:href="@{/teacher/test/list/{no}(no=${ltNum})}">목록가기</a>
          </div>
   </div>
   
@@ -64,7 +65,8 @@
 		const ques4 = testForm.ques4.value;
 		const ans = testForm.ans.value;
 		const cty = testForm.cty.value;
-		let param = {prblCntn, ques1, ques2, ques3, ques4, ans, cty}
+		const ltNum = testForm.ltNum.value;
+		let param = {prblCntn, ques1, ques2, ques3, ques4, ans, cty, ltNum}
 		console.log(param);
 		
 		/*
@@ -85,7 +87,7 @@
 	function saveRes(res) {
 		console.log(res);
 		alert('문제가 등록되었습니다.');
-		window.location.href = "/teacher/test/list";
+		window.location.href = `/teacher/test/list/${res.ltNum}`;
 	}
 	
 	//버튼 클릭 시 함수 호출.

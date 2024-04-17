@@ -13,6 +13,7 @@
 		,LT_NUM
 		FROM CURRI
 		WHERE LT_NUM = #{ltNum}
+		ORDER BY RND_NUM
 	</select>
 	
 	<!-- 커리상세 -->
