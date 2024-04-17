@@ -16,7 +16,7 @@ public class LectureVO {
 	private String ltIntro;		//강의 소개
 	private String ltCateCd;	//강의 카테고리 코드
 	private String ltCateNm;	//강의 카테고리 코드명
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date frDt;			//시작 날짜
 	private String accpYnCd;	//승인 여부 코드
 	private String accpYnNm;	//승인 여부 코드명

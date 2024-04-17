@@ -35,6 +35,13 @@ public class LiveController {
 		return "teacher/live/getLiveList";
 	}
 	
+	//단건 조회
+	@GetMapping("/teacher/live/info/{spltNum}")
+	public String info(@PathVariable String spltNum, Model model) {
+		model.addAttribute("live", liveService.getLiveInfo(spltNum));
+		return "teacher/live/info";
+	}
+	
 	//등록페이지 이동
 	@GetMapping("/teacher/live/insert")
 	public void insertForm() {
@@ -46,11 +53,11 @@ public class LiveController {
 	@PostMapping("/teacher/live/insert")
 	public String spltInsert(@RequestBody LiveVO vo) {
 		liveService.spltInsert(vo);
-		return "redirect:/teacher/live/getLiveList";
+		return "/teacher/live/getLiveList";
 	}
 	
 	
-	/* 괸리자 */
+	/* 관리자 */
 	
 	//미승인 목록
 	@GetMapping("/admin/live/ingLiveList")

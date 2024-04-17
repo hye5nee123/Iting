@@ -51,6 +51,11 @@ public class LiveServiceImpl implements LiveService{
 		return liveMapper.spltInsert(vo);
 	}
 
+	@Override
+	public LiveVO getLiveInfo(String spltNum) {
+		return liveMapper.getLiveInfo(spltNum);
+	}
+
 
 	
 }

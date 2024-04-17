@@ -87,6 +87,12 @@ public class LectureServiceImpl implements LectureService {
 	public long getCount(LectureVO vo) {
 		return lectureMapper.getCount(vo, null);
 	}
+	//미승인 상세
+	@Override
+	public LectureVO ingInfo(String ltNum) {
+		return lectureMapper.ingInfo(ltNum);
+	}
+
 
 
 }

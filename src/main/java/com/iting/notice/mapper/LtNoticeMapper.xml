@@ -30,7 +30,7 @@ FROM LT_NOTICE
       		   #{ltNoticeNum}
       		  ,#{ltNoticeTtl}
       		  ,#{ltNoticeCntn}
-      		  ,#{ltNoticeRegDt}
+      		  ,sysdate
       )
 </insert>
 <!-- 공지사항 상세 -->

@@ -10,9 +10,6 @@ function move(ltNum){
 	location.href='/teacher/lecture/info/'+ ltNum
 }
 
-
-
-
 </script>
 <style>
 #asd {
@@ -68,7 +65,7 @@ text-overflow: ellipsis;
 							<td th:text="${ltb.ltNum}"></td>
 							<td th:text="${ltb.ltTtl}"></td>
 							<td>
-							<p  class="text-truncate" style="width: 8rem;" th:text="${ltb.ltIntro}"></p>
+							<p class="text-truncate" style="width: 8rem;" th:text="${ltb.ltIntro}"></p>
 							</td>
 							<td th:text="${#dates.format(ltb.frDt,'yyyy-MM-dd')}"></td>
 							<td th:text="${ltb.ltDifCd}"></td>
