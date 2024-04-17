@@ -50,6 +50,8 @@ public class TlsnController {
 		CurriVO cvo = new CurriVO();
 		cvo.setLtNum(ltNum);
 		model.addAttribute("tlsn", curriService.getCurriList(cvo));
+		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
+		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
 		// 강사정보
 		model.addAttribute("tlsnInfo", tlsnService.getTlsnInfo(vo));
 		System.out.println(vo);

@@ -126,6 +126,10 @@
 .tlsn_info .top p{margin-top:5px; margin-bottom:5px; color:#555; font-size:16px; line-height:1.4rem; font-weight:700; word-break:keep-all;}
 .tlsn_info .top span{display:block; color:#777; font-weight:400; font-size:14px;}
 .tlsn_info .top span i{display:inline-block; color:#777; font-size:14px !important; font-style:normal; font-weight:700;}
+.tlsn_info .top .tit p{margin:0;}
+.tlsn_info .top .tit p span{margin-right:2px; color:#205cdc; font-size:14px !important; font-weight:700;}
+.tlsn_info .top .tit p i{font-size:14px !important;}
+.tlsn_info .top .ttl{color:#888;}
 .tlsn_info .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
 .tlsn_info .bottom{position:relative; float:none; width:100%; color:#555; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
 .tlsn_info .bottom p{color:#888; font-size:15px; margin-bottom:0; font-weight:400; margin-top:10px;}
@@ -135,7 +139,8 @@
 .btn_box [class^="go_"]{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .tlsn_title h2{float:left;}
 .tlsn_title em{display:block; font-style:normal; float:left; margin:13px 10px 0; color:#888;}
-.tlsn_title span{display:block; float:left; margin-top:16px;}
+.tlsn_title span{display:block; float:left; margin-top:16px; letter-spacing:0;}
+.tlsn_title i{display:block; float:left; font-style:normal; font-size:14px; margin-left:2px; margin-top:16px; color:#888;}
 .tlsn_title .message{margin-left:10px; border:0; background:none; padding:0; float:left;}
 .tlsn_title .message i{margin-top:9px; color:#205cdc; font-size:35px;}
 .tlsn_title:after{content:''; display:block; clear:both;}
@@ -146,6 +151,13 @@
 .tlsn_info.tlsn_box .bottom{border-top:0; padding-top:0;}
 .tlsn_info.tlsn_box .bottom a{position:relative; top:auto; right:auto;}
 .tlsn_info .top span i.ico_tlTm{font-size:20px !important; font-weight:500; color:#555; vertical-align:middle; margin-right:3px; margin-top:-2px;}
+.tlsn_info_curr{margin:30px 0; padding:20px 20px 20px 30px;}
+.tlsn_info_curr ul{width:100%;}
+.tlsn_info_curr ul li{width:21%;}
+.tlsn_info_curr .message em{float:left; color:#888; font-size:14px; font-style:normal; margin-left:15px;}
+.tlsn_info_curr .message i{color:#ffc107;}
+.tlsn_info_curr .message span{clear:both; display:block; border-radius:50px; width:80px; text-align:center; padding:2px 5px; border:1px solid #ffc107; color:#ffc107; font-size:12px; margin-left:40px;}
+.tlsn_info_curr .message:after{content:''; display:block; clear:both;}
 
 /* 강의질문 */
 .message_box h2 em{font-style:normal; margin-right:5px; font-size:20px; color:#ccc;}

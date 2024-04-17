@@ -28,7 +28,7 @@
    
 	<div class="btn_box demo-inline-spacing">
 		<a th:href="@{/member/note/insert/{no}(no=${note.noteNum})}" class="btn btn-lg">답장하기</a>
-		<a id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" th:href="@{/member/note/list(gb=${gb})}">목록가기</a>
+		<a id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" th:href="@{/member/note/list/{ltNum}/{gb}(ltNum=${note.ltNum}, gb=${gb})}">목록가기</a>
 	</div>
 </section>
 
