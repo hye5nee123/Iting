@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section layout:fragment="content">
+<div id="container" layout:fragment="container">
+		<h4 class="fw-bold py-3 mb-4">공지사항</h4>
+		<div class="nav-align-top mb-4">
+			<div class="tab-content test_content">
+				<div class="tab-pane fade active show note_box"
+					id="navs-pills-top-home" role="tabpanel">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="notice : ${noticeMemList}">
+								<td th:text="${notice.noticeNum}" ></td>
+								<td th:text="${notice.ttl}"></td>
+								<td th:text="${#dates.format(notice.regDt, 'yyyy/MM/dd')}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<script th:inline="javascript">
+</script>
+</section>
+</body>
+</html>
