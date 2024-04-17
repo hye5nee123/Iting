@@ -7,6 +7,9 @@
 <title>수강중인강의상세</title>
 <link rel="stylesheet" href="/css/member/content.css" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
 </head>
 <body>
 <section layout:fragment="content">
@@ -61,11 +64,16 @@
 				</div>
 				<p th:text="${tlsn.rndCntn}"></p>
 				<div class="bottom">
+					<!-- <a href="#" class="go_link modal_btn" th:onclick="addTlsnDetail()">수강하기 ></a> -->
 					<a href="#" class="go_link gray modal_btn">수강하기 ></a>
 				</div>
 			</div>
-			<div class="graph">
-				<span>그래프</span>
+			<div class="graph" id="rndPer" th:data-percent="${curriDetail[stat.index].rndPrgre}">
+				<!-- 차트부분 -->
+				<h6 class="text-center">[[${stat.count}]]회차 진행률</h6>				
+				<h5 class="text-center">커리큘럼 번호  : [[${tlsn.rndNum}]]</h5>		
+				<canvas class="myChart" width="150" height="100"></canvas>
+				
 			</div>
 		</div>
 		
@@ -81,6 +89,8 @@
 				<div class="test">
 					<h5></h5>
 				</div>
+				<button id="start">Start</button>
+				<button id="stop">Stop</button>
 			</div>
 		</div>
 	</div>
@@ -88,14 +98,98 @@
 		<a th:href="@{/member/tlsn/list}" class="go_list orange">수강중인 강의가기</a>
 	</div>
 <script>
+
+// 반복해서 진행률 담고 차트 그리기
+let progress = 0;
+let remain = 0;
+
+for(let i = 0; i < rndPer.length; i++) {
+	progress = rndPer[i].dataset.percent;
+	remain = 100 - progress;
+	
+	drawChart(progress, remain, i);
+}
+
+// 차트그리기
+function drawChart(progress, remain, i) {
+	// 도넛 차트
+	const dataDonut = {
+	    datasets: [{
+	      label: ['진행률(%)'],
+	      data: [remain, progress],
+	      backgroundColor: [
+	        'rgb(238, 238, 238)',
+	        'rgb(255, 138, 0)'
+	      ],
+	      borderColor: [
+	        'rgba(0, 0, 0, 0)'
+	      ],
+	      borderWidth: 1
+	    }]
+	};
+
+	// 도넛 차트 안에 텍스트 넣기
+	const centerText = {
+	   id :'centerText',
+	   afterDatasetDraw(chart, args, options){
+	     const{ctx, chartArea: {left, right, top, buttom, width, height} } = chart;
+	     
+	     let text = progress;
+	     if (isNaN(text)) {
+	       text = 0;
+	     }
+	
+	     ctx.save();
+	     ctx.font = '900 18px Nanum Gothic';
+	     ctx.fillStyle = 'rgba(50, 50, 50, 0.8)';
+	     ctx.textAlign = 'center';
+	     ctx.fillText(text + '%', width/2 , height/2 + top);
+	     ctx.restore();
+	   }
+	}
+	
+	// 차트 설정
+	const configDonut = {
+	   type: 'doughnut',
+	   data: dataDonut,
+	   options: {
+	     cutout:'60%',
+	     borderRadius:10
+	   },
+	   plugins:[centerText]
+	};
+  
+	let charts = [];
+	
+	//객체 생성 전에 기존 객체가 배열에 있으면 종료, 배열 초기화
+	if(!charts) {
+		charts.forEach(obj =>{
+			obj.destroy()
+		})
+	}
+	charts = [];
+	
+	//차트 객체 생성, 배열로 객체 관리
+	let myChartDonut = new Chart(document.getElementsByClassName('myChart')[i], configDonut)
+	charts.push(myChartDonut)
+}
+/* -- 차트끝 -- */
+
+
+
+
+// 강의 모달
 const modal = document.querySelector('.test_modal');
 const modalOpen = document.querySelector('.modal_btn');
 const modalClose = document.querySelector('.btn_close');
 
+// 모달 열기
 modalOpen.addEventListener('click',function(){
     modal.classList.add('on');
     // 진도율에 따라 재생시작
 });
+
+// 모달 닫기
 modalClose.addEventListener('click',function(){
     modal.classList.remove('on');
     
@@ -103,26 +197,65 @@ modalClose.addEventListener('click',function(){
 	var percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(2);
     
     // 강의를 닫으면 진도율 저장
-    insertDetailReq(percent);
+    //insertDetailReq(percent);
+    
+    // 페이지 새로고침
+	history.go(0);
+    
 });
+
+/* 10초 간격으로 진도율 업데이트 하기*/
+// intervalID를 저장할 변수입니다
+let nIntervId;
+
+function startInterval() {
+	if (!nIntervId) {
+	  nIntervId = setInterval(updateDetailReq(), 5000);
+	  console.log("인터벌 시작");
+	}
+}
+
+// 진도율 수정 요청.
+function updateDetailReq() {
+	console.log("함수 호출됨")
+	
+	// rndPrgre, rndNum(커리큘럼 회차번호)
+	let param = { rndNum: "cu00010", rndPrgre : 15.09 }
+	console.log(param)
+	let updateRet = csrf_axios({
+						method: 'PUT',
+						url: '/member/tlsn/detail/update',
+						data: param
+					});
+	console.log(updateRet);
+}
+
+// 진도율 수정 응답
+function updateDetailRes(data) {
+	console.log('진도율 수정완료', data);
+}
+
+function stopInterval() {
+	console.log("인터벌 종료");
+	
+  	clearInterval(nIntervId);
+  	// 변수에서 intervalID를 해체합니다
+  	nIntervId = null;
+}
+
+
+document.getElementById("start").addEventListener("click", startInterval);
+document.getElementById("stop").addEventListener("click", stopInterval);
 
 let finPlayTime = 0;
 let totalPlayTime = 0;
 
-// 현재 재생위치 변경시 이벤트발생
-/*
-lectVideo[0].addEventListener('timeupdate', e => {
-	// 현재 재생 시간 (초 단위 절삭)
-	var testPlaytime = Math.floor(lectVideo[0].currentTime);
-	// 전체 재생 시간 (초 단위 절삭)
-	var testTotal = Math.floor(lectVideo[0].duration);
-	// 상태 표시
-	$(".test").html(testPlaytime + " / " + testTotal);
-	}, false);
-*/
+// interval 사용해서 주기적으로 update해주기 영상 중간에 꺼져도 진도율이 저장될 수 있도록하기 위함
 
-// 영상 일시정지 시 이벤트 발생
-lectVideo[0].addEventListener('pause', e => {
+// 영상 재생하는 동안
+lectVideo[0].addEventListener('timeupdate', e => {
+	let plyaRange = lectVideo[0].played;
+	
 	// 현재 재생 시간
 	finPlayTime = Math.floor(lectVideo[0].currentTime);
 	// 전체 재생 시간
@@ -131,7 +264,7 @@ lectVideo[0].addEventListener('pause', e => {
 	var percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(2);
 	
 	// 화면에 표시 테스트
-	$(".test").html(finPlayTime + " / " + totalPlayTime + " 진행률 : " + percent + "%");
+	$(".test").html(finPlayTime + " / " + totalPlayTime + " 진행률 : " + percent + "%    " + plyaRange);
 });
 
 // 퍼센트 계산 함수
@@ -139,27 +272,10 @@ function calculatorPercent(parts, whole) {
 	return (parts / whole) * 100;
 }
 
-//등록요청.
-function insertDetailReq(percent) {
-	console.log("함수 호출됨")
-	const ltNum = dataLtNum[0].dataset.ltnum;
-	const rndPrgre = percent;
-	
-	// 수강번호(tlsnNum)도 넘겨야함
-	let param = { ltNum, rndPrgre, tlsnNum : 'tl00006' }
-	console.log(param)
-	csrf_axios({
-			method: 'POST',
-			url: '/member/tlsn/detail/insert',
-			data: param
-		
-			})
-			.then(res => insertDetailRes(res.data))
-}
 
-// 등록 응답
-function insertDetailRes(data) {
-	console.log(data);
+// 수강하기 눌렀을 때 수강상세 업데이트 진행
+function addTlsnDetail() {
+	updateDetailReq()
 }
 
 </script>

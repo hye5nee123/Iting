@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,16 +47,28 @@ public class TlsnController {
 	
 	// 수강목록 상세목록
 	@RequestMapping("member/tlsn/detailList/{ltNum}")
-	public String getTlsnDetailList(@PathVariable String ltNum, Model model, TlsnVO vo) {
+	public String getTlsnDetailList(@PathVariable String ltNum, Model model, TlsnVO vo, HttpSession session) {
 		// 커리큘럼 정보
 		CurriVO cvo = new CurriVO();
 		cvo.setLtNum(ltNum);
-		model.addAttribute("tlsn", curriService.getCurriList(cvo));
-		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));
-		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
-		// 강사정보
-		model.addAttribute("tlsnInfo", tlsnService.getTlsnInfo(vo));
-		System.out.println(vo);
+		
+		model.addAttribute("tlsn", curriService.getCurriList(cvo)); 		// 커리큘럼 정보
+		model.addAttribute("lecture", lectureService.getLectureInfo(ltNum));// 강의 정보
+		model.addAttribute("cur", lectureService.getCurriAll(ltNum));		// 커리큘럼 통계
+		model.addAttribute("tlsnInfo", tlsnService.getTlsnInfo(vo));		// 강사 정보
+		
+		
+		TlsnVO tlvo = TlsnVO.builder()
+							.memNum((String) session.getAttribute("usernum"))
+							.ltNum(ltNum)
+							.build();
+		
+		TlsnVO tvo =  tlsnService.getTlsnInfoMem(tlvo); // 수강 정보
+		
+		
+		// 수강 상세 - 진도율 정보
+		model.addAttribute("curriDetail", tlsnService.getTlsnDtCurriInfo(tvo.getTlsnNum()));
+		
 		return "member/tlsn/detailList";
 	}
 	
@@ -76,20 +89,19 @@ public class TlsnController {
 				return -2;
 			}
 		}
-		
+		// 수강 등록 + 수강상세 등록
 		return tlsnService.tlsnInsert(vo);
+		
 	}
 	
-	// 수강 상세 등록
-	@PostMapping("/member/tlsn/detail/insert")
+	// 수강 상세 진행률 수정
+	@PutMapping("/member/tlsn/detail/update")
 	@ResponseBody
 	public TlsnDetailVO tlsnDetailInsert(@RequestBody TlsnDetailVO vo) {
 		
-		// 수강상세 진행률 중복되지 않게 들어가야함
-		
-		tlsnService.tlsnDetailInsert(vo);
+		tlsnService.tlsnDetailUpdate(vo);
 		
 		return vo;
-		
 	}
+	
 }

@@ -1,9 +1,16 @@
 package com.iting.tlsn.model;
 
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TlsnVO {
 	private String tlsnNum;  //수강 번호
 	private String tlsnStCd; //수강 상태 코드

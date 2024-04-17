@@ -24,9 +24,9 @@
 	
 	<select id="getTlsnInfo" parameterType="TlsnVO" resultType="TlsnVO">
 		SELECT l.LT_NUM
-		, l.LT_TTL
-		, l.LECTURER_NUM
-        , e.NAME
+				, l.LT_TTL
+				, l.LECTURER_NUM
+		        , e.NAME
 		FROM LT l JOIN LECTURER e
                     ON l.LECTURER_NUM = e.LECTURER_NUM
 		WHERE l.LT_NUM = #{ltNum}
@@ -73,27 +73,57 @@
 	
 	<!-- 수강상세 등록 -->
 	<insert id="tlsnDetailInsert">
-		<selectKey keyProperty="tlsnRndNum" order="BEFORE" resultType="string">
-			SELECT 'td' || LPAD(NVL(MAX(SUBSTR(tlsn_rnd_num, -5)), 0) + 1, 5, '0') 
+		<selectKey keyProperty="tlsnDetailNum" order="BEFORE" resultType="string">
+			SELECT 'td' || LPAD(NVL(MAX(SUBSTR(tlsn_detail_num, -5)), 0) + 1, 5, '0') 
 			FROM tlsn_detail
 		</selectKey>
 		
 		INSERT INTO tlsn_detail
 				(
-				tlsn_rnd_num
-				, rnd_ttl
+				tlsn_detail_num
 				, rnd_prgre
 				, lt_num
 				, tlsn_num
+				, rnd_num
 				)
 		VALUES
 			(
-			#{tlsnRndNum}
-			, #{rndTtl}
+			#{tlsnDetailNum}
 			, #{rndPrgre}
 			, #{ltNum}
 			, #{tlsnNum}
+			, #{rndNum}
 			)
-		
 	</insert>
+	
+	<!-- 수강상세 수정 -->
+	<update id="tlsnDetailUpdate">
+		UPDATE tlsn_detail
+		SET rnd_prgre = #{rndPrgre}
+		WHERE rnd_num = #{rndNum}
+	</update>
+	
+	<!-- 수강상세 단건조회 -->
+	<select id="getTlsnDetailInfo">
+		SELECT tlsn_detail_num
+		        , rnd_prgre
+		        , lt_num
+		        , tlsn_num
+		        , rnd_num
+		FROM tlsn_detail
+		WHERE rnd_num = #{rndNum}
+	</select>
+	
+	<!-- 강의 수강별 커리큘럼 수강상세 전체조회 -->
+	<select id="getTlsnDtCurriInfo">
+		SELECT tlsn_detail_num
+		        , rnd_prgre
+		        , lt_num
+		        , tlsn_num
+		        , rnd_num
+		FROM tlsn_detail
+		WHERE tlsn_num = #{tlsnNum}
+		ORDER BY rnd_num
+	</select>
+	
 </mapper>
