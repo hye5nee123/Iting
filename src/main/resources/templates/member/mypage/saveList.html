@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{member/mypage/myMain}">
+<head>
+<meta charset="UTF-8">
+<title>마이페이지 - 내가 찜한 강의</title>
+<style>
+</style>
+</head>
+<body>
+	<section layout:fragment="mycontent">
+		<div class="savetbl">
+			<div class="savetop">
+				<h3>내가 찜한 강의</h3>
+				<input id="chkall" type="checkbox"><p>전체 선택</p>
+			</div>
+			<div class="savecont">
+				<div class="saves" th:each="save : ${savelist}">
+					<input class="chkbox" type="checkbox">
+					<p class="savettl" th:text="${save.ltTtl}">제목</p>
+					<p class="savedate" th:text="${save.frDt}">개설날짜</p>
+					<img class="saveimg" src="/download/${save.ltImg}" alt="강의 이미지" role="button" th:onclick="location.href='/member/lecture/info/'+[[${save.ltNum}]]">
+					<p class="saveintro" th:text="${save.ltIntro}">소개</p>
+					<p class="savecat" th:text="${save.ltCateCd}">카테고리</p>
+					<p class="savelecname" th:text="${save.lecturerName}">강사명</p>
+					<p class="saveword" th:text="${save.ltKeywordCd}">강의키워드</p>
+					<p class="savestat" th:text="${save.ltStCd}">강의상태</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

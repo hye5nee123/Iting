@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 - 결제정보</title>
+<style>
+.subtype, .sublength{
+	display:inline-block;
+	text-align: center;
+}
+.subinfo {display: block;}
+</style>
 </head>
 <body>
 	<section layout:fragment="mycontent">
@@ -16,32 +23,33 @@
 			<div class="sublength">
 				<h3>구독 기한</h3>
 				<h5>[[${subspinfo.subspFrDt}]] ~ [[${subspinfo.subspToDt}]]</h5><br>
-				<h5>D-**</h5>
+				<h5>D-[[${subspinfo.subremain}]]</h5>
 			</div>
 		</div>
-		<div class="sttllist">
+		<div class="sttltbl">
+			<h3>결제내역</h3>
 			<table>
 				<thead>
 					<tr>
 						<th>구독유형</th>
 						<th>구독기간</th>
 						<th>결제유형</th>
-						<th>결제날짜</th>
+						<th>결제일시</th>
 						<th>할인금액</th>
 						<th>총결제금액</th>
 						<th>결제회차</th>
 					</tr>
 				</thead>
 				<tbody>
-					<!-- <tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr> -->
+					<tr th:each="sttl : ${sttllist}">
+						<td th:text="${sttl.subspTypCd}"></td>
+						<td th:text="|${sttl.subspFrDt} ~ ${sttl.subspToDt}|"></td>
+						<td th:text="${sttl.sttlTypCd}"></td>
+						<td th:text="${sttl.sttlDt}"></td>
+						<td th:text="${sttl.dcPrice}"></td>
+						<td th:text="${sttl.allSttlPrice}"></td>
+						<td th:text="${sttl.sttlRnd}"></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

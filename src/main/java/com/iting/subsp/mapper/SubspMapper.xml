@@ -7,16 +7,17 @@
 	<select id="getSubspInfo" resultType="SubspVO" parameterType="string">
 		SELECT subsp_num
                , subsp_st_cd
-               , subsp_fr_dt
-               , subsp_to_dt
+               , to_char(subsp_fr_dt, 'yyyy-mm-dd hh24:mi:ss') AS subsp_fr_dt
+               , to_char(subsp_to_dt, 'yyyy-mm-dd hh24:mi:ss') AS subsp_to_dt
                , find_code(subsp_typ_cd) subsp_typ_cd
                , subsp_price
                , mem_num
+               , CEIL(subsp_to_dt - sysdate) AS subremain
          FROM subsp
          WHERE mem_num = #{memNum}
 	
 	</select>
-
+	
 
 	<!-- 구독 등록 -->
 	<insert id="subspInsert" parameterType="SubspVO">
@@ -51,5 +52,5 @@
 		SET billing_key = #{billingKey}
 		WHERE subsp_num = #{subspNum}
 	</update>
-
+	
 </mapper>
