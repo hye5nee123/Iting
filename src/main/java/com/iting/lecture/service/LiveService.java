@@ -20,4 +20,6 @@ public interface LiveService {
 	public int update(LiveVO vo);
 	//등록
 	public int spltInsert(LiveVO vo);
+	//상세
+	public LiveVO getLiveInfo(String spltNum);
 }

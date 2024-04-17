@@ -260,8 +260,8 @@
 		
 		FROM LT
 		WHERE ACCP_YN_CD = 'd1'
-		<if test="vo.ltNum != null and vo.ltNum != ''">
-				AND LT_NUM like '%' || #{vo.ltNum} || '%'
+		<if test="vo.ltTtl != null and vo.ltTtl != ''">
+				AND LT_TTL like '%' || #{vo.ltTtl} || '%'
 			</if>
 			<if test="vo.ltKeywordCd != null and vo.ltKeywordCd != ''">
 				AND LT_KEYWORD_CD like '%' || #{vo.ltKeywordCd} || '%'
@@ -288,10 +288,29 @@
 		, find_code(ACCP_YN_CD) ACCP_YN_CD
 		, find_code(RDM_CATE_CD) RDM_CATE_CD
 		FROM LT
-		WHERE ACCP_YN_CD = 'd2'
+		WHERE ACCP_YN_CD ='d2'
+		
 
 	</select>
-	<!-- 개수  -->
+	<!-- 미승인 목록 상세 -->
+	<select id="ingInfo" resultType="LectureVO">
+	SELECT LT_NUM
+		, LT_ST_CD
+		, LT_TTL
+		, LT_IMG
+		, LT_INTRO
+		, LT_CATE_CD
+		, FR_DT
+		, find_code(LT_DIF_CD) LT_DIF_CD
+		, LECTURER_NUM
+		, find_code(LT_KEYWORD_CD) LT_KEYWORD_CD
+		, find_code(ACCP_YN_CD) ACCP_YN_CD
+		, find_code(RDM_CATE_CD) RDM_CATE_CD
+		FROM LT
+		WHERE LT_NUM =#{ltNum}
+	</select>
+	
+	<!-- 갯수  -->
 		<select id="getCount" resultType="Long">
 		select count(*)
 		FROM lt l JOIN lecturer lec

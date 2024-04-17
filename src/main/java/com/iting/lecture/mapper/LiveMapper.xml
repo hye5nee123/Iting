@@ -50,6 +50,19 @@ FROM LIVE_SPLT
  
  </insert>
  
+ <!-- 상세  -->
+ <select id="getLiveInfo" resultType="LiveVO">
+SELECT SPLT_NUM
+      ,SPLT_TTL
+      ,SPLT_CNTN
+      ,SPLT_DT
+      ,LECTURER_NUM
+      ,find_code(ACCP_YN_CD) ACCP_YN_CD
+FROM LIVE_SPLT
+WHERE SPLT_NUM =#{spltNum}
+ </select>
+ 
+ 
  <!--Live 미승인 -->
  <select id="ingLiveList" resultType="LiveVO">
  SELECT SPLT_NUM,
@@ -86,7 +99,7 @@ WHERE ACCP_YN_CD = 'd1'
 	</select>
 	
 		<!-- LIVE강의 전체 목록 -->
-	<select id="getAllLiceList">
+	<select id="getAllLiveList">
 		SELECT * FROM ( SELECT ROWNUM AS rn, a.* FROM (
 
 		SELECT SPLT_NUM,
