@@ -17,4 +17,7 @@ public interface TlsnMapper {
 	
 	// 수강상세
 	public int tlsnDetailInsert(TlsnDetailVO vo);
+	public int tlsnDetailUpdate(TlsnDetailVO vo);
+	public TlsnDetailVO getTlsnDetailInfo(String rndNum);
+	public List<TlsnDetailVO> getTlsnDtCurriInfo(String rndNum);
 }
