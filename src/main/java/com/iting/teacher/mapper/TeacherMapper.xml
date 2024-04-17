@@ -16,4 +16,15 @@
 		                  ON l.LECTURER_NUM = t.LECTURER_NUM
 		WHERE t.LT_NUM = #{ltNum}
 	</select>
+	
+	<!-- 강사 개인정보 조회 -->
+	<select id="getTeacherMain">
+		SELECT LECTURER_NUM 
+			   , ID
+			   , NAME
+			   , MAIL
+			   , PHONE
+		FROM LECTURER
+		WHERE LECTURER_NUM = #{user}
+	</select>
 </mapper>

@@ -127,19 +127,19 @@
 .tlsn_info .top span{display:block; color:#777; font-weight:400; font-size:14px;}
 .tlsn_info .top span i{display:inline-block; color:#777; font-size:14px !important; font-style:normal; font-weight:700;}
 .tlsn_info .top .tit p{margin:0;}
-.tlsn_info .top .tit p span{margin-right:2px; color:#205cdc; font-size:14px !important; font-weight:700;}
-.tlsn_info .top .tit p i{font-size:14px !important;}
+.tlsn_info .top .tit p span{margin-right:2px; color:#ff8a00; font-size:14px !important; font-weight:700;}
+.tlsn_info .top .tit p i{color:#ff8a00; font-size:14px !important;}
 .tlsn_info .top .ttl{color:#888;}
 .tlsn_info .graph span{display:block; width:65px; height:65px; font-size:13px; background:#eee; border-radius:50%;}
 .tlsn_info .bottom{position:relative; float:none; width:100%; color:#555; padding-top:10px; margin-top:20px; border-top:1px dashed #ddd;}
 .tlsn_info .bottom p{color:#888; font-size:15px; margin-bottom:0; font-weight:400; margin-top:10px;}
 .tlsn_info .bottom  i{margin-top:-2px; font-size:20px; color:#205cdc;}
-.tlsn_info .go_link{position:absolute; right:0; top:50%; padding:5px 15px; background:#205cdc; border-radius:50px; color:#fff; font-size:14px; font-weight:700;}
+.tlsn_info .go_link{position:absolute; right:0; top:50%; padding:5px 12px; background:#205cdc; border-radius:50px; color:#fff; font-size:14px; font-weight:700;}
 .btn_box{margin-top:30px; text-align:center;}
 .btn_box [class^="go_"]{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .tlsn_title h2{float:left;}
 .tlsn_title em{display:block; font-style:normal; float:left; margin:13px 10px 0; color:#888;}
-.tlsn_title span{display:block; float:left; margin-top:16px; letter-spacing:0;}
+.tlsn_title span{display:block; float:left; margin-top:16px; color:#ff8a00; letter-spacing:0;}
 .tlsn_title i{display:block; float:left; font-style:normal; font-size:14px; margin-left:2px; margin-top:16px; color:#888;}
 .tlsn_title .message{margin-left:10px; border:0; background:none; padding:0; float:left;}
 .tlsn_title .message i{margin-top:9px; color:#205cdc; font-size:35px;}
@@ -155,9 +155,10 @@
 .tlsn_info_curr ul{width:100%;}
 .tlsn_info_curr ul li{width:21%;}
 .tlsn_info_curr .message em{float:left; color:#888; font-size:14px; font-style:normal; margin-left:15px;}
-.tlsn_info_curr .message i{color:#ffc107;}
-.tlsn_info_curr .message span{clear:both; display:block; border-radius:50px; width:80px; text-align:center; padding:2px 5px; border:1px solid #ffc107; color:#ffc107; font-size:12px; margin-left:40px;}
+.tlsn_info_curr .message span{clear:both; display:block; border-radius:50px; width:80px; text-align:center; padding:2px 5px; border:1px solid #205cdc; color:#205cdc; font-size:12px; margin-left:40px;}
 .tlsn_info_curr .message:after{content:''; display:block; clear:both;}
+.go_list.orange{background:#ff8a00;}
+.go_link.gray{background:#9e9e9e;}
 
 /* 강의질문 */
 .message_box h2 em{font-style:normal; margin-right:5px; font-size:20px; color:#ccc;}
@@ -191,6 +192,9 @@
 .mT20{margin-top:20px;}
 .taC{text-align:center;}
 .btn-outline-warning:hover{color:#fff;}
+.table.taC i{font-style:normal; margin-left:3px; font-size:15px; color:#888;}
+.message_list .tab-content .tab_mem ul li a{width:calc(100% - 21%);}
+.message_list .tab-content .tab_mem ul em{font-size:15px; color:#3d3d3d; font-style:normal; margin-right:3px;}
 
 /* 쪽지시험 */
 .test_info .left .top span{margin-left:5px;}
@@ -198,6 +202,7 @@
 .test_info .btn_cont{position:absolute; right:30px; top:50%; transform:translateY(-50%);}
 .test_info .go_link{display:block; width:88px; float:none; position:relative; top:auto; left:auto; background:#ff8a00;}
 .test_info .go_link.gray{background:#888;}
+.test_info button + a,
 .test_info button + button{margin-top:10px;}
 .test_btn [class^="go_"]{background:#ff8a00;}
 
@@ -214,7 +219,7 @@
 .test_modal .test_box p{color:#555; margin-bottom:10px; font-size:16px; font-weight:700; word-break:keep-all;}
 .test_modal .test_box ul{list-style:none;}
 .test_modal .test_box li{margin-top:5px;}
-.test_modal .test_box li label{margin-bottom:0; font-size:15px; padding-left:5px; color:#777; font-weight:400;}
+.test_modal .test_box li label{width:calc(100% - 3%); vertical-align:top; word-break:keep-all; margin-bottom:0; font-size:15px; padding-left:5px; color:#777; font-weight:400;}
 .test_modal .btn_box{margin-top:15px; text-align:center;}
 .test_modal .btn_form{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .test_modal .video_text{height:74.5%; padding-bottom:50px;}
@@ -249,19 +254,23 @@
 .result_list .cty *{display:block; font-style:normal;}
 .result_list .cty span{color:#555; font-size:15px; letter-spacing:-1px; word-break:keep-all;}
 .result_list i.txt{display:inline-block; font-style:normal; margin-bottom:5px; color:#205cdc; font-size:12px; line-height:1.3rem; padding:0 15px; border:1px solid #205cdc; text-align:center; border-radius:50px;}
-.result_list .answer{padding-bottom:10px; border-bottom:1px dashed #ddd;}
+.result_list .answer{position:relative; padding-bottom:10px; border-bottom:1px dashed #ddd;}
 .result_list .answer i.txt{color:#ff8a00; border:1px solid #ff8a00;}
 .result_list .ans{margin-bottom:0;}
 .result_list .answer span,
 .result_list .ans span{margin-left:5px; color:#111; font-weight:600;}
 
+section.product > section{min-height:450px;}
 
-
-
-
-
-
-
+/* 오답노트 */
+.ox_list{flex-flow:column; position:relative; margin-top:30px; padding:40px 30px 40px 50px; border:1px solid #bbb;}
+.ox_list:before{content:''; display:block; position:absolute; left:-25px; top:20px; width:47px; height:97%; background:url(/img/member/test/bg_spring.png) repeat-y;}
+.ox_list > div{margin-top:40px; padding-top:35px; padding-bottom:0;}
+.ox_list > div > p{color:#555; margin-bottom:10px; font-size:16px; font-weight:700; word-break:keep-all;}
+.ox_list > div i{font-style:normal;}
+.ox_list div:not(.res):before{content:''; display:block; position:absolute; border-left:0 !important; border-top:1px dashed #ddd; top:0; left:0; width:100%; height:1px;}
+.ox_list div:first-child{margin-top:0; padding-top:0;}
+.ox_list div:first-child:before{display:none;}
 
 
 

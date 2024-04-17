@@ -11,7 +11,7 @@
 <body>
 <div id="container" layout:fragment="container">
 	<h4 class="fw-bold py-3">문제관리
-		<button type="button" class="btn btn btn-warning btn_posi" onclick="location.href='/teacher/test/insert'">문제등록하기</button>	
+		<a type="button" class="btn btn btn-warning btn_posi" th:href="@{/teacher/test/insert/{no}(no=${ltNum})}">문제등록하기</a>	
 	</h4>
    <div class="test_insert test_test">
 	   <div th:each="test, stat: ${testList}" class="row">
@@ -47,8 +47,8 @@
 		     </div>
 	     </div>
 	     <div class="demo-inline-spacing btn_box">
-   			<a th:href="@{/teacher/test/update/{no}(no=${test.prblNum})}" class="btn btn-outline-warning">문제수정</a>
-   			<a th:href="@{/teacher/test/delete/{no}(no=${test.prblNum})}" id="BtnDel" class="btn btn-outline-secondary">문제삭제</a>
+   			<a th:href="@{/teacher/test/update/{ltNum}/{no}(ltNum=${test.ltNum}, no=${test.prblNum})}" class="btn btn-outline-warning">문제수정</a>
+   			<a th:href="@{/teacher/test/delete/{ltNum}/{no}(ltNum=${test.ltNum}, no=${test.prblNum})}" id="BtnDel" class="btn btn-outline-secondary">문제삭제</a>
    		</div>
 	</div>
   </div>

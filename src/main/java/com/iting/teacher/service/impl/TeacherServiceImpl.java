@@ -19,4 +19,10 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherMapper.getTeacherInfo(ltNum);
 	}
 
+
+	@Override
+	public TeacherVO getTeacherMain(TeacherVO vo) {
+		return teacherMapper.getTeacherMain(vo);
+	}
+
 }

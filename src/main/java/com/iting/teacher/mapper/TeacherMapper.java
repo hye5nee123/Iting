@@ -7,4 +7,5 @@ import com.iting.teacher.model.TeacherVO;
 @Mapper
 public interface TeacherMapper {
 	public TeacherVO getTeacherInfo(String ltNum);
+	public TeacherVO getTeacherMain(TeacherVO vo);
 }

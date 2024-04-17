@@ -16,7 +16,7 @@
 			<div class="section-title tlsn_title">
 			    <h2 th:text="${tlsnInfo.ltTtl}"></h2><em> / </em><span th:text="${tlsnInfo.name}"></span><i>강사님</i>
 			    
-			    <button class="print">수료증 발급</button>
+			    <!-- /* <button class="print">수료증 발급</button> */ -->
 			</div>
 		</div>
 	</div>
@@ -61,7 +61,7 @@
 				</div>
 				<p th:text="${tlsn.rndCntn}"></p>
 				<div class="bottom">
-					<a href="#" class="go_link modal_btn">수강하기 ></a>
+					<a href="#" class="go_link gray modal_btn">수강하기 ></a>
 				</div>
 			</div>
 			<div class="graph">
@@ -85,7 +85,7 @@
 		</div>
 	</div>
 	<div class="btn_box">
-		<a th:href="@{/member/tlsn/list}" class="go_list">수강중인 강의가기</a>
+		<a th:href="@{/member/tlsn/list}" class="go_list orange">수강중인 강의가기</a>
 	</div>
 <script>
 const modal = document.querySelector('.test_modal');

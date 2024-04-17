@@ -39,6 +39,9 @@ import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
 import com.iting.common.service.CommonService;
 import com.iting.common.service.UsersService;
+import com.iting.teacher.model.TeacherVO;
+import com.iting.teacher.service.TeacherService;
+import com.iting.test.model.TestVO;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -59,6 +62,9 @@ public class CommonController {
 	@Autowired
 	CommonService commonService;
 
+	@Autowired
+	TeacherService teacherService;
+	
 	@Autowired
 	HttpSession httpSession;
 

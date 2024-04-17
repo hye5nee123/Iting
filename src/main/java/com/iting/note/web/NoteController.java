@@ -1,6 +1,5 @@
 package com.iting.note.web;
 
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -81,17 +80,15 @@ public class NoteController {
 		return "member/note/list";
 	}
 
-	// 강사 단건조회
+	// 강사 - 회원 단건조회
 	@GetMapping("teacher/note/info/{noteNum}/{gb}")
-	public String info(@PathVariable String noteNum, @PathVariable String ltNum, @PathVariable String gb, Model model, LectureVO vo) {
-		model.addAttribute("curriList", lectureService.getCurriList(vo));
-		model.addAttribute("cur", lectureService.getCurriAll(ltNum));
+	public String info(@PathVariable String noteNum, @PathVariable String gb, Model model, LectureVO vo) {
 		model.addAttribute("note", noteService.getRecInfo(noteNum));
 		model.addAttribute("gb", gb);
 		return "teacher/note/info";
 	}
 
-	// 회원 단건조회
+	// 회원 - 강사 단건조회
 	@GetMapping("member/note/info/{noteNum}/{gb}")
 	public String infoMem(@PathVariable String noteNum, @PathVariable String gb, Model model) {
 		model.addAttribute("note", noteService.getRecInfo(noteNum));

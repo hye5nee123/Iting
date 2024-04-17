@@ -45,7 +45,7 @@ public class TestController {
 	
 	// 학생 문제은행 목록조회
 	@RequestMapping("member/test/list")
-	public String getTestMemList(String ltNum, Model model, TestVO vo, HttpSession session) {
+	public String getTestMemList(Model model, TestVO vo, HttpSession session) {
 		String user = (String) session.getAttribute("usernum");
 		// model.addAttribute("testList", testService.getTestList(ltNum));
 		model.addAttribute("tlsnList", tlsnService.getTlsnList(user));
@@ -53,8 +53,9 @@ public class TestController {
 	}
 	
 	// 등록페이지 이동
-	@GetMapping("teacher/test/insert")
-	public ModelAndView list() {
+	@GetMapping("teacher/test/insert/{ltNum}")
+	public ModelAndView list(@PathVariable String ltNum, Model model) {
+		model.addAttribute("testList", testService.getTestList(ltNum));
 		ModelAndView mv = new ModelAndView("teacher/test/insert");
 		return mv;
 	}
@@ -63,32 +64,31 @@ public class TestController {
 	@ResponseBody
 	@PostMapping("teacher/test/insert")
 	public TestVO insertTest(@RequestBody TestVO vo) {
-		vo.setLtNum("lt00001");
 		testService.insertTest(vo);
 		return vo;
 	}
 	
 	// 수정페이지 이동
-	@GetMapping("teacher/test/update/{prblNum}")
-	public String update(@PathVariable String prblNum, Model model) {
-		model.addAttribute("test", testService.getTestInfo(prblNum));
+	@GetMapping("teacher/test/update/{ltNum}/{prblNum}")
+	public String update(@PathVariable String ltNum, @PathVariable String prblNum, Model model) {
+		model.addAttribute("test", testService.getTestInfo(ltNum, prblNum));
 		return "teacher/test/update";
 	}
 		
 	// 수정처리
 	@ResponseBody
-	@PostMapping("teacher/test/update/{prblNum}")
-	public String update(@RequestBody TestVO vo) {
+	@PostMapping("teacher/test/update")
+	public TestVO update(@RequestBody TestVO vo) {
 		testService.updateTest(vo);
-		return "redirect:teacher/test/list";
+		return vo;
 	}
 			
 	// 삭제처리
-	@RequestMapping("teacher/test/delete/{prblNum}")
-	public String delete(@PathVariable String prblNum){ 
+	@RequestMapping("teacher/test/delete/{ltNum}/{prblNum}")
+	public String delete(@PathVariable String ltNum, @PathVariable String prblNum){ 
 		System.out.println("prblNum : " + prblNum);
-		testService.deleteTest(prblNum);
-		return "redirect:/teacher/test/list";
+		testService.deleteTest(ltNum, prblNum);
+		return "redirect:/teacher/test/list/{ltNum}";
 	}
 	
 	// 문제 응시등록
@@ -117,6 +117,14 @@ public class TestController {
 		model.addAttribute("testResult", testService.getExamResult(applexamNum));
 		model.addAttribute("resultList", testService.getResultList(vo));
 		return "member/test/result";
+	}
+	
+	// 오답노트
+	@RequestMapping("member/test/ox/{ltNum}")
+	public String getOxList(@PathVariable String ltNum, Model model, TestVO vo) {
+		model.addAttribute("resultList", testService.getResultList(vo));
+		model.addAttribute("oxList", testService.getOxList(vo));
+		return "member/test/ox";
 	}
 	
 	

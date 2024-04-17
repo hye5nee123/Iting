@@ -23,4 +23,5 @@ public class NoteVO {
 	private String name;
 	private String ltNum;
 	private String user;
+	private String memNum;
 }

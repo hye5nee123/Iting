@@ -45,7 +45,7 @@
 			<div class="btn_cont">			
 			 	<button type="button" th:if="${tlsn.examYn == null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
 			 	<button type="button" th:if="${tlsn.examYn != null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">재응시 ></button>
-			 	<button type="button" th:if="${tlsn.examYn != null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link gray">오답노트 ></button>
+			 	<a th:if="${tlsn.examYn != null}" th:href="@{/member/test/ox/{ltNum}(ltNum=${tlsn.ltNum})}" class="go_link gray">오답노트 ></a>
 			</div>
 		</div>
 	</div>
