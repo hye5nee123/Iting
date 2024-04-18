@@ -137,9 +137,9 @@
 
                     <div class="col-lg-6 col-md-5">
                         <div class="search_wrapper">
-                            <input class="search" type="text" placeholder="찾는강의가 있으신가요?">
-                            <button class="button e_search_submit">
-                                <span><i class='bx bx-search-alt-2'></i>검색</span>
+                            <input class="text" type="text" placeholder="찾는강의가 있으신가요?" name="lectSearch" id="searchKeyWord">
+                            <button type="button" onclick="searchLect()">
+                                <i class='bx bx-search-alt-2'></i>검색
                             </button>
                             <div class="search_view_cover e_search_view_cover">
                             </div>
@@ -249,12 +249,17 @@
 
 
 
-    <!-- JS -->
-    <script src="/js/member/main.js"></script>
-
 </body>
 <script>
-    const goalDate = new Date("2024-04-30").getTime();
+
+
+function searchLect() {
+	lectureService.ltListReq(1, searchKeyWord.value);
+}
+
+
+
+    const goalDate = new Date("2024-04-29").getTime();
 
     function calcDate() {
         const now = new Date().getTime();
@@ -268,10 +273,10 @@
         if (distance < 0) {
             return '(지나감)';
         } else {
-            return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음`;
+            return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다.`;
         }
     }
-
+    
     setInterval(() => {
         document.getElementById('count').innerText = calcDate();
     }, 1000);

@@ -24,29 +24,29 @@ public class CurriController {
 	LectureService lectureService;
 	
 	//커리 목록조회
-	@GetMapping("/teacher/curri/list/{ltNum}")
+	@GetMapping("teacher/curri/list/{ltNum}")
 	public String list(@PathVariable String ltNum, Model model, CurriVO vo) {
 		vo.setLtNum(ltNum);
 		model.addAttribute("lecture", lectureService.getLectureInfo1(ltNum));
 		model.addAttribute("list", curriService.getCurriList(vo));
-		return "/teacher/curri/list";
+		return "teacher/curri/list";
 	}
 	//단건조회
-	@GetMapping("/teacher/curri/info/{rndNum}")
+	@GetMapping("teacher/curri/info/{rndNum}")
 	public String info(@PathVariable String rndNum, Model model) {
 		model.addAttribute("curri", curriService.getCurriInfo(rndNum));
 		curriService.getCurriInfo(rndNum);
-		return "/teacher/curri/info";
+		return "teacher/curri/info";
 	}
 	//커리등록페이지
-	@GetMapping("/teacher/curri/insert/{ltNum}")
+	@GetMapping("teacher/curri/insert/{ltNum}")
 	public ModelAndView list(@PathVariable String ltNum) {
-		ModelAndView mv = new ModelAndView("/teacher/curri/insert");
+		ModelAndView mv = new ModelAndView("teacher/curri/insert");
 		return mv;
 	}
 	//등록기능
 	@ResponseBody
-	@PostMapping("/teacher/curri/insert")
+	@PostMapping("teacher/curri/insert")
 	public int curriInsert(@RequestBody CurriVO vo) {
 
 		return curriService.curriInsert(vo);

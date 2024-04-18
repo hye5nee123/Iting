@@ -42,14 +42,14 @@ public class LectureController {
 
 	/* 회원 */
 	// 강의 전체목록 페이지 이동
-	@RequestMapping("/member/lecture/allList")
+	@RequestMapping("member/lecture/allList")
 	public ModelAndView allList(LectureVO vo) {
-		ModelAndView mv = new ModelAndView("/member/lecture/allList");
+		ModelAndView mv = new ModelAndView("member/lecture/allList");
 		return mv;
 	}
 
 	// 강의 전체목록 조회처리 - 장효은
-	@GetMapping("/member/lecture/allSelect")
+	@GetMapping("member/lecture/allSelect")
 	@ResponseBody
 	public Map<String, Object> allList(LectureVO vo, PagingVO pvo) {
 		pvo.setPageUnit(8);
@@ -85,7 +85,7 @@ public class LectureController {
 
 	/* 강사 -도승민 */
 	// 강의 목록 조회
-	@GetMapping("/teacher/lecture/getLectureList")
+	@GetMapping("teacher/lecture/getLectureList")
 	public String getLectureList(Model model, LectureVO vo, HttpSession session) {
 		vo.setLecturerNum((String) session.getAttribute("usernum"));
 		model.addAttribute("getLectureList", lectureService.getLectureList(vo));
@@ -93,7 +93,7 @@ public class LectureController {
 	}
 
 	// 강의 단건 조회
-	@GetMapping("/teacher/lecture/info/{ltNum}")
+	@GetMapping("teacher/lecture/info/{ltNum}")
 	public String info1(@PathVariable String ltNum, Model model) {
 		model.addAttribute("lecture", lectureService.getLectureInfo1(ltNum));
 		return "teacher/lecture/info";
@@ -101,13 +101,13 @@ public class LectureController {
 	// 강의 수정
 
 	// 강의 등록페이지 이동
-	@GetMapping("/teacher/lecture/insert")
+	@GetMapping("teacher/lecture/insert")
 	public void insertForm() {
 	}
 
 	// 등록기능
 	@ResponseBody
-	@PostMapping("/teacher/lecture/insert")
+	@PostMapping("teacher/lecture/insert")
 	public String ltInsert(@RequestBody LectureVO vo, MultipartFile uFile) {
 		System.out.println(vo + "===============");
 		FileVO fvo = FileUtil.uploadFile(uFile);
@@ -123,30 +123,30 @@ public class LectureController {
 	
 
 	// 강의 리스트
-	@GetMapping("/admin/lecture/list")
+	@GetMapping("admin/lecture/list")
 	public String list(Model model, LectureVO vo) {
 		model.addAttribute("list", lectureService.getLectureList(vo));
-		return "/admin/lecture/list";
+		return "admin/lecture/list";
 	}
 
 	// 승인 대기 목록
-	@GetMapping("/admin/lecture/ingLectureList")
+	@GetMapping("admin/lecture/ingLectureList")
 	public String ingLectureList(Model model,String ltNum, LectureVO vo) {
 		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
-		return "/admin/lecture/ingLectureList";
+		return "admin/lecture/ingLectureList";
 
 	}
 	//미승인 상세
-	@GetMapping("/admin/lecture/ingInfo/{ltNum}")
+	@GetMapping("admin/lecture/ingInfo/{ltNum}")
 	public String ingInfo(@PathVariable String ltNum, Model model) {
 		model.addAttribute("ing",lectureService.ingInfo(ltNum));
 		return "admin/lecture/ingInfo";
 	}
 
-	@GetMapping("/teacher/main")
+	@GetMapping("teacher/main")
 	public String ingLectureList1(Model model,String ltNum, LectureVO vo) {
 		model.addAttribute("ingLectureList", lectureService.ingLectureList(vo));
-		return "/teacher/main";
+		return "teacher/main";
 
 	}
 	
