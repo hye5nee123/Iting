@@ -24,8 +24,8 @@ color:#fff !important ;
 			<input th:value="${cnq.ltCnqNum}" class="form-control hidden"
 				type="text" id="ltCnqNum" name="ltCnqNum" readonly> 제목 : <input
 				type="text" name="ttl" th:value="${cnq.ttl}"> 내용 :
-			<textarea name="cntn" th:value="${cnq.cntn}"></textarea>
-			<br> 작성자 : <input type="text" name="name" th:value="${cnq.name}">
+			<input name="cntn" th:value="${cnq.cntn}"></input>
+			<br> 작성자 : <input type="text" name="name" th:value="${cnq.name}" readonly>
 			<div>
 				<a class="cnq_insertBtn" id="saveBtn">등록</a> <a class="cnq_reset"
 					id="listBtn" onclick="location.href='/member/cnq/list'">글목록으로</a>
