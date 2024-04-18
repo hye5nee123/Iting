@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.schedule.mapper.LrnMapper">
+	<!-- 일정 등록 -->
+	<insert id="lrnInsert" parameterType="LrnVO">
+		<selectKey keyProperty="lrnScheNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'lr' || LPAD(NVL(MAX(SUBSTR(lrn_sche_num, -5)), 0) + 1, 5, '0') 
+			FROM lrn_sche
+		</selectKey>
+		INSERT INTO lrn_sche_num
+				, sche_cntn
+				, mem_num
+				, fr_dt
+				, to_dt
+			VALUES 
+					(
+					#{lrnScheNum}
+					, #{scheCntn}
+					, #{memNum}
+					, #{frDt}
+					, #{toDt}
+					)
+	</insert>
+	
+	<!-- 일정 전체-->
+	<select id="getLrnList">
+		SELECT lrn_sche_num
+				, sche_cntn
+				, mem_num
+				, fr_dt
+				, to_dt
+		FROM lrn_sche
+	</select>
+</mapper>
