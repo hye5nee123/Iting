@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+</head>
+<body>
+<section layout:fragment="content">
+	<div id="container">
+		[[${list}]]
+		<h3>학습 캘린더</h3>
+		
+		<form>
+			일정
+			<input type="text">
+		</form>
+		
+		
+		<script>
+		
+		function formatDate(frDt) {
+		    const date = new Date(frDt);
+		    const year = date.getFullYear();
+		    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+		    const day = String(date.getDate()).padStart(2, '0');
+		    return `${year}/${month}/${day}`; // yyyy/MM/dd 형식으로 반환
+		}
+		
+
+	      document.addEventListener('DOMContentLoaded', function() {
+	        var calendarEl = document.getElementById('calendar');
+	        var calendar = new FullCalendar.Calendar(calendarEl, {
+	        	initialView: 'dayGridMonth',
+	       		  events : [
+	       		            {
+	       		              title: '물주기',
+	       		              start: '2024-04-01'
+	       		          	},
+	       		            {
+	       		              title: '뚜껑 닫기',
+	       		              start: '2024-04-03',
+	       		              end: '2024-04-05'
+	       		          	}
+	       		          ]
+	        });
+	        calendar.render();
+	      });
+	
+	    </script>
+		<div id='calendar'></div>
+	</div>
+
+</section>
+</body>
+</html>
