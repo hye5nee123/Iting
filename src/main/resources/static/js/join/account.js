@@ -72,12 +72,9 @@ function usertypeForm(num) {
 
 // 약관 체크
 let allboxs = document.querySelectorAll('.chk');
-let chkdboxs = document.querySelectorAll('.chk:checked');
 for (box of allboxs) {
 	box.addEventListener('click', () => {
-		if (allboxs.length != chkdboxs.length) {
 			document.querySelector('#chk_all').checked = false;
-		}
 	});
 }
 chk_all.addEventListener('click', () => {

@@ -17,4 +17,6 @@ public interface SaveMapper {
 	public String memSelect(String id);
 	
 	public List<SaveListVO> getSaveList(String memNum); // 내가 찜한 강의 목록
+
+	public int deleteSave(List<String> ltNums, String memNum); //내가 찜한 강의 삭제
 }

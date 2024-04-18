@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -39,6 +38,7 @@ import com.iting.common.model.FileVO;
 import com.iting.common.model.UsersVO;
 import com.iting.common.service.CommonService;
 import com.iting.common.service.UsersService;
+import com.iting.lecture.service.LectureService;
 import com.iting.teacher.model.TeacherVO;
 import com.iting.teacher.service.TeacherService;
 import com.iting.test.model.TestVO;
@@ -66,14 +66,14 @@ public class CommonController {
 	TeacherService teacherService;
 	
 	@Autowired
-	HttpSession httpSession;
-
+	LectureService lectureService;
+	
 	/* 메인이동 */
 	// 관리자
 	@RequestMapping("admin/main")
-	public ModelAndView goAdminMain() {
-		ModelAndView mv = new ModelAndView("admin/main");
-		return mv;
+	public String goAdminMain(Model model) {
+		model.addAttribute("ingLectureList", lectureService.ingLectureList(null));
+		return "admin/main";
 	}
 
 	// 회원
