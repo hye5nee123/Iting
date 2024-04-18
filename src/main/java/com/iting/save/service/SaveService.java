@@ -17,4 +17,6 @@ public interface SaveService {
 	public String memSelect(String id);
 	
 	List<SaveListVO> getSaveList(String memNum);
+
+	int deleteSave(List<String> ltNums, String memNum);
 }

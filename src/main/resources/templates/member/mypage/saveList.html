@@ -6,6 +6,36 @@
 <meta charset="UTF-8">
 <title>마이페이지 - 내가 찜한 강의</title>
 <style>
+.saveimgbox {
+	width: 300px;
+	height: 200px;
+}
+
+.saveimg {
+	max-width: 100%;
+	height: auto;
+}
+
+.savetop {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.savecont {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.saves {
+	display: flex;
+	width: 100%;
+}
+
+.tops {
+	flex-direction: row;
+}
 </style>
 </head>
 <body>
@@ -13,14 +43,25 @@
 		<div class="savetbl">
 			<div class="savetop">
 				<h3>내가 찜한 강의</h3>
-				<input id="chkall" type="checkbox"><p>전체 선택</p>
+				<div class="tops">
+					<label> <input id="chkall" type="checkbox"
+						onchange="makeChkList()"> 전체 선택
+					</label> <button type="button" class="delete" onclick="deleteSaves()">선택
+						삭제</button>
+				</div>
 			</div>
 			<div class="savecont">
 				<div class="saves" th:each="save : ${savelist}">
-					<input class="chkbox" type="checkbox">
+					<input class="chkbox" type="checkbox" th:value="${save.ltNum}"
+						onclick="makeChkList()">
+					<div class="saveimgbox">
+						<a class="saveimg" th:href="|/member/lecture/info/${save.ltNum}|"
+							role="button"> <img class="saveimg"
+							th:src="|/download/${save.ltImg}|" alt="강의 이미지">
+						</a>
+					</div>
 					<p class="savettl" th:text="${save.ltTtl}">제목</p>
 					<p class="savedate" th:text="${save.frDt}">개설날짜</p>
-					<img class="saveimg" src="/download/${save.ltImg}" alt="강의 이미지" role="button" th:onclick="location.href='/member/lecture/info/'+[[${save.ltNum}]]">
 					<p class="saveintro" th:text="${save.ltIntro}">소개</p>
 					<p class="savecat" th:text="${save.ltCateCd}">카테고리</p>
 					<p class="savelecname" th:text="${save.lecturerName}">강사명</p>
@@ -29,6 +70,61 @@
 				</div>
 			</div>
 		</div>
+		<script>
+	let allboxs = document.querySelectorAll('.chkbox');
+	let chkdboxs;
+	function makeChkList(){
+			chkdboxs = document.querySelectorAll('.chkbox:checked');
+	}
+	for (let box of allboxs) {
+		box.addEventListener('change', () => {
+			if (allboxs.length != chkdboxs.length) {
+				document.querySelector('#chkall').checked = false;
+			}
+		});
+	}
+	chkall.addEventListener('click', () => {
+		for (let obj of allboxs) {
+			if (chkall.checked) {
+				obj.checked = true;
+			} else if (!chkall.checked) {
+				obj.checked = false;
+			}
+		}
+	});
+	async function deleteSaves(){
+		let deleteNums = [];
+		if (chkdboxs == null || chkdboxs.length == 0){
+			return alert("삭제할 강의를 선택해주세요.");
+		} else {
+			for (let chkSave of chkdboxs){
+				deleteNums.push(chkSave.value);
+			}
+		} 
+		let result = await 
+		csrf_axios({
+			method: 'delete',
+			url: '/member/savedelete',
+			data: deleteNums
+		}).then(res => res.data);
+		if(result > 0){
+			Swal.fire({
+				icon: "success",
+				title: "삭제 완료",
+				confirmButtonText: "확인",
+				confirmButtonColor: "#205cdc"
+			})
+			.then((rest) => {
+				if (rest.isConfirmed || rest.dismiss) {
+					location.reload();
+				}
+			});
+		} else {
+			errorAlert("삭제 실패", "관리자에게 문의해주세요");
+		}
+			
+	}
+	</script>
 	</section>
 </body>
 </html>

@@ -38,6 +38,10 @@ public class SaveServiceImpl implements SaveService {
 		return saveMapper.getSaveList(memNum);
 	}
 
+	@Override
+	public int deleteSave(List<String> ltNums, String memNum) {
+		return saveMapper.deleteSave(ltNums, memNum);
+	}
 
 	
 

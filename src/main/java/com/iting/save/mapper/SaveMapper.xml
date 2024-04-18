@@ -24,4 +24,12 @@
 		FROM savelist_view
 		WHERE mem_num = #{memNum}
 	</select>
+	
+	<delete id="deleteSave">
+		DELETE save
+		WHERE mem_num = #{memNum} AND lt_num IN 
+ 		<foreach collection="ltNums" item="ltNum" separator="," open="(" close=")" >
+			#{ltNum}
+		</foreach>
+	</delete>
 </mapper>
