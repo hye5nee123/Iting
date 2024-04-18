@@ -21,20 +21,20 @@ public class LtNoticeController {
 	LtNoticeService ltnoticeService;
 	
 	//강의공지사항 목록
-	@GetMapping("/teacher/notice/ltnoticeList")
+	@GetMapping("teacher/notice/ltnoticeList")
 	public String getLtNoticeList(Model model, LtNoticeVO vo) {
 		model.addAttribute("ltnoticeList", ltnoticeService.getLtNoticeList(vo));
 		return "teacher/notice/ltnoticeList";
 	}
 	//강의공지 등록페이지
-	@GetMapping("/teacher/notice/insert")
+	@GetMapping("teacher/notice/insert")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView("teacher/notice/insert");
 		return mv;
 	}
 	//등록기능
 	@ResponseBody
-	@PostMapping("/teacher/notice/insert")
+	@PostMapping("teacher/notice/insert")
 	public String ltNoticeInsert(@RequestBody LtNoticeVO vo){
 		
 		ltnoticeService.ltNoticeInsert(vo);
@@ -42,11 +42,11 @@ public class LtNoticeController {
 	}
 	
 	//단건조회
-	@GetMapping("/teacher/notice/info/{ltNoticeNum}")
+	@GetMapping("teacher/notice/info/{ltNoticeNum}")
 	public String info(@PathVariable String ltNoticeNum, Model model) {
 		model.addAttribute("lno",ltnoticeService.getLtNoticeInfo(ltNoticeNum));
 		ltnoticeService.getLtNoticeInfo(ltNoticeNum);
-		return "/teacher/notice/info";
+		return "teacher/notice/info";
 	}
 	
 }

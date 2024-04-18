@@ -29,52 +29,52 @@ public class LiveController {
 	LiveService liveService;
 
 	//목록 조회
-	@GetMapping("/teacher/live/getLiveList")
+	@GetMapping("teacher/live/getLiveList")
 	public String list(Model model, LiveVO vo) {
 		model.addAttribute("getLiveList", liveService.getLiveList(vo));
 		return "teacher/live/getLiveList";
 	}
 	
 	//단건 조회
-	@GetMapping("/teacher/live/info/{spltNum}")
+	@GetMapping("teacher/live/info/{spltNum}")
 	public String info(@PathVariable String spltNum, Model model) {
 		model.addAttribute("live", liveService.getLiveInfo(spltNum));
 		return "teacher/live/info";
 	}
 	
 	//등록페이지 이동
-	@GetMapping("/teacher/live/insert")
+	@GetMapping("teacher/live/insert")
 	public void insertForm() {
 		
 	}
 	
 	//등록기능
 	@ResponseBody
-	@PostMapping("/teacher/live/insert")
+	@PostMapping("teacher/live/insert")
 	public String spltInsert(@RequestBody LiveVO vo) {
 		liveService.spltInsert(vo);
-		return "/teacher/live/getLiveList";
+		return "teacher/live/getLiveList";
 	}
 	
 	
 	/* 관리자 */
 	
 	//미승인 목록
-	@GetMapping("/admin/live/ingLiveList")
+	@GetMapping("admin/live/ingLiveList")
 	public String ingLiveList(Model model, String spltNum, LiveVO vo) {
 		model.addAttribute("ingLiveList", liveService.ingLiveList(vo));
-		return "/admin/live/ingLiveList";
+		return "admin/live/ingLiveList";
 	}
 	
-	@RequestMapping("/admin/live/allendLiveList")
+	@RequestMapping("admin/live/allendLiveList")
 	public ModelAndView allLiveList() {
-		ModelAndView mv = new ModelAndView("/admin/live/endLiveList");
+		ModelAndView mv = new ModelAndView("admin/live/endLiveList");
 		return mv;
 	} 
 	
 	//승인 완료 목록
 	@ResponseBody
-	@GetMapping("/admin/live/endLiveList")
+	@GetMapping("admin/live/endLiveList")
 	public Map<String, Object>endLiveList(LiveVO vo, PagingVO pvo){
 		pvo.setPageUnit(5);
 		pvo.setPageSize(5);
@@ -93,7 +93,7 @@ public class LiveController {
 	
 	//승인수정 기능
 	@ResponseBody
-	@GetMapping("/admin/live/update/{spltNum}/{accpYnCd}")
+	@GetMapping("admin/live/update/{spltNum}/{accpYnCd}")
 	public LiveVO update(LiveVO vo, @PathVariable String spltNum, @PathVariable String accpYnCd) {
 		vo.setSpltNum(spltNum);
 		vo.setAccpYnCd(accpYnCd);
