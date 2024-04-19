@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<meta charset="UTF-8">
+<title>정산관리</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+
+<style type="text/css">
+.settDiv { text-align: right; }
+</style>
+
+<script th:inline="javascript">
+	
+</script>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<h4 class="fw-bold py-3 mb-4">정산 리스트</h4>
+		<div class="nav-align-top mb-4">
+			<div class="tab-content test_content">
+				<div class="tab-pane fade active show note_box" id="navs-pills-top-home" role="tabpanel">
+					<div class="settDiv">
+						<h6>정산중 : <span th:text="${settCount.settIng}"></span></h6>
+						<h6>정산완료 : <span th:text="${settCount.settFin}"></span></h6>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>기본급</th>
+								<th>인센티브</th>
+								<th>총 정산 금액</th>
+								<th>정산 상태</th>
+								<th>날짜</th>
+								<th>강사 번호</th>
+								<th>강의 번호</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="sett : ${settList}">
+								<td th:text="${sett.settNum}"></td>
+								<td th:text="${sett.salary}"></td>
+								<td th:text="${sett.incn}"></td>
+								<td th:text="${sett.allSettPrice}"></td>
+								<td th:text="${sett.settStCd}"></td>								
+								<td th:text="${#dates.format(sett.settDt, 'yyyy/MM/dd')}"></td>
+								<td th:text="${sett.lecturerNum}"></td>
+								<td th:text="${sett.ltNum}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+	<script>
+		
+	</script>
+	</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <section layout:fragment="content">
 
-	<style>
+<style>
 #cntn th {
 	background: #EFEFFB
 }
@@ -40,18 +40,9 @@
 	background: #ff8a00;
 	border-radius: 5px;
 }
+
 </style>
-	<h2 class="related-title">글정보</h2>
-	<ul class="info">
-		<li>조회수 : [[${cnq.hit}]]</li>
-		<br>
-		<br>
-		<li>글번호 :[[${cnq.ltCnqNum}]]</li>
-		<br>
-		<br>
-		<li>댓글수</li>
-	</ul>
-	<br> <br> <br>
+	<h2 class="related-title">게시글 상세</h2>
 	<form method="post" name="frm">
 		<div>
 			<table id="cntn">
@@ -81,6 +72,7 @@
 					</tr>
 					<tr>
 						<th style="padding: 20px;">첨부파일</th>
+
 						<td colspan="3" style="padding: 20px;">
 							<div th:each="file:${files}" th:text="${file.atchTtl}"
 								th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
@@ -91,25 +83,26 @@
 		</div>
 		<div>
 			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
-				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
+				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|" >수정</button>
 			<button class="cnq_insertBtn" type="button" id="listBtn">목록</button>
 			<button class="cnq_reset" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
 		</div>
 	</form>
+	<br>
+	<br>
+	<br>
 	<!-- 댓글  시작-->
 	<div>
 		<div class="checkout__input contact__form">
 			<form name="replyForm" method="post">
-				<div class="comment-name">
-					<span class="anonym">작성자 : 
-					<input type="text" class="form-control" id="DRWUPR" placeholder="이름"
+				<div class="contact__text">
+					<!--  <h5>ID : [[${session.userId}]] </h5>-->
+					<input type="hidden" class="form-control" id="DRWUPR"
 						name="DRWUPR" th:value="${session.userId}" readonly
 						style="width: 100px; border: none;">
-					</span>
 					<input type="hidden" name="ltCnqNum" th:value="${cnq.ltCnqNum}">
 				</div>
-				내용 :
 				<textarea name="cntn"></textarea>
 				<br> 
 				<button type="button" id="saveRBtn" class="cnq_insertBtn">등록</button>

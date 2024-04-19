@@ -11,20 +11,22 @@
 	rel="stylesheet">
 
 <style>
+
+
 #cnq {
-	width: 100%;
-	height: 3000px;
+	width:100%;
+	height: 1000px;
 	border: none;
 }
 
-#noticeList{width: 500%;
+#noticeList{width: 100%;
 	height: 1000px;
 	border: none;}
 
 .tab-pane{
 position: relative;
-    width: 50vw; /* 너비 지정 */
-    height: 50vh; /* 높이 지정 */
+    min-width: 50vw; /* 너비 지정 */
+    min-height: 50vh; /* 높이 지정 */
     overflow: hidden;
 }
 </style>
@@ -148,7 +150,7 @@ position: relative;
 							</div>
 						</div>
 						<!-- 커뮤니티 시작 -->
-						<div class="tab-pane" id="tabs-6" role="tabpanel">
+						<div class="tab-pane cnq-tab-pane" id="tabs-6" role="tabpanel">
 							<div class="product__details__tab__content">
 								<div class="product__details__tab__content__item">
 									<iframe th:src="|/member/cnq/list/${lecture.ltNum}|" id="cnq"
@@ -160,7 +162,7 @@ position: relative;
 						<!-- 추전강의 -->
 						<div class="tab-pane" id="tabs-7" role="tabpanel">
 							<div class="product__details__tab__content">
-								<iframe th:src="|/teacher/notice/mltnoticeList|" id="noticeList"
+								<iframe th:src="|/member/notice/mltnoticeList|" id="noticeList"
 										scrolling="no" class="inner"></iframe>
 								<div class="product__details__tab__content__item">
 									

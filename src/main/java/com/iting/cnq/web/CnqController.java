@@ -67,7 +67,7 @@ public class CnqController {
 		CnqVO vo = cnqService.getCnqInfo(ltCnqNum);
 		model.addAttribute("cnq", vo);
 
-		// 조회 
+		// 조회
 		cnqService.updateHit(ltCnqNum);
 
 		// 첨부파일 조회
@@ -91,7 +91,7 @@ public class CnqController {
 	@ResponseBody
 	@PostMapping("/member/cnq/insert")
 	// jsonType 을 받기 위해서 @RequestBody붙임.
-	//usernum을 받아오기 위해서 session 값 가져옴.
+	// usernum을 받아오기 위해서 session 값 가져옴.
 	public CnqVO cnqInsert(@RequestBody CnqVO vo, HttpSession session) {
 		vo.setMemNum((String) session.getAttribute("usernum"));
 		System.out.println(vo + "====================");
@@ -118,15 +118,23 @@ public class CnqController {
 
 // 삭제처리.
 	@RequestMapping("/member/cnq/{ltCnqNum}")
-	public String delete(@PathVariable String ltCnqNum) {
+	public String delete(@PathVariable String ltCnqNum, String ltNum, CnqVO vo, Model model) {
+		CnqVO cvo = cnqService.getCnqInfo(ltCnqNum);
+		vo.setLtNum(ltNum);
+		
+		if (cnqService.getCnqInfo(ltCnqNum) == null) {
+			model.addAttribute("msg", "없는 게시글 정보입니다 확인해주세요");
+			model.addAttribute("url","/member/cnq/list/" + cvo.getLtNum());
+			return "member/cnq/alert";
+		}
 		cnqService.deleteCnq(ltCnqNum);
-		return "redirect:/member/cnq/list";
+		return "redirect:/member/cnq/list/" + cvo.getLtNum();
 	}
 
 	/* 강사 */
 
 	/* 관리자 */
-	
+
 	// 강의문답 전체조회. //
 	@RequestMapping("/admin/cnq/list")
 	public String getAdminCnqList(Model model, CnqVO vo) {
