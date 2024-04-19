@@ -32,6 +32,7 @@ public class TlsnVO {
 	private String rndTtl;
 	private String ltTm;
 	private String examYn;
+	private int score;
 	
 	private String retCode;
 	private String cnt;
