@@ -28,18 +28,18 @@ public class LtNoticeController {
 	}
 	
 	//회원용 강의 공지사항 목록
-	@GetMapping("teacher/notice/mltnoticeList")
+	@GetMapping("member/notice/mltnoticeList")
 	public String getMltNoticeList(Model model, LtNoticeVO vo) {
 		model.addAttribute("mltnoticeList",ltnoticeService.getMltNoticeList(vo));
-		return "teacher/notice/mltnoticeList";
+		return "member/notice/mltnoticeList";
 	}
 	
 	 //회원용 상세 공지사항
-	  @GetMapping("teacher/notice/mltnoticeInfo/{ltNoticeNum}") 
+	  @GetMapping("member/notice/mltnoticeInfo/{ltNoticeNum}") 
 	  public String mltnoticeInfo(@PathVariable String ltNoticeNum, Model model){
 	  model.addAttribute("lno",ltnoticeService.getMltNoticeInfo(ltNoticeNum));
 	  ltnoticeService.getMltNoticeInfo(ltNoticeNum);
-	  return "teacher/notice/mltnoticeInfo"; 
+	  return "member/notice/mltnoticeInfo"; 
 	  }
 	 
 	
