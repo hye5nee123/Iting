@@ -33,9 +33,8 @@
 						
 						<div class="mb-3 test_list">
 							<label for="ltIntro" class="form-label">첨부파일</label>
-							<input class="form-control" type="file" name="uFile">
+							<input class="form-control" type="file" name="uFile" onchange="uploadFileReq(testForm.typCode.value, testForm)">
 							<input type="hidden" name="typCode" th:value="k2">
-							<br><button type="button" onclick="uploadFileReq(testForm.typCode.value, testForm)">등록</button>
 						</div>
 						<div class="mb-3 test_list">
 							<label for="file" class="form-label">내용</label> <textarea

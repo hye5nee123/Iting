@@ -1,5 +1,5 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8081/chatserver'
+    brokerURL: 'ws://localhost:8081/chatserver' // 운영서버 도메인
 });
 
 stompClient.activate();
