@@ -28,7 +28,7 @@ public class SubspController {
 	/* 회원 */
 	
 	// 구독 등록
-	@PostMapping("/member/subsp/insert")
+	@PostMapping("member/subsp/insert")
 	public SubspVO subspInsert(@RequestBody SubspVO vo) {
 		
 		System.out.println(vo);
@@ -44,27 +44,27 @@ public class SubspController {
 	}
 	
 	// 구독 등록 화면 이동
-	@RequestMapping("/member/subsp/form")
+	@RequestMapping("member/subsp/form")
 	public ModelAndView subspForm() {
 		ModelAndView mv = new ModelAndView("/member/subsp/form");
 		return mv;
 	}
 	
 	// 내 구독 정보
-	@RequestMapping("/member/subsp/info")
+	@RequestMapping("member/subsp/info")
 	public ModelAndView subspList() {
 		ModelAndView mv = new ModelAndView("/admin/subsp/info");
 		return mv;
 	}
 	
 	// 구독정보 단건 조회
-	@GetMapping("/member/subsp/{memNum}")
+	@GetMapping("member/subsp/{memNum}")
 	public SubspVO memInfo(@PathVariable String memNum) {
 		return subspService.getSubspInfo(memNum);
 	}
 	
 	// 구독 빌링키 등록 (수정)
-	@PutMapping("/member/subsp/billing")
+	@PutMapping("member/subsp/billing")
 	public SubspVO subpUpdate(@RequestBody SubspVO vo) {
 		System.out.println(vo);
 		subspService.subspUpdate(vo);

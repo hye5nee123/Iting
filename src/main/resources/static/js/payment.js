@@ -200,7 +200,7 @@ function sttlInsetRes(data) {
 			  if (result.isConfirmed) {
 			    location.href = "/member/lecture/allList";
 			  } else {
-			  	location.href = "/member/main";
+			  	location.href = "/member/mypage/sttlList";
 			  }
 			});
 		}
