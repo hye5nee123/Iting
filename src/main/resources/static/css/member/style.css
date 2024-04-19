@@ -527,6 +527,7 @@ ol {
 }
 
 .header__nav__option a:hover{background:#f57b54; color:#fff;}
+.banner.spad{margin-top:500px;}
 
 .header__nav__option a i{margin-top:-2px;}
 .header__nav__option #count{display: inline-block;
@@ -945,6 +946,7 @@ ol {
 	color: #b7b7b7;
 	font-size: 24px;
 	font-weight: 700;
+	letter-spacing:-0.5px;
 	list-style: none;
 	display: inline-block;
 	margin-right: 88px;
