@@ -66,7 +66,6 @@
 					<th>첨부파일</th>
 					<th>조회수</th>
 					<th>작성자</th>
-
 				</tr>
 			<tbody>
 				<tr th:each="cnq, stat: ${cnqList}"
@@ -74,8 +73,9 @@
 					<td th:text="${cnq.ltCnqNum}"></td>
 					<td th:text="${cnq.ttl}"></td>
 					<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
-					<td><span th:if="${not #strings.isEmpty(cnq.atchNum)}"
-						th:text="'icon자리'"></span></td>
+					<td><span th:if="${not #strings.isEmpty(cnq.atchNum)}">
+							<img src="/img/member/cnq/file.png" alt="Icon">
+					</span></td>
 					<td th:text="${cnq.hit}"></td>
 					<td th:text="${cnq.name}"></td>
 				</tr>
