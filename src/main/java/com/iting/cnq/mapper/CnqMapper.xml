@@ -44,7 +44,8 @@
 				c.drwup_dt,
 				c.hit,
 				m.name,
-				c.atch_num
+				c.atch_num,
+				c.lt_num
 		FROM 	lt_cnq c JOIN mem m
 			on c.mem_num = m.mem_num
 		WHERE 	lt_cnq_num = #{ltCnqNum}
