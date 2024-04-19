@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <section layout:fragment="content">
 
-	<style>
+<style>
 #cntn th {
 	background: #EFEFFB
 }
@@ -40,6 +40,7 @@
 	background: #ff8a00;
 	border-radius: 5px;
 }
+
 </style>
 	<h2 class="related-title">게시글 상세</h2>
 	<form method="post" name="frm">
@@ -71,6 +72,7 @@
 					</tr>
 					<tr>
 						<th style="padding: 20px;">첨부파일</th>
+
 						<td colspan="3" style="padding: 20px;">
 							<div th:each="file:${files}" th:text="${file.atchTtl}"
 								th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
@@ -79,7 +81,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div th:with="userNum=${session.userId}">
+		<div>
 			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|" >수정</button>
 			<button class="cnq_insertBtn" type="button" id="listBtn">목록</button>

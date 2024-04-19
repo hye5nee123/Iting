@@ -1,9 +1,20 @@
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/blank}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/bootstrap.min.css"
+	type="text/css">
 <section layout:fragment="content">
-
+	<style>
+#insertBtn {
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #205cdc;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
 	<script th:inline="javascript">
 		let ltNum =  [[${cnqVO.ltNum}]]
 		function gopage(p){
@@ -47,7 +58,7 @@
 		</div>
 		<br>
 		<table class="table table-striped">
-		
+
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -58,7 +69,6 @@
 					<th>작성자</th>
 
 				</tr>
-				
 			<tbody>
 				<tr th:each="cnq, stat: ${cnqList}"
 					th:onclick="move([[${cnq.ltCnqNum}]])">
