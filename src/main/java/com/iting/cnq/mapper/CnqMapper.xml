@@ -22,9 +22,6 @@
 			<if test="vo.ttl != null and vo.ttl != ''">
 				AND TTL like '%' || #{vo.ttl} || '%'
 			</if>
-			<if test="vo.cntn != null and vo.cntn != ''">
-				AND CNTN like '%' || #{vo.cntn} || '%'
-			</if>
 			<if test="vo.name != null and vo.name != ''">
 				AND NAME like '%' || #{vo.name} || '%'
 			</if>
