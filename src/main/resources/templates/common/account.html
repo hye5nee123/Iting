@@ -50,23 +50,23 @@
 					<label for="id" class="form-label">아이디 <span class="needs">*</span></label>
 					<input class="form-control" type="text" id="id" name="id"
 						placeholder="4~20자의 영문 대소문자, 숫자" onblur="idChk()">
-					<div class="idchk"></div>
+					<div class="idchk form-text"></div>
 				</div>
 				<div class="mb-3">
 					<label for="pw" class="form-label">비밀번호 <span class="needs">*</span></label>
 					<input class="form-control" type="password" id="pw" name="pw"
 						placeholder="8~16자의 영문 대소문자, 숫자" onblur="pwCheck()">
-					<div class="pwchkstr"></div>
+					<div class="pwchkstr form-text"></div>
 				</div>
 				<div class="mb-3">
 					<label for="pwchk" class="form-label">비밀번호 확인 <span class="needs">*</span></label>
 					<input class="form-control" type="password" id="pwchk" name="pwchk" onblur="pwCheck()">
-					<div class="pwchkchkstr"></div>
+					<div class="pwchkchkstr form-text"></div>
 				</div>
 				<div class="mb-3">
 					<label for="email" class="form-label">이메일 <span class="needs">*</span></label>
 					<input class="form-control" type="text" id="email" name="email" onblur="mailCheck()">
-					<div class="mailchkstr"></div>
+					<div class="mailchkstr form-text"></div>
 				</div>
 				<div class="mb-3">
 					<label for="phone" class="form-label">휴대전화번호 <span class="needs">*</span></label>
@@ -74,7 +74,7 @@
 						onblur="phoneCheck()">
 					<button type="button" class="site-btn" id="sendsms"
 						onclick="sendSMS(phone.value)">인증</button>
-					<div class="phonechkstr"></div>
+					<div class="phonechkstr form-text"></div>
 					<div class="smschk">
 						<!-- 인증번호 입력란 -->
 					</div>
@@ -101,10 +101,11 @@
 				</div>
 			</div>
 			<div class="mb-3">
-				<div class="form-check mb-1">
+				<div class="form-check">
 					<input class="form-check-input" type="checkbox" id="chk_all">
 					<label class="form-label" for="chk_all">전체 약관 동의</label>
 				</div>
+				<hr class="mt-0 mb-2">
 				<div class="form-check mb-1">
 					<input class="form-check-input chk svc" type="checkbox" id="aglee1">
 					<label class="form-label" for="aglee1">[필수]Iting 이용 약관에 동의</label>
