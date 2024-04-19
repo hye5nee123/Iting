@@ -7,11 +7,21 @@
 <meta charset="UTF-8">
 <title>강사 메인페이지</title>
 <script th:inline="javascript">
-function move(){
-	location.href='/teacher/lecture/getLectureList'
-}
+
 
 </script>
+<style>
+.cc{
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
 </head>
 <body>
 <div id="container" layout:fragment="container">
@@ -20,14 +30,9 @@ function move(){
 			<div class="card">
 			  <h5 class="card-header">강의신청목록</h5>
 			  <div class="card-body">
+			  <a href="/teacher/lecture/getLectureList" class="cc">목록가기</a>
 			  <table class="table">
-			  	<colgroup>
-			  		<col span="1">
-			  		<col span="1" width="20%">
-			  		<col span="1" width="18%">
-			  		<col span="1" width="20%">
-			  		<col span="1" width="17%">
-			  	</colgroup>
+			
 					<thead>
 						<tr>
 							<th>강의제목</th>
