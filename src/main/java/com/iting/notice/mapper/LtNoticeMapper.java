@@ -14,4 +14,8 @@ public interface LtNoticeMapper {
 	public int ltNoticeInsert(LtNoticeVO VO);
 	//강의 공지 상세
 	public LtNoticeVO getLtNoticeInfo(String ltNoticeNum);
+	//회원 보기용 공지사항 목록
+	public List<LtNoticeVO> getMltNoticeList(LtNoticeVO vo);
+	//회원 보기용 공지사항 상세
+	public LtNoticeVO getMltNoticeInfo(String ltNoticeNum);
 }

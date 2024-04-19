@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	>
+	
+<head>
+<meta charset="UTF-8">
+<title>강의 공지사항</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+<script th:inline="javascript">
+	function move(ltNoticeNum){
+		location.href='/teacher/notice/mltnoticeInfo/'+ltNoticeNum
+	}
+</script>
+<style>
+.table{
+whidth:100px;
+}
+</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				강의 공지사항 목록
+			</h4>
+		<div class="card">
+                <div class="table-responsive text-nowrap">
+                  <table class="table" border="1">
+                    <thead>
+                      <tr>
+                        <th>공지사항 번호</th>
+                        <th>공지사항 제목</th>
+                        <th>내용</th>
+                        <th>공지날짜</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <tr th:each="lno, stat: ${mltnoticeList}"
+							th:onclick="move([[${lno.ltNoticeNum}]])">
+							<td th:text="${lno.ltNoticeNum}"></td>
+							<td th:text="${lno.ltNoticeTtl}"></td>
+							<td th:text="${lno.ltNoticeCntn}"></td>
+							<td th:text="${#dates.format(lno.ltNoticeRegDt,'yyyy-MM-dd')}"></td>
+							
+						</tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+	
+		</div>
+	
+	</div>
+</body>
+
+</html>
