@@ -8,9 +8,6 @@
 
 <script th:inline="javascript">
 
-function move(spltNum){
-	location.href='/admin/live/info/'+ spltNum
-}
 
 //등록버튼 이벤트 핸들러
 function update(spltNum,accpYnCd){
@@ -60,7 +57,7 @@ function update(spltNum,accpYnCd){
 					</thead>
 					<tbody>
 						<tr th:each="ing, stat: ${ingLiveList}"
-							th:onclick="move([[${ing.spltNum}]])">
+							>
 							<td th:text="${ing.spltNum}"></td>
 							<td th:text="${ing.spltTtl}"></td>
 							<td th:text="${ing.spltCntn}"></td>
