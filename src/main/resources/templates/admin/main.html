@@ -12,6 +12,18 @@ function move(no){
 }
 
 </script>
+<style>
+.dd{
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #205cdc;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
 </head>
 <body>
 <div id="container" layout:fragment="container">
@@ -21,6 +33,9 @@ function move(no){
 			  <!-- <a href="/admin/lecture/ingLectureList"> -->
 			  <h5 class="card-header" role="button" th:onclick="location.href='/admin/lecture/ingLectureList'">강의신청목록</h5>
 			  <!-- </a> -->
+			  <div>
+			  <a href="/admin/lecture/ingLectureList" class="dd">목록가기</a>
+			  </div>
 			  <div class="card-body">
 			    <table class="table">
 					<thead>

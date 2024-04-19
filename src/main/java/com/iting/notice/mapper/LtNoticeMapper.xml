@@ -11,6 +11,28 @@ SELECT LT_NOTICE_NUM
       ,LT_NOTICE_REG_DT
 FROM LT_NOTICE
 
+
+</select>
+
+<!--회원 보기용 공지사항  -->
+
+<select id="getMltNoticeList" resultType="LtNoticeVO">
+SELECT LT_NOTICE_NUM
+      ,LT_NOTICE_TTL
+      ,LT_NOTICE_CNTN
+      ,LT_NOTICE_REG_DT
+FROM LT_NOTICE
+
+</select>
+
+<!-- 회원 보기용 공지사항 단건 -->
+<select id="getMltNoticeInfo" resultType="LtNoticeVO">
+SELECT LT_NOTICE_NUM
+      ,LT_NOTICE_TTL
+      ,LT_NOTICE_CNTN
+      ,LT_NOTICE_REG_DT
+FROM LT_NOTICE
+WHERE LT_NOTICE_NUM =#{ltNoticeNum}
 </select>
 
 <!-- 공지사항 등록 -->

@@ -11,4 +11,8 @@ public interface LtNoticeService {
 	public int ltNoticeInsert(LtNoticeVO vo);
 	//상세
 	public LtNoticeVO getLtNoticeInfo(String ltNoticeNum);
+	//보기용 목록
+	public List<LtNoticeVO> getMltNoticeList(LtNoticeVO vo);
+	//보기용 상세
+	public LtNoticeVO getMltNoticeInfo(String ltNoticeNum);
 }

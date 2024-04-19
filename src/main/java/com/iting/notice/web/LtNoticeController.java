@@ -26,6 +26,23 @@ public class LtNoticeController {
 		model.addAttribute("ltnoticeList", ltnoticeService.getLtNoticeList(vo));
 		return "teacher/notice/ltnoticeList";
 	}
+	
+	//회원용 강의 공지사항 목록
+	@GetMapping("member/notice/mltnoticeList")
+	public String getMltNoticeList(Model model, LtNoticeVO vo) {
+		model.addAttribute("mltnoticeList",ltnoticeService.getMltNoticeList(vo));
+		return "member/notice/mltnoticeList";
+	}
+	
+	 //회원용 상세 공지사항
+	  @GetMapping("member/notice/mltnoticeInfo/{ltNoticeNum}") 
+	  public String mltnoticeInfo(@PathVariable String ltNoticeNum, Model model){
+	  model.addAttribute("lno",ltnoticeService.getMltNoticeInfo(ltNoticeNum));
+	  ltnoticeService.getMltNoticeInfo(ltNoticeNum);
+	  return "member/notice/mltnoticeInfo"; 
+	  }
+	 
+	
 	//강의공지 등록페이지
 	@GetMapping("teacher/notice/insert")
 	public ModelAndView list() {

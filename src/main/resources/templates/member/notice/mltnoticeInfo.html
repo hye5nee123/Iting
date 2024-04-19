@@ -2,9 +2,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/teacher/layout}">
+>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/bootstrap.min.css" type="text/css">
 <title>공지 사항 상세 페이지</title>
 <link rel="stylesheet" href="/css/teacher/content.css" />
 <link
@@ -28,7 +29,7 @@
 <body>
 	<div id="container" layout:fragment="container">
 		<div class="card mb-4">
-			<h5 class="card-header">강의상세</h5>
+		<h5 class="card-header">강의상세</h5>
 			<div class="card-body">
 				<div class="mb-3 row">
 					<label class="col-md-2 col-form-label">공지사항 번호</label>
@@ -56,7 +57,7 @@
 				</div>
 		</div>
 		<div>
-		<a href="/teacher/notice/ltnoticeList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
+		<a href="/member/notice/mltnoticeList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
 		</div>						
 	</div>
 	</div>
