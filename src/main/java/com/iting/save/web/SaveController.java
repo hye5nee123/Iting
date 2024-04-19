@@ -1,14 +1,18 @@
 package com.iting.save.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iting.cnq.model.CnqVO;
@@ -52,4 +56,15 @@ public class SaveController {
 			model.addAttribute("savelist", saveService.getSaveList(usernum));
 			return "member/mypage/saveList";
 		}
+		
+		// 내가 찜한 목록 삭제
+		@ResponseBody
+		@DeleteMapping("/member/savedelete")
+		public int deleteSaves(@RequestBody List<String> ltNums, HttpSession session) {
+			System.out.println(ltNums);
+			String memNum = (String) session.getAttribute("usernum");
+			System.out.println(memNum);
+			return saveService.deleteSave(ltNums, memNum);
+		}
+		
 }

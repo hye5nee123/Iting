@@ -105,7 +105,7 @@ public class TestController {
 	// 수정처리
 	@ResponseBody
 	@PostMapping("member/test/list")
-	public String updateExam(@RequestBody List<TestVO> vo) {
+	public String updateExam(@RequestBody List<TestVO> vo, Model model) {
 		testService.updateExam(vo);
 		System.out.println("들어와" + vo);
 		return "redirect:member/test/list";

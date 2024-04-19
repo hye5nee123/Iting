@@ -96,13 +96,6 @@ public class NoteController {
 		return "member/note/info";
 	}
 
-	@MessageMapping("/hello") // 메세지가 들어오면
-	@SendTo("/topic/greetings") // greetings 구독자에게 메세지 전송
-	public Greeting greeting(HelloMessage message) throws Exception {
-		Thread.sleep(1000); // simulated delay // 1초 대기
-		return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!"); // 이 내용을 전송하겠다
-	}
-
 	// 강사 - 회원 메세지 등록페이지 이동
 	@GetMapping("teacher/note/insert/{ltNum}/{memNum}")
 	public ModelAndView list(@PathVariable String ltNum, @PathVariable String memNum, Model model) {
@@ -120,7 +113,7 @@ public class NoteController {
 		MemberVO mvo = memberService.getMemberInfo(vo.getRecPs());
 		System.out.println(mvo);
 		// 요청 처리 메세지를 보내고
-		this.template.convertAndSendToUser(mvo.getId(), "/topic/message", "메세지가 도착했습니다.");
+		this.template.convertAndSendToUser(mvo.getId(), "/topic/message", vo);
 		return vo;
 	}
 
@@ -141,7 +134,7 @@ public class NoteController {
 		MemberVO mvo = memberService.getMemberInfo(vo.getRecPs());
 		System.out.println(mvo);
 		// 요청 처리 메세지를 보내고
-		this.template.convertAndSendToUser(mvo.getId(), "/topic/message", "메세지가 도착했습니다.");
+		this.template.convertAndSendToUser(mvo.getId(), "/topic/message", vo);
 		return vo;
 	}
 

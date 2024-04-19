@@ -10,7 +10,13 @@ stompClient.onConnect = (frame) => {
         showGreeting(JSON.parse(greeting.body).content);
     });
     stompClient.subscribe('/user/topic/message', (greeting) => {
-        alert(greeting.body);
-        location.href = "/member/note/list";
+        let vo = JSON.parse(greeting.body);
+        if(confirm("메세지가 도착했습니다. 이동할까요?")){
+        	if(vo.userType == 'member'){
+        		location.href = `/member/note/list/${vo.ltNum}`; 
+        	} else {
+        		location.href = `/teacher/note/list/${vo.ltNum}`; 
+        	}
+        }
     });
 };
