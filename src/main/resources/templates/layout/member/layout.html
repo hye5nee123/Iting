@@ -14,8 +14,7 @@
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/css/member/bootstrap.min.css" type="text/css">
@@ -75,7 +74,7 @@
     <style>
 
 #iting {
-    max-width: 15%;
+    max-width:90%;
 }
 
     </style>
@@ -124,26 +123,19 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>어서오세요 <span th:text="${session.userId}"></span>님</p>
-
+                            <p><i class='bx bx-smile'></i> 어서오세요 <span th:text="${session.username}"></span>님</p>
                         </div>
-                        <div class="main_btn">
-                            <a href="/member/main"><img src="/img/member/main/아이팅.png" id="iting"></a>
-
-                        </div>
-
-
                     </div>
 
                     <div class="col-lg-6 col-md-5">
-                        <div class="search_wrapper">
+                        <!-- <div class="search_wrapper">
                             <input class="text" type="text" placeholder="찾는강의가 있으신가요?" name="lectSearch" id="searchKeyWord">
                             <button type="button" onclick="searchLect()">
                                 <i class='bx bx-search-alt-2'></i>검색
                             </button>
                             <div class="search_view_cover e_search_view_cover">
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="header__top__right">
 
@@ -154,12 +146,6 @@
                                 <a href="/account">회원가입</a>
                                 <a th:if="${session.usertype} == 'ROLE_B1'" href="/member/mypage">마이페이지</a>
                             </div>
-                            <div type="hidden">
-                           	[[${subspinfo}]]
-                            </div>
-                            <div id="count">0일</div>
-                            <div class="header__top__hover">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,13 +155,13 @@
             <div class="row">
                 <div class="col-lg-2 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="/img/logo.png" alt=""></a>
+                    	<a href="/member/main"><img src="/img/common/logo_w.png" id="iting"></a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-6">
+                <div class="col-lg-7 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="/member/lecture/allList">수강신청(전체강의)</a>
+                            <li><a href="/member/lecture/allList">수강신청(전체강의)</a>
                                 <ul class="dropdown">
                                     <li><a href="/member/lecture/allList?ltCateCd=f1" data-cate="f1">기초강의</a></li>
                                     <li><a href="/member/lecture/allList?ltCateCd=f2" data-cate="f2">데이터분석</a></li>
@@ -213,10 +199,13 @@
                     </nav>
 
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="/member/subsp/form">구독하기</a>
-                        <a href="./contact.html">Live특강</a>
+                        <a href="/member/subsp/form"><i class='bx bx-check-square'></i> 구독하기</a>
+                        <!-- <a href="./contact.html">Live특강</a> -->
+                        <div id="count">0일</div>
+                        	<div class="header__top__hover">
+                        </div>
                     </div>
 
                 </div>
@@ -272,7 +261,7 @@ function searchLect() {
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         if(goalDate2 == '')
         	{
-        	return '구독내역 없음.';
+        	return '구독내역 없음';
         	}
         if (distance < 0) {
             return '(지나감)';

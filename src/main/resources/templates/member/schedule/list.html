@@ -17,7 +17,6 @@
 			    <h2>학습 캘린더</h2>
 			    <!-- <button class="print">수료증 발급</button> -->
 			</div>
-		[[${eventList}]]
 		</div>
 		
 		<div class="lrn_box">
@@ -31,11 +30,14 @@
 				</ul>
 			</form>
 			<div class="btn_box demo-inline-spacing mT0">
-	           <button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">일정등록</button>
+	           <button type="button" id="saveBtn" class="btn">일정등록</button>
 	         </div>
 		</div>
 		
 		<div id='calendar'></div>
+		<div class="btn_box">
+			<a href="/member/myclass/list" class="go_list">내강의실가기</a>
+		</div>
 		<script th:inline="javascript">
 			
 		function saveReq() {
@@ -75,7 +77,14 @@
 		    document.addEventListener('DOMContentLoaded', function() {
 		        var calendarEl = document.getElementById('calendar');
 		        var calendar = new FullCalendar.Calendar(calendarEl, {
+		            headerToolbar: {
+		              left: 'prev,next today',
+		              center: 'title',
+		              right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+		            }, 
 		            initialView: 'dayGridMonth',
+		            weekNumbers: true,
+		            dayMaxEvents: true,
 		            events : data
 		            });
 		        calendar.render();
