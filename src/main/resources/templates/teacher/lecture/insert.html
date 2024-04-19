@@ -41,9 +41,8 @@
 						</div>
 						<div class="mb-3 test_list">
 							<label for="uFile" class="form-label">이미지</label>
-							<input class="form-control" type="file" name="uFile">
+							<input class="form-control" type="file" name="uFile" onchange="uploadFileReq(testForm.typCode.value, testForm)">
 							<input type="hidden" name="typCode" th:value="k1">
-							<br><button type="button" onclick="uploadFileReq(testForm.typCode.value, testForm)">등록</button>
 						</div>
 
 						<div class="mb-3 test_list">

@@ -287,6 +287,15 @@ section.product > section{min-height:450px;}
 
 
 /*게시판*/
+input[type=file]::file-selector-button { width: 100px; height: 40px; background: #eee; border: none; border-radius: 10px; cursor: pointer; margin-top : 5px;
+  &:hover {
+    background: rgb(77,77,77);
+    color: #fff;
+  }
+}
+
+.cnq-buttons { text-align: right; }
 .cnq_insertBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
+.cnq_goListBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .detailCntn{width: 99%;height: 340px; padding: 40px 20px 30px; border-radius: 15px; box-sizing: border-box; box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);};
 .cnq_reset{float: right; padding: 12px 40px; font-size: 16px; border: 0; letter-spacing: -1px; background: #ff8a00; border-radius: 5px;};

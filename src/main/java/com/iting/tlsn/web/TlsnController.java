@@ -95,7 +95,7 @@ public class TlsnController {
 	}
 	
 	// 수강 상세 진행률 수정
-	@PutMapping("/member/tlsn/detail/update")
+	@PutMapping("member/tlsn/detail/update")
 	@ResponseBody
 	public TlsnDetailVO tlsnDetailInsert(@RequestBody TlsnDetailVO vo) {
 		
