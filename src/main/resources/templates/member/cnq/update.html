@@ -28,8 +28,8 @@ color:#fff !important ;
 			<textarea name="cntn" th:text="${cnq.cntn}"></textarea>
 			<br> 작성자 : <input type="text" name="name" th:value="${cnq.name}" readonly>
 			<div>
-				<a class="cnq_insertBtn" id="saveBtn">등록</a> <a class="cnq_reset"
-					id="listBtn">글목록으로</a>
+				<a class="cnq_insertBtn" id="saveBtn">등록</a> 
+				<a class="cnq_reset" id="listBtn">취소</a>
 			</div>
 		</form>
 	</div>
@@ -70,9 +70,6 @@ color:#fff !important ;
 		saveReq();
 	})
 	
-	cancel_btn.addEventListener("click", e => {
-		//이전 page로 돌아가야 함...
-	})
 	//목록 이전페이지.
 	listBtn.addEventListener("click",
 			e=>{location.href="javascript:history.back();"})

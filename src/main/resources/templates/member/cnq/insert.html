@@ -20,8 +20,8 @@
 				<input type="hidden" name="ltNum" th:value="${ltNum}">
 				<button type="button" onclick="uploadFileReq(cnqForm.typCode.value, cnqForm)">첨부파일 등록</button>
 				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
-				<button class="cnq_reset" type="button" id="listBtn" onclick="location.href='/member/cnq/list'">
-					글목록으로
+				<button class="cnq_reset" type="button" id="listBtn" onclick="location.href='/member/cnq/list'">>
+				글목록으로
 				</button>
 			</form>
 		</div>
@@ -55,6 +55,8 @@
 	function saveRes(res) {
 		console.log(res);
 		const ltNum = cnqForm.ltNum.value;
+		alert('게시글이 등록 되었습니다.');
+		window.location.href = `/member/cnq/list/${ltNum}`
 	}
 	
 	//버튼 클릭 시 함수 호출.
