@@ -53,47 +53,50 @@
 			</li>
 		</ul>
 	</div>
-	<div th:each="tlsn, stat: ${tlsn}" class="info tlsn_info tlsn_box">
-		<div class="top">
-			<div class="left">
-				<div class="tit">
-					<p><span th:text="${stat.count}"></span><i>회차 커리큘럼</i></p>
-					<i th:text="${tlsn.rndTtl}" class="ttl"></i>
-					<em> / </em>
-					<span><i class="bx bx-stopwatch ico_tlTm"></i><i th:text="${tlsn.ltTm}"></i></span>
+	
+	<div class="tlsn_list">
+		<div th:each="tlsn, stat: ${tlsn}" class="info tlsn_info tlsn_box">
+			<div class="top">
+				<div class="left">
+					<div class="tit">
+						<p><span th:text="${stat.count}"></span><i>회차 커리큘럼</i></p>
+						<i th:text="${tlsn.rndTtl}" class="ttl"></i>
+						<em> / </em>
+						<span><i class="bx bx-stopwatch ico_tlTm"></i><i th:text="${tlsn.ltTm}"></i></span>
+					</div>
+					<p th:text="${tlsn.rndCntn}"></p>
+					<div class="bottom link_button">
+						<!-- <a href="#" class="go_link modal_btn" th:onclick="addTlsnDetail()">수강하기 ></a> -->
+						<a href="#" class="go_link gray modal_btn">수강하기 ></a>
+					</div>
 				</div>
-				<p th:text="${tlsn.rndCntn}"></p>
-				<div class="bottom">
-					<!-- <a href="#" class="go_link modal_btn" th:onclick="addTlsnDetail()">수강하기 ></a> -->
-					<a href="#" class="go_link gray modal_btn">수강하기 ></a>
+				<div class="graph" id="rndPer" th:data-percent="${curriDetail[stat.index].rndPrgre}">
+					<!-- 차트부분 -->
+					<!-- <h6 class="text-center">[[${stat.count}]]회차 진행률</h6>				
+					<h5 class="text-center">커리큘럼 번호  : [[${tlsn.rndNum}]]</h5> -->	
+					<canvas class="myChart" width="120" height="100"></canvas>
+					
 				</div>
 			</div>
-			<div class="graph" id="rndPer" th:data-percent="${curriDetail[stat.index].rndPrgre}">
-				<!-- 차트부분 -->
-				<h6 class="text-center">[[${stat.count}]]회차 진행률</h6>				
-				<h5 class="text-center">커리큘럼 번호  : [[${tlsn.rndNum}]]</h5>		
-				<canvas class="myChart" width="150" height="100"></canvas>
-				
+			
+			<div class="test_modal">
+				<div class="text video_text">
+					<h3 th:text="${tlsn.rndTtl}" th:data-ltNum="${tlsn.ltNum}" id="dataLtNum"></h3>
+					<button class="btn_close"><i class='bx bx-x'></i></button>
+					<div class="test_box video_box">
+						<video id="lectVideo" controls width="100%" autoplay muted>			
+							<source th:src="|/downloading/${tlsn.atchNum}" type="video/mp4"/>
+						</video>
+					</div>
+					<div class="test">
+						<h5></h5>
+					</div>
+					<button id="start">Start</button>
+					<button id="stop">Stop</button>
+				</div>
 			</div>
 		</div>
-		
-		<div class="test_modal">
-			<div class="text video_text">
-				<h3 th:text="${tlsn.rndTtl}" th:data-ltNum="${tlsn.ltNum}" id="dataLtNum"></h3>
-				<button class="btn_close"><i class='bx bx-x'></i></button>
-				<div class="test_box video_box">
-					<video id="lectVideo" controls width="100%" autoplay muted>			
-						<source th:src="|/downloading/${tlsn.atchNum}" type="video/mp4"/>
-					</video>
-				</div>
-				<div class="test">
-					<h5></h5>
-				</div>
-				<button id="start">Start</button>
-				<button id="stop">Stop</button>
-			</div>
-		</div>
-	</div>
+	</div>	
 	<div class="btn_box">
 		<a th:href="@{/member/tlsn/list}" class="go_list orange">수강중인 강의가기</a>
 	</div>
