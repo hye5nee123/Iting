@@ -319,6 +319,19 @@
 		
 		<include refid="condition"></include>
 	</select>
-
+	
+	<!-- 박지웅 -->
+	<!-- 정산 관리 목록 -->
+	<select id="getSettList">
+		SELECT sett_num
+				, salary
+				, incn
+				, all_sett_price
+				, find_code(sett_st_cd)
+				, sett_dt
+				, lecturer_num
+				, lt_num
+		FROM sett
+	</select>
 
 </mapper>
