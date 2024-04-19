@@ -124,6 +124,7 @@
 		       #{applexamNum}
 		  FROM ( 
 				SELECT * from PRBL
+				WHERE LT_NUM = #{ltNum}
 				ORDER BY DBMS_RANDOM.RANDOM
 		  ) A
 		 <![CDATA[ WHERE ROWNUM < 11 ]]>

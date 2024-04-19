@@ -276,9 +276,15 @@ section.product > section{min-height:450px;}
 .ox_list div:first-child{margin-top:0; padding-top:0;}
 .ox_list div:first-child:before{display:none;}
 
-
-
-
+/* 학습캘린더 */
+.lrn_box{margin-top:30px; margin-bottom:50px; position:relative; padding:25px; border:1px solid #d5def9; background:rgb(98 140 230 / 5%); border-radius:15px;} 
+.lrn_box h3{font-size:17px; font-weight:700;}
+.lrn_box ul{display:flex; justify-content:space-between; gap:2%; flex-wrap:wrap; margin-top:10px; list-style:none;}
+.lrn_box li{width:32%; list-style:none; background:#fff; border:1px dashed #ddd; padding:10px; border-radius:10px;}
+.lrn_box li label{font-size:14px; color:#777; font-weight:700;}
+.lrn_box li .form-control{font-size:15px; color:#555;}
+.lrn_box li .form-control::placeholder{font-size:14px; color:#888;}
+#calendar{margin-bottom:50px;}
 
 /*게시판*/
 input[type=file]::file-selector-button { width: 100px; height: 40px; background: #eee; border: none; border-radius: 10px; cursor: pointer; margin-top : 5px;

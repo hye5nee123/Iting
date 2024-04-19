@@ -4,6 +4,7 @@
       layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
+<title>학습캘린더</title>
 <link rel="stylesheet" href="/css/member/content.css" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
@@ -11,47 +12,84 @@
 <body>
 <section layout:fragment="content">
 	<div id="container">
-		[[${list}]]
-		<h3>학습 캘린더</h3>
+		<div class="col-lg-12">
+			<div class="section-title">
+			    <h2>학습 캘린더</h2>
+			    <!-- <button class="print">수료증 발급</button> -->
+			</div>
+		</div>
 		
-		<form>
-			일정
-			<input type="text">
-		</form>
+		<div class="lrn_box">
+			<h3>일정등록</h3>
+			<form name="lrnForm" id="lrnForm">
+				<ul>
+					<li class="hidden"><input th:value="${session.usernum}" class="form-control" type="text" id="memNum" name="memNum" value=""></li>
+					<li><label>일정내용</label><input class="form-control" type="text" id="scheCntn" name="scheCntn" value="" placeholder="일정을 입력하세요."></li>
+					<li><label>시작일</label><input class="form-control" type="date" id="frDt" name="frDt" value=""></li>
+					<li><label>종료일</label><input class="form-control" type="date" id="toDt" name="toDt" value=""></li>
+				</ul>
+			</form>
+			<div class="btn_box demo-inline-spacing mT0">
+	           <button type="button" id="saveBtn" class="btn">일정등록</button>
+	         </div>
+		</div>
 		
-		
-		<script>
-		
-		function formatDate(frDt) {
-		    const date = new Date(frDt);
-		    const year = date.getFullYear();
-		    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
-		    const day = String(date.getDate()).padStart(2, '0');
-		    return `${year}/${month}/${day}`; // yyyy/MM/dd 형식으로 반환
-		}
-		
-
-	      document.addEventListener('DOMContentLoaded', function() {
-	        var calendarEl = document.getElementById('calendar');
-	        var calendar = new FullCalendar.Calendar(calendarEl, {
-	        	initialView: 'dayGridMonth',
-	       		  events : [
-	       		            {
-	       		              title: '물주기',
-	       		              start: '2024-04-01'
-	       		          	},
-	       		            {
-	       		              title: '뚜껑 닫기',
-	       		              start: '2024-04-03',
-	       		              end: '2024-04-05'
-	       		          	}
-	       		          ]
-	        });
-	        calendar.render();
-	      });
-	
-	    </script>
 		<div id='calendar'></div>
+		<div class="btn_box">
+			<a href="/member/myclass/list" class="go_list">내강의실가기</a>
+		</div>
+		<script th:inline="javascript">
+			
+		function saveReq() {
+			const scheCntn = lrnForm.scheCntn.value;
+			const memNum = lrnForm.memNum.value;
+			const frDt = lrnForm.frDt.value;
+			const toDt = lrnForm.toDt.value;
+			let param = {scheCntn, memNum, frDt, toDt}
+			console.log(param);
+			
+			/*
+			axios.post("/member/subsp/insert", param)
+				.then(res => saveRes(res.data))
+			*/
+			
+			csrf_axios({
+					method: 'POST',
+					url: '/member/schedule/insert',
+					data: param
+					})
+					.then(res => saveRes(res.data))
+			}
+			
+			// 등록 응답
+			function saveRes(res) {
+				alert('일정이 등록되었습니다.');
+				history.go(0);
+			}
+			
+			//버튼 클릭 시 함수 호출.
+			saveBtn.addEventListener("click", e => {
+				saveReq();
+			})
+			
+			let data = [[${eventList}]];
+
+		    document.addEventListener('DOMContentLoaded', function() {
+		        var calendarEl = document.getElementById('calendar');
+		        var calendar = new FullCalendar.Calendar(calendarEl, {
+		            headerToolbar: {
+		              left: 'prev,next today',
+		              center: 'title',
+		              right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+		            }, 
+		            initialView: 'dayGridMonth',
+		            weekNumbers: true,
+		            dayMaxEvents: true,
+		            events : data
+		            });
+		        calendar.render();
+		      });
+	  	</script>
 	</div>
 
 </section>

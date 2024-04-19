@@ -10,11 +10,12 @@
 			SELECT 'lr' || LPAD(NVL(MAX(SUBSTR(lrn_sche_num, -5)), 0) + 1, 5, '0') 
 			FROM lrn_sche
 		</selectKey>
-		INSERT INTO lrn_sche_num
+		INSERT INTO lrn_sche
+		 		(lrn_sche_num
 				, sche_cntn
 				, mem_num
 				, fr_dt
-				, to_dt
+				, to_dt )
 			VALUES 
 					(
 					#{lrnScheNum}

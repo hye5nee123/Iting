@@ -13,11 +13,14 @@
 		       , r.NAME
 		       , find_code(LT_CATE_CD) LT_CATE_CD
 		       , l.LT_TTL
-		       , (SELECT LT_NUM FROM APPLEXAM e WHERE e.MEM_NUM = t.MEM_NUM AND e.LT_NUM = t.LT_NUM) AS EXAM_YN
+		       , e.SCORE
+               , e.LT_NUM AS examYn
 		FROM TLSN t JOIN LT l
 	             ON t.LT_NUM = l.LT_NUM
 	           JOIN LECTURER r  
 	             ON l.LECTURER_NUM = r.LECTURER_NUM
+              LEFT OUTER JOIN APPLEXAM e
+                           ON e.MEM_NUM = t.MEM_NUM AND e.LT_NUM = t.LT_NUM
 		WHERE t.MEM_NUM = #{user}
 		ORDER BY t.APPL_DT DESC
 	</select>
