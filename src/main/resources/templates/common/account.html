@@ -1,22 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/auth}">
 
 <head>
 <meta charset="UTF-8">
-<!-- CSRF -->
-<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header"
-	th:content="${_csrf.headerName}" />
 
-<link rel="stylesheet" href="/css/member/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet" href="/css/member/nice-select.css"
-	type="text/css">
-<link rel="stylesheet" href="/css/member/style.css" type="text/css">
-
-<link rel="stylesheet" href="/css/member/slicknav.min.css"
-	type="text/css">
 <title>회원가입</title>
 <style>
 .container {
@@ -28,98 +18,110 @@
 }
 
 .naverbtn {
-	width: 200px;
+	width: 50px;
 }
 </style>
 
 </head>
 
 <body>
+	<section layout:fragment="cont">
 	<div class="container">
-		<div class="checkout__form">
+		<!-- logo -->
+		<div class="mb-3 app-brand justify-content-center">
 			<div class="main_btn">
-				<a href="/member/main"><img class="logo" src="img/common/logo_w.png" /></a>
+				<a href="/" role="button"><img class="logo" src="img/common/logo_w.png" alt="Logo"/></a>
 			</div>
-			<h6 class="checkout__title">회원가입</h6>
-			<div class="checkout">
-			<label>
-				<input type="radio" name="type" onchange="usertypeForm(1)" checked />
-				일반회원 
-			</label>
-			<label>
-				<input type="radio" name="type" onchange="usertypeForm(2)" />
-				강사
-			</label>
+		</div>
+		<!-- /logo -->
+			<h3 class="mb-3">회원가입</h3>
+			<div class="mb-3">
+				<label>
+					<input type="radio" name="type" onchange="usertypeForm(1)" checked />
+					일반회원 
+				</label>
+				<label>
+					<input type="radio" name="type" onchange="usertypeForm(2)" />
+					강사
+				</label>
 			</div>
-			<div class="checkout__input col-lg-4">
-				<p>
-					아이디 <span>*</span>
-				</p>
-				<input type="text" id="id" name="id"
-					placeholder="4~20자의 영문 대소문자, 숫자" onblur="idChk()">
-				<div class="idchk"></div>
-				<p>
-					비밀번호 <span>*</span>
-				</p>
-				<input type="password" id="pw" name="pw"
-					placeholder="8~16자의 영문 대소문자, 숫자" onblur="pwCheck()">
-				<div class="pwchkstr"></div>
-				<p>
-					비밀번호 확인 <span>*</span>
-				</p>
-				<input type="password" id="pwchk" name="pwchk" onblur="pwCheck()">
-				<div class="pwchkchkstr"></div>
-				<p>
-					이메일 <span>*</span>
-				</p>
-				<input type="text" id="email" name="email" onblur="mailCheck()">
-				<div class="mailchkstr"></div>
-				<p>
-					휴대전화번호 <span>*</span>
-				</p>
-				<input type="tel" id="phone" name="phone" placeholder="'-'제외하고 입력"
-					onblur="phoneCheck()">
-				<button type="button" class="site-btn" id="sendsms"
-					onclick="sendSMS(phone.value)">인증</button>
-				<div class="phonechkstr"></div>
-				<div class="smschk">
-					<!-- 인증번호 입력란 -->
+			<div class="mb-3">
+				<div class="mb-3">
+					<label for="id" class="form-label">아이디 <span class="needs">*</span></label>
+					<input class="form-control" type="text" id="id" name="id"
+						placeholder="4~20자의 영문 대소문자, 숫자" onblur="idChk()">
+					<div class="idchk"></div>
 				</div>
-				<p>이름(닉네임)</p>
-				<input type="text" id="nick" name="nick">
+				<div class="mb-3">
+					<label for="pw" class="form-label">비밀번호 <span class="needs">*</span></label>
+					<input class="form-control" type="password" id="pw" name="pw"
+						placeholder="8~16자의 영문 대소문자, 숫자" onblur="pwCheck()">
+					<div class="pwchkstr"></div>
+				</div>
+				<div class="mb-3">
+					<label for="pwchk" class="form-label">비밀번호 확인 <span class="needs">*</span></label>
+					<input class="form-control" type="password" id="pwchk" name="pwchk" onblur="pwCheck()">
+					<div class="pwchkchkstr"></div>
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">이메일 <span class="needs">*</span></label>
+					<input class="form-control" type="text" id="email" name="email" onblur="mailCheck()">
+					<div class="mailchkstr"></div>
+				</div>
+				<div class="mb-3">
+					<label for="phone" class="form-label">휴대전화번호 <span class="needs">*</span></label>
+					<input class="form-control" type="tel" id="phone" name="phone" placeholder="'-'제외하고 입력"
+						onblur="phoneCheck()">
+					<button type="button" class="site-btn" id="sendsms"
+						onclick="sendSMS(phone.value)">인증</button>
+					<div class="phonechkstr"></div>
+					<div class="smschk">
+						<!-- 인증번호 입력란 -->
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="nick" class="form-label">이름(닉네임)</label>
+					<input class="form-control" type="text" id="nick" name="nick">
+				</div>
+				<div class="mb-3">
+					<label class="form-label">주소</label>
+					<div class="col-lg-4">
+						<input class="form-control" type="text" id="sample6_postcode" placeholder="우편번호" readonly>
+					</div>
+					<button type="button" class="site-btn"
+						onclick="sample6_execDaumPostcode()">찾기</button>
+					<input class="form-control" type="text" id="sample6_address" name="addr" readonly>
+				</div>
+				<div class="mb-3">
+					<label for="sample6_detailAddress" class="form-label">상세주소</label>
+					<input class="form-control" type="text" id="sample6_detailAddress" name="detailaddr">
+				</div>
+				<div class="radios mb-3">
+					<!-- 회원, 강사 폼 바뀌는 부분 -->
+				</div>
 			</div>
-			<div class="checkout__input col-lg-4">
-				<p>주소</p>
+			<div class="mb-3">
+				<div class="form-check mb-1">
+					<input class="form-check-input" type="checkbox" id="chk_all">
+					<label class="form-label" for="chk_all">전체 약관 동의</label>
+				</div>
+				<div class="form-check mb-1">
+					<input class="form-check-input chk svc" type="checkbox" id="aglee1">
+					<label class="form-label" for="aglee1">[필수]Iting 이용 약관에 동의</label>
+					<a role="button">></a>
+				</div>
+				<div class="form-check mb-1">
+					<input class="form-check-input chk svc" type="checkbox" id="aglee2">
+					<label class="form-label" for="aglee2">[필수]개인정보 수집 및 이용에 동의</label>
+					<a role="button">></a>
+				</div>
+				<div class="form-check mb-1">
+					<input class="form-check-input chk" type="checkbox" id="aglee3">
+					<label class="form-label" for="aglee3">[선택]마케팅 정보 수신</label>
+					<a role="button">></a>
+				</div>
 			</div>
-			<div class="checkout__input col-lg-2">
-				<input type="text" id="sample6_postcode" placeholder="우편번호" readonly>
-				<button type="button" class="site-btn"
-					onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
-			</div>
-			<div class="checkout__input col-lg-4">
-				<input type="text" id="sample6_address" name="addr" readonly>
-			</div>
-			<div class="checkout__input col-lg-6">
-				<p>상세주소</p>
-				<input type="text" id="sample6_detailAddress" name="detailaddr">
-			</div>
-			<div class="col-lg-4 radios">
-				<!-- 회원, 강사 폼 바뀌는 부분 -->
-			</div>
-			<div class="col-lg-6 accrule">
-				<input type="checkbox" id="chk_all">
-				<h6>전체 약관 동의</h6>
-				<input type="checkbox" class="chk svc">
-				<p>[필수]Iting 이용 약관에 동의</p>
-				<button type="button">></button>
-				<input type="checkbox" class="chk svc">
-				<p>[필수]개인정보 수집 및 이용에 동의</p>
-				<button type="button">></button>
-				<input type="checkbox" class="chk">
-				<p>[선택]마케팅 정보 수신</p>
-				<button type="button">></button>
-			</div>
-			<div class="accbtn">
+			<div class="accbtn mb-3">
 				<button type="button" class="site-btn" style="width: 300px"
 					onclick="chkAccount()">가입하기</button>
 			</div>
@@ -128,14 +130,13 @@
 			<a id="naverIdLogin_loginButton" href="/oauth2/authorization/naver" role="button"><img
 				class="naverbtn" src="img/common/btnG_완성형.png" alt="nloginbutton" /></a>
 		</div>
-	</div>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="/js/common.js"></script>
 	<script src="/js/join/account.js"></script>
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- 다음 주소 api -->
 	<script src="/js/join/inputChk.js"></script>
+	</section>
 </body>
 </html>
