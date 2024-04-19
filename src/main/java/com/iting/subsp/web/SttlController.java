@@ -29,7 +29,7 @@ public class SttlController {
 	/* 회원 */
 	
 	// 결제 등록
-	@PostMapping("/member/sttl/insert")
+	@PostMapping("member/sttl/insert")
 	public SttlVO sttlInsert(@RequestBody SttlVO vo) {		
 		sttlService.sttlInsert(vo);
 		return vo;
@@ -38,7 +38,7 @@ public class SttlController {
 	
 	// 2회차 이상 결제 (정기결제 테스트)
 	//@Scheduled(cron="0 0/2 * * * ?")
-	@GetMapping("/member/test")
+	@GetMapping("member/test")
     public HttpEntity<String> getPostTest(){
 		return ReqPaymentSchedulerTest.setPayScheduleTest();
        

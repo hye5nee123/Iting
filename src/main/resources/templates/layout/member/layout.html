@@ -154,6 +154,9 @@
                                 <a href="/account">회원가입</a>
                                 <a th:if="${session.usertype} == 'ROLE_B1'" href="/member/mypage">마이페이지</a>
                             </div>
+                            <div>
+                           	[[${subspinfo}]]
+                            </div>
                             <div id="count">0일0시간0분0초</div>
                             <div class="header__top__hover">
                             </div>
@@ -256,9 +259,10 @@
 function searchLect() {
 	lectureService.ltListReq(1, searchKeyWord.value);
 }
+	
+	let goalDate2 = "[[${subspinfo.subspToDt}]]";
 
-
-
+	// 구독 날짜 받아오기
     const goalDate = new Date("2024-04-29").getTime();
 
     function calcDate() {
