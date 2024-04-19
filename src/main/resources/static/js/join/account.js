@@ -45,10 +45,9 @@ function usertypeForm(num) {
 	document.getElementsByClassName('radios')[0].innerHTML = ''; // 바뀔때 비워주기용
 	if (num == '1') {
 		actype = 'b1';
-		form = `<div class="checkout__input">
-					<p>관심사</p>
-				</div>
-                <select id="ocmenu" name="ocmenu">
+		form = `
+				<label for="ocmenu" class="form-label">관심사</label>
+                <select class="form-select form-select-sm" id="ocmenu" name="ocmenu">
                     <option value="">선택</option>
                     <option value="c1">프로그래밍 언어</option>
                     <option value="c2">컴퓨터공학 전공</option>
@@ -60,11 +59,10 @@ function usertypeForm(num) {
 	}
 	else if (num == '2') {
 		actype = 'd2';
-		form = `<div class="checkout__input">
-				<p>이력서 첨부 <span>*</span></p>
-				</div>
-				<input type="file" accept=".pdf, .xlsx, .hwp" id="uFile" name="uFile" onchange="fileCheck()"/>
-				<div class="filechkstr"></div>
+		form = `
+				<label for="ocmenu" class="form-label">이력서 첨부 <span class="needs">*</span></label>
+				<input class="form-control" type="file" accept=".pdf, .xlsx, .hwp" id="uFile" name="uFile" onchange="fileCheck()"/>
+				<div class="filechkstr form-text"></div>
 				`;
 	}
 	document.getElementsByClassName('radios')[0].innerHTML = form;
