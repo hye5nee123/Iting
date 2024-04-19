@@ -59,6 +59,8 @@
 	function saveRes(res) {
 		console.log(res);
 		const ltNum = cnqForm.ltNum.value;
+		alert('게시글이 등록 되었습니다.');
+		window.location.href = `/member/cnq/list/${ltNum}`
 	}
 	
 	//버튼 클릭 시 함수 호출.
