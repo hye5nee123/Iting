@@ -10,7 +10,7 @@ SELECT LT_NOTICE_NUM
       ,LT_NOTICE_CNTN
       ,LT_NOTICE_REG_DT
 FROM LT_NOTICE
-WHERE LT_NOTICE_NUM =#{ltNoticeNum}
+
 
 </select>
 
