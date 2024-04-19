@@ -79,9 +79,9 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
+		<div th:with="userNum=${session.userId}">
 			<button class="cnq_insertBtn" type="button" id="cnq_insertBtn"
-				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|" th:if="${#strings.equals(cnq.memnNum, username)}">수정</button>
+				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|" >수정</button>
 			<button class="cnq_insertBtn" type="button" id="listBtn">목록</button>
 			<button class="cnq_reset" type="button" id="cnq_insertBtn"
 				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>

@@ -13,16 +13,20 @@
 				제목 : <input name="ttl"> 
 				내용 :
 				<textarea name="cntn"></textarea>
-				<br> 작성자 : <input name="name" th:value="${session.userId}" readonly> 
-					<br>첨부파일 동시 테스트 <input type="file" name="uFile" multiple="multiple">
-				<!-- k1:이미지 -->
+				<br> 작성자 : <input name="name" th:value="${session.userId}" readonly>
+
+				<label>첨부 파일 : </label>
+				<input type="file" name="uFile" multiple="multiple" onchange="uploadFileReq(cnqForm.typCode.value, cnqForm)" class="mb-5">
+				
 				<input type="hidden" name="typCode" th:value="k1"> <br>
 				<input type="hidden" name="ltNum" th:value="${ltNum}">
-				<button type="button" onclick="uploadFileReq(cnqForm.typCode.value, cnqForm)">첨부파일 등록</button>
-				<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
-				<button class="cnq_reset" type="button" id="listBtn" onclick="location.href='/member/cnq/list'">>
-				글목록으로
-				</button>
+				
+				<div class="cnq-buttons mt-5">
+					<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
+					<button class="cnq_goListBtn" type="button" id="listBtn" onclick="location.href='/member/cnq/list'">
+						글목록으로
+					</button>
+				</div>
 			</form>
 		</div>
 	</div>

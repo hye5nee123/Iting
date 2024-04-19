@@ -52,6 +52,7 @@ var lectureService = (function(){
 	                        if(lecture.ltImg == null) {
 	                        	newTag += `<img src="/img/common/lect_sample.jpg" alt="기본 강의썸네일" onclick="location.href='/member/lecture/info/${lecture.ltNum}'">`;
 	                        } else {
+	                        // alt에 강의에 대한 설명을 적기
 	                        	newTag += `<img src="/download/${lecture.ltImg}" alt="${lecture.ltImg}" onclick="location.href='/member/lecture/info/${lecture.ltNum}'">`;
 	                        }
 	                        	                        
