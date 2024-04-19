@@ -40,6 +40,7 @@ import com.iting.common.model.UsersVO;
 import com.iting.common.service.CommonService;
 import com.iting.common.service.UsersService;
 import com.iting.lecture.service.LectureService;
+import com.iting.sett.service.SettService;
 import com.iting.subsp.service.SubspService;
 import com.iting.teacher.service.TeacherService;
 
@@ -71,11 +72,15 @@ public class CommonController {
 	@Autowired
 	SubspService subspService;
 	
+	@Autowired
+	SettService settService;
+	
 	/* 메인이동 */
 	// 관리자
 	@RequestMapping("admin/main")
 	public String goAdminMain(Model model) {
 		model.addAttribute("ingLectureList", lectureService.ingLectureList(null));
+		model.addAttribute("settCount", settService.getSettCount());
 		return "admin/main";
 	}
 
