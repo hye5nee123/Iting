@@ -46,14 +46,14 @@ public class SubspController {
 	// 구독 등록 화면 이동
 	@RequestMapping("member/subsp/form")
 	public ModelAndView subspForm() {
-		ModelAndView mv = new ModelAndView("/member/subsp/form");
+		ModelAndView mv = new ModelAndView("member/subsp/form");
 		return mv;
 	}
 	
 	// 내 구독 정보
 	@RequestMapping("member/subsp/info")
 	public ModelAndView subspList() {
-		ModelAndView mv = new ModelAndView("/admin/subsp/info");
+		ModelAndView mv = new ModelAndView("admin/subsp/info");
 		return mv;
 	}
 	
