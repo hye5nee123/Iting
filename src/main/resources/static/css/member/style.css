@@ -165,7 +165,7 @@ ol {
 	text-transform: uppercase;
 	padding: 14px 30px;
 	color: #ffffff;
-	background: #000000;
+	background: #2455a4;
 	letter-spacing: 4px;
 }
 
@@ -700,7 +700,7 @@ ol {
 
 .banner__item:hover .banner__item__text a:after {
 	width: 40px;
-	background: #e53637;
+	background: #f57b54;
 }
 
 .banner__item.banner__item--middle {
