@@ -21,27 +21,30 @@
 				</div> -->
 	<section layout:fragment="mycontent">
 		<div class="mb-3">
-		
 				<div class="mb-3 row">
 					<label for="id" class="col-md-2 col-form-label">아이디</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" id="id" name="id" th:value="${myinfo.id}" readonly>
+						<input class="form-control" type="text" id="id" name="id" th:value="${myinfo.id}" disabled readonly>
 					</div>
 				</div>
 				
 				<div class="mb-3 row">
 					<label for="email" class="col-md-2 col-form-label">이메일</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" id="email" name="email" th:value="${myinfo.mail}" readonly>
+						<input class="form-control" type="text" id="email" name="email" th:value="${myinfo.mail}" disabled readonly>
 					</div>
 				</div>
 				<div class="mb-3 row">
-					<label for="email" class="col-md-2 col-form-label">비밀번호</label>
-					<div class="col-md-10">
-				<div class="changepw">
+					<label for="pw" class="col-md-2 col-form-label">비밀번호</label>
+					<div class="changepw col-md-10">
 					<!-- 비밀번호 변경시 내용 -->
-					<input class="form-control" type="password" id="pw" name="pw" th:value="${myinfo.pw}" readonly>
-					<button type="button" class="site-btn" onclick="newPw()">변경</button>
+						<div class="input-group">
+							<div class="col-md-10">
+								<input class="form-control" type="password" id="pw" name="pw" th:value="${myinfo.pw}" aria-describedby="pwcgbtn" disabled readonly>
+							</div>
+							<button class="btn btn-dark" id="pwcgbtn" type="button" style="margin-left: 10px;" onclick="newPw()">변경</button>
+						</div>
+					</div>
 				</div>
 				<p>휴대전화번호</p>
 				<div class="changephone">
@@ -92,16 +95,20 @@
 			function newPw() {
 				pwFormOn = true;
 				nowPwAccep = false;
-				const pwForm = 
-					`<input type="password" id="nowpwchk" name="nowpwchk"
-						placeholder="현재 비밀번호 입력" onblur="nowPwChk()">
-					<div class="nowpwchkstr"></div>
-					<input type="password" id="pw"
-						name="pw" placeholder="새 비밀번호" onblur="pwCheck()">
-					<div class="pwchkstr"></div>
-					<input type="password" id="pwchk" name="pwchk"
-						placeholder="새 비밀번호 확인" onblur="pwCheck()">
-					<div class="pwchkchkstr"></div>`;
+				const pwForm = `
+								<div class="mb-3">
+									<input class="form-control" type="password" id="nowpwchk" name="nowpwchk" placeholder="현재 비밀번호 입력" onblur="nowPwChk()">
+									<div class="nowpwchkstr"></div>
+								</div>
+								<div class="mb-3">
+									<input class="form-control" type="password" id="pw" name="pw" placeholder="새 비밀번호" onblur="pwCheck()">
+									<div class="pwchkstr"></div>
+								</div>
+								<div class="mb-3">
+									<input class="form-control" type="password" id="pwchk" name="pwchk" placeholder="새 비밀번호 확인" onblur="pwCheck()">
+									<div class="pwchkchkstr"></div>
+								</div>
+								`;
 				document.getElementsByClassName('changepw')[0].innerHTML = pwForm;
 			};
 			function nowPwChk() {
