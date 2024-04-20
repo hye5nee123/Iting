@@ -59,6 +59,7 @@ public class CnqController {
 		pvo.setTotalRecord((long) map.get("count"));
 
 		model.addAttribute("paging", pvo);
+		
 		model.addAttribute("cnqList", map.get("data"));
 		return "member/cnq/list";
 
