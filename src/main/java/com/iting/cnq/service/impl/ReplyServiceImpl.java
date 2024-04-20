@@ -29,5 +29,10 @@ public class ReplyServiceImpl implements ReplyService {
 	public int cmtInsert(CnqVO vo) {
 		return cmtMapper.cmtInsert(vo);
 	}
+	@Override
+	public long getCount(CnqVO vo) {
+		
+		return cmtMapper.getCount(vo);
+	}
 
 }

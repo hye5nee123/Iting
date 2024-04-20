@@ -15,17 +15,16 @@
 					c.hit,
 					m.name,
 					atch_num
-		
-		FROM lt_cnq c JOIN mem m
-		on c.mem_num = m.mem_num
-		WHERE LT_NUM = #{vo.ltNum}
-			<if test="vo.ttl != null and vo.ttl != ''">
-				AND TTL like '%' || #{vo.ttl} || '%'
-			</if>
-			<if test="vo.name != null and vo.name != ''">
-				AND NAME like '%' || #{vo.name} || '%'
-			</if>
-		ORDER by LT_CNQ_NUM DESC
+			  FROM lt_cnq c JOIN mem m
+			                  on c.mem_num = m.mem_num
+			 WHERE LT_NUM = #{vo.ltNum}
+				<if test="vo.ttl != null and vo.ttl != ''">
+					AND TTL like '%' || #{vo.ttl} || '%'
+				</if>
+				<if test="vo.name != null and vo.name != ''">
+					AND NAME like '%' || #{vo.name} || '%'
+				</if>
+			ORDER by LT_CNQ_NUM DESC
 	<![CDATA[
 	) a where ROWNUM <= #{svo.end}) b where rn >= #{svo.start}
 	]]>
@@ -95,7 +94,8 @@
 	<!-- 게시글 페이징 위한 개수 조회 -->
 	<select id="getCount" resultType="Long">
 		select count(*)
-		from lt_cnq
+		from lt_cnq c	JOIN mem m
+			          on c.mem_num = m.mem_num
 		WHERE LT_NUM = #{vo.ltNum}
 			<if test="vo.ttl != null and vo.ttl != ''">
 				AND TTL like '%' || #{vo.ttl} || '%'
@@ -128,6 +128,6 @@
 					atch_num
 		FROM lt_cnq c JOIN mem m
 		on c.mem_num = m.mem_num
-		WHERE LT_NUM = 'lt00001'
+		WHERE LT_NUM = #{ltNum}
 	</select>
 </mapper>

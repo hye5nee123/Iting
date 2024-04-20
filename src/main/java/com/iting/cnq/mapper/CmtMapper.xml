@@ -43,5 +43,6 @@
 	<select id="getCount" resultType="Long">
 		select count(*)
 		from cmt
+		where LT_CNQ_NUM = #{ltCnqNum}
 	</select>
 </mapper>

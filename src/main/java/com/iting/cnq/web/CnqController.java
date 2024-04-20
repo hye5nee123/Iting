@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.iting.cnq.model.CSearchVO;
 import com.iting.cnq.model.CnqVO;
 import com.iting.cnq.service.CnqService;
+import com.iting.cnq.service.ReplyService;
 import com.iting.common.model.PagingVO;
 import com.iting.common.service.CommonService;
 
@@ -38,6 +39,8 @@ public class CnqController {
 	CnqService cnqService;
 	@Autowired
 	CommonService commonService;
+	@Autowired
+	ReplyService replyService;
 
 	/* 회원 */ //
 
@@ -50,11 +53,13 @@ public class CnqController {
 		svo.setStart(pvo.getFirst());
 		svo.setEnd(pvo.getLast());
 		vo.setLtNum(ltNum);
-		System.out.println(">>>>>>>>>>>> " + vo + ":" + svo);
+		
 		Map<String, Object> map = cnqService.getCnqList(vo, svo);
+		
 		pvo.setTotalRecord((long) map.get("count"));
 
 		model.addAttribute("paging", pvo);
+		
 		model.addAttribute("cnqList", map.get("data"));
 		return "member/cnq/list";
 
@@ -66,7 +71,7 @@ public class CnqController {
 		// Cnq 조회
 		CnqVO vo = cnqService.getCnqInfo(ltCnqNum);
 		model.addAttribute("cnq", vo);
-
+		model.addAttribute("count", replyService.getCount(vo));
 		// 조회
 		cnqService.updateHit(ltCnqNum);
 
@@ -122,12 +127,20 @@ public class CnqController {
 		CnqVO cvo = cnqService.getCnqInfo(ltCnqNum);
 		vo.setLtNum(ltNum);
 		
-		if (cnqService.getCnqInfo(ltCnqNum) == null) {
+		if(replyService.getCount(cvo)==0) {
+			
+		
+		
+		/*if (cnqService.getCnqInfo(ltCnqNum) == null) {
 			model.addAttribute("msg", "없는 게시글 정보입니다 확인해주세요");
-			model.addAttribute("url","/member/cnq/list/" + cvo.getLtNum());
+			model.addAttribute("url", "/member/cnq/list/" + cvo.getLtNum());
 			return "member/cnq/alert";
-		}
+		}*/
 		cnqService.deleteCnq(ltCnqNum);
+		}else {
+			model.addAttribute("msg", "댓글이 있는 게시글입니다 삭제 불가능입니다.");
+			
+		}
 		return "redirect:/member/cnq/list/" + cvo.getLtNum();
 	}
 

@@ -1,9 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/blank}">
-<meta charset="UTF-8">
-<section layout:fragment="content">
 
+<meta charset="UTF-8">
+<style>
+.File a:link {
+	color: blue;
+}
+
+.File a:visited {
+	color: red;
+}
+</style>
+<section layout:fragment="content">
 	<style>
 #cntn th {
 	background: #EFEFFB
@@ -17,6 +26,21 @@
 }
 
 #cntn th, td {
+	border: 1px solid;
+	border-color: #E0ECF8;
+}
+#rep th {
+	background: #CEE3F6
+}
+
+#rep {
+	border: 1px solid;
+	border-color: #E0ECF8;
+	border-radius: 30px;
+	width: 100%;
+}
+
+#rep th, td {
 	border: 1px solid;
 	border-color: #E0ECF8;
 }
@@ -72,9 +96,9 @@
 					<tr>
 						<th style="padding: 20px;">첨부파일</th>
 
-						<td colspan="3" style="padding: 20px;">
-							<div th:each="file:${files}" th:text="${file.atchTtl}"
-								th:onclick="|location.href='@{/downloading/{fileNum}(fileNum=${file.atchNum})}'|"></div>
+						<td colspan="3" style="padding: 20px;" class="File"><a
+							th:each="file:${files}" th:text="${file.atchTtl}"
+							th:href="@{/downloading/{fileNum}(fileNum=${file.atchNum})}"></a>
 						</td>
 					</tr>
 				</tbody>
@@ -86,8 +110,9 @@
 				th:onclick="|location.href='@{/member/cnq/updateform/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">수정</button>
 			<button class="cnq_insertBtn" type="button" id="listBtn">목록</button>
 			<button class="cnq_reset" type="button" id="cnq_insertBtn"
-				th:if="${userNum == cnq.memNum}"
-				th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|">삭제</button>
+				th:if="${userNum == cnq.memNum}">삭제</button>
+				<!-- th:onclick="|location.href='@{/member/cnq/{ltCnqNum}(ltCnqNum=${cnq.ltCnqNum})}'|" -->
+				
 		</div>
 	</form>
 	<br> <br> <br>
@@ -97,8 +122,8 @@
 			<form name="replyForm" method="post">
 				<div class="contact__text">
 					<!--  <h5>ID : [[${session.userId}]] </h5>-->
-					<input type="hidden" class="form-control" id="DRWUPR" name="DRWUPR"
-						th:value="${session.userId}" readonly
+					<input type="hidden" class="form-control" id="name" name="name"
+						th:value="${cnq.name}" readonly
 						style="width: 100px; border: none;"> <input type="hidden"
 						name="ltCnqNum" th:value="${cnq.ltCnqNum}">
 				</div>
@@ -109,7 +134,7 @@
 			</form>
 		</div>
 		<!-- 댓글 등록 끝 -->
-		<table>
+		<table id="rep">
 			<thead>
 				<tr>
 					<th>No</th>
@@ -124,8 +149,20 @@
 	</div>
 	<script th:inline="javascript">
 	const ltCnqNum = [[${cnq.ltCnqNum}]]
+	let countReply=0;
 	//함수 호출.
 	listReq(1);
+	
+	let cnqReset = document.querySelector('.cnq_reset');
+	
+	cnqReset.addEventListener("click", e=>{
+		const ltCnqNum = replyForm.ltCnqNum.value;
+		if(countReply == 0){
+				location.href=`/member/cnq/${ltCnqNum}`
+		}else{
+			alert('댓글이 존재합니다.');
+		}
+	})
 	
 	//controller에서 주소 따옴.
 	function listReq() {
@@ -137,6 +174,8 @@
 	//list 응답.
 	function listRes(res) {
 		replyList.innerHTML = '';
+		countReply = res.data.length
+	console.log(countReply);
 	console.log(res);
 	// 목록출력
 	for( obj of res.data) {
@@ -148,7 +187,7 @@
 	let newTag = `<tr>
 		<td>${obj.cmtNum}</td>
 		<td>${obj.cntn}</td>
-		<td>${obj.drwupDt}</td>
+		<td>${formatDate(obj.drwupDt)}</td>
 		<td>${obj.drwupr}</td>
 	</tr>`
 	console.log(newTag);
@@ -157,7 +196,7 @@
 	function saveReq() {
 		const ttl = cnqForm.ttl.value;
 		const cntn = cnqForm.cntn.value;
-		const name = cnqForm.name.value;
+		const drwupr = cnqForm.drwupr.value;
 		const ltNum = cnqForm.ltNum.value;
 		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum};
 	}
@@ -168,7 +207,7 @@
 	
 		//등록요청.
 		function saveRReq() {
-		const drwupr = replyForm.DRWUPR.value;
+		const drwupr = replyForm.name.value;
 		const cntn = replyForm.cntn.value;
 		const ltCnqNum = replyForm.ltCnqNum.value;
 		let param = { drwupr,cntn,ltCnqNum};
@@ -192,7 +231,7 @@
 	function saveRRes(res) {
 		console.log(res);
 		const ltCnqNum = replyForm.ltCnqNum.value;
-		alert('게시글 등록 완료!');
+		alert('댓글 등록 완료!');
 		history.go(0);
 		
 	}
@@ -201,6 +240,21 @@
 	saveRBtn.addEventListener("click", e => {
 		saveRReq();
 	})
+	
+	
+		function formatDate(drwupDt) {
+	    const date = new Date(drwupDt);
+	    const year = date.getFullYear();
+	    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+	    const day = String(date.getDate()).padStart(2, '0');
+	    return `${year}/${month}/${day}`; // yyyy/MM/dd 형식으로 반환
+	}
+	// 사용 예시
+	const formattedDate = formatDate(drwupDt);
+	console.log(formattedDate); // yyyy/MM/dd 형식으로 변환된 날짜 출력
+
+	
+
 	</script>
 </section>
 </html>
