@@ -104,6 +104,7 @@
 		UPDATE tlsn_detail
 		SET rnd_prgre = #{rndPrgre}
 		WHERE rnd_num = #{rndNum}
+		AND tlsn_num = #{tlsnNum}
 	</update>
 	
 	<!-- 수강상세 단건조회 -->

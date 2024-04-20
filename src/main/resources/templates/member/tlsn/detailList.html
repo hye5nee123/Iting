@@ -66,14 +66,13 @@
 					</div>
 					<p th:text="${tlsn.rndCntn}"></p>
 					<div class="bottom link_button">
-						<!-- <a href="#" class="go_link modal_btn" th:onclick="addTlsnDetail()">수강하기 ></a> -->
 						<a href="#" class="go_link gray modal_btn">수강하기 ></a>
 					</div>
 				</div>
-				<div class="graph" id="rndPer" th:data-percent="${curriDetail[stat.index].rndPrgre}">
+				<div class="graph" id="rndPer" th:data-percent="${curriDetail[stat.index].rndPrgre}"
+											 th:data-tlsnno="${curriDetail[stat.index].tlsnNum}"
+											 th:data-currino="${tlsn.rndNum}">
 					<!-- 차트부분 -->
-					<!-- <h6 class="text-center">[[${stat.count}]]회차 진행률</h6>				
-					<h5 class="text-center">커리큘럼 번호  : [[${tlsn.rndNum}]]</h5> -->	
 					<canvas class="myChart" width="120" height="100"></canvas>
 					
 				</div>
@@ -84,15 +83,10 @@
 					<h3 th:text="${tlsn.rndTtl}" th:data-ltNum="${tlsn.ltNum}" id="dataLtNum"></h3>
 					<button class="btn_close"><i class='bx bx-x'></i></button>
 					<div class="test_box video_box">
-						<video id="lectVideo" controls width="100%" autoplay muted>			
+						<video class="lectVideo" controls width="70%">			
 							<source th:src="|/downloading/${tlsn.atchNum}" type="video/mp4"/>
 						</video>
 					</div>
-					<div class="test">
-						<h5></h5>
-					</div>
-					<button id="start">Start</button>
-					<button id="stop">Stop</button>
 				</div>
 			</div>
 		</div>
@@ -100,7 +94,7 @@
 	<div class="btn_box">
 		<a th:href="@{/member/tlsn/list}" class="go_list orange">수강중인 강의가기</a>
 	</div>
-<script>
+<script th:inline="javascript">
 
 // 반복해서 진행률 담고 차트 그리기
 let progress = 0;
@@ -178,108 +172,151 @@ function drawChart(progress, remain, i) {
 }
 /* -- 차트끝 -- */
 
-
-
-
+/* -- 모달시작 -- */
 // 강의 모달
-const modal = document.querySelector('.test_modal');
-const modalOpen = document.querySelector('.modal_btn');
-const modalClose = document.querySelector('.btn_close');
+const modals = document.querySelectorAll('.test_modal');
+const modalOpens = document.querySelectorAll('.modal_btn');
+const modalCloses = document.querySelectorAll('.btn_close');
+const lectVideos = document.querySelectorAll('.lectVideo');
+const dataNumLts = document.querySelectorAll('.dataNumLt')
 
-// 모달 열기
-modalOpen.addEventListener('click',function(){
-    modal.classList.add('on');
-    // 진도율에 따라 재생시작
-});
+let tlsnNum = rndPer[0].dataset.tlsnno;
 
-// 모달 닫기
-modalClose.addEventListener('click',function(){
-    modal.classList.remove('on');
-    
- 	// 현재 진행률 계산
-	var percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(2);
-    
-    // 강의를 닫으면 진도율 저장
-    //insertDetailReq(percent);
-    
-    // 페이지 새로고침
-	history.go(0);
-    
-});
+for(let i = 0; i < modalOpens.length; i++) {
+	
+	let curriNum = rndPer[i].dataset.currino;
+	
+	// 모달 열기
+	modalOpens[i].addEventListener('click',function(){
+		modals[i].classList.add('on');
+		
+		if(rndPer[i].dataset.percent > 0) {
+			
+			let totalPlayTime = Math.floor(lectVideos[i].duration);
+			
+			let lastPlayTime = Math.floor(totalPlayTime * (rndPer[i].dataset.percent / 100));
+			
+			console.log(checkTime(lastPlayTime));
+			
+			Swal.fire({
+				title: "마지막 수강 위치로 이동하시겠습니까?",
+				text: `마지막 수강 위치 : ${checkTime(lastPlayTime)}`,
+				icon: "info",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "이동하기",
+				cancelButtonText: "처음부터 듣기"
+			})
+			.then((result) => {
+				if (result.isConfirmed) {			    
+				lectVideos[i].currentTime = lastPlayTime; //초
+				lectVideos[i].play();
+				
+				// 진도율 인터벌 시작
+			    startInterval(curriNum, i, tlsnNum)
+				
+				} else {
+					// 처음부터 재생
+					lectVideos[i].currentTime = 0;
+					lectVideos[i].play();
+					
+					// 진도율 인터벌 시작
+					startInterval(curriNum, i, tlsnNum);
+				}
+			});	
+		} else {
+			// 처음부터 재생
+			lectVideos[i].currentTime = 0;
+			lectVideos[i].play();
+			
+			// 진도율 인터벌 시작
+			startInterval(curriNum, i, tlsnNum);
+		}
+		
+	})
+	
+	// 모달 닫기
+	modalCloses[i].addEventListener('click',function(){
+		modals[i].classList.remove('on');
+		
+		// 진도율 업데이트
+		updateDetailReq(curriNum, i, tlsnNum)
+		
+	    // 진도율 인터벌 종료
+	    stopInterval();
+	    
+	    // 페이지 새로고침
+		history.go(0); 
+	});
+}
+
 
 /* 10초 간격으로 진도율 업데이트 하기*/
-// intervalID를 저장할 변수입니다
+// intervalID를 저장할 변수
 let nIntervId;
 
-function startInterval() {
+function startInterval(curriNum, i, tlsnNum) {
 	if (!nIntervId) {
-	  nIntervId = setInterval(updateDetailReq(), 5000);
+	  nIntervId = setInterval(updateDetailReq, 5000, curriNum, i, tlsnNum);
 	  console.log("인터벌 시작");
 	}
 }
 
+
 // 진도율 수정 요청.
-function updateDetailReq() {
-	console.log("함수 호출됨")
+async function updateDetailReq(curriNum, i, tlsnNum) {
+	console.log("수정 함수 호출됨")
 	
-	// rndPrgre, rndNum(커리큘럼 회차번호)
-	let param = { rndNum: "cu00010", rndPrgre : 15.09 }
+	// 현재 재생 시간
+	let finPlayTime = Math.floor(lectVideos[i].currentTime);
+	
+	// 전체 재생 시간
+	let totalPlayTime = Math.floor(lectVideos[i].duration);
+	
+	let percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(1);
+	
+	// rndPrgre(강의 진행률), rndNum(커리큘럼 회차번호), tlsnNum(수강번호)
+	let param = { rndNum: curriNum, rndPrgre : percent, tlsnNum : tlsnNum}
+	
 	console.log(param)
-	let updateRet = csrf_axios({
+	let updateRet = await csrf_axios({
 						method: 'PUT',
 						url: '/member/tlsn/detail/update',
 						data: param
-					});
+					}).catch(e => console.log(e));
 	console.log(updateRet);
 }
 
-// 진도율 수정 응답
-function updateDetailRes(data) {
-	console.log('진도율 수정완료', data);
-}
 
 function stopInterval() {
 	console.log("인터벌 종료");
 	
   	clearInterval(nIntervId);
-  	// 변수에서 intervalID를 해체합니다
+  	// 변수에서 intervalID를 해체
   	nIntervId = null;
 }
-
-
-document.getElementById("start").addEventListener("click", startInterval);
-document.getElementById("stop").addEventListener("click", stopInterval);
-
-let finPlayTime = 0;
-let totalPlayTime = 0;
-
-// interval 사용해서 주기적으로 update해주기 영상 중간에 꺼져도 진도율이 저장될 수 있도록하기 위함
-
-// 영상 재생하는 동안
-lectVideo[0].addEventListener('timeupdate', e => {
-	let plyaRange = lectVideo[0].played;
-	
-	// 현재 재생 시간
-	finPlayTime = Math.floor(lectVideo[0].currentTime);
-	// 전체 재생 시간
-	totalPlayTime = Math.floor(lectVideo[0].duration);
-	
-	var percent = calculatorPercent(finPlayTime, totalPlayTime).toFixed(2);
-	
-	// 화면에 표시 테스트
-	$(".test").html(finPlayTime + " / " + totalPlayTime + " 진행률 : " + percent + "%    " + plyaRange);
-});
 
 // 퍼센트 계산 함수
 function calculatorPercent(parts, whole) {
 	return (parts / whole) * 100;
 }
 
-
-// 수강하기 눌렀을 때 수강상세 업데이트 진행
-function addTlsnDetail() {
-	updateDetailReq()
+// 초 -> 분 계산 함수
+function checkTime(times) {
+	if (times < 60) {
+    	return '00분 ' + addZero(times) + '초'
+	}
+	// sec
+	var mins = Math.floor(times / 60)
+	var secs = times - mins * 60
+	return addZero(mins) + '분' + addZero(secs) + '초'
+    
+	function addZero(num) {
+		return ((num < 10) ? '0' : '') + num
+	}
 }
+
 
 </script>
 	
