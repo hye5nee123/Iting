@@ -12,5 +12,8 @@ public interface ReplyService {
 
 	//등록(ajax)
 	public int cmtInsert(CnqVO vo);
-
+	
+	
+	//개수
+	public long getCount(CnqVO vo);
 }
