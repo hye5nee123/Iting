@@ -17,14 +17,14 @@ function pwCheck() {
 	let statPwChk = ``;
 	pwAccep = false;
 	if (pwv == '') {
-		statPw = `<p>비밀번호를 입력해주세요</p>`;
+		statPw = `<p style="color: #ff8383;">비밀번호를 입력해주세요</p>`;
 	} else if (!(/^[a-zA-Z0-9]{8,16}$/.test(pwv))) {
-		statPw = `<p>영문 대소문자, 숫자조합 8~16자로 입력해주세요</p>`;
+		statPw = `<p style="color: #ff8383;">영문 대소문자, 숫자조합 8~16자로 입력해주세요</p>`;
 	} else if (pwv == pwChkv) {
-		statPwChk = `<p>일치</p>`;
+		statPwChk = `<p style="color: #00dd00;">일치</p>`;
 		pwAccep = true;
 	} else if (pwChkv != '') {
-		statPwChk = `<p>비밀번호가 일치하지 않습니다</p>`;
+		statPwChk = `<p style="color: #ff8383;">비밀번호가 일치하지 않습니다</p>`;
 	}
 	document.getElementsByClassName('pwchkstr')[0].innerHTML = statPw;
 	document.getElementsByClassName('pwchkchkstr')[0].innerHTML = statPwChk;
@@ -34,9 +34,9 @@ function mailCheck() {
 	let statMail = ``;
 	mailAccep = false;
 	if (mailv == '') {
-		statMail = `<p>이메일을 입력해주세요</p>`;
+		statMail = `<p style="color: #ff8383;">이메일을 입력해주세요</p>`;
 	} else if (!(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(mailv))) {
-		statMail = `<p>이메일 형식이 맞지 않습니다.</p>`;
+		statMail = `<p style="color: #ff8383;">이메일 형식이 맞지 않습니다.</p>`;
 	} else {
 		mailAccep = true;
 	}
@@ -47,11 +47,11 @@ function phoneCheck() {
 	let statphone = ``;
 	phoneAccep = false;
 	if (phonev == '') {
-		statphone = `<p>휴대전화번호를 입력해주세요</p>`;
+		statphone = `<p style="color: #ff8383;">휴대전화번호를 입력해주세요</p>`;
 	} else if (!(/^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/.test(phonev))) {
-		statphone = `<p>휴대전화번호 형식이 맞지 않습니다.</p>`;
+		statphone = `<p style="color: #ff8383;">휴대전화번호 형식이 맞지 않습니다.</p>`;
 	} else if (!SMSAccep) {
-		statphone = `<p>인증 필요</p>`;
+		statphone = `<p style="color: #ff8383;">인증 필요</p>`;
 		phoneAccep = true;
 	}
 	document.getElementsByClassName('phonechkstr')[0].innerHTML = statphone;

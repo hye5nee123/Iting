@@ -6,11 +6,17 @@
 
 <head>
 <meta charset="UTF-8">
-
+<!-- axios -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+ --><!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- 다음 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>회원가입</title>
 <style>
 .container {
 	margin: 0 auto;
+	width: 500px;
 }
 
 .logo {
@@ -20,6 +26,14 @@
 .naverbtn {
 	width: 50px;
 }
+.ttl{
+	margin-top: 30px;
+	text-align: center;
+}
+.needs {
+	color: red;
+}
+
 </style>
 
 </head>
@@ -34,16 +48,18 @@
 			</div>
 		</div>
 		<!-- /logo -->
-			<h3 class="mb-3">회원가입</h3>
-			<div class="mb-3">
-				<label>
-					<input type="radio" name="type" onchange="usertypeForm(1)" checked />
-					일반회원 
-				</label>
-				<label>
-					<input type="radio" name="type" onchange="usertypeForm(2)" />
-					강사
-				</label>
+			<div class="ttl">
+				<h3 class="mb-3" style="font-weight: 700; color: #111111;">회원가입</h3>
+				<div class="mb-3">
+					<label>
+						<input type="radio" name="type" onchange="usertypeForm(1)" checked />
+						일반회원 
+					</label>
+					<label>
+						<input type="radio" name="type" onchange="usertypeForm(2)" />
+						강사
+					</label>
+				</div>
 			</div>
 			<div class="mb-3">
 				<div class="mb-3">
@@ -69,13 +85,15 @@
 					<div class="mailchkstr form-text"></div>
 				</div>
 				<div class="mb-3">
-					<label for="phone" class="form-label">휴대전화번호 <span class="needs">*</span></label>
-					<input class="form-control" type="tel" id="phone" name="phone" placeholder="'-'제외하고 입력"
-						onblur="phoneCheck()">
-					<button type="button" class="site-btn" id="sendsms"
-						onclick="sendSMS(phone.value)">인증</button>
+						<label for="phone" class="form-label">휴대전화번호 <span class="needs">*</span></label>
+					<div class="input-group">
+						<input class="form-control" aria-describedby="sendsms" type="tel" id="phone" name="phone" placeholder="'-' 제외하고 입력"
+							onblur="phoneCheck()">
+						<button type="button" class="btn btn-primary" id="sendsms"
+							onclick="sendSMS(phone.value)">인증</button>
+					</div>
 					<div class="phonechkstr form-text"></div>
-					<div class="smschk">
+					<div class="smschk col-lg-6">
 						<!-- 인증번호 입력란 -->
 					</div>
 				</div>
@@ -85,12 +103,14 @@
 				</div>
 				<div class="mb-3">
 					<label class="form-label">주소</label>
-					<div class="col-lg-4">
-						<input class="form-control" type="text" id="sample6_postcode" placeholder="우편번호" readonly>
+					<div class="col-lg-5 mb-2">
+						<div class="input-group">
+							<input class="form-control" aria-describedby="adsrch" type="text" id="sample6_postcode" placeholder="우편번호">
+							<button type="button" id="adsrch" class="btn btn-primary"
+							onclick="sample6_execDaumPostcode()">찾기</button>
+						</div>
 					</div>
-					<button type="button" class="site-btn"
-						onclick="sample6_execDaumPostcode()">찾기</button>
-					<input class="form-control" type="text" id="sample6_address" name="addr" readonly>
+					<input class="form-control" type="text" id="sample6_address" name="addr">
 				</div>
 				<div class="mb-3">
 					<label for="sample6_detailAddress" class="form-label">상세주소</label>
@@ -108,35 +128,29 @@
 				<hr class="mt-0 mb-2">
 				<div class="form-check mb-1">
 					<input class="form-check-input chk svc" type="checkbox" id="aglee1">
-					<label class="form-label" for="aglee1">[필수]Iting 이용 약관에 동의</label>
+					<label class="form-label" for="aglee1">[필수] Iting 이용 약관에 동의</label>
 					<a role="button">></a>
 				</div>
 				<div class="form-check mb-1">
 					<input class="form-check-input chk svc" type="checkbox" id="aglee2">
-					<label class="form-label" for="aglee2">[필수]개인정보 수집 및 이용에 동의</label>
+					<label class="form-label" for="aglee2">[필수] 개인정보 수집 및 이용에 동의</label>
 					<a role="button">></a>
 				</div>
 				<div class="form-check mb-1">
 					<input class="form-check-input chk" type="checkbox" id="aglee3">
-					<label class="form-label" for="aglee3">[선택]마케팅 정보 수신</label>
+					<label class="form-label" for="aglee3">[선택] 마케팅 정보 수신</label>
 					<a role="button">></a>
 				</div>
 			</div>
 			<div class="accbtn mb-3">
-				<button type="button" class="site-btn" style="width: 300px"
-					onclick="chkAccount()">가입하기</button>
+				<button type="button" class="btn btn-primary d-grid w-100" onclick="chkAccount()">가입하기</button>
 			</div>
 		</div>
-		<div class="col-lg-6 naverIdLogin">
+		<!-- <div class="col-lg-6 naverIdLogin">
 			<a id="naverIdLogin_loginButton" href="/oauth2/authorization/naver" role="button"><img
 				class="naverbtn" src="img/common/btnG_완성형.png" alt="nloginbutton" /></a>
-		</div>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		</div> -->
 	<script src="/js/join/account.js"></script>
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<!-- 다음 주소 api -->
 	<script src="/js/join/inputChk.js"></script>
 	</section>
 </body>

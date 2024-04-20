@@ -10,16 +10,16 @@ async function idChk() {
 	idv = id.value;
 	let idStat;
 	if (idv == '') {
-		idStat = `<p>아이디를 입력해주세요</p>`;
+		idStat = `<p style="color: #ff8383;">아이디를 입력해주세요</p>`;
 	} else if (!(/^[a-zA-Z0-9]{4,20}$/.test(idv))) {
-		idStat = `<p>영문 대소문자, 숫자조합 4~20자로 입력해주세요</p>`;
+		idStat = `<p style="color: #ff8383;">영문 대소문자, 숫자조합 4~20자로 입력해주세요</p>`;
 	} else {
 		await axios.get(`/common/idchk/${idv}`)
 			.then(res => {
 				if (res.data.id != null || res.data.id == idv) {
-					idStat = `<p>사용할 수 없는 아이디입니다. 다른 아이디를 입력해주세요<p>`
+					idStat = `<p style="color: #ff8383;">사용할 수 없는 아이디입니다. 다른 아이디를 입력해주세요<p>`
 				} else {
-					idStat = `<p>사용가능한 아이디입니다</p>`;
+					idStat = `<p style="color: #00dd00;">사용가능한 아이디입니다</p>`;
 					idAccep = true;
 				}
 			})
@@ -33,7 +33,7 @@ function fileCheck() {
 	let statfile = ``;
 	fileAccep = false;
 	if (filev == null || filev == '') {
-		statfile = `<p>이력서를 첨부해주세요</p>`;
+		statfile = `<p style="color: #ff8383;">이력서를 첨부해주세요</p>`;
 	} else {
 		fileAccep = true;
 	}
@@ -47,7 +47,7 @@ function usertypeForm(num) {
 		actype = 'b1';
 		form = `
 				<label for="ocmenu" class="form-label">관심사</label>
-                <select class="form-select form-select-sm" id="ocmenu" name="ocmenu">
+                <select class="form-select" id="ocmenu" name="ocmenu">
                     <option value="">선택</option>
                     <option value="c1">프로그래밍 언어</option>
                     <option value="c2">컴퓨터공학 전공</option>
@@ -136,13 +136,14 @@ async function insertb1(param) {
 			showDenyButton: true,
 			confirmButtonText: "메인으로",
 			denyButtonText: "로그인화면으로",
-			confirmButtonColor: "#205cdc"
+			confirmButtonColor: "#205cdc",
+			allowOutsideClick: false
 		}).then((rest) => {
 			if (rest.isConfirmed) {
 				location.href = "/member/main";
 			} else if (rest.isDenied) {
 				location.href = "/commonlogin";
-			}
+			} 
 		});
 	} else {
 		errorAlert("회원가입 실패", "관리자에게 문의바랍니다");
@@ -163,9 +164,10 @@ async function insertd2(param) {
 		Swal.fire({
 			icon: "success",
 			title: "가입신청이 완료되었습니다",
-			text: "*검토 후 연락예정",
+			text: "이력서 검토 후 연락예정",
 			confirmButtonText: "메인으로",
-			confirmButtonColor: "#205cdc"
+			confirmButtonColor: "#205cdc",
+			allowOutsideClick: false
 		}).then((rest) => {
 			if (rest.isConfirmed) {
 				location.href = "/member/main";
