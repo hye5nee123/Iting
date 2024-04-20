@@ -3,7 +3,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/member/bootstrap.min.css"
 	type="text/css">
-<section layout:fragment="content">
 	<style>
 #insertBtn {
 	padding: 12px 40px;
@@ -37,13 +36,16 @@
 		
 
 	</script>
+<section layout:fragment="content">
 	<h3 class="related-title">커뮤니티</h3>
 	<br>
 	<!-- 검색 폼 시작 -->
 	<form name="frmSearch" th:object="${cnqVO}"
 		style="display: inline-block;">
-		<input type="hidden" name="page"> 제목 <input name="ttl"
-			th:value="*{ttl}"> 작성자 <input name="name" th:value="*{name}">
+		<input type="hidden" name="page"> 제목 
+		<input name="ttl"
+			th:value="*{ttl}"> 작성자 
+			<input name="name" th:value="*{name}">
 		<a href="#" onclick="gopage(1)" class="search-switch"> <img
 			src="/img/member/main/search.png" alt="searchBtn"></a> <a href="#"
 			onclick="init()" class="search-switch"> <img

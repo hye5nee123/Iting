@@ -9,22 +9,44 @@
 <title>마이페이지</title>
 <style>
 .mypage {
+	margin-top: 50px;
 	display: flex;
 	flex-wrap:nowrap;
+}
+.section-title {
+	font-weight: 700;
+	font-size: 30px;
+	text-align: left;
 }
 
 .asidemenu {
 	position: relative;
 	width: 30%;
-	top: 5%;
-	left: 5%;
-	
+	left: 10%;
 }
+.asidemenu li {
+	line-height: 2.0;
+}
+a {
+	color: #111111;
+	font-weight: 400;
+	font-size: 20px;
+}
+a:hover{
+	color: #0088ff;
+}
+.asidetap {
+	/* position: relative;
+	left: 10%; */
+}
+
+
 .mycontent{
 	position: relative;
-	width: 70%;
-	top: 5%;
-	border: 1px solid #000;
+	width: 60%;
+	border: 1px solid #d1d1d1;
+	border-radius: 15px;
+	padding: 50px;
 }
 
 ul {
@@ -41,16 +63,16 @@ ul {
 	<section layout:fragment="content">
 		<div class="mypage">
 			<div class="asidemenu">
-				<ul>
-					<h3>마이페이지</h3>
-					<li><a href="/member/mypage" role="button">
-							<h4>회원정보</h4>
+					<div class="section-title">마이페이지</div>
+				<ul class="asidetap">
+					<li><a id="mymain" href="/member/mypage" role="button">
+							내 정보
 					</a></li>
-					<li><a href="/member/mypage/sttlList" role="button">
-							<h4>결제정보</h4>
+					<li><a id="mysttl" href="/member/mypage/sttlList" role="button">
+							구독/결제정보
 					</a></li>
-					<li><a href="/member/mypage/savelist" role="button">
-							<h4>내가 찜한 강의</h4>
+					<li><a id="mysave" href="/member/mypage/savelist" role="button">
+							내가 찜한 강의
 					</a></li>
 					<!-- <li><a href="#" role="button">
 							<h4>커뮤니티 활동</h4>

@@ -184,6 +184,8 @@ function infoAlert(tit, txt) {
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('sample6_postcode').value = data.zonecode;
 							document.getElementById("sample6_address").value = addr;
+							sample6_postcode.readOnly = true;
+							sample6_address.readOnly = true;
 							// 커서를 상세주소 필드로 이동한다.
 							document.getElementById("sample6_detailAddress")
 									.focus();
@@ -206,9 +208,11 @@ function infoAlert(tit, txt) {
 				})
 				.then(res => console.log("문자 전송"));
 				document.getElementsByClassName('smschk')[0].innerHTML =
-				`
-						<input type="text" id="sms" name="sms" placeholder="인증번호 4자리 입력">
-						<button type="button" class="site-btn" onclick="smschk('`+numkey+`')">인증확인</button>`;
+				`	<div class="input-group">
+						<input class="form-control" type="text" id="sms" name="sms" placeholder="인증번호 입력" aria-describedby="smsbtn">
+						<button id="smsbtn" type="button" class="btn btn-dark" onclick="smschk('`+numkey+`')">인증확인</button>
+						</div>
+						`;
 			} else {
 				alert("휴대전화번호가 올바르지 않습니다")
 				return;
@@ -217,13 +221,13 @@ function infoAlert(tit, txt) {
 		function smschk(num){
 			let smschkresult;
 			if(phoneAccep && num == sms.value){
-				smschkresult = `<p>인증이 완료되었습니다</p>`;
+				smschkresult = `<p style="color: #00dd00;">인증이 완료되었습니다</p>`;
 			document.getElementsByClassName('smschk')[0].innerHTML = '';
 			sendsms.disabled = true;
 				SMSAccep = true;
 				phone.readOnly = true;
 			} else {
-				smschkresult = `<p>인증 실패</p>`;
+				smschkresult = `<p style="color: #ff8383;">인증 실패</p>`;
 			}
 			document.getElementsByClassName('phonechkstr')[0].innerHTML = smschkresult;
 		}		
