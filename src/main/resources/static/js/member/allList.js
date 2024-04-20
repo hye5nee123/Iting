@@ -53,7 +53,7 @@ var lectureService = (function(){
 	                        	newTag += `<img src="/img/common/lect_sample.jpg" alt="기본 강의썸네일" onclick="location.href='/member/lecture/info/${lecture.ltNum}'">`;
 	                        } else {
 	                        // alt에 강의에 대한 설명을 적기
-	                        	newTag += `<img src="/download/${lecture.ltImg}" alt="${lecture.ltImg}" onclick="location.href='/member/lecture/info/${lecture.ltNum}'">`;
+	                        	newTag += `<img src="/download/${lecture.ltImg}" alt="${lecture.ltTtl}썸네일" onclick="location.href='/member/lecture/info/${lecture.ltNum}'">`;
 	                        }
 	                        	                        
 	                        newTag += `<ul class="product__hover">
@@ -63,7 +63,7 @@ var lectureService = (function(){
 	                        <div class="product__item__text lectList">
 	                            <span class="lectSpan">${lecture.ltCateCd}</span>
 	                            <h6 class="mb-2"><span>${lecture.name}</span> 강사님</h6>
-	                            <div class="rating">`;
+	                            <div class="star">`;
 	          // 별점에 따라 별그리기            
               switch (lecture.reviewAvg) {
 				  case 1:
@@ -109,15 +109,11 @@ var lectureService = (function(){
 	                      	<i class='bx bx-star'></i>
 	                      	<i class='bx bx-star'></i>`;
 							}
-	                       
-	                      /* 
-	                      for(let j = 0; j < lecture.reviewAvg; j++) {
-	                      	newTag += `<i class='bx bxs-star'></i>`
-	                      }
-	                      */
-	                      
+
+	                 
+	                 // 강의 제목
 	                 newTag += `</div>
-	                 			<h5 onclick="location.href='/member/lecture/info/${lecture.ltNum}'">${lecture.ltTtl}</h5>
+	                 			<h5 onclick="location.href='/member/lecture/info/${lecture.ltNum}'" class="mt-2">${lecture.ltTtl}</h5>
 	                            
 	                        </div>
 	                    </div>
