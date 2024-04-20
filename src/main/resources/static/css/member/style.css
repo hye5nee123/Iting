@@ -117,7 +117,7 @@ ol {
 }
 
 .section-title span {
-	color: #205cdc;
+	color: #2455a4;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -527,7 +527,7 @@ ol {
 }
 
 .header__nav__option a:hover{background:#f57b54; color:#fff;}
-.banner.spad{margin-top:500px;}
+.banner.spad{margin-top:600px;}
 
 .header__nav__option a i{margin-top:-2px;}
 .header__nav__option #count{display: inline-block;
@@ -770,10 +770,14 @@ ol {
 -----------------------*/
 
 .categories {
-	background: #f3f2ee;
+	position:absolute;
+	left:0;
+	width:100%;
+	background:rgb(147 162 195 / 5%);
 	overflow: hidden;
-	padding-top: 150px;
-	padding-bottom: 125px;
+	padding-top: 80px;
+	padding-bottom: 60px;
+	text-align:center;
 }
 
 .categories__text {
@@ -839,7 +843,7 @@ ol {
 }
 
 .categories__deal__countdown span {
-	color: #e53637;
+	color: #2455a4;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -1974,19 +1978,30 @@ ol {
 
 .footer {
 	background: #111111;
-	padding-top: 70px;
+	padding-top: 50px;
 }
+.footer .text-center,
+.footer .row {
+	width:100%;
+}
+.footer ul{list-style:none;}
+.footer li{color:#eee; font-size:15px; font-weight:300;}
 
 .footer__about {
 	margin-bottom: 30px;
 }
 
-.footer__about .footer__logo {
-	margin-bottom: 30px;
+.footer__logo {
+	width:170px;
+	margin-right:20px;
 }
 
 .footer__about .footer__logo a {
 	display: inline-block;
+}
+
+.footer__about .footer__logo img {
+	width:60% !important;
 }
 
 .footer__about p {
@@ -2768,6 +2783,7 @@ ol {
 }
 
 .latest {
+	padding-top:730px;
 	padding-bottom: 55px;
 }
 
