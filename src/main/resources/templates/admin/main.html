@@ -34,10 +34,9 @@ function move(no){
 			  <!-- <a href="/admin/lecture/ingLectureList"> -->
 			  <h5 class="card-header" role="button" th:onclick="location.href='/admin/lecture/ingLectureList'">강의신청목록</h5>
 			  <!-- </a> -->
-			  <div>
-			  <a href="/admin/lecture/ingLectureList" class="dd">목록가기</a>
-			  </div>
+
 			  <div class="card-body">
+			  <a href="/admin/lecture/ingLectureList" class="dd">목록가기</a>
 			    <table class="table">
 					<thead>
 						<tr>
@@ -62,7 +61,7 @@ function move(no){
 		  <div class="card">
 		    <h5 class="card-header">정산관리</h5>
 		    	<div class="card-body">
-				    <div class="chart-container" style="position: relative; height:200px; width:40vw">
+				    <div class="chart-container" style="position: relative; height:200px; width:40vw; top: 0; left: 30%;">
 				    	<canvas class="myChart" width="100" height="100"></canvas>
 				    </div>
 			    </div>
@@ -79,7 +78,7 @@ function move(no){
                     <ul class="nav nav-pills mb-3" role="tablist">
                       <li class="nav-item">
                         <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
-                          총 구독중 수 / 구독완료수
+                          총 매출
                         </button>
                       </li>
                     </ul>

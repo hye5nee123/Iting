@@ -14,35 +14,31 @@
 .lectSpan { display: inline-flex; align-items: center; margin: 5px 0; padding: 5px 10px; border: 1px solid #ced4da; border-radius: 32px; background-color: #fff; font-size: 14px; color: #000; line-height: 14px; }
 .product__item__pic img { height: 100%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
 .star i { letter-spacing:-1px; color:#ffca35; }
+.lect_search {position: relative;}
+.lect_search > input {width:300px; padding: 10px 30px; border-radius: 50px; border: 1px solid #eee; font-size: 16px; margin-bottom: 22px;}
+.lect_search > button { background-color: #205cdc; padding: 10px 15px; margin: 10px; border:none; border-radius: 50px; color:#fff;}
 </style>
 
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="container">
+		<div class="container mt-5">
 			<div class="row">
 				<!-- 강의 카테고리별 제목 넣기 -->
-				<h4 class="col-8" th:if="${lectureVO.ltCateCd} == null">전체 강의</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f1')}">기초강의</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f2')}">데이터 분석</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f3')}">웹 개발</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f4')}">프로그래밍언어</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f5')}">인공지능</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f6')}">컴퓨터 공학 전공</h4>
-				<h4 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f7')}">IT자격증</h4>
-				<div class="shop__sidebar__search col-4">
-					<input type="text" placeholder="강의명을 검색해주세요." name="lectSearch" id="searchKeyWord">
-		            <button type="button" onclick="searchLect()"><i class='bx bx-search-alt-2'></i>검색</button>
-				</div>
+				<h3 class="col-8" th:if="${lectureVO.ltCateCd} == null">전체 강의</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f1')}">기초강의</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f2')}">데이터 분석</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f3')}">웹 개발</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f4')}">프로그래밍언어</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f5')}">인공지능</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f6')}">컴퓨터 공학 전공</h3>
+				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f7')}">IT자격증</h3>
 			</div>
             <div class="shop__product__option">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="shop__product__option__left">
-                            <p>검색 옵션</p>
-                            [[${reviewAvg}]]
-                            [[${lectList}]]
-                        </div>
+                <div class="row my-5">
+                    <div class="col-lg-6 col-md-6 col-sm-6 lect_search">
+						<input type="text" placeholder="강의명을 검색해주세요." name="lectSearch" id="searchKeyWord">
+			            <button type="button" onclick="searchLect()"><i class='bx bx-search-alt-2'></i>검색</button>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="shop__product__option__right">

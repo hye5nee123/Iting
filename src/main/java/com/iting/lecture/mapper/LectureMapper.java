@@ -14,6 +14,7 @@ public interface LectureMapper {
 	public List<LectureVO> getAllLectureList(LectureVO vo, PagingVO pvo);
 	public List<LectureVO> getLectureList(LectureVO vo);
 	public LectureVO getLectureInfo(String ltNum);
+	public List<LectureVO> getMainLectureList();
 
 	// 신수지
 	public List<LectureVO> getTcList(String lecturerNum);
