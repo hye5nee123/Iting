@@ -91,6 +91,8 @@ public class CommonController {
 		String usernum =  (String) session.getAttribute("usernum");
 		
 		model.addAttribute("subspinfo", subspService.getSubspInfo(usernum));
+		model.addAttribute("lectMainList", lectureService.getMainLectureList());
+		
 		ModelAndView mv = new ModelAndView("member/main");
 		return mv;
 	}

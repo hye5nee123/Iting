@@ -123,20 +123,12 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p><i class='bx bx-smile'></i> 어서오세요 <span th:text="${session.username}"></span>님</p>
+                            <p th:if="${session.username == null}"><i class='bx bx-smile'></i> 로그인이 필요합니다</p>
+                            <p th:if="${session.username != null}"><i class='bx bx-smile'></i> 어서오세요 <span th:text="${session.username}"></span>님</p>
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-md-5">
-                        <!-- <div class="search_wrapper">
-                            <input class="text" type="text" placeholder="찾는강의가 있으신가요?" name="lectSearch" id="searchKeyWord">
-                            <button type="button" onclick="searchLect()">
-                                <i class='bx bx-search-alt-2'></i>검색
-                            </button>
-                            <div class="search_view_cover e_search_view_cover">
-                            </div>
-                        </div> -->
-
                         <div class="header__top__right">
 
                             <div class="header__top__links">
@@ -173,7 +165,7 @@
                                 </ul>
 
                             </li>
-                            <li><a href="./shop.html">무료강의</a></li>
+                            <li><a href="/member/lecture/allList">무료강의</a></li>
                             <li><a href="#">커뮤니티</a>
                                 <ul class="dropdown">
                                     <li><a href="http://localhost:8081/member/lecture/info/lt00001">수강후기</a></li>
