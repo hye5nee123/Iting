@@ -30,7 +30,9 @@ body{background:#fff !important;}
 .banner__item__pic img{height:100%;}
 
 .blog__item{background:#fff;}
-.blog__item__pic{background:#333; background-repeat:no-repeat; background-position:50%;}
+.blog03 .blog__item__pic{background-color:#153249;}
+.blog04 .blog__item__pic{background-color:#ebebea; background-size:50%; background-position:50% 40%;}
+.blog__item__pic{background:#333; background-repeat:no-repeat; background-position:50%; background-size:60%;}
 
 .review_box{width:100%;}
 .review{margin-top:40px; list-style:none; margin-bottom:60px;}
