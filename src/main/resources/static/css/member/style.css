@@ -937,7 +937,7 @@ ol {
 -----------------------*/
 
 .product {
-	padding-top: 0;
+	padding-top: 20px;
 	padding-bottom: 60px;
 }
 
@@ -2784,7 +2784,7 @@ ol {
 
 .latest {
 	padding-top:730px;
-	padding-bottom: 55px;
+	padding-bottom: 10px;
 }
 
 .blog__item {

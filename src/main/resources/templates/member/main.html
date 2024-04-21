@@ -5,7 +5,6 @@
      >
 <head>
 <meta charset="UTF-8">
-
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <!-- Demo styles -->
 
@@ -55,7 +54,7 @@
     .product__item img {height: 100%; width:100%;}
   </style>
   
-<title>아이팅 메인페이지</title>
+<title>아이팅</title>
 </head>
 <body>
 <section layout:fragment="content">
@@ -101,7 +100,7 @@
                         </div>
                         <div class="banner__item__text">
                             <h2>HTML의 이해</h2>
-                            <a href="#">강의보러가기</a>
+                            <a th:href="@{/member/lecture/info/lt00001}">강의보러가기</a>
                         </div>
                     </div>
                 </div>
@@ -280,8 +279,8 @@
 		            </div>
 		            <div class="row">
 		                <div class="col-lg-4 col-md-6 col-sm-6">
-		                    <div class="blog__item">
-		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-1.jpg" style="background-image: url(/img/member/main/blog-1.jpg);"></div>
+		                    <div class="blog__item blog04">
+		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-4.png" style="background-image: url(/img/member/main/blog-4.png);"></div>
 		                        <div class="blog__item__text">
 		                            <span>Java</span>
 		                            <h5>풀스택 개발자</h5>
@@ -290,8 +289,8 @@
 		                    </div>
 		                </div>
 		                <div class="col-lg-4 col-md-6 col-sm-6">
-		                    <div class="blog__item">
-		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-1.jpg" style="background-image: url(/img/member/main/blog-1.jpg);"></div>
+		                    <div class="blog__item blog03">
+		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-3.png" style="background-image: url(/img/member/main/blog-3.png);"></div>
 		                        <div class="blog__item__text">
 		                            <span>JavaScript</span>
 		                            <h5>프론트엔드개발자</h5>
@@ -312,24 +311,6 @@
 		            </div>
 		        </div>
 		    </section>
-	        
-	 		<section class="module-medium" id="demos">
-	          <h3>로드맵</h3>
-	          <div class="container">
-	            <div class="row multi-columns-row">
-	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-	                  <div class="content-box-image"><img src="/img/member/main/full.png" alt="풀스택 개발자"></div>
-	                  <h3 class="content-box-title font-serif">풀스택 개발자</h3></a></div>
-	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-	                  <div class="content-box-image"><img src="/img/member/main/html.png" alt="프론트엔드개발자"></div>
-	                  <h3 class="content-box-title font-serif">프론트엔드개발자</h3></a></div>
-	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-	                  <div class="content-box-image"><img src="/img/member/main/node.png" alt="백엔드개발자"></div>
-	                  <h3 class="content-box-title font-serif">백엔드개발자</h3></a></div>
-	            </div>
-	          </div>
-	        </section>
-	
 	</section>
  
 
