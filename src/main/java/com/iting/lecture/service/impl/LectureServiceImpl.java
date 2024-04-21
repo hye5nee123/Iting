@@ -93,6 +93,11 @@ public class LectureServiceImpl implements LectureService {
 		return lectureMapper.ingInfo(ltNum);
 	}
 
+	@Override
+	public List<LectureVO> getMainLectureList() {
+		return lectureMapper.getMainLectureList();
+	}
+
 
 
 }

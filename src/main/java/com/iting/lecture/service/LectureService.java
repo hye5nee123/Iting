@@ -12,6 +12,7 @@ public interface LectureService {
 	public List<LectureVO> getLectureList(LectureVO vo);
 	public LectureVO getLectureInfo(String ltNum);
 	public LectureVO getLectureInfo1(String ltNum);
+	public List<LectureVO> getMainLectureList();
 	
 	// 신수지
 	public List<LectureVO> getTcList(String ltNum);
