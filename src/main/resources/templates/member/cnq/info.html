@@ -148,6 +148,12 @@
 		</table>
 	</div>
 	<script th:inline="javascript">
+	//댓글 등록 버튼 이벤트 리스너 등록.
+	document.getElementById("saveRBtn").addEventListener("click", saveRReq);
+	 // 목록 버튼 클릭 이벤트 리스너 등록
+    document.getElementById("listBtn").addEventListener("click", function() {
+        history.back();
+    });
 	const ltCnqNum = [[${cnq.ltCnqNum}]]
 	let countReply=0;
 	//함수 호출.
@@ -170,6 +176,9 @@
 		.then(res => res.json())
 		.then(res => listRes(res))
 	}
+	//목록 이전페이지.(맨위로 올려야 작동 합니다.)
+	listBtn.addEventListener("click",
+			e=>{location.href="javascript:history.back();"})
 	
 	//list 응답.
 	function listRes(res) {
@@ -200,8 +209,6 @@
 		const ltNum = cnqForm.ltNum.value;
 		let param = { ttl, cntn, name,ltNum,  atchNum :fileNum};
 	}
-	listBtn.addEventListener("click",
-			e=>{location.href="javascript:history.back();"})
 			
 	//댓글
 	
