@@ -118,31 +118,31 @@ p {
 			<div class="savecont">
 				<div th:each="save : ${savelist}">
 					<hr>
-				<div class="saves" >
-					<input class="chkbox" type="checkbox" th:value="${save.ltNum}"
-					onclick="makeChkList()">
-					<div class="saveimgbox">
-						<a class="saveimg" th:href="|/member/lecture/info/${save.ltNum}|"
-							role="button"> <img class="saveimg"
-							th:src="|/download/${save.ltImg}|" alt="강의 이미지">
-						</a>
-					</div>
-					<div class="savecnt">
-						<div class="save1">
-							<p class="savestat badge bg-dark" th:text="${save.ltStCd}">강의상태</p>
-							<p class="savettl" th:text="${save.ltTtl}">제목</p>
-							<p class="savedate" th:text="|개설일 : ${save.frDt}|">개설일</p>
+					<div class="saves" >
+						<input class="chkbox" type="checkbox" th:value="${save.ltNum}"
+						onclick="makeChkList()">
+						<div class="saveimgbox">
+							<a class="saveimg" th:href="|/member/lecture/info/${save.ltNum}|"
+								role="button"> 
+								<img class="saveimg" th:if="${save.ltImg} != null" th:src="|/download/${save.ltImg}|" alt="강의 이미지">
+							</a>
 						</div>
-						<div class="save2">
-							<p class="saveintro" th:text="${save.ltIntro}">소개</p>
-							<p class="savelecname" th:text="${save.lecturerName}">강사명</p>
-							<div class="savewordcat">
-							<p class="badge rounded-pill bg-secondary" th:text="${save.ltCateCd}">카테고리</p>
-							<p class="badge rounded-pill bg-primary" th:text="${save.ltKeywordCd}">강의키워드</p>
+						<div class="savecnt">
+							<div class="save1">
+								<p class="savestat badge bg-dark" th:text="${save.ltStCd}">강의상태</p>
+								<p class="savettl" th:text="${save.ltTtl}">제목</p>
+								<p class="savedate" th:text="|개설일 : ${save.frDt}|">개설일</p>
+							</div>
+							<div class="save2">
+								<p class="saveintro" th:text="${save.ltIntro}">소개</p>
+								<p class="savelecname" th:text="${save.lecturerName}">강사명</p>
+								<div class="savewordcat">
+								<p class="badge rounded-pill bg-secondary" th:text="${save.ltCateCd}">카테고리</p>
+								<p class="badge rounded-pill bg-primary" th:text="${save.ltKeywordCd}">강의키워드</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</div>
 			</div>
 		</div>
