@@ -2,34 +2,37 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/blank}">
 <meta charset="UTF-8">
+<title>조혜원</title>
 <section layout:fragment="content">
 	<style>
 .cnq_reset {
 	float: right;
 	padding: 12px 40px;
 	font-size: 16px;
-	color:#fff !important ;
+	color: #fff !important;
 	border: 0;
 	letter-spacing: -1px;
 	background: #ff8a00;
 	border-radius: 5px;
 }
-.cnq_insertBtn{
-color:#fff !important ;  
+
+.cnq_insertBtn {
+	color: #fff !important;
 }
 </style>
 	<div class="checkout__input contact__form">
 		<h3 class="related-title">글 수정</h3>
 		<form name="cnqUpdateForm" method="post">
-		<input type="hidden" name="ltNum" th:value="${cnq.ltNum}"></input>
-			<input th:value="${cnq.ltCnqNum}" class="form-control hidden"
-				type="text" id="ltCnqNum" name="ltCnqNum" readonly> 제목 : <input
+			<input type="hidden" name="ltNum" th:value="${cnq.ltNum}"></input> <input
+				th:value="${cnq.ltCnqNum}" class="form-control hidden" type="text"
+				id="ltCnqNum" name="ltCnqNum" readonly> 제목 : <input
 				type="text" name="ttl" th:value="${cnq.ttl}"> 내용 :
 			<textarea name="cntn" th:text="${cnq.cntn}"></textarea>
-			<br> 작성자 : <input type="text" name="name" th:value="${cnq.name}" readonly>
+			<br> 작성자 : <input type="text" name="name" th:value="${cnq.name}"
+				readonly>
 			<div>
-				<a class="cnq_insertBtn" id="saveBtn">등록</a> 
-				<a class="cnq_reset" id="listBtn">취소</a>
+				<a class="cnq_insertBtn" id="saveBtn">등록</a> <a class="cnq_reset"
+					id="listBtn">취소</a>
 			</div>
 		</form>
 	</div>
