@@ -141,19 +141,21 @@
 	                    </ul>
 	                </div>
 	            </div>
-	            <div class="row product__filter" id="MixItUpE49582">
+	            <div class="row product__filter le_box" id="MixItUpE49582">
 					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals"
 						th:each="lect, stat: ${lectMainList}" th:if="${stat.index < 8}">
 	                    <div class="product__item">
-	                    <span th:text="${stat.index + 1}"></span><span>위</span>
+	                    <div class="index">
+		                    <span th:text="${stat.index + 1}"></span><span>위</span>
+	                    </div>
 	                    <a th:href="@{/member/lecture/info/{ltNum}(ltNum = ${lect.ltNum})}">
 	                       	<img th:if="${lect.ltImg == null}" src="/img/common/lect_sample.jpg" alt="기본 강의썸네일" th:onclick="location.href='/member/lecture/info/${lect.ltNum}'">
 	                        <img th:src="@{/download/{ltImg}(ltImg = ${lect.ltImg})}" th:alt="${lect.ltTtl}" th:onclick="location.href='/member/lecture/info/${lect.ltNum}'">
 	                    </a>
 	                        <div class="product__item__text">
-	                             <h6 th:text="${lect.ltCateCd}"></h6>
+	                             <span th:text="${lect.ltCateCd}"></span>
 	                            <h6 th:text="${lect.ltTtl}"></h6>
-	                            <h6 th:text="${lect.name}"></h6>
+	                            <div class="txt"><p th:text="${lect.name}"></p><i>강사님</i></div>
 	                        </div>
 	                    </div>
 	                </div>

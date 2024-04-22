@@ -516,6 +516,7 @@ ol {
 
 .header__nav__option a {
 	display: inline-block;
+	font-size:14px;
 	margin-right: 5px;
 	position: relative;
 	border:1px dashed #f57b54;
@@ -534,6 +535,7 @@ ol {
 	position: relative;
 	border:1px dashed #aaa;
 	color:#aaa;
+	font-size:14px;
 	font-weight:500;
 	letter-spacing:-0.5px;
 	padding:4px 13px; 
@@ -3449,6 +3451,7 @@ ol {
 		margin-right: 10px;
 	}
 	.header__nav__option a {
+		font-size:14px;
 		margin-right: 10px;
 	}
 	.header__nav__option .price {
