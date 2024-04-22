@@ -50,45 +50,44 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				(requests) -> requests
-				.antMatchers("/*", "/member/**", "/js/**", "/css/**", "/img/**", "/video/**", "/common/**", "/lecture/**", "/download/**", "/upload/**", "/js/*", "/downloading/**").permitAll()
-				.antMatchers("/admin/**").hasRole("B2")
-				.antMatchers("/teacher/**").hasRole("D1")
+				.antMatchers("/*"
+							, "/member/**"
+							, "/js/**"
+							, "/css/**"
+							, "/img/**"
+							, "/video/**"
+							, "/common/**"
+							, "/lecture/**"
+							, "/download/**"
+							, "/upload/**"
+							, "/js/*"
+							, "/downloading/**"
+							).permitAll() // 전체 권한 허용
+				.antMatchers("/admin/**").hasRole("B2") // 관리자 권한 허용
+				.antMatchers("/teacher/**").hasRole("D1") // 강사 권한 허용
 				.anyRequest().authenticated())
-//				.formLogin((form) -> form
-//						.loginPage("/login")
-//						.permitAll())
-				.formLogin().loginPage("/commonlogin")
-				.usernameParameter("userId")
-//				.passwordParameter("password")
-				.loginProcessingUrl("/userlogin")
-				.successHandler(authenticationSuccessHandler())
+				.formLogin().loginPage("/commonlogin") // 로그인 폼 지정
+				.usernameParameter("userId") // 아이디 폼 이름
+				.loginProcessingUrl("/userlogin") // 로그인 작동 url
+				.successHandler(authenticationSuccessHandler()) // 로그인 성공 핸들러
 //				.failureForwardUrl("/commonlogin")
 //				.failureUrl("/commonlogin")
 //				.failureHandler(loginFailureHandler()) // 로그인 실패 핸들러
-				.permitAll()
+				.permitAll() // 요청 허용
 				.and()
-				
-//				.logout((logout) -> logout.permitAll());
 				.logout()
-				.logoutUrl("/logout")
-				.logoutSuccessHandler(logoutSuccessHandler())
-				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
-				
-//				.logoutSuccessHandler((request, response, authentication) -> {
-//	                response.sendRedirect("/member/main");
-//				})
+				.logoutUrl("/logout") // 로그아웃 요청 주소
+				.logoutSuccessHandler(logoutSuccessHandler()) // 로그아웃 성공 핸들러
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID") // 세션 및 쿠키 제거
 				.permitAll()
 				.and()
 				.headers()
 				.frameOptions()
 				.sameOrigin()
 				.and()
-				
-				//.exceptionHandling().accessDeniedHandler(AccessDeniedHandler());
 				.exceptionHandling(handler -> handler
-						.accessDeniedHandler(accessDeniedHandler()))
-				//.csrf().disable()
-				.userDetailsService(detailService)
+						.accessDeniedHandler(accessDeniedHandler())) // 접근 거부 핸들러
+				.userDetailsService(detailService) 
 				;
 		http.oauth2Login()
 		.userInfoEndpoint()
