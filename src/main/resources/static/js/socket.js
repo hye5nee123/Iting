@@ -1,5 +1,6 @@
 const stompClient = new StompJs.Client({
     brokerURL: 'ws://yeacademy.shop/chatserver' // 운영서버 도메인
+    // brokerURL: 'ws://15.164.49.2:80/chatserver' // 운영서버 도메인
 });
 
 stompClient.activate();
