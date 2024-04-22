@@ -5,7 +5,6 @@
      >
 <head>
 <meta charset="UTF-8">
-
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <!-- Demo styles -->
 
@@ -41,8 +40,8 @@
 
     .swiper-slide img {
       display: block;
-      width: 50%;
-      height: 50%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
@@ -50,19 +49,21 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+
+    .product__item img {height: 100%; width:100%;}
   </style>
   
-<title>아이팅 메인페이지</title>
+<title>아이팅</title>
 </head>
 <body>
 <section layout:fragment="content">
 	<!-- 메인 슬라이드 -->
 	<div class="swiper mySwiper mt-5">
 	  <div class="swiper-wrapper">
-	    <div class="swiper-slide"><img src="/img/member/main/노드.jpg"></div>
-	    <div class="swiper-slide"><img src="/img/member/main/스프링.jpg"></div>
-	    <div class="swiper-slide"><img src="/img/member/main/혼공자.png"></div>
-	    <div class="swiper-slide"><img src="/img/member/main/자바.jpg"></div>
+	    <div class="swiper-slide"><img src="/img/member/main/main_banner_02.jpg"></div>
+	    <div class="swiper-slide"><img src="/img/member/main/main_banner_01.jpg"></div>
+	    <div class="swiper-slide"><img src="/img/member/main/main_banner_03.jpg"></div>
 	  </div>
 	  <div class="swiper-button-next"><i class='bx bx-arrow-back'></i></div>
 	  <div class="swiper-button-prev"><i class='bx bx-arrow-back'></i></div>
@@ -94,19 +95,19 @@
             <div class="row">
                 <div class="col-lg-7 offset-lg-4">
                     <div class="banner__item">
-                        <div class="banner__item__pic">
-                            <img src="img/banner/banner-1.jpg" alt="">
+                        <div class="banner__item__pic pic01">
+                            <img src="/img/member/main/banner-1.jpg" alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>HTML의 이해</h2>
-                            <a href="#">강의보러가기</a>
+                            <a th:href="@{/member/lecture/info/lt00001}">강의보러가기</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="banner__item banner__item--middle">
-                        <div class="banner__item__pic">
-                            <img src="img/banner/banner-2.jpg" alt="">
+                        <div class="banner__item__pic pic02">
+                            <img src="/img/member/main/banner-2.jpg" alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>프로그래밍언어</h2>
@@ -116,12 +117,12 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="banner__item banner__item--last">
-                        <div class="banner__item__pic">
-                            <img src="img/banner/banner-3.jpg" alt="">
+                        <div class="banner__item__pic pic03">
+                            <img src="/img/member/main/banner-3.jpg" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Shoes Spring 2030</h2>
-                            <a href="#">Shop now</a>
+                            <h2>스프링부트 개발</h2>
+                            <a href="#">강의보러가기</a>
                         </div>
                     </div>
                 </div>
@@ -131,7 +132,7 @@
     
 	 <section class="product spad">
 	        <div class="container">
-	            <div class="row mt-5">
+	            <div class="row">
 	                <div class="col-lg-12">
 	                    <ul class="filter__controls">
 	                        <li class="active" data-filter="*">추천강의</li>
@@ -141,132 +142,175 @@
 	                </div>
 	            </div>
 	            <div class="row product__filter" id="MixItUpE49582">
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals"
+						th:each="lect, stat: ${lectMainList}" th:if="${stat.index < 8}">
 	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00002">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/리눅스.jpg">
-	                        </div>
-	                        </a>
+	                    <span th:text="${stat.index + 1}"></span><span>위</span>
+	                    <a th:href="@{/member/lecture/info/{ltNum}(ltNum = ${lect.ltNum})}">
+	                       	<img th:if="${lect.ltImg == null}" src="/img/common/lect_sample.jpg" alt="기본 강의썸네일" th:onclick="location.href='/member/lecture/info/${lect.ltNum}'">
+	                        <img th:src="@{/download/{ltImg}(ltImg = ${lect.ltImg})}" th:alt="${lect.ltTtl}" th:onclick="location.href='/member/lecture/info/${lect.ltNum}'">
+	                    </a>
 	                        <div class="product__item__text">
-	                             <h6>예담</h6>
-	                            <h6>리눅스</h6>
-	                            <h6>서강중</h6>
+	                             <h6 th:text="${lect.ltCateCd}"></h6>
+	                            <h6 th:text="${lect.ltTtl}"></h6>
+	                            <h6 th:text="${lect.name}"></h6>
 	                        </div>
 	                    </div>
 	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00003">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/스프링.jpg">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-	                             <h6>NODE.JS, SPRING</h6>
-	                            <h6>강의2</h6>
-	                            <h6>김유미</h6>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00004">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/혼공자.png">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-	                           
-	                             <h6>예담</h6>
-	                            <h6>JAVA</h6>
-	                            <h6>이창호</h6>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00005">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/plsql.jpg">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-									<h6>예담</h6>
-									<h6>PL/SQL</h6>
-	                            <h6>권미진</h6>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00006">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/자바.jpg">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-	                            <h6>예담</h6>
-	                            <h6>HTML/CSS</h6>
-	                            <h6>권정남</h6>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00007">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/sql.jpg">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-	                             <h6>예담</h6>
-	                            <h6>SQL</h6>
-	                            <h6>권현미</h6>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00008">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/노드.jpg">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-	                             <h6>예담</h6>
-	                            <h6>NODE.JS</h6>
-	                            <h6>김지영</h6>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-	                    <div class="product__item">
-	                    <a href="/member/lecture/info/lt00009">
-	                        <div class="product__item__pic set-bg" data-setbg="/img/member/main/qb.jpg">
-	                        </div>
-	                        </a>
-	                        <div class="product__item__text">
-	                            <h6>예담</h6>
-	                            <h6>VIEW</h6>
-	                            <h6>송선희</h6>
-	                        </div>
-	                    </div>
-	                </div>
+					
 	            </div>
 	            
 	        </div>
 	        </section>
-	 		<section class="module-medium" id="demos">
-	          <h3>로드맵</h3>
-	          <div class="container">
-	            <div class="row multi-columns-row">
-	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-	                  <div class="content-box-image"><img src="/img/member/main/full.png" alt="풀스택 개발자"></div>
-	                  <h3 class="content-box-title font-serif">풀스택 개발자</h3></a></div>
-	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-	                  <div class="content-box-image"><img src="/img/member/main/html.png" alt="프론트엔드개발자"></div>
-	                  <h3 class="content-box-title font-serif">프론트엔드개발자</h3></a></div>
-	              <div class="col-md-4 col-sm-6 col-xs-12"><a class="content-box" href="#">
-	                  <div class="content-box-image"><img src="/img/member/main/node.png" alt="백엔드개발자"></div>
-	                  <h3 class="content-box-title font-serif">백엔드개발자</h3></a></div>
-	            </div>
-	          </div>
-	        </section>
-	
+	        
+	        <section class="categories spad">
+		        <div class="container">
+		            <div>
+		             
+	                    <div class="categories__deal__countdown">
+	                        <span>코딩이 처음인 비전공자부터 개발자까지</span>
+	                        <h2>생생한 수강후기</h2>
+		                      <div class="review_box">
+									<ul class="review">
+										<li>
+											<div>
+												<span class="img"><i class='bx bx-cool'></i></span>
+												<p class="id">전상진</p>
+												<div class="star">
+													<span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span>
+												</div>
+												<p class="text">바쁜 비개발자 직장인에게 추천드리고 싶어요.</p>
+												<span class="txt">- Spring기초 수강</span>
+											</div>
+										
+										</li><li>
+											<div>
+												<span class="img"><i class='bx bx-wink-smile' ></i></span>
+												<p class="id">김현준</p>
+												<div class="star">
+													<span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span>
+												</div>
+												<p class="text">IT 분야에 관심이 있으신 분들은 전부 다 수강하시길 추천드려요.</p>
+												<span class="txt">- 프로그래밍언어 수강</span>
+											</div>
+										
+										</li><li>
+											<div>
+												<span class="img"><i class='bx bx-happy-heart-eyes' ></i></span>
+												<p class="id">신혜원</p>
+												<div class="star">
+													<span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span>
+												</div>
+
+												<p class="text">자투리 시간을 활용하는 습관을<br> 기를 수 있었어요.</p>
+												<span class="txt">- Oracle 완전정복 수강</span>
+											</div>
+										
+										</li><li>
+											<div>
+												<span class="img"><i class='bx bx-laugh' ></i></span>
+												<p class="id">이수진</p>
+												<div class="star">
+													<span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span><span>
+														<i class="bx bxs-star"></i>
+													</span>
+												</div>
+
+												<p class="text">너무 유익하고 수강하는 내내 시간가는 줄 몰랐어요.</p>
+												<span class="txt">- Vue.js 중급 수강</span>
+											</div>
+										
+										</li>
+										</ul>
+								</div>
+	                        <a href="#" class="primary-btn">자세히보기</a>
+	                    </div>
+		            </div>
+		        </div>
+		    </section>
+	        
+	        <section class="latest spad">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-lg-12">
+		                    <div class="section-title">
+		                        <span>개발자가 되는 가장 빠른 길</span>
+		                        <h2>취업 로드맵</h2>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-lg-4 col-md-6 col-sm-6">
+		                    <div class="blog__item blog04">
+		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-4.png" style="background-image: url(/img/member/main/blog-4.png);"></div>
+		                        <div class="blog__item__text">
+		                            <span>Java</span>
+		                            <h5>풀스택 개발자</h5>
+		                            <a href="#">자세히보기</a>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="col-lg-4 col-md-6 col-sm-6">
+		                    <div class="blog__item blog03">
+		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-3.png" style="background-image: url(/img/member/main/blog-3.png);"></div>
+		                        <div class="blog__item__text">
+		                            <span>JavaScript</span>
+		                            <h5>프론트엔드개발자</h5>
+		                            <a href="#">자세히보기</a>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="col-lg-4 col-md-6 col-sm-6">
+		                    <div class="blog__item">
+		                        <div class="blog__item__pic set-bg" data-setbg="/img/member/main/blog-1.jpg" style="background-image: url(/img/member/main/blog-1.jpg);"></div>
+		                        <div class="blog__item__text">
+		                            <span>Node</span>
+		                            <h5>백엔드개발자</h5>
+		                            <a href="#">자세히보기</a>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </section>
 	</section>
  
 

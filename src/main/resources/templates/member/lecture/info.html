@@ -197,7 +197,12 @@ position: relative;
 	
 	// 등록 응답
 	function saveRes(res) {
-		alert('찜 등록 완료!');
+		Swal.fire({
+			icon: "success",
+			title: "찜 완료",
+			confirmButtonText: "확인",
+			confirmButtonColor: "#205cdc"
+		})
 		console.log(res)
 	}
 	
