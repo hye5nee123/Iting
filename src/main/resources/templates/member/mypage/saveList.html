@@ -9,24 +9,25 @@
 #mysave {
 	color: #28a745;
 }
-
+.savetbl {
+	margin-bottom: 35px;
+}
+.chkbox {
+	margin-right: 10px;
+}
 .saveimgbox {
-	width: 300px;
-	height: 200px;
+	width: 180px;
+	height: 120px;
+	align-content: center;
+	text-align: center;
 }
 
 .saveimg {
-	max-width: 100%;
-	height: auto;
-}
-
-.savetop {
-	display: flex;
-	flex-direction: column;
 	width: 100%;
+	height: 100%;
 }
 
-.savecont {
+.savetop, .savecont {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -36,41 +37,112 @@
 	display: flex;
 	width: 100%;
 }
-
-.tops {
-	flex-direction: row;
+p {
+	font-size: 15px;
+	margin-bottom: 0;
+}
+.delete {
+	position: absolute;
+	right: 50px;
+	top: 43px;
+}
+.savecnt {
+	position: relative;
+	width: 65%;
+	padding: 0px 10px;
+}
+.save1 {
+	display: flex;
+	margin-bottom: 3px;
+}
+.save2 {
+	display: flex;
+	
+}
+.badge {
+	color: #ffffff;
+	align-content: center;
+}
+.savettl {
+	position: relative;
+	font-weight: 700;
+	left: 1%;
+}
+.savestat {
+	width: 60px;
+	position: relative;
+}
+.savedate {
+	position: absolute;
+	font-weight: 700;
+	font-size: 12px;
+	right: 7px;
+}
+.saveintro {
+	position: absolute;
+	font-size: 12px;
+	line-height: 1.2;
+	margin: 0 5px;
+}
+.savelecname {
+	position: relative;
+	left: 5px;
+	top: 62px;
+	font-weight: 700;
+}
+.savewordcat {
+	position: absolute;
+	right: 7px;
+	bottom: 7px;
+	font-weight: 700;
+	font-size: 15px;
+	
+}
+.savecat {
 }
 </style>
 </head>
 <body>
 	<section layout:fragment="mycontent">
-		<div class="savetbl">
+		<div class="nodata" th:if="${savelist} == null">아직 찜한 강의가 없습니다.</div>
+		<div th:if="${savelist} != null" class="savetbl">
 			<div class="savetop">
-				<h3>내가 찜한 강의</h3>
 				<div class="tops">
-					<label> <input id="chkall" type="checkbox"
+					<label class="mb-0"> <input id="chkall" type="checkbox"
 						onchange="makeChkList()"> 전체 선택
-					</label> <button type="button" class="delete" onclick="deleteSaves()">선택
+					</label> 
+					<button type="button" class="delete btn btn-warning" onclick="deleteSaves()">선택
 						삭제</button>
 				</div>
 			</div>
 			<div class="savecont">
-				<div class="saves" th:each="save : ${savelist}">
+				<div th:each="save : ${savelist}">
+					<hr>
+				<div class="saves" >
 					<input class="chkbox" type="checkbox" th:value="${save.ltNum}"
-						onclick="makeChkList()">
+					onclick="makeChkList()">
 					<div class="saveimgbox">
 						<a class="saveimg" th:href="|/member/lecture/info/${save.ltNum}|"
 							role="button"> <img class="saveimg"
 							th:src="|/download/${save.ltImg}|" alt="강의 이미지">
 						</a>
 					</div>
-					<p class="savettl" th:text="${save.ltTtl}">제목</p>
-					<p class="savedate" th:text="${save.frDt}">개설날짜</p>
-					<p class="saveintro" th:text="${save.ltIntro}">소개</p>
-					<p class="savecat" th:text="${save.ltCateCd}">카테고리</p>
-					<p class="savelecname" th:text="${save.lecturerName}">강사명</p>
-					<p class="saveword" th:text="${save.ltKeywordCd}">강의키워드</p>
-					<p class="savestat" th:text="${save.ltStCd}">강의상태</p>
+					<div class="savecnt">
+						<div class="save1">
+							<p class="savestat badge bg-dark" th:text="${save.ltStCd}">강의상태</p>
+							<p class="savettl" th:text="${save.ltTtl}">제목</p>
+							<p class="savedate" th:text="|개설일 : ${save.frDt}|">개설일</p>
+						</div>
+						<div class="save2">
+							<p class="saveintro" th:text="${save.ltIntro}">소개</p>
+							<p class="savelecname" th:text="${save.lecturerName}">강사명</p>
+							<div class="savewordcat">
+							<p class="badge rounded-pill bg-secondary" th:text="${save.ltCateCd}">카테고리</p>
+							<p class="badge rounded-pill bg-primary" th:text="${save.ltKeywordCd}">강의키워드</p>
+							</div>
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>

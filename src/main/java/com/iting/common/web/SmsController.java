@@ -9,6 +9,8 @@ import com.iting.common.model.SMSVO;
 
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @RestController
@@ -77,7 +79,7 @@ public class SmsController {
 	 * 단일 메시지 발송 예제
 	 */
 	@PostMapping("/sendsms")
-	public void sendOne(@RequestBody SMSVO nums) {
+	public SingleMessageSentResponse sendOne(@RequestBody SMSVO nums) {
 		Message message = new Message();
 //		String num = phonenum.substring(1, phonenum.length() - 1);
 		System.out.println(nums.getPhonenum());
@@ -90,8 +92,8 @@ public class SmsController {
 //	        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
 		message.setText(nums.getNumkey());
 		
-//		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-//		return response; // 문자 보내기 (리턴 받는 메소드 타입 변경해줘야함)
+		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+		return response; // 문자 보내기 (리턴 받는 메소드 타입 변경해줘야함)
 	}
 
 //	    /**

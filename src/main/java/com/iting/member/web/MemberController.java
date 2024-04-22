@@ -1,5 +1,7 @@
 package com.iting.member.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.iting.common.model.AccountVO;
 import com.iting.member.model.MemberVO;
 import com.iting.member.service.MemberService;
+import com.iting.subsp.model.MySttlVO;
+import com.iting.subsp.model.SubspVO;
 import com.iting.subsp.service.SttlService;
 import com.iting.subsp.service.SubspService;
 import com.iting.tlsn.service.TlsnService;
@@ -50,8 +54,14 @@ public class MemberController {
 	@GetMapping("/member/mypage/sttlList")
 	public String goMySttl(Model model, HttpSession session) {
 		String usernum = (String) session.getAttribute("usernum");
-		model.addAttribute("sttllist", sttlService.getSttlList(usernum));
-		model.addAttribute("subspinfo", subspService.getSubspInfo(usernum));
+		SubspVO subinfo = subspService.getSubspInfo(usernum);
+		if(subinfo != null) {
+			model.addAttribute("subspinfo", subinfo);
+			List<MySttlVO> sttllist = sttlService.getSttlList(usernum);
+			if(!sttllist.isEmpty()) {
+				model.addAttribute("sttllist", sttllist);
+			}
+		} 
 		return "member/mypage/sttlList";
 	}
 	// 마이페이지 회원정보 수정

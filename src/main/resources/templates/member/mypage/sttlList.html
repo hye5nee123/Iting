@@ -9,52 +9,83 @@
 #mysttl {
 	color: #28a745;
 }
-.subtype, .sublength{
-	text-align: center;
+.mycontent {
 }
+p {
+	margin: 0;
+}
+
 .subinfo {
 	display: flex;
 	margin-bottom: 4%;
 	position: relative;
-	height: 35%;
+	height: 78px;
+}
+.subtype, .sublength{
+	text-align: center;
+	align-content: center;
+	padding: 12px;
 }
 
 .subtype {
-	width: 48%;
+	width: 23%;
 	margin-right: 2%;
 	border: 1px solid #d1d1d1;
 	border-radius: 10px;
 }
 
 .sublength {
-	width: 48%;
+	width: 73%;
 	margin-left: 2%;
 	border: 1px solid #d1d1d1;
 	border-radius: 10px;
 }
 .sttltbl {
-	height: 46%;
+	height: 500px;
 	border: 1px solid #d1d1d1;
 	border-radius: 10px;
+	text-align: center;
+	margin-bottom: 35px;
+	padding: 15px;
+}
+.ttl2 {
+	font-weight: 700;
+	font-size: 18px;
+}
+.sttlttl {
+	font-weight: 700;
+	font-size: 24px;
+	text-align: center;
+}
+th, td {
+	font-size: 12px;
+}
+.table {
+	margin: 0 auto;
+}
+.table td, .table th {
+	padding: 5px 10px;
+	align-content: center;
 }
 </style>
 </head>
 <body>
-	<section layout:fragment="mycontent">
-		<div class="subinfo" th:if="${subspinfo.subspStCd} == 'm1'">
-			<div class="subtype">
-				<p class="ttl2">구독 유형</p>
-				<p>[[${subspinfo.subspTypCd}]]</p>
-			</div>
-			<div class="sublength">
-				<p class="ttl2">구독 기한</p>
-				<p>[[${subspinfo.subspFrDt}]] ~ [[${subspinfo.subspToDt}]]</p>
-				<p>D-[[${subspinfo.subremain}]]</p>
-			</div>
+	<section class="mycontent" layout:fragment="mycontent">
+		<div class="nodata" th:if="${subspinfo} == null">아직 구독하지 않았습니다.</div>
+		<div class="subinfo" th:if="${subspinfo} != null">
+				<div class="subtype">
+					<p class="ttl2">구독 유형</p>
+					<p>[[${subspinfo.subspTypCd}]]</p>
+				</div>
+				<div class="sublength">
+					<p class="ttl2">구독 기한</p>
+					<p class="ttl2">D-[[${subspinfo.subremain}]]</p>
+					<p style="font-size: 12px;">[[${subspinfo.subspFrDt}]] ~ [[${subspinfo.subspToDt}]]</p>
+				</div>
 		</div>
 		<div class="sttltbl">
-			<h3>결제내역</h3>
-			<table>
+			<p class="sttlttl mb-3">결제내역</p>
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>구독유형</th>
@@ -66,9 +97,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="sttl : ${sttllist}">
+					<tr th:if="${sttllist} != null" class="tblcont" th:each="sttl : ${sttllist}">
 						<td th:text="${sttl.subspTypCd}"></td>
-						<td th:text="|${sttl.subspFrDt} ~ ${sttl.subspToDt}|"></td>
+						<td><span th:text="${sttl.subspFrDt}"></span><br>
+						<span>~</span><br>
+						<span th:text="${sttl.subspToDt}"></span></td>
 						<td th:text="${sttl.sttlTypCd}"></td>
 						<td th:text="${sttl.sttlDt}"></td>
 						<td th:text="${sttl.allSttlPrice}"></td>
@@ -76,6 +109,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<div class="nodata" th:if="${sttllist} == null">아직 결제내역이 없습니다.</div>
 		</div>
 	</section>
 </body>
