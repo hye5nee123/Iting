@@ -226,7 +226,7 @@
 .test_modal .test_box li label{width:calc(100% - 3%); vertical-align:top; word-break:keep-all; margin-bottom:0; font-size:15px; padding-left:5px; color:#777; font-weight:400;}
 .test_modal .btn_box{margin-top:15px; text-align:center;}
 .test_modal .btn_form{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
-.test_modal .video_text{height:74.5%; padding-bottom:50px;}
+.test_modal .video_text{width:60%; height:74.5%; padding-bottom:50px;}
 .test_modal .video_box{padding:0; overflow-y:auto;}
 
 /* 채점결과 */
