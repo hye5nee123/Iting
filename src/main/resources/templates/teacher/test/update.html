@@ -88,8 +88,19 @@
 	// 등록 응답
 	function saveRes(res) {
 		console.log(res);
-		alert('문제가 수정되었습니다.');
-		window.location.href = `/teacher/test/list/${res.ltNum}`;
+		Swal.fire({
+			  title: "문제가 수정되었습니다.",
+			  icon: "success",
+			  showCancelButton: false,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				 window.location.href = `/teacher/test/list/${res.ltNum}`;
+			  }
+		});
 	}
 	
 	//버튼 클릭 시 함수 호출.
