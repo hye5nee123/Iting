@@ -29,10 +29,17 @@
                     <tbody class="table-border-bottom-0">
                       <tr th:each="lno, stat: ${mltnoticeList}"
 							th:onclick="move([[${lno.ltNoticeNum}]])">
-							<td th:text="${lno.ltNoticeNum}"></td>
-							<td th:text="${lno.ltNoticeTtl}"></td>
-							<td th:text="${lno.ltNoticeCntn}"></td>
+							<td th:text="${stat.count}"></td>
+							<td>
+							<p class="text-truncate" style="width: 8rem;" th:text="${lno.ltNoticeTtl}"></p>
+							</td>
+							<td>
+							<p class="text-truncate" style="width: 8rem;" th:text="${lno.ltNoticeCntn}">
+							</p></td>
 							<td th:text="${#dates.format(lno.ltNoticeRegDt,'yyyy-MM-dd')}"></td>
+							<td>
+							<input type="hidden" th:value="${lno.ltNum}" name="lnum">
+							</td>
 						</tr>
                     </tbody>
                   </table>

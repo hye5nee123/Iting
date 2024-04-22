@@ -12,6 +12,7 @@ SELECT LT_NOTICE_NUM
 FROM LT_NOTICE
 
 
+
 </select>
 
 <!--회원 보기용 공지사항  -->
