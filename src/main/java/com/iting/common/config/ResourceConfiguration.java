@@ -23,5 +23,7 @@ public class ResourceConfiguration implements WebMvcConfigurer {
         
         // 접근 파일 캐싱 시간 
         .setCacheControl(CacheControl.maxAge(1, TimeUnit.MINUTES));
+        
+        System.out.println(filePath + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 }
