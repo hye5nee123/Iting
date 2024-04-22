@@ -93,7 +93,7 @@ public class SmsController {
 		message.setText(nums.getNumkey());
 		
 		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-		return response; // 문자 보내기 (리턴 받는 메소드 타입 변경해줘야함)
+		return response; // 문자 보내기
 	}
 
 //	    /**
