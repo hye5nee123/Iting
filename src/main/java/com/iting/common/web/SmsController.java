@@ -80,7 +80,6 @@ public class SmsController {
 	/**
 	 * 단일 메시지 발송 예제
 	 * @return 
-	 * @return 
 	 */
 	@PostMapping("/sendsms")
 	public SingleMessageSentResponse sendOne(@RequestBody SMSVO nums) {
