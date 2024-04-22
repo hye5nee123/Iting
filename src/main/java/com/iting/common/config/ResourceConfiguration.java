@@ -18,7 +18,8 @@ public class ResourceConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	
         registry.addResourceHandler("/download/**")
-        .addResourceLocations(filePath)
+        //.addResourceLocations(filePath)
+        .addResourceLocations("file:///" + filePath)
         
         // 접근 파일 캐싱 시간 
         .setCacheControl(CacheControl.maxAge(1, TimeUnit.MINUTES));
