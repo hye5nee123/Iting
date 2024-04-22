@@ -318,6 +318,7 @@ input[type=file]::file-selector-button { width: 100px; height: 40px; background:
   }
 }
 
+.notice_box{margin-top:20px; margin-bottom:20px;}
 .cnq-buttons { text-align: right; }
 .cnq_insertBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
 .cnq_goListBtn{padding:12px 40px; font-size:16px; border:0; letter-spacing:-1px; background:#205cdc; color:#fff; border-radius:5px;}
