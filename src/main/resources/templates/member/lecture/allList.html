@@ -25,41 +25,45 @@
 		<div class="container mt-5">
 			<div class="row">
 				<!-- 강의 카테고리별 제목 넣기 -->
-				<h3 class="col-8" th:if="${lectureVO.ltCateCd} == null">전체 강의</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f1')}">기초강의</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f2')}">데이터 분석</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f3')}">웹 개발</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f4')}">프로그래밍언어</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f5')}">인공지능</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f6')}">컴퓨터 공학 전공</h3>
-				<h3 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f7')}">IT자격증</h3>
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h2 class="col-8" th:if="${lectureVO.ltCateCd} == null">전체 강의</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f1')}">기초강의</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f2')}">데이터 분석</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f3')}">웹 개발</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f4')}">프로그래밍언어</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f5')}">인공지능</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f6')}">컴퓨터 공학 전공</h2>
+						<h2 class="col-8" th:if="${#strings.equals(lectureVO.ltCateCd, 'f7')}">IT자격증</h2>
+					</div>
+				</div>	
 			</div>
-            <div class="shop__product__option">
-                <div class="row my-5">
-                    <div class="col-lg-6 col-md-6 col-sm-6 lect_search">
+            <div class="shop__product__option serach_box">
+                <div>
+                    <div class="lect_search">
 						<input type="text" placeholder="강의명을 검색해주세요." name="lectSearch" id="searchKeyWord">
 			            <button type="button" onclick="searchLect()"><i class='bx bx-search-alt-2'></i>검색</button>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="shop__product__option__right">
-                            <p>정렬기준 : </p>
-                            <select style="display: none;">
-                                <option value="">최신순</option>
-                                <option value="">평점순</option>
-                                <option value="">추천순</option>
-                                <option value="">인기순</option>
-                            </select>
-                            <div class="nice-select" tabindex="0">
-                            	<span class="current">최신순</span>
-                            	<ul class="list">
-                            		<li data-value="" class="option selected">최신순</li>
-                            		<li data-value="" class="option">평점순</li>
-                            		<li data-value="" class="option">추천순</li>
-                            		<li data-value="" class="option">인기순</li>
-                            	</ul>
-                           </div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="option_box">
+                <div class="shop__product__option__right">
+                    <p>정렬기준 : </p>
+                    <select style="display: none;">
+                        <option value="">최신순</option>
+                        <option value="">평점순</option>
+                        <option value="">추천순</option>
+                        <option value="">인기순</option>
+                    </select>
+                    <div class="nice-select" tabindex="0">
+                    	<span class="current">최신순</span>
+                    	<ul class="list">
+                    		<li data-value="" class="option selected">최신순</li>
+                    		<li data-value="" class="option">평점순</li>
+                    		<li data-value="" class="option">추천순</li>
+                    		<li data-value="" class="option">인기순</li>
+                    	</ul>
+                   </div>
                 </div>
             </div>
             <div class="row" id="lectureList">

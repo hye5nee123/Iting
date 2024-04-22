@@ -49,3 +49,13 @@ body{background:#fff !important;}
 .review .star{margin-top:5px;}
 .review .star span{display:inline-block;}
 .review .star i{letter-spacing:-1px; color:#ffca35;}
+
+.le_box .product__item{position:relative;}
+.le_box .index{position:absolute; left:0; top:0; background:#f57b54; width:40px; height:40px; text-align:center; line-height:40px; z-index:1;}
+.le_box .index span{color:#fff; margin-bottom:5px; font-size:14px; font-weight:700;}
+.le_box .product__item__text{padding-top:20px;}
+.le_box .product__item__text span{display:inline-block; padding:1px 10px; border-radius:50px; border:1px solid #ddd; text-align:center; font-size:14px; color:#999; font-weight:700;}
+.le_box .product__item__text h6{margin-top:8px; font-size:17px; color:#333; font-weight:700;}
+.le_box .product__item__text .txt{margin-top:5px;}
+.le_box .product__item__text .txt p{display:inline-block; color:#777; font-size:15px; font-weight:500;}
+.le_box .product__item__text .txt i{font-style:normal; margin-left:2px; display:inline-block; color:#999;}

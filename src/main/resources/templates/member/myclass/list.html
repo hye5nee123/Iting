@@ -17,6 +17,9 @@
 			    <!-- <button class="print">수료증 발급</button> -->
 			</div>
 		</div>
+	</div>
+	
+	<div class="lecture_list_box">
 		<div class="info lt_info">
 			<h3>수강 중인 강의</h3>
 			<a th:href="@{/member/tlsn/list}" class="go_link">전체보기 ></a>
@@ -43,58 +46,46 @@
 				</li>
 			</ul>
 		</div>
-	</div>
 	
-	<div class="row myclass_list">
-		<ul>
-			<li>
-				<div>
-					<h3>쪽지시험</h3>
-					<a th:href="@{/member/test/list}" class="go_link">전체보기 ></a>
-					<ul>
-						<li th:if="${session.username == null}">
-							<span>로그인이 필요합니다</span>
-						</li>
-						<li th:each="tlsn, stat: ${tlsnList}">
-							<a href="#"><i class='bx bx-edit'></i>
-								<span th:text="${tlsn.ltTtl}"></span>
-								<em><i th:text="${tlsn.name}"></i> 강사님</em>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<li>
-				<div>
-					<h3>오답노트</h3>
-					<a href="#" class="go_link">전체보기 ></a>
-					<ul>
-						<li th:if="${session.username == null}">
-							<span>로그인이 필요합니다</span>
-						</li>
-						<li th:if="${tlsn.examYn != null}" th:each="tlsn, stat: ${tlsnList}">
-							<a th:href="@{/member/test/ox/{ltNum}(ltNum=${tlsn.ltNum})}"><i class='bx bx-file'></i>
-								<span th:text="${tlsn.ltTtl}"></span>
-								<em><i th:text="${tlsn.name}"></i> 강사님</em>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<li>
-				<div>
-					<h3>학습통계</h3>
-					<a href="#" class="go_link">전체보기 ></a>
-					
-					<div class="graph">
-						<div th:if="${session.username == null}" class="mt-4">
-							<span>로그인이 필요합니다</span>
-						</div>
+		<div class="row myclass_list">
+			<ul>
+				<li>
+					<div>
+						<h3>쪽지시험</h3>
+						<a th:href="@{/member/test/list}" class="go_link">전체보기 ></a>
+						<ul>
+							<li th:if="${session.username == null}">
+								<span>로그인이 필요합니다</span>
+							</li>
+							<li th:each="tlsn, stat: ${tlsnList}">
+								<a href="#"><i class='bx bx-edit'></i>
+									<span th:text="${tlsn.ltTtl}"></span>
+									<em><i th:text="${tlsn.name}"></i> 강사님</em>
+								</a>
+							</li>
+						</ul>
 					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
+				</li>
+				<li>
+					<div>
+						<h3>오답노트</h3>
+						<a href="#" class="go_link">전체보기 ></a>
+						<ul>
+							<li th:if="${session.username == null}">
+								<span>로그인이 필요합니다</span>
+							</li>
+							<li th:if="${tlsn.examYn != null}" th:each="tlsn, stat: ${tlsnList}">
+								<a th:href="@{/member/test/ox/{ltNum}(ltNum=${tlsn.ltNum})}"><i class='bx bx-file'></i>
+									<span th:text="${tlsn.ltTtl}"></span>
+									<em><i th:text="${tlsn.name}"></i> 강사님</em>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>	
 	
 	<div class="row lecture_calendar">
 		<h3 class="related-title">학습캘린더 <span>2024년 4월 5째주</span></h3>

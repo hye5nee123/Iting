@@ -90,7 +90,7 @@
 .myclass_list{margin-top:20px; min-height:240px;}
 .myclass_list ul{list-style:none;}
 .myclass_list > ul{display:flex; width:100%; gap:2%; justify-content:space-between;}
-.myclass_list > ul > li{width:33%;}
+.myclass_list > ul > li{width:50%;}
 .myclass_list > ul > li > div{height:100%; padding:25px 20px; border:1px solid #ddd; background:#f9f9f9; border-radius:10px;}
 .myclass_list > ul > li:first-child > div{background:rgb(255 138 0 / 5%); border:1px solid #ffd8a9;}
 .myclass_list h3{font-size:17px; font-weight:700;}
@@ -285,6 +285,30 @@ section.product > section{min-height:450px;}
 .lrn_box li .form-control{font-size:15px; color:#555;}
 .lrn_box li .form-control::placeholder{font-size:14px; color:#888;}
 #calendar{margin-bottom:50px;}
+
+/* 수강검색 */
+.serach_box{position:relative; margin-top:20px; margin-bottom:20px; background:rgb(98 140 230 / 5%); border-radius:10px; padding:15px 30px; border:1px solid #d5def9;}
+.serach_box input{margin-bottom:0 !important;}
+.serach_box #searchKeyWord{width:500px;}
+.serach_box .lect_search{text-align:center;}
+.option_box{margin-bottom:50px;}
+
+/* 내강의실 수정 */
+.lecture_list_box{display:flex; min-height:513px; justify-content:space-between; gap:3%;}
+.lecture_list_box .lt_info{width:60%;}
+.lecture_list_box .lt_info{width:60%;}
+.lecture_list_box .lt_info ul{height:390px; margin-top:15px;}
+.lecture_list_box .lt_info ul li:first-child,
+.lecture_list_box .lt_info ul li:nth-child(2){margin-top:0;}
+.lecture_list_box .lt_info ul li{width:48%; margin:0 2%; margin-top:4%;}
+.lecture_list_box .lt_info ul li:nth-child(odd){margin-left:0;}
+.lecture_list_box .lt_info ul li:nth-child(even){margin-right:0;}
+.lecture_list_box .lt_info .box{height:182px; padding:25px 20px;}
+.lecture_list_box .lt_info .box .bottom{padding-top:15px;}
+.lecture_list_box .myclass_list{margin-top:25px; width:40%;}
+.lecture_list_box .myclass_list > ul{flex-wrap:wrap;gap:3%;}
+.lecture_list_box .myclass_list div ul{height:150px;}
+.lecture_list_box .myclass_list > ul > li{width:100%;}
 
 /*게시판*/
 input[type=file]::file-selector-button { width: 100px; height: 40px; background: #eee; border: none; border-radius: 10px; cursor: pointer; margin-top : 5px;
