@@ -20,69 +20,87 @@
 					<div class="idchk form-text"></div>
 				</div> -->
 	<section layout:fragment="mycontent">
-		<div class="mb-3">
-		
-				<div class="mb-3 row">
-					<label for="id" class="col-md-2 col-form-label">아이디</label>
-					<div class="col-md-10">
-						<input class="form-control" type="text" id="id" name="id" th:value="${myinfo.id}" readonly>
+			<div class="mb-3 row">
+				<label for="id" class="col-md-3 col-form-label">아이디</label>
+				<div class="col-md-9">
+					<input class="form-control" type="text" id="id" name="id" th:value="${myinfo.id}" disabled readonly>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="email" class="col-md-3 col-form-label">이메일</label>
+				<div class="col-md-9">
+					<input class="form-control" type="text" id="email" name="email" th:value="${myinfo.mail}" disabled readonly>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="pw" class="col-md-3 col-form-label">비밀번호</label>
+				<div class="changepw col-md-9">
+				<!-- 비밀번호 변경시 내용 -->
+					<div class="input-group">
+						<div class="col-md-10" style="padding: 0;">
+							<input class="form-control" type="password" id="pw" name="pw" th:value="${myinfo.pw}" disabled readonly>
+						</div>
+						<button class="btn btn-dark" type="button" style="margin-left: 13px;" onclick="newPw()">변경</button>
 					</div>
 				</div>
-				
-				<div class="mb-3 row">
-					<label for="email" class="col-md-2 col-form-label">이메일</label>
-					<div class="col-md-10">
-						<input class="form-control" type="text" id="email" name="email" th:value="${myinfo.mail}" readonly>
-					</div>
-				</div>
-				<div class="mb-3 row">
-					<label for="email" class="col-md-2 col-form-label">비밀번호</label>
-					<div class="col-md-10">
-				<div class="changepw">
-					<!-- 비밀번호 변경시 내용 -->
-					<input class="form-control" type="password" id="pw" name="pw" th:value="${myinfo.pw}" readonly>
-					<button type="button" class="site-btn" onclick="newPw()">변경</button>
-				</div>
-				<p>휴대전화번호</p>
-				<div class="changephone">
+			</div>
+			<div class="mb-3 row">
+				<label for="phone" class="col-md-3 col-form-label">휴대전화번호</label>
+				<div class="col-md-9">
+					<div class="changephone">
 					<!-- 전화번호 변경시 내용 -->
-					<input class="form-control" type="tel" id="phone" name="phone" th:value="${myinfo.phone}" readonly>
-					<button type="button" class="site-btn" onclick="newPhone()">변경</button>
+						<div class="input-group">
+							<div class="col-md-10" style="padding: 0;">
+								<input class="form-control" type="tel" id="phone" name="phone" th:value="${myinfo.phone}" disabled readonly>
+							</div>
+							<button type="button" class="btn btn-dark" style="margin-left: 13px;" onclick="newPhone()">변경</button>
+						</div>
+					</div>
+					<div class="smschk">
+						<!-- 인증번호 입력란 -->
+					</div>
 				</div>
-				<div class="smschk">
-					<!-- 인증번호 입력란 -->
+			</div>
+			<div class="mb-3 row">
+				<label for="nick" class="col-md-3 col-form-label">이름(닉네임)</label>
+				<div class="col-md-9" >
+					<input class="form-control" type="text" id="nick" name="nick" th:value="${myinfo.name}">
 				</div>
-				<p>이름(닉네임)</p>
-				<input class="form-control" type="text" id="nick" name="nick" th:value="${myinfo.name}">
+			</div>
 				
 				
-			<div class="checkout__input col-lg-4">
-				<p>주소</p>
+			<div class="mb-3 row">
+				<label class="col-md-3 col-form-label">주소</label>
+				<div class="col-md-9">
+					<div class="input-group mb-2">
+						<input class="form-control col-lg-3" type="text" id="sample6_postcode" placeholder="우편번호" readonly>
+						<button type="button" class="btn btn-dark" onclick="sample6_execDaumPostcode()">찾기</button>
+					</div>
+					<input class="form-control" type="text" id="sample6_address" name="addr" th:value="${myinfo.addr}" readonly>
+				</div>
 			</div>
-			<div class="checkout__input col-lg-2">
-				<input class="form-control" type="text" id="sample6_postcode" placeholder="우편번호" readonly>
-				<button type="button" class="site-btn" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+			<div class="mb-3 row">
+				<label for="sample6_detailAddress" class="col-md-3 col-form-label">상세주소</label>
+				<div class="col-md-9">
+					<input class="form-control" type="text" id="sample6_detailAddress" name="detailaddr" th:value="${myinfo.detailAddr}">
+				</div>
 			</div>
-			<div class="checkout__input col-lg-4">
-				<input class="form-control" type="text" id="sample6_address" name="addr" th:value="${myinfo.addr}" readonly>
+			<div class="mb-3 row">
+				<label for="ocmenu" class="col-md-3 col-form-label">관심사</label>
+				<div class="col-md-9">
+					<select class="form-control" id="ocmenu" name="ocmenu">
+						<option value="">선택</option>
+						<option id="c1" value="c1">프로그래밍 언어</option>
+						<option id="c2" value="c2">컴퓨터공학 전공</option>
+						<option id="c3" value="c3">웹 개발</option>
+						<option id="c4" value="c4">데이터 분석</option>
+						<option id="c5" value="c5">IT 자격증</option>
+					</select>
+				</div>
 			</div>
-			<div class="checkout__input col-lg-6">
-				<p>상세주소</p>
-				<input class="form-control" type="text" id="sample6_detailAddress" name="detailaddr" th:value="${myinfo.detailAddr}">
+			<div class="text-center">
+				<button type="button" class="btn btn-primary" id="updateinfo" name="updateinfo" onclick="updateInfo()">수정</button>
 			</div>
-			<div class="checkout__input">
-				<p>관심사</p>
-			</div>
-			<select id="ocmenu" name="ocmenu">
-				<option value="">선택</option>
-				<option id="c1" value="c1">프로그래밍 언어</option>
-				<option id="c2" value="c2">컴퓨터공학 전공</option>
-				<option id="c3" value="c3">웹 개발</option>
-				<option id="c4" value="c4">데이터 분석</option>
-				<option id="c5" value="c5">IT 자격증</option>
-			</select>
-			<button type="button" class="site-btn" id="updateinfo" name="updateinfo" onclick="updateInfo()">수정</button>
-		</div>
 		<script>
 			let actype = 'b1';
 			let pwFormOn = false;
@@ -92,16 +110,20 @@
 			function newPw() {
 				pwFormOn = true;
 				nowPwAccep = false;
-				const pwForm = 
-					`<input type="password" id="nowpwchk" name="nowpwchk"
-						placeholder="현재 비밀번호 입력" onblur="nowPwChk()">
-					<div class="nowpwchkstr"></div>
-					<input type="password" id="pw"
-						name="pw" placeholder="새 비밀번호" onblur="pwCheck()">
-					<div class="pwchkstr"></div>
-					<input type="password" id="pwchk" name="pwchk"
-						placeholder="새 비밀번호 확인" onblur="pwCheck()">
-					<div class="pwchkchkstr"></div>`;
+				const pwForm = `
+								<div class="mb-3">
+									<input class="form-control" type="password" id="nowpwchk" name="nowpwchk" placeholder="현재 비밀번호 입력" onblur="nowPwChk()">
+									<div class="nowpwchkstr"></div>
+								</div>
+								<div class="mb-3">
+									<input class="form-control" type="password" id="pw" name="pw" placeholder="새 비밀번호" onblur="pwCheck()">
+									<div class="pwchkstr"></div>
+								</div>
+								<div class="mb-3">
+									<input class="form-control" type="password" id="pwchk" name="pwchk" placeholder="새 비밀번호 확인" onblur="pwCheck()">
+									<div class="pwchkchkstr"></div>
+								</div>
+								`;
 				document.getElementsByClassName('changepw')[0].innerHTML = pwForm;
 			};
 			function nowPwChk() {
@@ -114,11 +136,15 @@
 			function newPhone() {
 				phoneFormOn = true;
 				const phoneForm = 
-					`<input type="tel" id="phone" name="phone" placeholder="변경할 번호 '-' 제외하고 입력"
-					onblur="phoneCheck()">
-					<button type="button" class="site-btn" id="sendsms"
-						onclick="sendSMS(phone.value)">인증</button>
-					<div class="phonechkstr"></div>`;
+					`
+						<div class="input-group">
+							<div class="col-md-10" style="padding: 0;">
+								<input class="form-control" type="tel" id="phone" name="phone" placeholder="변경할 번호 '-' 제외하고 입력" onblur="phoneCheck()">
+							</div>
+							<button type="button" class="btn btn-dark" id="sendsms" style="margin-left: 13px;" onclick="sendSMS(phone.value)">인증</button>
+						</div>
+						<div class="phonechkstr"></div>
+					`;
 				document.getElementsByClassName('changephone')[0].innerHTML = phoneForm;
 			};
 			async function updateInfo() {
