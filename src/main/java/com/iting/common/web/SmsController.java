@@ -16,8 +16,7 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 @RestController
 public class SmsController {
 
-	@Value("${SMS-SENDNUM-SET}")
-	static String sendnum;
+	@Value("${SMS-SENDNUM-SET}") String sendnum;
 	
 	final DefaultMessageService messageService;
 
@@ -81,15 +80,11 @@ public class SmsController {
 	/**
 	 * 단일 메시지 발송 예제
 	 * @return 
+	 * @return 
 	 */
 	@PostMapping("/sendsms")
 	public SingleMessageSentResponse sendOne(@RequestBody SMSVO nums) {
 		Message message = new Message();
-		String num = nums.getPhonenum().substring(1, nums.getPhonenum().length() - 1);
-		System.out.println(nums.getPhonenum());
-		System.out.println(num);
-		System.out.println(nums.getNumkey());
-		System.out.println(sendnum);
 		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
 //	        message.setFrom("발신번호 입력");
 		message.setFrom(sendnum);
