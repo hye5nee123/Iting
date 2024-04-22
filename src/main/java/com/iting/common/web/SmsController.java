@@ -77,16 +77,17 @@ public class SmsController {
 
 	/**
 	 * 단일 메시지 발송 예제
+	 * @return 
 	 */
 	@PostMapping("/sendsms")
-	public SingleMessageSentResponse sendOne(@RequestBody SMSVO nums) {
+	public SingleMessageSentResponse sendOne(@RequestBody SMSVO nums, @Value("${SMS-SENDNUM-SET}") String sendnum) {
 		Message message = new Message();
 //		String num = phonenum.substring(1, phonenum.length() - 1);
 		System.out.println(nums.getPhonenum());
 		System.out.println(nums.getNumkey());
 		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
 //	        message.setFrom("발신번호 입력");
-		message.setFrom("01086532528");
+		message.setFrom(sendnum);
 //	        message.setTo("수신번호 입력");
 		message.setTo(nums.getPhonenum());
 //	        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
