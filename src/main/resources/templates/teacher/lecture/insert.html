@@ -22,19 +22,15 @@
 					onsubmit="return false">
 					<div class="row">
 						<div class="mb-3">
-
 							<h5 class="tit">강의명을 입력해주세요.</h5>
-
 							<input class="form-control" type="text" id="ltTtl" name="ltTtl">
 						</div>
 						<hr class="my-0">
-
 						<div class="mb-3 test_list">
 							<label for="lecturerNum" class="form-label">강사번호</label><input
 								th:value="${session.usernum}" class="form-control" type="text"
 								name="lecturerNum" id="lecturerNum" readonly>
 						</div>
-
 						<div class="mb-3 test_list">
 							<label for="ltIntro" class="form-label">강의소개</label>
 							<textarea class="form-control" name="ltIntro" id="ltIntro"></textarea>
@@ -44,13 +40,10 @@
 							<input class="form-control" type="file" name="uFile" onchange="uploadFileReq(testForm.typCode.value, testForm)">
 							<input type="hidden" name="typCode" th:value="k1">
 						</div>
-
 						<div class="mb-3 test_list">
 							<label for="frDt" class="form-label">강의날짜</label> <input
 								class="form-control" type="Date" name="frDt" id="frDt">
 						</div>
-
-
 						<div class="mb-3 test_list">
 							<label for="ltKeywordCd">강의 키워드 선택</label> <select
 								name="ltKeywordCd" id="ltKeywordCd">
@@ -61,7 +54,6 @@
 								<option value="h5">Oracle</option>
 							</select>
 						</div>
-
 						<div class="mb-3 test_list">
 							<label for="ltDifCd">강의 난이도</label> <select name="ltDifCd"
 								id="ltDifCd">
@@ -71,10 +63,7 @@
 							</select>
 						</div>
 					</div>
-
-
 					<div class="mb-3 test_list">
-
 						<label for="ltCateCd" class="form-label" name="ltCateCd"
 							id="ltCateCd">카테고리</label>
 						<div>
@@ -135,10 +124,8 @@
 			<div class="btn_box demo-inline-spacing">
 				<button type="button" id="saveBtn"
 					class="btn btn-lg btn btn-warning">신청하기</button>
-
 			</div>
 		</div>
-
 		<div></div>
 		<input type="hidden" th:value="${session.usernum}" name="tnum">
 		<script>
@@ -171,19 +158,26 @@
 					.then(res => saveRes(res.data))
 		}
 
-
 		// 등록 응답
-		function saveRes(res) {
-			console.log(res);
-			alert('강의가 등록되었습니다.');
-			window.location.href = "/teacher/lecture/getLectureList";
-			
-		}
+				function saveRes(res) {
+				  Swal.fire({
+				  title: "글등록이 완료되었습니다",
+				  icon: "success",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3085d6",
+				  cancelButtonColor: "#d33",
+				  confirmButtonText: "확인",
+				  cancelButtonText: "취소"
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				    location.href = "/teacher/lecture/getLectureList";
+				  }
+				});
 
+		}
 		//버튼 클릭 시 함수 호출.
 		saveBtn.addEventListener("click", e => {
 			saveReq();
-			
 			
 		})
 
