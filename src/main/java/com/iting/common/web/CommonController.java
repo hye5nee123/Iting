@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -74,6 +75,9 @@ public class CommonController {
 	
 	@Autowired
 	SettService settService;
+	
+	@Value("${file-upload-folder}")
+	String filePath;
 	
 	/* 메인이동 */
 	// 관리자
@@ -163,9 +167,14 @@ public class CommonController {
 		FileVO fvo = commonService.getFileInfo(fileNum);
 		
 		String fileName = fvo.getAtchMarkTtl();
-        String filePath = "D:" + File.separator + "iting_webstorage" + File.separator + fileName;
+        //String filePath = "D:" + File.separator + "iting_webstorage" + File.separator + fileName;
+        String newFilePath = filePath + fileName;
 
-        Resource resource = new UrlResource(Paths.get(filePath).toUri());
+        Resource resource = new UrlResource(Paths.get(newFilePath).toUri());
+        
+        
+        System.out.println(filePath + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(newFilePath+ "==========================>");
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + UriUtils.encode(fileName, "UTF-8") + "\"")
@@ -173,12 +182,6 @@ public class CommonController {
     }
 	
 	
-	/* 첨부 파일 다운로드 - 테스트용 */
-	@GetMapping("/downfile")
-	public ModelAndView downLoadFile(String fileName) {
-		ModelAndView mv = new ModelAndView();
-		return mv;
-	}
 
 	/* 엑셀로 DB 테이블 내려받기 */
 	@GetMapping("/empExcel")
