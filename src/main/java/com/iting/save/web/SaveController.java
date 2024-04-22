@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iting.cnq.model.CnqVO;
+import com.iting.save.model.SaveListVO;
 import com.iting.save.model.SaveVO;
 import com.iting.save.service.SaveService;
 
@@ -53,7 +54,10 @@ public class SaveController {
 		@GetMapping("/member/mypage/savelist")
 		public String goMySave(Model model, HttpSession session) {
 			String usernum = (String) session.getAttribute("usernum");
-			model.addAttribute("savelist", saveService.getSaveList(usernum));
+			List<SaveListVO> savelist = saveService.getSaveList(usernum);
+			if(!savelist.isEmpty()) {
+				model.addAttribute("savelist", savelist);
+			}
 			return "member/mypage/saveList";
 		}
 		
