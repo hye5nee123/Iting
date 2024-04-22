@@ -24,8 +24,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="notice : ${noticeMemList}">
-								<td th:text="${notice.noticeNum}" ></td>
+							<tr th:each="notice, stat : ${noticeMemList}">
+								<td th:text="${stat.count}" ></td>
 								<td th:text="${notice.ttl}"></td>
 								<td th:text="${#dates.format(notice.regDt, 'yyyy/MM/dd')}"></td>
 							</tr>

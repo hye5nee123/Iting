@@ -166,7 +166,19 @@
 		if(countReply == 0){
 				location.href=`/member/cnq/${ltCnqNum}`
 		}else{
-			alert('댓글이 존재합니다.');
+			Swal.fire({
+				  title: "댓글이 존재합니다",
+				  icon: "info",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3085d6",
+				  cancelButtonColor: "#d33",
+				  confirmButtonText: "확인",
+				  cancelButtonText: "취소"
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				    location.href = `/member/cnq/list/${ltNum}`;
+				  }
+				});
 		}
 	})
 	
@@ -238,8 +250,20 @@
 	function saveRRes(res) {
 		console.log(res);
 		const ltCnqNum = replyForm.ltCnqNum.value;
-		alert('댓글 등록 완료!');
-		history.go(0);
+		Swal.fire({
+			  title: "댓글 등록이 완료되었습니다",
+			  icon: "success",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  history.go(0);
+			  }
+			});
+		
 		
 	}
 	

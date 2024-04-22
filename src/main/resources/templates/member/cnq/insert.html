@@ -57,8 +57,19 @@
 	function saveRes(res) {
 		console.log(res);
 		const ltNum = cnqForm.ltNum.value;
-		alert('게시글이 등록 되었습니다.');
-		window.location.href = `/member/cnq/list/${ltNum}`
+		Swal.fire({
+			  title: "글등록이 완료되었습니다",
+			  icon: "success",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    location.href = `/member/cnq/list/${ltNum}`;
+			  }
+			});
 	}
 	
 	//버튼 클릭 시 함수 호출.

@@ -27,7 +27,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="cnq, stat: ${adminCnqList}">
-								<td th:text="${cnq.ltCnqNum}"></td>
+								<td th:text="${stat.count}"></td>
 								<td th:text="${cnq.ttl}"></td>
 								<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
 								<td th:text="${cnq.name}"></td>

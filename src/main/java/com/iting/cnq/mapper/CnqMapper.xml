@@ -128,6 +128,5 @@
 					atch_num
 		FROM lt_cnq c JOIN mem m
 		on c.mem_num = m.mem_num
-		WHERE LT_NUM = #{ltNum}
 	</select>
 </mapper>
