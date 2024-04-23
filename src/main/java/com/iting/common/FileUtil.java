@@ -20,12 +20,14 @@ public class FileUtil {
 	CommonService commonService;
 	
 	@Value("${file-upload-folder}")
-	static String filePath;
+	public static String filePath;
 	
 	
 	/* 파일업로드 메소드 */
 	public static FileVO uploadFile(MultipartFile uFile)  {
 		// String uploadDir = "D:/iting_webstorage/";
+		
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + filePath);
 		
 		// 디렉터리 생성
 		File uploadPath = new File(filePath);
