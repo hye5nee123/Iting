@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,13 +19,16 @@ public class FileUtil {
 	@Autowired
 	CommonService commonService;
 	
+	@Value("${file-upload-folder}")
+	static String filePath;
+	
 	
 	/* 파일업로드 메소드 */
 	public static FileVO uploadFile(MultipartFile uFile)  {
-		String uploadDir = "D:/iting_webstorage/";
+		// String uploadDir = "D:/iting_webstorage/";
 		
 		// 디렉터리 생성
-		File uploadPath = new File(uploadDir);
+		File uploadPath = new File(filePath);
 		
 		if (!uploadPath.exists()) {			
 			uploadPath.mkdir();
@@ -46,7 +50,7 @@ public class FileUtil {
 			
 			
 			// 파일 생성 (저장 경로, 파일이름)
-			File file = new File(uploadDir, newFile);
+			File file = new File(filePath, newFile);
 			// 파일저장
 			try {
 				uFile.transferTo(file);
