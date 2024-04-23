@@ -253,7 +253,7 @@ public class CommonController {
 					+ "." + exetension;
 			vo.setNewFileName(newFile);
 			// 파일 경로 및 이름 정의
-			File file = new File("D:/iting_webstorage/", fileData.getOriginalFilename());
+			File file = new File(filePath, fileData.getOriginalFilename());
 			// 정의된 값으로 파일 저장
 			try {
 				fileData.transferTo(file);
