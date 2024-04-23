@@ -183,6 +183,7 @@
 		FROM LT l JOIN CURRI c
                     ON l.LT_NUM = c.LT_NUM
 		WHERE l.LT_NUM = #{ltNum}
+		ORDER BY c.RND_NUM
 	</select>
 	
 	<!-- 커리큘럼 -->
