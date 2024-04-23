@@ -1,9 +1,7 @@
-# Iting
-
 <div align='center'>
 
-<h1>Live-show</h1>
-<p>live...</p>
+<h1>CRUD  Internet Lectures Project -Iting</h1>
+<p>학원에서 배운 것에서 더 심화해서 배우고 싶다는 생각을 계속 가지고 있었습니다. 그래서 방법을 찾던 중 가장 손쉽고 제약이 덜한 방법이 인터넷 강의 사이트라는 해답을 찾게 되어 우리가 배웠던 과목의 심화 과정을 넣어 인터넷 강의 사이트를 제작하기로 했습니다 </p>
 
 <h4> <span> · </span> <a href="https://github.com/hye5nee123/Iting/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Request Feature </a> </h4>
 
@@ -18,21 +16,10 @@
 ## :star2: About the Project
 
 ### :camera: Screenshots
-<div align="center"> <a href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdkuZC1FSxkMBY1eQciqyfde5egeA1OzeSkTW4pgk6HQ&s" alt='image' width='800'/></a> </div>
-<div align="center"> <a href=""><img src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG" alt='image' width='800'/></a> </div>
-<div align="center"> <a href=""><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt='image' width='800'/></a> </div>
-<div align="center"> <a href=""><img src="https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg" alt='image' width='800'/></a> </div>
-<div align="center"> <a href=""><img src="https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_1280.jpg" alt='image' width='800'/></a> </div>
+![image](https://github.com/hye5nee123/Iting/assets/152113818/047264bd-c20c-4ddd-8a52-2709812b2e38)
 
-
-<div align='center'>
-
-<img src=http://localhost:8081/img/member/main/main_banner_02.jpg alt="logo" width=600 height=300 />
-
-<h1>개발자를 위한 인터넷 강의 플랫폼</h1>
-<p>학원 다닐 시간이 없거나 온라인 강의를 선호하는 바쁜 개발자들을 위해 개설하게 되었습니다.</p>
-
-<h4> <span> · </span> <a href="https://github.com/hye5nee123/Iting/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Request Feature </a> </h4>
+![image](https://github.com/hye5nee123/Iting/assets/152113818/4e8e0b97-4aa8-4289-9958-d3a749d07dd4)
+<!--스크린샷 들어올 자리!-->
 
 
 </div>
