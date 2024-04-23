@@ -3,7 +3,7 @@
 <h1>CRUD  Internet Lectures Project -Iting</h1>
 <p>학원에서 배운 것에서 더 심화해서 배우고 싶다는 생각을 계속 가지고 있었습니다. 그래서 방법을 찾던 중 가장 손쉽고 제약이 덜한 방법이 인터넷 강의 사이트라는 해답을 찾게 되어 우리가 배웠던 과목의 심화 과정을 넣어 인터넷 강의 사이트를 제작하기로 했습니다 </p>
 
-<h4> <span> · </span> <a href="https://github.com/hye5nee123/Iting/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Request Feature </a> </h4>
+<h4> <span> · </span> <a href="https://github.com/hye5nee123/Iting/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/hye5nee123/Iting/issues"> Report Bug </a> <span> · </span> <a href="//github.com/hye5nee123/Iting/branches)"> Request Feature </a> </h4>
 
 
 </div>
