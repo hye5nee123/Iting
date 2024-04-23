@@ -66,9 +66,19 @@
 	
 	// 등록 응답
 	function saveRes(res) {
-		console.log(res);
-		alert('메세지가 전송되었습니다.');
-		window.location.href = `/member/note/list/${res.ltNum}`;
+		Swal.fire({
+			  title: "메세지가 전송되었습니다.",
+			  icon: "success",
+			  showCancelButton: false,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				 window.location.href = `/member/note/list/${res.ltNum}`;
+			  }
+		});
 	}
 	
 	//버튼 클릭 시 함수 호출.
