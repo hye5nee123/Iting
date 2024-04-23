@@ -39,9 +39,11 @@ public final class FileUtil {
 		// 디렉터리 생성
 		File uploadPath = new File("/"+filePath);
 		
+		
 		if (!uploadPath.exists()) {			
 			uploadPath.mkdir();
 		}
+		
 		
 		String uuid = UUID.randomUUID().toString();
 		
