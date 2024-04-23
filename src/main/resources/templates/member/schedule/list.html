@@ -63,8 +63,19 @@
 			
 			// 등록 응답
 			function saveRes(res) {
-				alert('일정이 등록되었습니다.');
-				history.go(0);
+				Swal.fire({
+					  title: "일정이 등록되었습니다.",
+					  icon: "success",
+					  showCancelButton: false,
+					  confirmButtonColor: "#3085d6",
+					  cancelButtonColor: "#d33",
+					  confirmButtonText: "확인",
+					  cancelButtonText: "취소"
+					}).then((result) => {
+					  if (result.isConfirmed) {
+						  history.go(0);
+					  }
+				});
 			}
 			
 			//버튼 클릭 시 함수 호출.

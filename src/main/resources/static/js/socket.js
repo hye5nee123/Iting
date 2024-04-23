@@ -13,7 +13,7 @@ stompClient.onConnect = (frame) => {
     stompClient.subscribe('/user/topic/message', (greeting) => {
         let vo = JSON.parse(greeting.body);
         Swal.fire({
-		  title: "메세지가 도착했습니다. 이동할까요?",
+		  title: "메세지가 도착했습니다.<br> 이동할까요?",
 		  icon: "success",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",
