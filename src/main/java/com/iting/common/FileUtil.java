@@ -34,14 +34,16 @@ public final class FileUtil {
 		
 		// String uploadDir = "D:/iting_webstorage/";
 		
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + filePath);
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + "/"+filePath);
 		
 		// 디렉터리 생성
-		File uploadPath = new File(filePath);
+		File uploadPath = new File("/"+filePath);
+		
 		
 		if (!uploadPath.exists()) {			
 			uploadPath.mkdir();
 		}
+		
 		
 		String uuid = UUID.randomUUID().toString();
 		
@@ -59,7 +61,7 @@ public final class FileUtil {
 			
 			
 			// 파일 생성 (저장 경로, 파일이름)
-			File file = new File(filePath, newFile);
+			File file = new File("/"+filePath, newFile);
 			// 파일저장
 			try {
 				uFile.transferTo(file);
