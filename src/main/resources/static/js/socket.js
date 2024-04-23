@@ -12,12 +12,22 @@ stompClient.onConnect = (frame) => {
     });
     stompClient.subscribe('/user/topic/message', (greeting) => {
         let vo = JSON.parse(greeting.body);
-        if(confirm("메세지가 도착했습니다. 이동할까요?")){
-        	if(vo.userType == 'member'){
-        		location.href = `/member/note/list/${vo.ltNum}`; 
-        	} else {
-        		location.href = `/teacher/note/list/${vo.ltNum}`; 
-        	}
-        }
+        Swal.fire({
+		  title: "메세지가 도착했습니다. 이동할까요?",
+		  icon: "success",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "확인",
+		  cancelButtonText: "취소"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		  if(vo.userType == 'member'){
+	    		location.href = `/member/note/list/${vo.ltNum}`; 
+	    	} else {
+	    		location.href = `/teacher/note/list/${vo.ltNum}`; 
+	    	}
+		  }
+		});
     });
 };
