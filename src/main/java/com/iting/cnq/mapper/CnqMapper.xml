@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.cnq.mapper.CnqMapper">
+
+	<!-- 게시글 전체 조회 -->
+	<select id="getCnqList" resultType="CnqVO">
+		select * from (
+			select ROWNUM as rn, a.* from (
+				SELECT
+					c.lt_cnq_num,
+					c.ttl,
+					c.cntn,
+					c.drwup_dt,
+					c.hit,
+					m.name,
+					atch_num
+			  FROM lt_cnq c JOIN mem m
+			                  on c.mem_num = m.mem_num
+			 WHERE LT_NUM = #{vo.ltNum}
+				<if test="vo.ttl != null and vo.ttl != ''">
+					AND TTL like '%' || #{vo.ttl} || '%'
+				</if>
+				<if test="vo.name != null and vo.name != ''">
+					AND NAME like '%' || #{vo.name} || '%'
+				</if>
+			ORDER by LT_CNQ_NUM DESC
+	<![CDATA[
+	) a where ROWNUM <= #{svo.end}) b where rn >= #{svo.start}
+	]]>
+	</select>
+
+	<!-- 상세조회 -->
+	<select id="getCnqInfo" parameterType="String"
+		resultType="CnqVO">
+		SELECT
+				c.lt_cnq_num,
+				c.ttl,
+				c.cntn,
+				c.drwup_dt,
+				c.hit,
+				m.name,
+				c.atch_num,
+				c.lt_num,
+				m.mem_num
+		FROM 	lt_cnq c JOIN mem m
+			on c.mem_num = m.mem_num
+		WHERE 	lt_cnq_num = #{ltCnqNum}
+	</select>
+
+	<!-- 게시글 등록 -->
+	<insert id="cnqInsert" parameterType="CnqVO">
+		<selectKey keyProperty="ltCnqNum" order="BEFORE"
+			resultType="string">
+			SELECT 'cn' || LPAD(NVL(MAX(SUBSTR(LT_CNQ_NUM, -5)), 0) +
+			1, 5, '0') AS LT_CNQ_NUM
+			FROM lt_cnq
+		</selectKey>
+		INSERT INTO lt_Cnq (
+					LT_CNQ_NUM
+					, TTL
+					, CNTN
+					, DRWUP_DT
+					, MEM_NUM
+					, LT_NUM
+					, HIT
+					, ATCH_NUM
+					)
+		VALUES (
+					#{ltCnqNum}
+					, #{ttl}
+					, #{cntn}
+					, sysDate
+					, #{memNum}
+					, #{ltNum}
+					, 0
+					,#{atchNum}
+				)
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteCnq">
+		DELETE FROM lt_cnq
+		WHERE lt_cnq_num = #{ltCnqNum}
+	</delete>
+	<!-- 게시글 수정 -->
+	<update id="updateCnq" parameterType="CnqVO">
+		UPDATE lt_cnq
+		SET    TTL = #{ttl},
+				CNTN = #{cntn}
+		WHERE LT_CNQ_NUM = #{ltCnqNum}
+	</update>
+	
+	<!-- 게시글 페이징 위한 개수 조회 -->
+	<select id="getCount" resultType="Long">
+		select count(*)
+		from lt_cnq c	JOIN mem m
+			          on c.mem_num = m.mem_num
+		WHERE LT_NUM = #{vo.ltNum}
+			<if test="vo.ttl != null and vo.ttl != ''">
+				AND TTL like '%' || #{vo.ttl} || '%'
+			</if>
+			<if test="vo.cntn != null and vo.cntn != ''">
+				AND CNTN like '%' || #{vo.cntn} || '%'
+			</if>
+			<if test="vo.name != null and vo.name != ''">
+				AND NAME like '%' || #{vo.name} || '%'
+			</if>
+	</select>
+	
+	<!-- 게시글 조회수 증가 -->
+	<update id="updateHit">
+		UPDATE lt_cnq 
+			SET hit = hit + 1 
+		WHERE lt_cnq_num = #{ltCnqNum}
+	</update>
+
+
+<!-- 관리자 게시글 전체조회 -->
+	<select id="getAdminCnqList" resultType="CnqVO">
+				SELECT
+					c.lt_cnq_num,
+					c.ttl,
+					c.cntn,
+					c.drwup_dt,
+					c.hit,
+					m.name,
+					atch_num
+		FROM lt_cnq c JOIN mem m
+		on c.mem_num = m.mem_num
+	</select>
+</mapper>

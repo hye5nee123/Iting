@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<meta charset="UTF-8"/>
+<title>강의승인 페이지</title>
+
+<script th:inline="javascript">
+
+function move(ltNum){
+	location.href='/admin/lecture/ingInfo/'+ ltNum
+}
+
+//등록버튼 이벤트 핸들러
+function update(ltNum,accpYnCd){
+	fetch(`/admin/lecture/update/${ltNum}/${accpYnCd}`)
+	.then(res => res.json())
+	.then(res =>{
+		location.href="/admin/lecture/allendLectureList"
+	})
+}
+
+function update1(ltNum,accpYnCd){
+	fetch(`/admin/lecture/update/${ltNum}/${accpYnCd}`)
+	.then(res => res.json())
+	.then(res =>{
+		location.href="/admin/lecture/ingLectureList"
+	})
+}
+</script>
+
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				승인 대기 목록
+
+			</h4>
+
+
+			<div class="table-responsive text-nowrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>강의번호</th>
+							<th>강의제목</th>
+							<th>강의소개</th>
+							<th>시작날짜</th>
+							<th>강의난이도</th>
+							<th>강의키워드</th>
+							<th>강사번호</th>
+							<th>승인여부</th>
+							<th>승인</th>
+
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr th:each="ing, stat: ${ingLectureList}"
+							th:onclick="move([[${ing.ltNum}]])">
+							<td th:text="${ing.ltNum}"></td>
+							<td th:text="${ing.ltTtl}"></td>
+							<td th:text="${ing.ltIntro}"></td>
+							<td th:text="${#dates.format(ing.frDt,'yyyy-MM-dd')}"></td>
+							<td th:text="${ing.ltDifCd}"></td>
+							<td th:text="${ing.ltKeywordCd}"></td>
+							<td th:text="${ing.lecturerNum}"></td>
+							<td th:text="${ing.accpYnCd}"></td>
+							<td onclick="event.cancelBubble = true;">
+								<button type="button"
+									th:onclick="update([[${ing.ltNum}]],'d1')">승인</button>
+								<button type="button" 
+									th:onclick="update1([[${ing.ltNum}]],'d3')">취소</button>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

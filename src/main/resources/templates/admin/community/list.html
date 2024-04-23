@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<meta charset="UTF-8">
+<title>공지사항</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+<script th:inline="javascript">
+	</script>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<h3 class="related-title">커뮤니티</h3>
+		<div class="nav-align-top mb-4">
+			<div class="tab-content test_content">
+				<div class="tab-pane fade active show note_box"
+					id="navs-pills-top-home" role="tabpanel">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>날짜</th>
+								<th>작성자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cnq, stat: ${adminCnqList}">
+								<td th:text="${stat.count}"></td>
+								<td th:text="${cnq.ttl}"></td>
+								<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
+								<td th:text="${cnq.name}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

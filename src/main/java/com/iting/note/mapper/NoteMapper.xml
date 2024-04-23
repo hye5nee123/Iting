@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.note.mapper.NoteMapper">
+	<!-- 받은쪽지함 -->
+	<select id="getRecList" resultType="NoteVO">
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.CFM_YN_CD
+		       , n.SENT_PS
+		       , n.REC_PS
+		       , n.LT_NUM
+		       , e.ID
+		       , e.NAME
+		FROM NOTE n JOIN mem_lec_view m
+                      ON n.REC_PS = m.MEM_NUM
+                    JOIN mem_lec_view e
+                      ON n.SENT_PS = e.MEM_NUM       
+		WHERE n.REC_PS = #{user}
+		AND n.LT_NUM = #{ltNum} 
+		ORDER BY n.NOTE_NUM DESC
+	</select>
+	
+	<!-- 보낸쪽지함 -->
+	<select id="getSentList" resultType="NoteVO" parameterType="String">
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.CFM_YN_CD
+		       , n.SENT_PS
+		       , n.REC_PS
+		       , m.ID
+		       , m.NAME
+		FROM NOTE n JOIN mem_lec_view m
+                      ON n.REC_PS = m.MEM_NUM
+                    JOIN mem_lec_view e
+                      ON n.SENT_PS = e.MEM_NUM
+		WHERE n.SENT_PS = #{user}
+		ORDER BY n.NOTE_NUM DESC
+	</select>
+	
+	<!-- 받은쪽지 단건조회 -->
+	<select id="getRecInfo" resultType="NoteVO">
+		SELECT n.NOTE_NUM
+		       , n.NOTE_TTL
+		       , n.NOTE_CNTN
+		       , n.RPLY
+		       , n.SENT_DT
+		       , n.REC_DT
+		       , n.CFM_YN_CD
+               , n.LT_NUM
+		       , e.ID as SENT_PS
+		       , m.ID as REC_PS
+		       , e.MEM_NUM as MEM_NUM
+		FROM NOTE n JOIN mem_lec_view m
+                      ON n.REC_PS = m.MEM_NUM
+                    JOIN mem_lec_view e
+                      ON n.SENT_PS = e.MEM_NUM
+		WHERE n.NOTE_NUM = #{noteNum}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertNote" parameterType="NoteVO">	
+		<selectKey keyProperty="noteNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'no' || LPAD(NVL(MAX(SUBSTR(NOTE_NUM, -5)), 0) + 1, 5, '0') AS NOTE_NUM 
+			FROM NOTE
+		</selectKey>
+		INSERT INTO NOTE(NOTE_NUM
+						, NOTE_TTL
+						, NOTE_CNTN
+						, SENT_DT
+						, REC_DT
+						, SENT_PS
+						, REC_PS
+						, LT_NUM
+						)
+		VALUES ( 
+				  #{noteNum}
+				, #{noteTtl}
+				, #{noteCntn}
+				, sysdate
+				, sysdate
+				, #{sentPs}
+				, #{recPs}
+				, #{ltNum}
+				
+				)
+	</insert>
+</mapper>

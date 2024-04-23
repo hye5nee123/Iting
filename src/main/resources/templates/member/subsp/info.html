@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout/member/layout}" >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section layout:fragment="content">
+	<div class="container">
+		
+	</div>
+	
+<script>
+//등록 요청
+function saveReq() {
+	const subspTypCd = subspFrm.subspTypCd.value;
+	const subspFrDt = subspFrm.subspFrDt.value;
+	const subspToDt = subspFrm.subspToDt.value;
+	const subspStCd = subspFrm.subspStCd.value;
+	const subspPrice = subspFrm.subspPrice.value;
+	const memNum = subspFrm.memNum.value;
+	//const subspTypCd = subspFrm.subspFrm.value;
+
+	let param = { subspTypCd, subspFrDt, subspToDt, subspStCd, subspPrice, memNum, subspTypCd }
+	
+	console.log(param);
+	
+	axios.post("/member/subsp/insert", param)
+		.then(res => saveRes(res.data))
+}
+// 등록 응답
+function saveRes(res) {
+	console.log(res);
+	alert('구독 등록 완료!');
+}
+
+// 등록 
+saveBtn.addEventListener("click", e => {
+	saveReq();
+})
+
+</script>
+	
+</section>
+</body>
+</html>

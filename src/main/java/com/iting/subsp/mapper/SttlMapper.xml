@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.subsp.mapper.SttlMapper">
+
+	<!-- 결제 등록 -->
+	<insert id="sttlInsert" parameterType="SttlVO">
+		<selectKey keyProperty="sttlNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'st' || LPAD(NVL(MAX(SUBSTR(sttl_num, -5)), 0) + 1, 5, '0') 
+			FROM sttl
+		</selectKey>
+		INSERT INTO sttl (
+							sttl_num
+							, sttl_typ_cd
+							, sttl_dt
+							, sttl_st_cd
+							<if test="dcPrice != 0">
+							, dc_price
+							</if>
+							, all_sttl_price
+							, subsp_num
+							, mem_num
+							, sttl_accp_num
+							, sttl_rnd
+			                )
+			VALUES (
+					#{sttlNum}
+			        , #{sttlTypCd}
+			        , #{sttlDt}
+			        , #{sttlStCd}
+			        <if test="dcPrice != 0">
+			        , #{dcPrice}			        
+			        </if>
+			        , #{allSttlPrice}
+			        , #{subspNum}
+			        , #{memNum}
+			        , #{sttlAccpNum}
+			        , #{sttlRnd}
+			        )
+	</insert>
+	
+	<select id="getSttlList" parameterType="string">
+		SELECT
+			find_code(subsp_typ_cd) AS subsp_typ_cd
+			, to_char(subsp_fr_dt, 'yyyy-mm-dd hh24:mi:ss') AS subsp_fr_dt
+            , to_char(subsp_to_dt, 'yyyy-mm-dd hh24:mi:ss') AS subsp_to_dt
+			, find_code(sttl_typ_cd) AS sttl_typ_cd
+			, to_char(sttl_dt, 'yyyy-mm-dd hh24:mi:ss') AS sttl_dt
+			, dc_price
+			, all_sttl_price
+			, sttl_rnd
+			FROM sttl st
+			JOIN subsp sb
+			ON (st.subsp_num = sb.subsp_num)
+		WHERE st.mem_num = #{memnum}
+	</select>
+</mapper>

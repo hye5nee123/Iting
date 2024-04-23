@@ -3,22 +3,175 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/admin/layout}">
 <head>
- <!-- layout:decorate="~{layout/admin}" -->
 <meta charset="UTF-8">
 <title>관리자 메인페이지</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script th:inline="javascript">
+function move(no){
+	location.href='/admin/lecture/ingInfo/'+no;
+}
+
+</script>
+<style>
+.dd{
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #205cdc;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
 </head>
 <body>
-	<div id="container" layout:fragment="container"> <!--/* {폴더명/footer}라면 footer.html을 가져옴 */-->
-		<table>
-			<tr>
-				<th>No</th>
-				<th>employee_id</th>
-			</tr>
-			<tr th:each="test : ${testList}" > <!--/* <tr th:each="emp, stat : ${empList}"> stat : 상태변수 */-->
-					<td th:text="${test.title}">1</td>
-					<td th:text="${test.text}">100</td>
-			</tr>
-		</table>
+<div id="container" layout:fragment="container">
+		<div class="row">
+		<div class="col-md-6 col-12 mb-md-0 mb-4">
+			<div class="card">
+			  <!-- <a href="/admin/lecture/ingLectureList"> -->
+			  <h5 class="card-header" role="button" th:onclick="location.href='/admin/lecture/ingLectureList'">강의신청목록</h5>
+			  <!-- </a> -->
+
+			  <div class="card-body">
+			  <a href="/admin/lecture/ingLectureList" class="dd">목록가기</a>
+			    <table class="table">
+					<thead>
+						<tr>
+							<th>강의제목</th>
+							<th>승인여부</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ing, stat: ${ingLectureList}"
+							th:onclick="move([[${ing.ltNum}]])" role="button">
+							<td th:text="${ing.ltTtl}" th:if="${stat.index} < 5"></td>
+							<td th:text="${ing.accpYnCd}" th:if="${stat.index} < 5"></td>
+						</tr>
+					</tbody>
+				</table>
+			
+			  </div>
+			  
+			</div>
+		</div>
+		<div class="col-md-6 col-12">
+		  <div class="card">
+		    <h5 class="card-header">정산관리</h5>
+		    	<div class="card-body">
+				    <div class="chart-container" style="position: relative; height:200px; width:40vw; top: 0; left: 30%;">
+				    	<canvas class="myChart" width="100" height="100"></canvas>
+				    </div>
+			    </div>
+		  </div>
+		</div>
 	</div>
+	
+	<div class="row statistics">
+	   <div class="col-md-12">
+	     <div class="card">
+	       <h5 class="card-header">통계</h5>
+	       <div class="card-body">
+	        <div class="nav-align-top mb-4">
+                    <ul class="nav nav-pills mb-3" role="tablist">
+                      <li class="nav-item">
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
+                          총 매출
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
+                        <div class="mb-0" id="chart_div">
+                        <!-- 차트 위치 -->
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
+                        <p>
+                         지출
+                        </p>
+                        <p class="mb-0">
+                          정산 테이블
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+	       </div>
+	     </div>
+	   </div>
+	 </div>
+	<script th:inline="javascript">
+	/* 차트.js */
+	let countIng = [[${settCount.settIng}]];
+	let countFin = [[${settCount.settFin}]];
+	
+	// 데이터
+	let datas = {
+	    datasets: [{
+	        data: [countIng, countFin]
+	    }],
+	    labels: [
+	        '정산중',
+	        '정산 완료'
+	    ]
+	};
+	
+	// 도넛 차트
+	var myDoughnutChart = new Chart(document.getElementsByClassName('myChart'), {
+	    type: 'doughnut',
+	    data: datas,
+	   	options: {
+	     cutout:'60%',
+	     borderRadius:10,
+		}		
+	});
+	 
+	 
+	 /* 구글 차트 */
+	 google.charts.load('current', {packages: ['corechart', 'bar']});
+	 google.charts.setOnLoadCallback(drawMaterial);
+
+	 function drawMaterial() {
+	       let data = new google.visualization.DataTable();
+	       data.addColumn('timeofday', '월 매출/지출');
+	       data.addColumn('number', '매출');
+	       data.addColumn('number', '지출');
+
+	       data.addRows([
+	         [{v: [1, 0, 0], f: '8'}, 1, .25],
+	         [{v: [2, 0, 0], f: '9'}, 2, .5],
+	         [{v: [3, 0, 0], f:'10'}, 3, 1],
+	         [{v: [4, 0, 0], f: '11'}, 4, 2.25],
+	         [{v: [5, 0, 0], f: '12'}, 5, 2.25],
+	         [{v: [6, 0, 0], f: '1'}, 6, 3],
+	         [{v: [7, 0, 0], f: '2'}, 7, 4],
+	         [{v: [8, 0, 0], f: '3'}, 8, 5.25],
+	         [{v: [9, 0, 0], f: '4'}, 9, 7.5],
+	         [{v: [10, 0, 0], f: '5'}, 10, 10],
+	       ]);
+
+	       let options = {
+	         title: 'Motivation and Energy ',
+	         hAxis: {
+	           title: '행',
+	           format: 'yyyy-MM-dd',
+	           viewWindow: {
+	             min: [7, 30, 0],
+	             max: [17, 30, 0]
+	           }
+	         },
+	         vAxis: {
+	           title: '열'
+	         }
+	       };
+
+	       let materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+	       materialChart.draw(data, options);
+	     }
+	 </script>
+</div>
 </body>
 </html>

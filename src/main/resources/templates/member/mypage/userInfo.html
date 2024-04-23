@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{member/mypage/myMain}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>마이페이지 - 회원정보</title>
+	<script src="/js/join/inputChk.js"></script>
+<style>
+#mymain {
+	color: #28a745;
+}
+</style>
+</head>
+<body>
+<!-- <div class="mb-3">
+					<label for="id" class="form-label">아이디 <span class="needs">*</span></label>
+					<input class="form-control" type="text" id="id" name="id"
+						placeholder="4~20자의 영문 대소문자, 숫자" onblur="idChk()">
+					<div class="idchk form-text"></div>
+				</div> -->
+	<section layout:fragment="mycontent">
+			<div class="mb-3 row">
+				<label for="id" class="col-md-3 col-form-label">아이디</label>
+				<div class="col-md-9">
+					<input class="form-control" type="text" id="id" name="id" th:value="${myinfo.id}" disabled readonly>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="email" class="col-md-3 col-form-label">이메일</label>
+				<div class="col-md-9">
+					<input class="form-control" type="text" id="email" name="email" th:value="${myinfo.mail}" disabled readonly>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="pw" class="col-md-3 col-form-label">비밀번호</label>
+				<div class="changepw col-md-9">
+				<!-- 비밀번호 변경시 내용 -->
+					<div class="input-group">
+						<div class="col-md-10" style="padding: 0;">
+							<input class="form-control" type="password" id="pw" name="pw" th:value="${myinfo.pw}" disabled readonly>
+						</div>
+						<button class="btn btn-dark" type="button" style="margin-left: 13px;" onclick="newPw()">변경</button>
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="phone" class="col-md-3 col-form-label">휴대전화번호</label>
+				<div class="col-md-9">
+					<div class="changephone">
+					<!-- 전화번호 변경시 내용 -->
+						<div class="input-group">
+							<div class="col-md-10" style="padding: 0;">
+								<input class="form-control" type="tel" id="phone" name="phone" th:value="${myinfo.phone}" disabled readonly>
+							</div>
+							<button type="button" class="btn btn-dark" style="margin-left: 13px;" onclick="newPhone()">변경</button>
+						</div>
+					</div>
+					<div class="smschk">
+						<!-- 인증번호 입력란 -->
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="nick" class="col-md-3 col-form-label">이름(닉네임)</label>
+				<div class="col-md-9" >
+					<input class="form-control" type="text" id="nick" name="nick" th:value="${myinfo.name}">
+				</div>
+			</div>
+				
+				
+			<div class="mb-3 row">
+				<label class="col-md-3 col-form-label">주소</label>
+				<div class="col-md-9">
+					<div class="input-group mb-2">
+						<input class="form-control col-lg-3" type="text" id="sample6_postcode" placeholder="우편번호" readonly>
+						<button type="button" class="btn btn-dark" onclick="sample6_execDaumPostcode()">찾기</button>
+					</div>
+					<input class="form-control" type="text" id="sample6_address" name="addr" th:value="${myinfo.addr}" readonly>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="sample6_detailAddress" class="col-md-3 col-form-label">상세주소</label>
+				<div class="col-md-9">
+					<input class="form-control" type="text" id="sample6_detailAddress" name="detailaddr" th:value="${myinfo.detailAddr}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="ocmenu" class="col-md-3 col-form-label">관심사</label>
+				<div class="col-md-9">
+					<select class="form-control" id="ocmenu" name="ocmenu">
+						<option value="">선택</option>
+						<option id="c1" value="c1">프로그래밍 언어</option>
+						<option id="c2" value="c2">컴퓨터공학 전공</option>
+						<option id="c3" value="c3">웹 개발</option>
+						<option id="c4" value="c4">데이터 분석</option>
+						<option id="c5" value="c5">IT 자격증</option>
+					</select>
+				</div>
+			</div>
+			<div class="text-center">
+				<button type="button" class="btn btn-primary" id="updateinfo" name="updateinfo" onclick="updateInfo()">수정</button>
+			</div>
+		<script>
+			let actype = 'b1';
+			let pwFormOn = false;
+			let phoneFormOn = false;
+			let nowPwAccep = true;
+			document.querySelector(`#[[${myinfo.intCd}]]`).defaultSelected = true;
+			function newPw() {
+				pwFormOn = true;
+				nowPwAccep = false;
+				const pwForm = `
+								<div class="mb-3">
+									<input class="form-control" type="password" id="nowpwchk" name="nowpwchk" placeholder="현재 비밀번호 입력" onblur="nowPwChk()">
+									<div class="nowpwchkstr"></div>
+								</div>
+								<div class="mb-3">
+									<input class="form-control" type="password" id="pw" name="pw" placeholder="새 비밀번호" onblur="pwCheck()">
+									<div class="pwchkstr"></div>
+								</div>
+								<div class="mb-3">
+									<input class="form-control" type="password" id="pwchk" name="pwchk" placeholder="새 비밀번호 확인" onblur="pwCheck()">
+									<div class="pwchkchkstr"></div>
+								</div>
+								`;
+				document.getElementsByClassName('changepw')[0].innerHTML = pwForm;
+			};
+			function nowPwChk() {
+				if (nowpwchk.value == `[[${myinfo.pw}]]`) {
+					nowPwAccep = true;
+				} else {
+					nowPwAccep = false;
+				}
+			};
+			function newPhone() {
+				phoneFormOn = true;
+				const phoneForm = 
+					`
+						<div class="input-group">
+							<div class="col-md-10" style="padding: 0;">
+								<input class="form-control" type="tel" id="phone" name="phone" placeholder="변경할 번호 '-' 제외하고 입력" onblur="phoneCheck()">
+							</div>
+							<button type="button" class="btn btn-dark" id="sendsms" style="margin-left: 13px;" onclick="sendSMS(phone.value)">인증</button>
+						</div>
+						<div class="phonechkstr"></div>
+					`;
+				document.getElementsByClassName('changephone')[0].innerHTML = phoneForm;
+			};
+			async function updateInfo() {
+				if(!nowPwAccep){
+					alert("현재 비밀번호가 일치하지 않습니다");
+					return;
+				}
+				if(!chkInput()){
+					return;
+				}
+				let param = setValue();
+				if(`[[${myinfo.pw}]]` == param.pwv 
+					&& `[[${myinfo.name}]]` == param.nickv 
+					&& `[[${myinfo.addr}]]` == param.addrv
+					&& `[[${myinfo.detailAddr}]]` == param.dadrv
+					&& `[[${myinfo.phone}]]` == param.phonev
+					&& `[[${myinfo.intCd}]]` == param.intr){
+					alert("변경된 정보가 없습니다.");
+					return;
+				}
+				let result = await csrf_axios({
+					method: 'PUT',
+					url: '/member/updateMyInfo',
+					data: param
+				})
+					.then(ret => ret.data);
+				if(result == 1){
+					Swal.fire({
+						icon: "success",
+						title: "수정 완료",
+						confirmButtonText: "확인",
+						confirmButtonColor: "#205cdc"
+					}).then((rest) => {
+						if (rest.isConfirmed ||rest.dismiss) {
+							location.href = "/member/mypage";
+						}
+					});
+				} else {
+					errorAlert("수정 실패", "관리자에게 문의바랍니다");
+				}
+			}
+		</script>
+	</section>
+</body>
+
+</html>

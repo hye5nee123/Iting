@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<title>쪽지시험</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section layout:fragment="content">
+
+	<div class="test_modal">
+		<form method="POST" name="testForm" class="text">
+			<h3>쪽지시험</h3>
+			<button class="btn_close"><i class='bx bx-x'></i></button>
+			<div class="test_box">
+				
+			</div>
+			<div class="btn_box">
+				<button type="button" id="saveBtn" class="btn_form">제출하기</button>
+			</div>
+		</form>
+	</div>
+	<div class="row lecture_info">
+		<div class="col-lg-12">
+			<div class="section-title">
+			    <h2>쪽지시험</h2>
+			</div>
+		</div>
+	</div>
+	
+	<div th:each="tlsn, stat: ${tlsnList}" class="info tlsn_info test_info">
+		<div class="top">
+			<div class="left">
+				<div class="top">				
+					<i th:text="${tlsn.ltCateCd}"></i>
+					<span>/ <i th:text="${tlsn.name}"></i> 강사님</span>
+				</div>
+				<p th:text="${tlsn.ltTtl}"></p>
+				<p th:text="${tlsn.ltNum}" class="hidden"></p>
+				
+			</div>
+			<div class="btn_cont">			
+			 	<button type="button" th:if="${tlsn.examYn == null}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">문제풀기 ></button>
+			 	<button type="button" th:if="${tlsn.examYn != null and tlsn.score < 60}" th:onclick='modalOpen([[${tlsn.ltNum}]])' class="go_link">재응시 ></button>
+			 	<a th:if="${tlsn.examYn != null}" th:href="@{/member/test/ox/{ltNum}(ltNum=${tlsn.ltNum})}" class="go_link gray">오답노트 ></a>
+			</div>
+		</div>
+	</div>
+	<div class="btn_box test_btn">
+		<a th:href="@{/member/myclass/list}" class="go_list">내강의실가기</a>
+	</div>
+<script>
+	const modal = document.querySelector('.test_modal');
+	const modalClose = document.querySelector('.btn_close');
+	
+	// 문제풀기 버튼클릭시
+	function modalOpen(ltNum){
+	
+		fetch (`/member/test/list/${ltNum}`)
+		.then(res => res.json())
+		.then(res => {
+			saveTest(res);
+	    	modal.classList.add('on');
+		})
+	};
+	
+	modalClose.addEventListener('click',function(){
+	    modal.classList.remove('on');
+	});
+	
+	function saveTest(res) {
+		let box = document.querySelector('.test_box');		
+		for(let i = 0; i < res.length; i++) {
+		let text = `<div class="test_list" data-num="${res[i].applexamNum}" data-order="${res[i].prblOrdNum}" data-prbl="${res[i].prblNum}">
+		<p>${i+1}. ${res[i].prblCntn}</p>
+		<ul>
+			<li>
+				<input type="radio" name="${res[i].prblNum}" value="1"/>
+				<label for="${res[i].prblNum}">${res[i].ques1}</label>
+			</li>
+			<li>
+				<input type="radio" name="${res[i].prblNum}" value="2"/>
+				<label for="${res[i].prblNum}">${res[i].ques2}</label>
+			</li>
+			<li>
+				<input type="radio" name="${res[i].prblNum}" value="3"/>
+				<label for="${res[i].prblNum}">${res[i].ques3}</label>
+			</li>
+			<li>
+				<input type="radio" name="${res[i].prblNum}" value="4"/>
+				<label for="${res[i].prblNum}">${res[i].ques4}</label>
+			</li>
+		</ul>
+	</div>`
+			box.insertAdjacentHTML("beforeend", text);
+		}
+	}
+	
+	
+	// 문제체크
+	function checkReq() {
+		const posi = document.querySelectorAll('.test_list');
+		let chk = true;
+		for(let i = 0; i < posi.length; i++) {
+			const check =  posi[i].querySelectorAll('input[type=radio]:checked');
+			if(check.length == 0){
+				chk = false;
+			} 
+		}
+		if(chk){
+			Swal.fire({
+				  title: "답안을 제출할까요?",
+				  icon: "success",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3085d6",
+				  cancelButtonColor: "#d33",
+				  confirmButtonText: "확인",
+				  cancelButtonText: "취소"
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					  saveReq();
+				  }
+				});
+		} else{
+			errorAlert("풀지 않은 문제가 있습니다.");
+		}
+	}
+	
+	// 문제제출하기
+	let param = [];  //[{APPLEXAM_NUM : 66, ANSWER : 답}]
+	function saveReq() {
+		const posi = document.querySelectorAll('.test_list');
+		for(let i = 0; i < posi.length; i++) {
+			let applexamNum = posi[i].dataset.num;
+			let prblOrdNum = posi[i].dataset.order;
+			let prblNum = posi[i].dataset.prbl;
+			const answer = posi[i].querySelector('input[type=radio]:checked').value
+				param.push({applexamNum, prblOrdNum, prblNum, answer});
+		}
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: `/member/test/list`,
+				data: JSON.stringify(param)
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		Swal.fire({
+			  title: "답안이 제출되었습니다.",
+			  icon: "success",
+			  showCancelButton: false,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				 window.location.href = `/member/test/result/${param[0].applexamNum}`;
+			  }
+		});
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		checkReq();
+	})
+	
+	function goBack() {
+		window.history.back();
+	}
+	
+	
+</script>
+</section>
+</body>
+</html>

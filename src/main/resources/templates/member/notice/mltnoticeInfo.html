@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/member/bootstrap.min.css" type="text/css">
+<title>공지 사항 상세 페이지</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+	
+	<style>
+	#qqq{
+	width:auto !important;
+	float: right;
+    padding: 12px 40px;
+    font-size: 16px;
+    border: 0;
+    letter-spacing: -1px;
+    background: #ff8a00;
+    color: #fff;
+    border-radius: 5px;	
+	}
+	</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card mb-4">
+		<h5 class="card-header">강의상세</h5>
+			<div class="card-body">
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">공지사항 번호</label>
+					<div class="col-md-10">
+						<input th:value="${lno.ltNoticeNum}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">제목</label>
+					<div class="col-md-10">
+						<input th:value="${lno.ltNoticeTtl}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">내용</label>
+					<div class="col-md-10">
+						<textarea th:text="${lno.ltNoticeCntn}" class="col-md-10 form-control" readonly rows="5"></textarea>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">공지날짜</label>
+					<div class="col-md-10">
+						<input th:value="${#dates.format(lno.ltNoticeRegDt,'yyyy-MM-dd')}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+		</div>
+		<div>
+		<a href="/member/notice/mltnoticeList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
+		</div>						
+	</div>
+	</div>
+	
+</body>
+</html>

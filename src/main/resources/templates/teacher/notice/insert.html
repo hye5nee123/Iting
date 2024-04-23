@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>강의 공지사항 등록</title>
+<style>
+.btn_box {
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+	<section layout:fragment="container">
+		<div id="container" >
+			<h4 class="fw-bold py-3 mb-4">
+				강의 공지사항등록
+			</h4>
+			<div class="test_insert">
+				<form id="formAccountSettings" method="POST" name="testForm"
+					onsubmit="return false" >
+					<div class="row">
+						<div class="mb-3">
+
+							<h5 class="tit">공지번호.</h5>
+
+							<input class="form-control" type="number" id="ltNoticeNum" name="ltNoticeNum" readonly>
+						</div>
+						<hr class="my-0">
+				
+						<div class="mb-3 test_list">
+							<label for="ttl" class="form-label">제목</label><input 
+							class="form-control" type="text" name="ltNoticeTtl" id="ltNoticeTtl" >
+						</div>
+					
+						<div class="mb-3 test_list">
+							<label for="cntn" class="form-label">내용</label> <textarea
+								class="form-control"  name="ltNoticeCntn" id="ltNoticeCntn"></textarea>
+						</div>
+				
+						<div class="mb-3 test_list">
+							<label for="frDt" class="form-label">등록날짜</label> <input
+								class="form-control" type="Date" name="ltNoticeRegDt" id="ltNoticeRegDt">
+						</div>
+						</div>
+					
+				</form>
+			</div>
+		<div class="btn_box demo-inline-spacing">
+			<button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">등록하기</button>
+		</div>
+		</div>
+		<script>
+		function saveReq() {
+			/* const ltNoticeNum = testForm.ltNoticeNum.value; */
+			const ltNoticeTtl = testForm.ltNoticeTtl.value;
+			const ltNoticeCntn = testForm.ltNoticeCntn.value;
+			const ltNoticeRegDt = testForm.ltNoticeRegDt.value;
+			
+			
+			
+			
+			let param = { ltNoticeTtl, ltNoticeCntn, ltNoticeRegDt}
+			console.log(param);
+			
+			/*
+			axios.post("/member/subsp/insert", param)
+				.then(res => saveRes(res.data))
+			*/
+			
+			csrf_axios({
+					method: 'POST',
+					url: '/teacher/notice/insert', 
+					data: param
+				
+					})
+					.then(res => saveRes(res.data))
+		}
+
+
+		// 등록 응답
+		function saveRes(res) {
+			console.log(res);
+			alert('공지가 등록되었습니다.');
+			window.location.href = "/teacher/notice/ltnoticeList";
+			
+		}
+
+		//버튼 클릭 시 함수 호출.
+		saveBtn.addEventListener("click", e => {
+			saveReq();
+			
+		})
+
+
+	
+</script>
+		
+	</section>
+</body>
+</html>

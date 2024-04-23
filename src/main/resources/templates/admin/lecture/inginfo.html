@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<meta charset="UTF-8">
+<title>상세 페이지</title>
+<link rel="stylesheet" href="/css/admin/content.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+	
+	<style>
+	#qqq{
+	width:auto !important;
+	float: right;
+    padding: 12px 40px;
+    font-size: 16px;
+    border: 0;
+    letter-spacing: -1px;
+    background: #205cdc;
+    color: #fff;
+    border-radius: 5px;	
+	}
+	</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card mb-4">
+			<h5 class="card-header">강의상세</h5>
+			<div class="card-body">
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의번호</label>
+					<div class="col-md-10">
+						<input  th:value="${ing.ltNum}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의제목</label>
+					<div class="col-md-10">
+						<input  th:value="${ing.ltTtl}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의소개</label>
+					<div class="col-md-10">
+						<textarea  th:text="${ing.ltIntro}" class="col-md-10 form-control" readonly rows="5"></textarea>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강사번호</label>
+					<div class="col-md-10">
+						<input  th:value="${ing.lecturerNum}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+			
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의난이도</label>
+					<div class="col-md-10">
+						<input  th:value="${ing.ltDifCd}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">시작날짜</label>
+					<div class="col-md-10">
+						<input  th:value="${#dates.format(ing.frDt,'yyyy-MM-dd')}" class="col-md-10 form-control" readonly>
+					</div>
+						
+				</div>
+			
+				<div class="mb-3 row">
+					<label for="html5-datetime-local-input"
+						class="col-md-2 col-form-label">강의키워드코드</label>
+					<div class="col-md-10">
+						<input  th:value="${ing.ltKeywordCd}" class="col-md-10 form-control" readonly>
+					</div>
+					</div>
+			
+			<!--/* 	<div class="mb-3 row">
+					<label for="html5-file-input" class="col-md-2 col-form-label">이미지</label>
+					<div class="col-md-10">
+						<img th:if="${lecture.ltImg} != null" th:src="${lecture.ltImg}" class="col-md-10 form-control" readonly>
+					</div>
+				</div> */-->
+				<div class="mb-3 row">
+					<label for="html5-datetime-local-input"
+						class="col-md-2 col-form-label">승인여부</label>
+					<div class="col-md-10">
+						<input  th:value="${ing.accpYnCd}" class="col-md-10 form-control" readonly>
+					</div>
+			</div>
+		</div>
+		<div>
+		<a href="/admin/lecture/ingLectureList" class="col-md-2 col-form-label" id="qqq">목록가기</a>
+		</div>						
+	</div>
+	</div>
+	
+</body>
+</html>

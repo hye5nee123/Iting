@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<!--/* layout:decorate="~{layout/admin}" */-->
+<meta charset="UTF-8">
+<title>강의질문 페이지</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+<script th:inline="javascript">
+
+
+//등록버튼 이벤트 핸들러
+function update(ltNum){
+	fetch(`/admin/lecture/update/${ltNum}`)
+	.then(res => res.json())
+	.then(res =>{
+		$('#ing li:nth-child(1) button').tab('show')
+	
+	})
+	
+	
+}
+
+function getupdateList(){
+	fetch("/admin/lecture/endLectureList")
+	.then(res => res.json())
+	.then(res => listRes(res))
+}
+
+//list 응답.
+function listRes(res) {
+	updateList.innerHTML = '';
+	console.log(res);
+	// 목록출력
+	for( obj of res) {
+		updateList.innerHTML += makeTr(obj);
+	}
+}
+
+//tr 생성.
+function makeTr(obj) {
+	let newTag = `<tr>
+		<td>${obj.ltNum}</td>
+		<td>${obj.ltTtl}</td>
+		<td>${obj.ltIntro}</td>
+		<td>${obj.frDt}</td>
+		<td>${obj.ltDifCd}</td>
+		<td>${obj.ltKeywordCd}</td>
+		<td>${obj.lecturerNum}</td>
+		<td>${obj.accpYnCd}</td>
+	</tr>`
+	console.log(newTag);
+	return newTag;
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+	
+	$('[data-bs-target="#navs-pills-top-profile"]').on('shown.bs.tab', function (e) {
+		getupdateList();
+	})
+	
+	
+});
+
+
+	
+	</script>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<h4 class="fw-bold py-3 mb-4">강의신청목록</h4>
+		<div class="nav-align-top mb-4">
+			<ul class="nav nav-pills mb-3 " id="ing" role="tablist">
+				<li class="nav-item">
+					<button type="button" class="nav-link active" role="tab"
+						data-bs-toggle="tab" data-bs-target="#navs-pills-top-home"
+						aria-controls="navs-pills-top-home" aria-selected="true">
+						대기중인 강의</button>
+				</li>
+				<li class="nav-item">
+					<button type="button" class="nav-link" role="tab"
+						data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile"
+						aria-controls="navs-pills-top-profile" aria-selected="false">
+						승인된 강의</button>
+				</li>
+			</ul>
+
+			<div class="tab-content test_content">
+				<div class="tab-pane fade active show note_box"
+					id="navs-pills-top-home" role="tabpanel">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>강의번호</th>
+								<th>강의제목</th>
+								<th>강의소개</th>
+								<th>신청날짜</th>
+								<th>강의난이도</th>
+								<th>강의키워드</th>
+								<th>강사번호</th>
+								<th>승인여부</th>
+
+
+							</tr>
+						</thead>
+						<tbody id="lectureList">
+							<tr th:each="ltb, stat: ${list}">
+								<td th:text="${ltb.ltNum}"></td>
+								<td th:text="${ltb.ltTtl}"></td>
+								<td th:text="${ltb.ltIntro}"></td>
+								<td th:text="${#dates.format(ltb.frDt,'yyyy-MM-dd')}"></td>
+								<td th:text="${ltb.ltDifCd}"></td>
+								<td th:text="${ltb.ltKeywordCd}"></td>
+								<td th:text="${ltb.lecturerNum}"></td>
+								<td th:text="${ltb.accpYnCd}"></td>
+
+								<td>
+									<button type="button" id="saveBtn"
+										th:onclick="update([[${ltb.ltNum}]])">등록하기</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tab-pane fade" id="navs-pills-top-profile"
+					role="tabpanel">
+					<table class="table">
+					<div class="search_wrapper">
+                            <input class="search" type="text" placeholder="찾으시는 강의">
+                            <button class="button e_search_submit">
+                                <span><i class="bx bx-search-alt-2"></i>검색</span>
+                            </button>
+                            <div class="search_view_cover e_search_view_cover">
+                            </div>
+                        </div>
+						<thead>
+							<tr>
+								<th>강의번호</th>
+								<th>강의제목</th>
+								<th>강의소개</th>
+								<th>신청날짜</th>
+								<th>강의난이도</th>
+								<th>강의키워드</th>
+								<th>강사번호</th>
+								<th>승인여부</th>
+
+							</tr>
+						</thead>
+						<tbody id="updateList">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

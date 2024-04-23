@@ -2,5 +2,75 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iting.member.mapper.MemberMapper">
+	<select id="getMemberList">
+		SELECT *
+		FROM MEM
+	</select>
+	
+	<!-- 회원목록 -->
+	<select id="getMemberLtsn">
+		SELECT m.MEM_NUM
+		       , m.ID
+		       , m.NAME
+		       , m.MAIL
+		       , m.PHONE
+		       , t.TLSN_NUM
+		       , t.LT_NUM
+		       , l.LT_TTL
+		FROM MEM m JOIN TLSN t
+		            ON m.MEM_NUM = t.MEM_NUM
+		           JOIN LT l
+		             ON t.LT_NUM = l.LT_NUM
+		WHERE t.LT_NUM = #{ltNum}
+	</select>
+	
+	<select id="getMemberInfo">
+		SELECT MEM_NUM
+			   , ID
+		       , NAME
+		FROM mem_lec_view
+		WHERE MEM_NUM = #{memNum}
+	</select>
+	
+	<select id="getMyInfo" parameterType="string" resultType="MemberVO">
+		SELECT id
+			, pw
+			, name
+			, addr
+			, detail_addr
+			, mail
+			, phone
+			, int_cd
+		FROM mem
+		WHERE mem_num = #{memNum}
+	</select>
+	
+	<update id="putMyInfo" parameterType="AccountVO">
+		UPDATE mem
+		SET pw = #{pwv}
+			, name = #{nickv}
+			, addr = #{addrv}
+			, detail_addr = #{dadrv}
+			, phone	= #{phonev}
+			, int_cd = #{intr}
+		WHERE mem_num = #{accnum}
+	</update>
 
+	<!-- 회원단건 -->
+	<select id="getMemberNote">
+		SELECT m.MEM_NUM
+		       , m.ID
+		       , m.NAME
+		       , m.MAIL
+		       , m.PHONE
+		       , t.TLSN_NUM
+		       , t.LT_NUM
+		       , l.LT_TTL
+		FROM TLSN t JOIN MEM m
+		            ON m.MEM_NUM = t.MEM_NUM
+		           JOIN LT l
+		             ON t.LT_NUM = l.LT_NUM
+		WHERE t.LT_NUM = #{ltNum}
+		AND m.MEM_NUM = #{memNum}
+	</select>
 </mapper>

@@ -1,12 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/auth}">
+
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<title>로그인</title>
+<style>
+.logo, .main_btn {
+	width: 150px;
+}
 
+.naverBtn {
+	width: 50px;
+}
+
+#naverIdLogin, .links{
+	text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+	<section layout:fragment="cont">
+		<!-- logo -->
+		<div class="app-brand justify-content-center">
+			<div class="main_btn">
+				<a href="/" role="button"><img class="logo"
+					src="img/common/logo_h.png" alt="Logo" /></a>
+			</div>
+		</div>
+		<!-- /logo -->
+		<form class="frm mb-3" th:action="@{/userlogin}" method="post"
+			name="frm">
+			<div class="mb-3">
+				<label class="form-label" for="userId">아이디</label> <input
+					class="form-control" type="text" id="userId" name="userId"
+					autofocus />
+			</div>
+			<div class="mb-3 form-password-toggle">
+				<label class="form-label" for="password">비밀번호</label>
+				<div class="input-group input-group-merge">
+					<input class="form-control" type="password" id="password"
+						name="password" /> <span class="input-group-text cursor-pointer"><i
+						class="bx bx-hide"></i></span>
+				</div>
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary d-grid w-100">로그인</button>
+			</div>
+		</form>
+		<div class="mb-3 links">
+			<a href="#">아이디찾기</a> | <a href="#">비밀번호찾기</a> | <a href="/account">회원가입</a>
+		</div>
+		<div class="mb-3" id="naverIdLogin">
+			<p><small>간편로그인</small></p>
+			<a href="/oauth2/authorization/naver" id="naverIdLogin_loginButton"
+				role="button"><img alt="nloginbutton" class="naverBtn"
+				src="/img/common/btnG_아이콘사각.png"></a>
+		</div>
+		<script>
+		//console.log([[${loginFailMsg}]]);
+		frm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			let id = frm.userId.value;
+			let pw = frm.password.value;
+			if (id == '') {
+				alert("아이디를 입력해주세요")
+				return;
+			} else if (pw == '') {
+				alert("비밀번호를 입력해주세요")
+				return;
+			} else {
+				frm.submit();
+			}
+		});
+		
+	</script>
+	</section>
 </body>
+
 </html>

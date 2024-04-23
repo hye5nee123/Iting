@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/member/layout}">
+<head>
+<meta charset="UTF-8">
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<title>마이페이지</title>
+<style>
+.mypage {
+	margin-top: 50px;
+	display: flex;
+	flex-wrap:nowrap;
+}
+.section-title {
+	font-weight: 700;
+	font-size: 30px;
+	text-align: left;
+}
+
+.asidemenu {
+	position: relative;
+	width: 30%;
+	left: 10%;
+}
+.asidemenu li {
+	line-height: 2.0;
+}
+.mypage a {
+	color: #111111;
+	font-weight: 400;
+	font-size: 20px;
+}
+.mypage a:hover{
+	color: #0088ff;
+}
+.asidetap {
+	/* position: relative;
+	left: 10%; */
+}
+
+
+.mycontent{
+	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+	position: relative;
+	width: 60%;
+	border: 1px solid #d1d1d1;
+	border-radius: 15px;
+	padding: 50px 50px 15px 50px;
+}
+
+ul {
+	list-style: none;
+}
+.nice-select {
+	width: 200px;
+}
+.nodata {
+	text-align: center;
+	height: 78px;
+	align-content: center;
+}
+</style>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="mypage">
+			<div class="asidemenu">
+					<div class="section-title">마이페이지</div>
+				<ul class="asidetap">
+					<li><a id="mymain" href="/member/mypage" role="button">
+							내 정보
+					</a></li>
+					<li><a id="mysttl" href="/member/mypage/sttlList" role="button">
+							구독/결제정보
+					</a></li>
+					<li><a id="mysave" href="/member/mypage/savelist" role="button">
+							내가 찜한 강의
+					</a></li>
+					<!-- <li><a href="#" role="button">
+							<h4>커뮤니티 활동</h4>
+					</a></li>
+					<li><a href="#" role="button">
+							<h4>알림 설정</h4>
+					</a></li> -->
+				</ul>
+			</div>
+			<div class="mycontent" layout:fragment="mycontent">
+				<!-- 마이페이지 본문 -->
+			</div>
+		</div>
+			<div style="height: 300px;">
+			</div>
+		<script>
+		</script>
+	</section>
+</body>
+</html>

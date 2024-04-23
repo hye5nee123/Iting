@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/teacher/layout}">
+<head>
+ <!-- layout:decorate="~{layout/admin}" -->
+<meta charset="UTF-8">
+<title>강의질문상세</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+</head>
+<body>
+<div id="container" layout:fragment="container">
+	<h4 class="fw-bold py-3 mb-4">강의질문</h4>
+    <div class="tab-content test_content note_content">
+      <div class="tab-pane fade active show note_box" id="navs-pills-top-home" role="tabpanel">
+        <div class="table-responsive table-bordered">
+        	<div class="message_info">
+         	<span th:text="${gb=='rec'}?${note.sentPs}:${note.recPs}"></span>
+         	<i th:text="${gb=='sent'}?${#dates.format(note.sentDt,'yyyy-MM-dd')}:${#dates.format(note.recDt,'yyyy-MM-dd')}"></i>
+         	<p th:text="${note.noteTtl}"></p>
+        	<div class="txt note_txt" th:text="${note.noteCntn}"></div>
+        	</div>      
+              
+         </div>
+      </div>
+      <div class="btn_box demo-inline-spacing">
+      		<a th:if="${gb=='rec'}" th:href="@{/teacher/note/insert/{ltNum}/{memNum}(ltNum=${note.ltNum}, memNum=${note.memNum})}" class="btn btn-lg btn-warning">답장하기</a>
+           <a id="listBtn" class="btn btn-lg ml-1 btn btn btn-secondary" th:href="@{/teacher/note/list/{ltNum}(ltNum=${note.ltNum}, gb=${gb})}">목록가기</a>
+         </div>
+    </div>
+</div>
+</body>
+</html>

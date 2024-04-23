@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/blank}">
+<meta charset="UTF-8">
+<section layout:fragment="content">
+	<script th:inline="javascript">
+		function gopage(p) {
+			frmSearch.page.value = p;
+			frmSearch.submit();
+		}
+	</script>
+	<h3 class="related-title">review</h3>
+	<br>
+	<div>
+		<br> <br>
+		<div>
+			<!-- 등록 버튼 기능 X (함수도 없음) -->
+			<button class="cnq_insertBtn" type="button" id="insertBtn">등록</button>
+		</div>
+		<br>
+		<div>
+			<button onclick="cd == 'drwupDt'">최신순</button>
+			<button>별점순</button>
+		</div>
+		<table class="table table-striped">
+			<thead>
+		
+				<tr>
+					<th>제목</th>
+					<th>내용</th>
+					<th>날짜</th>
+					<th>별점</th>
+					<th>작성자</th>
+				</tr>
+			<tbody>
+				<tr th:each="review, stat: ${reviewList}">
+					<td th:text="${review.ttl}"></td>
+					<td th:text="${review.cntn}"></td>
+					<td th:text="${#dates.format(review.drwupDt,'yyyy/MM/dd')}"></td>
+					<td th:text="${review.star}"></td>
+					<td th:text="${review.name}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+</html>

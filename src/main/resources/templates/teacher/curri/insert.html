@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>커리등록</title>
+<style>
+.btn_box {
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+	<section layout:fragment="container">
+		<div id="container" >
+			<h4 class="fw-bold py-3 mb-4">
+				커리등록
+			</h4>
+			<div class="test_insert">
+				<form id="formAccountSettings" method="POST" name="testForm"
+					onsubmit="return false">
+					<div class="row">
+						<hr class="my-0">
+						<div class="mb-3 test_list">
+							<label for="ques" class="form-label">제목</label><input 
+							class="form-control" type="text" name="rndTtl" id="rndTtl" >
+						</div>
+						<div class="mb-3 test_list">
+							<label for="ltIntro" class="form-label">첨부파일</label>
+							<input class="form-control" type="file" name="uFile" onchange="uploadFileReq(testForm.typCode.value, testForm)">
+							<input type="hidden" name="typCode" th:value="k2">
+						</div>
+						<div class="mb-3 test_list">
+							<label for="file" class="form-label">내용</label> <textarea
+								class="form-control"  name="rndCntn" id="rndCntn"></textarea>
+						</div>
+						<div class="mb-3 test_list">
+							<label for="frDt" class="form-label">강의시간</label> <input
+								class="form-control" type="number" name="ltTm" id="ltTm">
+						</div>
+						<div class="mb-3 test_list">
+							<label for="ltNum" class="form-label">강의번호</label> <input
+								class="form-control" type="text" name="ltNum" id="ltNum" th:value="${ltNum}" readonly>
+						</div>
+						</div>
+				</form>
+			</div>
+		<div class="btn_box demo-inline-spacing">
+			<button type="button" id="saveBtn" class="btn btn-lg btn btn-warning">등록하기</button>
+		</div>
+		</div>
+		<input type="hidden" th:value="${session.usernum}" name="tnum">
+		<script>
+		function saveReq() {
+			const rndTtl = testForm.rndTtl.value;
+			const rndCntn = testForm.rndCntn.value;
+			const ltTm = testForm.ltTm.value;
+			const ltNum = testForm.ltNum.value;  
+			
+			let param = {rndTtl, rndCntn, ltTm,ltNum, atchNum:fileNum}
+			console.log(param);
+			/*
+			axios.post("/member/subsp/insert", param)
+				.then(res => saveRes(res.data))
+			*/
+			csrf_axios({
+					method: 'POST',
+					url: '/teacher/curri/insert', 
+					data: param
+					})
+					.then(res => saveRes(res.data))
+		}
+		// 등록 응답
+		function saveRes(res) {
+			Swal.fire({
+				  title: "글등록이 완료되었습니다",
+				  icon: "success",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3085d6",
+				  cancelButtonColor: "#d33",
+				  confirmButtonText: "확인",
+				  cancelButtonText: "취소"
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				    location.href = "/teacher/lecture/getLectureList";
+				  }
+				});
+		}
+		//버튼 클릭 시 함수 호출.
+		saveBtn.addEventListener("click", e => {
+			saveReq();
+		})
+
+</script>
+		
+	</section>
+</body>
+</html>

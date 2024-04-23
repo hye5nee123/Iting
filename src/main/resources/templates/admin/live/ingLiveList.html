@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin/layout}">
+<head>
+<meta charset="UTF-8"/>
+<title>LIVE 강의승인 페이지</title>
+
+<script th:inline="javascript">
+
+
+//등록버튼 이벤트 핸들러
+function update(spltNum,accpYnCd){
+	fetch(`/admin/live/update/${spltNum}/${accpYnCd}`)
+	.then(res => res.json())
+	.then(res =>{
+		location.href="/admin/live/allendLiveList"
+	})
+}
+</script>
+
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				승인 대기 목록
+
+			</h4>
+
+
+			<div class="table-responsive text-nowrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>특강 번호</th>
+							<th>특강 제목</th>
+							<th>특강 내용</th>
+							<th>특강 날짜</th>
+							<th>강사 번호</th>
+							<th>승인 여부</th>
+							<th>승인</th>
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr th:each="ing, stat: ${ingLiveList}"
+							>
+							<td th:text="${ing.spltNum}"></td>
+							<td th:text="${ing.spltTtl}"></td>
+							<td th:text="${ing.spltCntn}"></td>
+							<td th:text="${#dates.format(ing.spltDt,'yyyy-MM-dd')}"></td>
+							<td th:text="${ing.lecturerNum}"></td>
+							<td th:text="${ing.accpYnCd}"></td>
+							<td onclick="event.cancelBubble = true;">
+								<button type="button"
+									th:onclick="update([[${ing.spltNum}]],'d1')">승인</button>
+								<button type="button" 
+									th:onclick="update([[${ing.spltNum}]],'d3')">취소</button>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

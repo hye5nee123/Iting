@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.cnq.mapper.CmtMapper">
+	<select id="getListWithPaging" resultType="CnqVO">
+		SELECT * from (select ROWNUM as rn, a.* from (
+		SELECT c.cmt_num,
+		c.cntn,
+		c.drwup_dt,
+		l.lt_cnq_num,
+		c.drwupr
+		FROM cmt c JOIN lt_cnq l
+		ON(c.lt_cnq_num = l.lt_cnq_num )
+		where l.lt_cnq_num = #{vo.ltCnqNum}
+		ORDER by c.cmt_num
+	<![CDATA[
+	) a where ROWNUM <= #{svo.end}) b where rn >= #{svo.start}
+	]]>
+	</select>
+<!-- 댓글 등록 -->
+<insert id="cmtInsert" parameterType="CnqVO">
+		<selectKey keyProperty="cmtNum" order="BEFORE"
+			resultType="string">
+				SELECT 'cm' || LPAD(NVL(MAX(SUBSTR(CMT_NUM, -5)), 0) +
+			1, 5, '0') AS CMT_NUM
+			FROM cmt
+			</selectKey>
+	INSERT INTO cmt (
+					CMT_NUM,
+                    CNTN,
+                    DRWUP_DT,
+                    LT_CNQ_NUM,
+                    DRWUPR
+					)
+		VALUES (
+					#{cmtNum}
+					, #{cntn}
+					, sysDate 
+					, #{ltCnqNum}
+					, #{drwupr}
+				)
+			</insert>	
+	<select id="getCount" resultType="Long">
+		select count(*)
+		from cmt
+		where LT_CNQ_NUM = #{ltCnqNum}
+	</select>
+</mapper>

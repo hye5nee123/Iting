@@ -1,12 +1,212 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/member/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>강의상세</title>
+<link rel="stylesheet" href="/css/member/content.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+
+<style>
+
+#cnq {
+	width:100%;
+	height: 1000px;
+	border: none;
+}
+
+#noticeList{width: 100%;
+	height: 1000px;
+	border: none;}
+
+.tab-pane{
+position: relative;
+    min-width: 50vw; /* 너비 지정 */
+    min-height: 50vh; /* 높이 지정 */
+    overflow: hidden;
+}
+</style>
+
+
 </head>
 <body>
+	<section layout:fragment="content">
+		<div class="row lecture_info">
+			<div class="col-lg-12">
+				<div class="section-title">
+					<span th:text="${lecture.ltCateCd}"></span>
+					<h2 th:text="${lecture.ltTtl}"></h2>
+				</div>
+			</div>
+			<div class="info">
+				<ul>
+					<li><i class='bx bx-spreadsheet'></i>
+						<div>
+							<p>커리큘럼 수</p>
+							<span>총 <em th:text="${cur.cnt}"></em>개
+							</span>
+						</div></li>
+					<li><i class='bx bx-bar-chart-alt'></i>
+						<div>
+							<p>난이도</p>
+							<span th:text="${lecture.ltDifCd}"></span>
+						</div></li>
+					<li><i class='bx bx-pencil'></i>
+						<div>
+							<p>키워드</p>
+							<span th:text="${lecture.ltKeywordCd}"></span>
+						</div></li>
+				</ul>
+				<button type="button" th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">수강하기</button>
+			</div>
+			<p class="text" th:text="${lecture.ltIntro}"></p>
+		</div>
 
+		<div class="row lecture_list">
+			<div class="left">
+				<video controls width="500" autoplay muted>
+					<source src="/video/html의이해_intro.mp4" type="video/mp4" />
+				</video>
+			</div>
+			<div class="right">
+				<h3>
+					<i class='bx bx-slideshow'></i> <span th:text="${lecture.ltTtl}"></span>
+				</h3>
+				<span class="target">로드맵 목표</span> <span class="txt">프로그래밍
+					시대에 맞는 인재 되기</span>
+				<p>
+					<span><i class='bx bx-user'></i> <i>22,789</i>명 수강</span>
+				</p>
+				<div class="btn">
+					<button type="button"
+						th:onclick="lectInsertReq([[${lecture.ltNum}]], [[${session.usernum}]])">
+						<i class='bx bx-check'></i> 수강하기
+					</button>
+					<button class="saveInsert">
+						<i class='bx bx-heart'></i> 찜하기
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row lecture_cur">
+			<h3 class="related-title">커리큘럼</h3>
+			<ul>
+				<li><p class="total">
+						<i class='bx bx-caret-right-circle'></i> 총 강의 <i
+							th:text="${cur.cnt}"></i>개
+					</p></li>
+				<li><p class="total">
+						<i class='bx bx-stopwatch'></i> 영상시간 <i th:text="${cur.sum}"></i>분
+					</p></li>
+			</ul>
+
+			<div class="list">
+				<ul th:each="curri, stat: ${curriList}">
+					<li><div>
+							<a><span th:text="${stat.count}"></span><i
+								th:text="${curri.rndTtl}"></i></a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="product__details__tab">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#tabs-5" role="tab">수강후기</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#tabs-6" role="tab">커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#tabs-7" role="tab">강의 공지사항</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tabs-5" role="tabpanel">
+							<div class="product__details__tab__content">
+								<div class="product__details__tab__content__item">
+									<h5>평균 만족도 4.9점의 생생한 후기</h5>
+									<ul class="review">
+										<li th:each="review, stat:${reviewList}">
+											<div>
+												<span class="img"></span>
+												<p class="id" th:text="${review.name}">아이디</p>
+												<div class="star">
+													<span th:each="i : ${#numbers.sequence(1, review.star)}">
+														<i class="bx bxs-star"></i>
+													</span>
+												</div>
+
+												<p class="text" th:text="${review.cntn}"></p>
+											</div>
+										<li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- 커뮤니티 시작 -->
+						<div class="tab-pane cnq-tab-pane" id="tabs-6" role="tabpanel">
+							<div class="product__details__tab__content">
+								<div class="product__details__tab__content__item">
+									<iframe th:src="|/member/cnq/list/${lecture.ltNum}|" id="cnq"
+										scrolling="no"></iframe>
+								</div>
+							</div>
+						</div>
+						<!-- 커뮤니티 끝 -->
+						<!-- 추전강의 -->
+						<div class="tab-pane" id="tabs-7" role="tabpanel">
+							<div class="product__details__tab__content">
+								<iframe th:src="|/member/notice/mltnoticeList|" id="noticeList"
+										scrolling="no" class="inner"></iframe>
+								<div class="product__details__tab__content__item">
+									
+								</div>
+								<div class="product__details__tab__content__item">
+									
+								</div>
+							</div>
+						</div>
+						<!-- 추천강의 끝 -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:inline="javascript">
+		let saveInsert = document.querySelector('.saveInsert');
+		let ltNum = [[${lecture.ltNum}]];
+		let memNum = [[${session.usernum}]];
+		
+	//등록요청.
+	function saveReq() {
+		let param = {ltNum : ltNum, memNum : memNum}
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/save/insert',
+				data: param
+				})
+				.then(res => saveRes(res))
+	}
+	// 등록 응답
+	function saveRes(res) {
+		Swal.fire({
+			icon: "success",
+			title: "찜 완료",
+			confirmButtonText: "확인",
+			confirmButtonColor: "#205cdc"
+		})
+		console.log(res)
+	}
+	//버튼 클릭 시 함수 호출.
+	saveInsert.addEventListener('click', e => {
+		saveReq();
+	})
+	</script>
+	</section>
 </body>
 </html>

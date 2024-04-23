@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/blank}">
+<meta charset="UTF-8">
+<title>조혜원</title>
+<section layout:fragment="content">
+
+	<div class="container">
+		<div class="checkout__input contact__form">
+			<h3 class="related-title">글등록</h3>
+			<form name="cnqForm" method="post">
+
+				제목 : <input name="ttl"> 내용 :
+				<textarea name="cntn"></textarea>
+				<br> 작성자 : <input type="hidden" name="name"
+					th:value="${session.usernum}" readonly> <label>첨부
+					파일 : </label> <input type="file" name="uFile" multiple="multiple"
+					onchange="uploadFileReq(cnqForm.typCode.value, cnqForm)"
+					class="mb-5"> <input type="hidden" name="typCode"
+					th:value="k1"> <br> <input type="hidden" name="ltNum"
+					th:value="${ltNum}">
+
+				<div class="cnq-buttons mt-5">
+					<button type="button" id="saveBtn" class="cnq_insertBtn">등록</button>
+					<button class="cnq_goListBtn" type="button" id="listBtn">
+						글목록으로</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+	//등록요청.
+		
+	function saveReq() {
+		const ttl = cnqForm.ttl.value;
+		const cntn = cnqForm.cntn.value;
+		const memNum = cnqForm.name.value;
+		const ltNum = cnqForm.ltNum.value;
+		let param = { ttl, cntn, memNum,ltNum,  atchNum :fileNum}
+		console.log(param);
+		
+		/*
+		axios.post("/member/subsp/insert", param)
+			.then(res => saveRes(res.data))
+		*/
+		
+		csrf_axios({
+				method: 'POST',
+				url: '/member/cnq/insert',
+				data: param
+			
+				})
+				.then(res => saveRes(res.data))
+	}
+	
+	// 등록 응답
+	function saveRes(res) {
+		console.log(res);
+		const ltNum = cnqForm.ltNum.value;
+		Swal.fire({
+			  title: "글등록이 완료되었습니다",
+			  icon: "success",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    location.href = `/member/cnq/list/${ltNum}`;
+			  }
+			});
+	}
+	
+	//버튼 클릭 시 함수 호출.
+	saveBtn.addEventListener("click", e => {
+		saveReq();
+	})
+		//목록 이전페이지.
+	listBtn.addEventListener("click",
+			e=>{location.href="javascript:history.back();"})
+</script>
+</section>
+</html>

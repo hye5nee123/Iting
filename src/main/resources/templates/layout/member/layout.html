@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Male_Fashion Template">
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Male-Fashion | Template</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/css/member/bootstrap.min.css" type="text/css">
@@ -21,11 +26,64 @@
     <link rel="stylesheet" href="/css/member/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/member/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/member/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/boxicons.css" />
+    <link rel="stylesheet" href="/css/member/main.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/boxicons.css" />
+
+    <!-- Js Plugins -->
+    <script src="/js/member/jquery-3.3.1.min.js"></script>
+    <script src="/js/member/bootstrap.min.js"></script>
+    <script src="/js/member/jquery.nice-select.min.js"></script>
+    <script src="/js/member/jquery.nicescroll.min.js"></script>
+    <script src="/js/member/jquery.magnific-popup.min.js"></script>
+    <script src="/js/member/jquery.countdown.min.js"></script>
+    <script src="/js/member/jquery.slicknav.js"></script>
+    <script src="/js/member/mixitup.min.js"></script>
+    <script src="/js/member/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    
+    <!-- 네이버 로그인 -->
+    <script src="/js/join/naverlogin.js"></script>
+
+	<!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Common JS -->
+    <script src="/js/common.js"></script>
+    <script src="/js/socket.js"></script>
+
+    <!-- 포트원 sdk -->
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+ 
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+  ChannelIO('boot', {
+    "pluginKey": "0e4565f7-9e3e-4b55-a0d4-b02dc2c809bf"
+  });
+  
+  
+ 
+
+
+
+  </script>
+    
+    <style>
+
+#iting {
+    max-width:90%;
+}
+
+    </style>
 </head>
 
 <body>
     <!-- Page Preloder -->
-<!--     <div id="preloder">
+    <!--     <div id="preloder">
         <div class="loader"></div>
     </div> -->
 
@@ -66,17 +124,20 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>어서오세요</p>
+                            <p th:if="${session.username == null}"><i class='bx bx-smile'></i> 로그인이 필요합니다</p>
+                            <p th:if="${session.username != null}"><i class='bx bx-smile'></i> 어서오세요 <span th:text="${session.username}"></span>님</p>
                         </div>
                     </div>
+
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
+
                             <div class="header__top__links">
-                                <a href="#">로그인</a>
-                                <a href="#">회원가입</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>마이페이지 </span>
+
+                                <a th:if="${session.usernum} == null" href="/commonlogin">로그인</a>
+                                <a id="logoutbtn" th:if="${session.usernum} != null" href="/member/main" onclick="logout()">로그아웃</a>
+                                <a href="/account">회원가입</a>
+                                <a th:if="${session.usertype} == 'ROLE_B1'" href="/member/mypage">마이페이지</a>
                             </div>
                         </div>
                     </div>
@@ -85,89 +146,145 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-2 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    	<a href="/member/main"><img src="/img/common/logo_w.png" id="iting"></a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-7 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">수강신청(전체강의)</a>
-                            <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                            <li><a href="/member/lecture/allList">수강신청</a>
+                                <ul class="dropdown">
+                                    <li><a href="/member/lecture/allList?ltCateCd=f1" data-cate="f1">기초강의</a></li>
+                                    <li><a href="/member/lecture/allList?ltCateCd=f2" data-cate="f2">데이터분석</a></li>
+                                    <li><a href="/member/lecture/allList?ltCateCd=f3" data-cate="f3">웹 개발</a></li>
+                                    <li><a href="/member/lecture/allList?ltCateCd=f4" data-cate="f4">프로그래밍언어</a></li>
+                                    <li><a href="/member/lecture/allList?ltCateCd=f5" data-cate="f5">인공지능</a></li>
+                                    <li><a href="/member/lecture/allList?ltCateCd=f6" data-cate="f6">컴퓨터 공학 전공</a></li>
+                                    <li><a href="/member/lecture/allList?ltCateCd=f7" data-cate="f7">IT자격증</a></li>
                                 </ul>
-                                </li>
-                            <li><a href="./shop.html">무료강의</a></li>
+
+                            </li>
+                            <li><a href="/member/lecture/allList">무료강의</a></li>
                             <li><a href="#">커뮤니티</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="/member/lecture/info/lt00001">수강후기</a></li>
+                                    <li><a href="/member/lecture/info/lt00001">커뮤니티</a></li>
+                                    <li><a href="/member/lecture/info/lt00001">추천강의</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">내강의실</a>
-                            <ul class="dropdown">
-                                    <li><a href="./about.html">수강현황</a></li>
+                            <li><a href="/member/myclass/list">내강의실</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">수강현황</a></li>
                                     <li><a href="./shop-details.html">회원정보 관리</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./contact.html">고객센터</a>
-                             <ul class="dropdown">
-                                    <li><a href="./about.html">공지사항</a></li>
+                            <li><a href="/member/notice/noticeList">고객센터</a>
+                                <ul class="dropdown">
+                                    <li><a href="/member/notice/noticeList">공지사항</a></li>
                                     <li><a href="./shop-details.html">자주하는질문</a></li>
                                     <li><a href="./shopping-cart.html">Q&A</a></li>
                                 </ul>
                             </li>
                         </ul>
+
                     </nav>
+
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
+                        <a href="/member/subsp/form"><i class='bx bx-check-square'></i> 구독하기</a>
+                        <!-- <a href="./contact.html">Live특강</a> -->
+                        <div class="header__top__hover">
+                        	<div id="count">0일</div>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
+
     </header>
     <!-- Header Section End -->
 
     <!-- 내용 들어올 자리 -->
-	    <section class="product spad">
+    <section class="product spad">
         <div class="container" layout:fragment="content">
-        
-        </div>
-    	</section>
 
-    
+        </div>
+    </section>
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer">
-    
+        <div class="container">
+            <div class="row">
+	                <div class="footer__logo">
+	                    <a href="/member/main"><img src="/img/common/logo_w.png" id="iting"></a>
+	                </div>
+                <div>
+	                <ul>
+	                    <li>주)예담직업전문학교 대구광역시 중구 중앙대로 403 (남일동 135-1, 5층)</li>
+	                    <li>Tel. 053-421-2460&nbsp;&nbsp;&nbsp;&nbsp;Fax. 053-356-3939</li>
+	                </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <div class="footer__copyright__text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            아이팅 , made with ❤️ by 코드맵
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
     <!-- Footer Section End -->
 
-    
 
-    <!-- Js Plugins -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.nice-select.min.js"></script>
-    <script src="/js/jquery.nicescroll.min.js"></script>
-    <script src="/js/jquery.magnific-popup.min.js"></script>
-    <script src="/js/jquery.countdown.min.js"></script>
-    <script src="/js/jquery.slicknav.js"></script>
-    <script src="/js/mixitup.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/main.js"></script>
+
 </body>
+<script>
+
+
+function searchLect() {
+	lectureService.ltListReq(1, searchKeyWord.value);
+}
+	
+	let goalDate2 = "[[${subspinfo != null? subspinfo.subspToDt : ''}]]";
+	
+
+	// 구독 날짜 받아오기
+    const goalDate = new Date(goalDate2).getTime();
+
+    function calcDate() {
+        const now = new Date().getTime();
+        const distance = goalDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        if(goalDate2 == '')
+        	{
+        	return '구독내역 없음';
+        	}
+        if (distance < 0) {
+            return '(지나감)';
+        } else {
+            return `D-${days}일`;
+        }
+    }
+    
+    setInterval(() => {
+        document.getElementById('count').innerText = calcDate();
+    }, 1000);
+    
+</script>
 
 </html>

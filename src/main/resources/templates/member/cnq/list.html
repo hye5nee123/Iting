@@ -1,0 +1,114 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta charset="UTF-8">
+	<title>list</title>
+<link rel="stylesheet" href="/css/member/bootstrap.min.css"
+	type="text/css">
+	<style>
+
+#insertBtn {
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #205cdc;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+	<script th:inline="javascript">
+		let ltNum =  [[${cnqVO.ltNum}]]
+		function gopage(p){
+			frmSearch.page.value = p;
+			frmSearch.submit();
+		}
+		function init(){
+			frmSearch.ttl.value = "";
+			frmSearch.name.value = "";
+		}
+		function move(ltCnqNum){
+			location.href='/member/cnq/info/'+ ltCnqNum
+		}		
+
+		window.addEventListener("load", function (event) {
+			insertBtn.addEventListener("click", e=>{
+				location.href=`/member/cnq/insert/${ltNum}`
+			})
+		});
+		
+
+	</script>
+<section layout:fragment="content">
+	<h3 class="related-title">커뮤니티</h3>
+	<br>
+	<!-- 검색 폼 시작 -->
+	<form name="frmSearch" th:object="${cnqVO}"
+		style="display: inline-block;">
+		<input type="hidden" name="page"> 제목 
+		<input name="ttl"
+			th:value="*{ttl}"> 작성자 
+			<input name="name" th:value="*{name}">
+		<a href="#" onclick="gopage(1)" class="search-switch"> <img
+			src="/img/member/main/search.png" alt="searchBtn"></a> <a href="#"
+			onclick="init()" class="search-switch"> <img
+			src="/img/member/main/resetBtn.png" alt="searchBtn"></a>
+	</form>
+	<!-- 검색 폼 끝 -->
+	<!-- 댓글 출력 -->
+	<div>
+		<br> <br>
+		<div>
+			<button class="cnq_insertBtn" type="button" id="insertBtn">등록</button>
+		</div>
+		<br>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>날짜</th>
+					<th>첨부파일</th>
+					<th>조회수</th>
+					<th>작성자</th>
+				</tr>
+			<tbody>
+				<tr th:each="cnq, stat: ${cnqList}"
+					th:onclick="move([[${cnq.ltCnqNum}]])">
+					<td th:text="${stat.count}"></td>
+					<td th:text="${cnq.ttl}"></td>
+					<td th:text="${#dates.format(cnq.drwupDt,'yyyy/MM/dd')}"></td>
+					<td><span th:if="${not #strings.isEmpty(cnq.atchNum)}">
+							<img src="/img/member/cnq/file.png" alt="Icon">
+					</span></td>
+					<td th:text="${cnq.hit}"></td>
+					<td th:text="${cnq.name}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 페이징 시작 -->
+		<!-- disabled : 비활성화 -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item" th:if="${paging.startPage} > 1"><a
+					class="page-link"
+					th:href="|javascript:gopage(${paging.startPage-1})|">Previous</a></li>
+
+				<li
+					th:each="num : *{#numbers.sequence(paging.startPage, paging.endPage)}"
+					class="page-item" th:addclass="${num} == ${paging.page} ? active">
+					<a class="page-link" th:href="|javascript:gopage(${num})|"
+					th:text="${num}">2</a>
+				</li>
+
+				<li class="page-item"
+					th:classappend="${paging.endPage} >= ${paging.lastPage} ? disabled">
+					<a class="page-link"
+					th:href="|javascript:gopage(${paging.endPage+1})|">Next</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- 페이징 종료 -->
+	</div>
+
+</section>
+</html>

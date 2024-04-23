@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>커리큘럼목록</title>
+<script th:inline="javascript">
+function move(rndNum){
+	location.href='/teacher/curri/info/'+ rndNum
+}
+</script>
+
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<div id="container" layout:fragment="container">
+		<div class="card mb-4">
+			<h5 class="card-header">강의상세</h5>
+			<div class="card-body">
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의번호</label>
+					<div class="col-md-10">
+						<input  th:value="${lecture.ltNum}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의제목</label>
+					<div class="col-md-10">
+						<input  th:value="${lecture.ltTtl}" class="col-md-10 form-control" readonly>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-md-2 col-form-label">강의소개</label>
+					<div class="col-md-10">
+						<textarea  th:text="${lecture.ltIntro}" class="col-md-10 form-control" readonly rows="5"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<h4 class="card-header">
+				커리큘럼목록
+
+				<a id="asd" th:href="|/teacher/curri/insert/${ltNum}|">등록하기</a>
+			</h4>
+			
+
+			<div class="table-responsive text-nowrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>회차번호</th>
+							<th>회차제목</th>
+							<th>회차내용</th>
+							<th>강의시간</th>
+							<th>첨부파일번호</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="curri, stat: ${list}"
+							th:onclick="move([[${curri.rndNum}]])">
+							<td th:text="${curri.rndNum}"></td>
+							<td th:text="${curri.rndTtl}"></td>
+							<td th:text="${curri.rndCntn}"></td>
+							<td th:text="${curri.ltTm}"></td>
+							<td th:text="${curri.atchNum}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	
+	</div>
+
+	
+</body>
+
+</html>

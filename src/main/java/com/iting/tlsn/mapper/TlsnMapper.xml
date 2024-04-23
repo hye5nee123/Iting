@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.tlsn.mapper.TlsnMapper">
+	<!-- 전체수강목록 -->
+	<select id="getTlsnList">
+		SELECT t.TLSN_NUM
+		       , t.TLSN_ST_CD
+		       , t.MEM_NUM
+		       , t.LT_NUM
+		       , t.CETE_YN_CD
+		       , t.APPL_DT
+		       , r.NAME
+		       , find_code(LT_CATE_CD) LT_CATE_CD
+		       , l.LT_TTL
+		       , e.SCORE
+               , e.LT_NUM AS examYn
+		FROM TLSN t JOIN LT l
+	             ON t.LT_NUM = l.LT_NUM
+	           JOIN LECTURER r  
+	             ON l.LECTURER_NUM = r.LECTURER_NUM
+              LEFT OUTER JOIN APPLEXAM e
+                           ON e.MEM_NUM = t.MEM_NUM AND e.LT_NUM = t.LT_NUM
+		WHERE t.MEM_NUM = #{user}
+		ORDER BY t.APPL_DT DESC
+	</select>
+	
+	<select id="getTlsnInfo" parameterType="TlsnVO" resultType="TlsnVO">
+		SELECT l.LT_NUM
+				, l.LT_TTL
+				, l.LECTURER_NUM
+		        , e.NAME
+		FROM LT l JOIN LECTURER e
+                    ON l.LECTURER_NUM = e.LECTURER_NUM
+		WHERE l.LT_NUM = #{ltNum}
+	</select>
+	
+	<insert id="tlsnInsert" parameterType="TlsnVO">
+		<selectKey keyProperty="tlsnNum"
+					order="BEFORE"
+					resultType="string">
+			SELECT 'tl' || LPAD(NVL(MAX(SUBSTR(tlsn_num, -5)), 0) + 1, 5, '0') 
+			FROM tlsn
+		</selectKey>
+		INSERT INTO tlsn (
+						  tlsn_num
+						, tlsn_st_cd
+						, mem_num
+						, lt_num
+						, cete_yn_cd
+						, appl_dt
+                  		 )
+		VALUES (
+		          #{tlsnNum}
+		        , #{tlsnStCd}
+		        , #{memNum}
+		        , #{ltNum}
+		        , #{ceteYnCd}
+		        , SYSDATE
+		        )
+	</insert>
+	
+	<!-- 수강 단건조회 -->
+	<select id="getTlsnInfoMem" parameterType="TlsnVO">
+		SELECT tlsn_num
+		        , tlsn_st_cd
+		        , mem_num
+		        , lt_num
+		        , cete_yn_cd
+		        , appl_dt
+		FROM tlsn
+		WHERE mem_num = #{memNum}
+		AND lt_num = #{ltNum}
+	</select>
+	
+	
+	<!-- 수강상세 등록 -->
+	<insert id="tlsnDetailInsert">
+		<selectKey keyProperty="tlsnDetailNum" order="BEFORE" resultType="string">
+			SELECT 'td' || LPAD(NVL(MAX(SUBSTR(tlsn_detail_num, -5)), 0) + 1, 5, '0') 
+			FROM tlsn_detail
+		</selectKey>
+		
+		INSERT INTO tlsn_detail
+				(
+				tlsn_detail_num
+				, rnd_prgre
+				, lt_num
+				, tlsn_num
+				, rnd_num
+				)
+		VALUES
+			(
+			#{tlsnDetailNum}
+			, #{rndPrgre}
+			, #{ltNum}
+			, #{tlsnNum}
+			, #{rndNum}
+			)
+	</insert>
+	
+	<!-- 수강상세 수정 -->
+	<update id="tlsnDetailUpdate">
+		UPDATE tlsn_detail
+		SET rnd_prgre = #{rndPrgre}
+		WHERE rnd_num = #{rndNum}
+		AND tlsn_num = #{tlsnNum}
+	</update>
+	
+	<!-- 수강상세 단건조회 -->
+	<select id="getTlsnDetailInfo">
+		SELECT tlsn_detail_num
+		        , rnd_prgre
+		        , lt_num
+		        , tlsn_num
+		        , rnd_num
+		FROM tlsn_detail
+		WHERE rnd_num = #{rndNum}
+	</select>
+	
+	<!-- 강의 수강별 커리큘럼 수강상세 전체조회 -->
+	<select id="getTlsnDtCurriInfo">
+		SELECT tlsn_detail_num
+		        , rnd_prgre
+		        , lt_num
+		        , tlsn_num
+		        , rnd_num
+		FROM tlsn_detail
+		WHERE tlsn_num = #{tlsnNum}
+		ORDER BY rnd_num
+	</select>
+	
+</mapper>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/teacher/layout}">
+<head>
+ <!-- layout:decorate="~{layout/admin}" -->
+<meta charset="UTF-8">
+<title>문제관리</title>
+<link rel="stylesheet" href="/css/teacher/content.css" />
+</head>
+<body>
+<div id="container" layout:fragment="container">
+	<h4 class="fw-bold py-3">문제관리
+		<a type="button" class="btn btn btn-warning btn_posi" th:href="@{/teacher/test/insert/{no}(no=${ltNum})}">문제등록하기</a>	
+	</h4>
+   <div class="test_insert test_test">
+	   <div th:each="test, stat: ${testList}" class="row">
+	     <div class="mb-3">
+	       <span class="form-label">문제 <i th:text="${stat.count}"></i></span>
+	       <h5 th:text="${test.prblCntn}" class="tit form-tit"></h5>
+	     </div>
+	     <hr class="my-0">
+	     <div class="mb-3 test_list first_list">
+	       <span class="form-label">①</span>
+	       <p th:text="${test.ques1}"></p>
+	     </div>
+	     <div class="mb-3 test_list">
+	       <span class="form-label">②</span>
+	       <p th:text="${test.ques2}"></p>
+	     </div>
+	     <div class="mb-3 test_list">
+	       <span class="form-label">③</span>
+	       <p th:text="${test.ques3}"></p>
+	     </div>
+	     <div class="mb-3 test_list">
+	       <span class="form-label">④</span>
+	       <p th:text="${test.ques4}"></p>
+	     </div>
+	     <div class="ans">
+	     	<div class="mb-3 test_list">
+		       <span class="tit">정답</span>
+		       <p th:text="${test.ans}"></p>
+		     </div>
+	     	<div class="mb-3 test_list">
+		       <span class="tit">해설</span>
+		       <p th:text="${test.cty}"></p>
+		     </div>
+	     </div>
+	     <div class="demo-inline-spacing btn_box">
+   			<a th:href="@{/teacher/test/update/{ltNum}/{no}(ltNum=${test.ltNum}, no=${test.prblNum})}" class="btn btn-outline-warning">문제수정</a>
+   			<a th:href="@{/teacher/test/delete/{ltNum}/{no}(ltNum=${test.ltNum}, no=${test.prblNum})}" id="BtnDel" class="btn btn-outline-secondary">문제삭제</a>
+   		</div>
+	</div>
+  </div>
+  <script>
+  $('#BtnDel').on('click', function(){
+      alert("문제가 삭제되었습니다.");
+});
+  </script>
+</div>
+</body>
+</html>

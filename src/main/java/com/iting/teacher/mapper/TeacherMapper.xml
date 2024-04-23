@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.teacher.mapper.TeacherMapper">
+	
+	<!-- 강사 정보 + 강의 단건조회 -->
+	<select id="getTeacherInfo" resultType="TeacherVO">
+		SELECT l.LECTURER_NUM
+		       , l.ID
+		       , l.NAME
+		       , l.MAIL
+		       , l.PHONE
+		       , t.LT_NUM
+		       , t.LT_TTL
+		FROM LECTURER l JOIN LT t
+		                  ON l.LECTURER_NUM = t.LECTURER_NUM
+		WHERE t.LT_NUM = #{ltNum}
+	</select>
+	
+	<!-- 강사 개인정보 조회 -->
+	<select id="getTeacherMain">
+		SELECT LECTURER_NUM 
+			   , ID
+			   , NAME
+			   , MAIL
+			   , PHONE
+		FROM LECTURER
+		WHERE LECTURER_NUM = #{user}
+	</select>
+</mapper>

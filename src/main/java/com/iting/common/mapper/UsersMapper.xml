@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.common.mapper.UsersMapper">
+
+	<select id="getUserInfo" parameterType="string"
+		resultType="UsersVO">
+		select num_cd
+            , id
+            , name
+            ,'{noop}' || pw AS pw
+            ,'ROLE_' || upper(user_cd) AS user_cd
+        from users_view
+        where id = #{userid}
+	</select>
+	
+	
+	
+	
+	<insert id="insertUser" parameterType="AccountVO">
+	
+		<selectKey keyProperty="accnum"
+				order="BEFORE"
+				resultType="string">
+			<if test='actype == "b1"'>
+				SELECT 'me' || LPAD(NVL(MAX(SUBSTR(mem_num, -5)), 0) + 1, 5, '0') AS mem_num
+				FROM mem
+			</if>
+			<if test='actype == "d2"'>
+				SELECT 'le' || LPAD(NVL(MAX(SUBSTR(lecturer_num, -5)), 0) + 1, 5, '0') AS lecturer_num
+				FROM lecturer
+			</if>
+		</selectKey>
+		
+		<if test='actype == "b1"'>
+		insert
+		into mem
+		(
+		mem_num
+		, mem_fg_cd
+		, int_cd
+		</if>
+		<if test='actype == "d2"'>
+		insert all
+		into atch
+		(
+		atch_num, atch_ttl, atch_typ_cd, atch_mark_ttl
+		) 
+		values
+		(
+		(SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') AS atch_num
+				FROM atch)
+		, #{fileName}
+		, 'k3'
+		, #{newFileName}
+		)
+		into lecturer(
+		lecturer_num
+		, accp_yn_cd
+		, atch_num
+		</if>
+		, id
+		, pw
+		, name
+		, addr
+		, detail_addr
+		, mail
+		, phone
+		, join_dt
+		, login_typ_cd
+		, token
+		)
+		values
+		(
+		#{accnum}
+		, #{actype}
+		<if test='actype == "b1"'>
+		, #{intr}
+		</if>
+		<if test='actype == "d2"'>
+		, (SELECT 'at' || LPAD(NVL(MAX(SUBSTR(atch_num, -5)), 0) + 1, 5, '0') AS atch_num
+				FROM atch)
+		</if>
+		, #{idv}
+		, #{pwv}
+		, #{nickv}
+		, #{addrv}
+		, #{dadrv}
+		, #{mailv}
+		, #{phonev}
+		, sysdate
+		, 'a1'
+		, ''
+		)
+		<if test='actype == "d2"'>
+		select * from dual
+		</if>
+		
+	</insert>
+	
+	
+	
+	
+	<select id="getUserNum" resultType="string">
+		SELECT 'me' || LPAD(NVL(MAX(SUBSTR(mem_num, -5)), 0) + 1, 5, '0') AS mem_num FROM mem
+	</select>
+	
+</mapper>

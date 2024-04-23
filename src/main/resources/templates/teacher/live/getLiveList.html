@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/teacher/layout}">
+<head>
+<meta charset="UTF-8">
+<title>LIVE 목록</title>
+<script th:inline="javascript">
+function move(spltNum){
+	location.href='/teacher/live/info/'+ spltNum
+}
+</script>
+<style>
+#asd {
+	float: right;
+	padding: 12px 40px;
+	font-size: 16px;
+	border: 0;
+	letter-spacing: -1px;
+	background: #ff8a00;
+	color: #fff;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<div id="container" layout:fragment="container">
+		<div class="card">
+			<h4 class="card-header">
+				강의목록
+				<button type="button" id="asd"
+					onclick="location.href='/teacher/live/insert'">등록하기</button>
+			</h4>
+			<div class="table-responsive text-nowrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>특강 번호</th>
+							<th>특강 제목</th>
+							<th>특강 내용</th>
+							<th>특강 날짜</th>
+							<th>강사 번호</th>
+							<th>승인 여부</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="live, stat: ${getLiveList}"
+							th:onclick="move([[${live.spltNum}]])">
+							<td th:text="${live.spltNum}"></td>
+							<td th:text="${live.spltTtl}"></td>
+							<td th:text="${live.spltCntn}"></td>
+							<td th:text="${#dates.format(live.spltDt,'yyyy-MM-dd')}"></td>
+							<td th:text="${live.lecturerNum}"></td>
+							<td th:text="${live.accpYnCd}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

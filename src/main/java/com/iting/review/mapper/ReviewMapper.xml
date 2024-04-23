@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iting.review.mapper.ReviewMapper">
+
+	<!-- 전체조회 -->
+	<select id="getReviewList" resultType="ReviewVO">
+		SELECT r.REVIEW_NUM "reviewNum",
+				r.TTL "ttl",
+				r.CNTN "cntn",
+				r.DRWUP_DT "drwupDt",
+				r.STAR "star",
+				t.TLSN_NUM "tlsnNum",
+				l.lt_ttl "ltTtl",
+				m.name "name"
+		  FROM  review r, 
+		        tlsn t, 
+		        lt l,
+		        mem m
+		  WHERE r.TLSN_NUM = t.TLSN_NUM
+			AND t.lt_num = l.lt_num
+			AND r.mem_num = m.mem_num
+			AND l.lt_num = #{ltNum}
+		  ORDER by 
+		<choose>
+		<when test="cd !=null and cd !=  '' ">${cd} DESC</when>
+		<otherwise>REVIEW_NUM DESC</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 상세조회 -->
+	<select id="getReviewInfo" parameterType="String"
+		resultType="ReviewVO">
+		SELECT
+				c.lt_cnq_num,
+				c.ttl,
+				c.cntn,
+				c.drwup_dt,
+				c.hit,
+				m.name
+		FROM 	lt_cnq c JOIN mem m
+			on c.mem_num = m.mem_num
+		WHERE 	lt_cnq_num = #{ltCnqNum}
+	</select>
+	
+</mapper>
