@@ -9,28 +9,35 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iting.common.model.FileVO;
 import com.iting.common.service.CommonService;
 
-public class FileUtil {
+@Component
+public final class FileUtil {
 	
 	@Autowired
 	CommonService commonService;
 	
-	@Value("${file-upload-folder}")
-	public static String filePath;
 	
+	private static String filePath;
+
+	@Value("${file-upload-folder}")
+    public void setFilePath(String filePath) {
+		FileUtil.filePath = filePath;
+    }
 	
 	/* 파일업로드 메소드 */
 	public static FileVO uploadFile(MultipartFile uFile)  {
+		
 		// String uploadDir = "D:/iting_webstorage/";
 		
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + FileUtil.filePath);
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + filePath);
 		
 		// 디렉터리 생성
-		File uploadPath = new File(FileUtil.filePath);
+		File uploadPath = new File(filePath);
 		
 		if (!uploadPath.exists()) {			
 			uploadPath.mkdir();
@@ -52,7 +59,7 @@ public class FileUtil {
 			
 			
 			// 파일 생성 (저장 경로, 파일이름)
-			File file = new File(FileUtil.filePath, newFile);
+			File file = new File(filePath, newFile);
 			// 파일저장
 			try {
 				uFile.transferTo(file);
