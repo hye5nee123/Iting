@@ -37,14 +37,32 @@
 
 ## :compass: Roadmap
 
+* [x] 
 * [x] ddddddd
-* [x] ddddddd
+      
+
+<br>
+<br>
+<br>
+<br>
+
+![image](https://github.com/hye5nee123/Iting/assets/152113818/d9faab0b-7632-4db7-8f2d-310d39995812)
 
 
-## :wave: Contributing
 
-<a href="https://github.com/hye5nee123/Iting/graphs/contributors"> <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" /> </a>
 
+## :wave: Contributer
+
+<a href="https://github.com/hye5nee123/Iting/graphs/contributors">
+  <img src="https://github.com/hye5nee123/Iting/assets/152113818/4ce1dd06-81e6-4680-b402-8af210d7a0e7" width="100px" /></a>
+ <a href="https://github.com/hye5nee123/Iting/graphs/contributors">
+  <img src="https://github.com/hye5nee123/Iting/assets/152113818/62a739ac-ae19-425e-85ce-9e5270939d2b" width="100px" /></a> 
+ <a href="https://github.com/hye5nee123/Iting/graphs/contributors">
+  <img src="https://github.com/hye5nee123/Iting/assets/152113818/3658d5b0-2e30-459a-9701-decdda954cc9" width="100px" /></a> 
+   <a href="https://github.com/hye5nee123/Iting/graphs/contributors">
+  <img src="https://github.com/hye5nee123/Iting/assets/152113818/284d0aa1-31e2-4f81-8c68-e1ff4f8f57e1" width="100px" /></a> 
+  <a href="https://github.com/hye5nee123/Iting/graphs/contributors">
+  <img src="https://github.com/hye5nee123/Iting/assets/152113818/8b88da84-8d1d-4498-91c0-09f0524467fa" width="100px" /></a> 
 Contributions are always welcome!
 
 see `contributing.md` for ways to get started
