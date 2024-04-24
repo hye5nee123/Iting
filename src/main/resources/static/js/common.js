@@ -88,7 +88,7 @@ function lectInsertRes(data) {
 	} else if(data == -1) {
 		// 수강 완료 시 알림
 		Swal.fire({
-		  title: "이미 수강중인 강의입니다.",
+		  title: "이미 수강중인 강의입니다",
 		  text: "내강의실로 이동하시겠습니까?",
 		  icon: "info",
 		  showCancelButton: true,
@@ -101,7 +101,24 @@ function lectInsertRes(data) {
 		    location.href = "/member/tlsn/list";
 		  }
 		});
+	} else if(data == -99) {
+		// 수강 완료 시 알림
+		Swal.fire({
+		  title: "구독시 이용가능한 서비스입니다",
+		  text: "구독하기로 이동하시겠습니까?",
+		  icon: "info",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "구독하기",
+		  cancelButtonText: "취소"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    location.href = "/member/subsp/form";
+		  }
+		});
 	}
+	
 	else {
 		errorAlert("수강이 완료된 강의입니다.")
 	}

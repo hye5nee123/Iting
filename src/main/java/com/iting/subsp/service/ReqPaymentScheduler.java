@@ -64,8 +64,11 @@ public class ReqPaymentScheduler {
 	    return response;
 	}
 	
+	String billingKey = "";
+	String orderName = "";
+	int price = 0;
 	
-	// 빌링키 예약결제
+	// 빌링키 결제 - 2회차 부터
 	public HttpEntity<String> setPaySchedule() {
 		
 		// URL 생성
@@ -74,9 +77,8 @@ public class ReqPaymentScheduler {
 				.path("/payments/{paymentId}/schedule")
 				.encode()
 				.build()
-				.expand(paymentId) // {paymentId}에 들어갈 값을 순차적으로 입력
+				.expand(paymentId)
 				.toUri();
-		
 		
 		// Header set
 		HttpHeaders header = new HttpHeaders();
@@ -88,13 +90,12 @@ public class ReqPaymentScheduler {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("billingKey", "billing-key-018ead6e-c7e4-dc67-ddc8-7da9c246a61a");
-		map.put("orderName", "아이팅 1개월 구독권 2회차 결제");
+		map.put("billingKey", billingKey);
+		map.put("orderName", orderName);
 		
 		map.put("currency", "KRW");
-		map.put("amount", Collections.singletonMap("total", 39800));
+		map.put("amount", Collections.singletonMap("total", price));
 
-		
 		// Message
         HttpEntity<Map<String, Object>> requestMessage = new HttpEntity<>(map, header);	
 		
