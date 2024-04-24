@@ -119,10 +119,10 @@
 
 codeMap<> - -
 
-Project Link: [https://github.com/hye5nee123/Iting](https://github.com/hye5nee123/Iting)
+Project Link: https://github.com/hye5nee123/Iting/tree/main
 
 ## :gem: Acknowledgements
 
 Use this section to mention useful resources and libraries that you have used in your projects.
 
-- [dd](dd)
+- [JAVA](https://github.com/openjdk)
