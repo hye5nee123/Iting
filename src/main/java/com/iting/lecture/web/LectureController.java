@@ -150,15 +150,15 @@ public class LectureController {
 
 	}
 	
-	@RequestMapping("/admin/lecture/allendLectureList")
+	@RequestMapping("admin/lecture/allendLectureList")
 	public ModelAndView allendLectureList() {
-		ModelAndView mv = new ModelAndView("/admin/lecture/endLectureList");
+		ModelAndView mv = new ModelAndView("admin/lecture/endLectureList");
 		return mv;
 	}
 	
 	//승인 완료 목록
 	@ResponseBody
-	@GetMapping("/admin/lecture/endLectureList")
+	@GetMapping("admin/lecture/endLectureList")
 	public Map<String, Object> endLectureList(LectureVO vo, PagingVO pvo) {
 		
 		pvo.setPageUnit(5);
@@ -178,7 +178,7 @@ public class LectureController {
 
 	// 승인수정 기능
 	@ResponseBody
-	@GetMapping("/admin/lecture/update/{ltNum}/{accpYnCd}")
+	@GetMapping("admin/lecture/update/{ltNum}/{accpYnCd}")
 	public LectureVO update(LectureVO vo, @PathVariable String ltNum, @PathVariable String accpYnCd) {
 		vo.setLtNum(ltNum);
 		vo.setAccpYnCd(accpYnCd);

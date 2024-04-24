@@ -80,7 +80,7 @@ function update1(ltNum,accpYnCd){
 							<td th:text="${ing.ltKeywordCd}"></td>
 							<td th:text="${ing.lecturerNum}"></td>
 							<td th:text="${ing.accpYnCd}"></td>
-							<td onclick="event.cancelBubble = true;">
+							<td onclick="event.cancelBubble = true;">	
 								<button type="button"
 									th:onclick="update([[${ing.ltNum}]],'d1')">승인</button>
 								<button type="button" 
