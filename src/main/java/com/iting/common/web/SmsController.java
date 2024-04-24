@@ -95,7 +95,20 @@ public class SmsController {
 		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 		return response; // 문자 보내기
 	}
-
+	
+//	public void sendOne(@RequestBody SMSVO nums) {
+//		Message message = new Message();
+//		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+////	        message.setFrom("발신번호 입력");
+//		message.setFrom(sendnum);
+////	        message.setTo("수신번호 입력");
+//		message.setTo(nums.getPhonenum());
+////	        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
+//		message.setText(nums.getNumkey());
+//		
+////		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+////		return response; // 문자 보내기
+//	}
 //	    /**
 //	     * MMS 발송 예제
 //	     * 단일 발송, 여러 건 발송 상관없이 이용 가능
