@@ -103,7 +103,10 @@ public class CommonController {
 
 	// 강사
 	@RequestMapping("teacher/main")
-	public ModelAndView goTeacherMain() {
+	public ModelAndView goTeacherMain(Model model) {
+		
+		//model.addAttribute("lectCount", model);
+		
 		ModelAndView mv = new ModelAndView("teacher/main");
 		return mv;
 	}
