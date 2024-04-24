@@ -125,4 +125,10 @@ Project Link: https://github.com/hye5nee123/Iting/tree/main
 
 Use this section to mention useful resources and libraries that you have used in your projects.
 
-- [JAVA](https://github.com/openjdk)
+- [Java](https://github.com/openjdk)
+- [Spring](https://github.com/spring-projects/spring-framework)
+- [jquery](https://github.com/jquery/jquery)
+- [bootstrap](https://github.com/twbs/bootstrap)
+- [Thymeleaf](https://github.com/thymeleaf)
+- [axios](https://github.com/axios/axios)
+
