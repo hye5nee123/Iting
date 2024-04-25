@@ -6,10 +6,9 @@
 
 <meta charset="UTF-8">
 <title>강사 메인페이지</title>
-<script th:inline="javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-
-</script>
 <style>
 .cc{
 	float: right;
@@ -60,8 +59,9 @@
 		<div class="col-md-6 col-12">
 		  <div class="card">
 		    <h5 class="card-header">정산관리</h5>
-		    <div class="card-body"> 
-		  	</div>
+		    <div class="chart-container" style="position: relative; height:200px; width:40vw; top: 0; left: 30%;">
+		    	<canvas class="myChart2" width="100" height="100"></canvas>
+		    </div>
 		  </div>
 		</div>
 	</div>
@@ -75,60 +75,90 @@
                     <ul class="nav nav-pills mb-3" role="tablist">
                       <li class="nav-item">
                         <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
-                          월매출
+                          수강생 수
                         </button>
                       </li>
                       <li class="nav-item">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
-                          지출
-                        </button>
-                      </li>
-                      <li class="nav-item">
-                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-messages" aria-controls="navs-pills-top-messages" aria-selected="false">
-                          구독수
+                          매출
                         </button>
                       </li>
                     </ul>
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
-                        <p>
-                          Icing pastry pudding oat cake. Lemon drops cotton candy caramels cake caramels sesame snaps
-                          powder. Bear claw candy topping.
-                        </p>
-                        <p class="mb-0">
-                          Tootsie roll fruitcake cookie. Dessert topping pie. Jujubes wafer carrot cake jelly. Bonbon
-                          jelly-o jelly-o ice cream jelly beans candy canes cake bonbon. Cookie jelly beans marshmallow
-                          jujubes sweet.
-                        </p>
+                        <div class="mb-0" id="chart_div2">
+                        <!-- 차트 위치 -->
+                        </div>
                       </div>
                       <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
                         <p>
-                          Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                          cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                          cheesecake fruitcake.
+                         정산중
                         </p>
-                        <p class="mb-0">
-                          Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
-                          cotton candy liquorice caramels.
-                        </p>
+                        
                       </div>
-                      <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-                        <p>
-                          Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
-                          cupcake gummi bears cake chocolate.
-                        </p>
-                        <p class="mb-0">
-                          Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
-                          roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
-                          jelly-o tart brownie jelly.
-                        </p>
-                      </div>
+                     
                     </div>
                   </div>
 	       </div>
 	     </div>
 	   </div>
 	 </div>
-	</div>
+
+<script th:inline="javascript">
+	/* 차트.js */
+	let countIng = 50;
+	let countFin = 50;
+	
+	// 데이터
+	let datas = {
+	    datasets: [{
+	        data: [countIng, countFin]
+	    }],
+	    labels: [
+	        '정산중',
+	        '정산 완료'
+	    ]
+	};
+	
+	// 도넛 차트
+	var myDoughnutChart = new Chart(document.getElementsByClassName('myChart2'), {
+	    type: 'doughnut',
+	    data: datas,
+	   	options: {
+	     cutout:'60%',
+	     borderRadius:10,
+		}		
+	});
+	
+	/* 구글 차트 */
+	google.charts.load('current', {'packages':['corechart']});
+	
+	google.charts.setOnLoadCallback(drawChart);
+	
+	function drawChart() {
+	
+	  // Create the data table.
+	  var data = new google.visualization.DataTable();
+	  data.addColumn('string', 'Topping');
+	  data.addColumn('number', '명');
+	  data.addRows([
+	    ['html의 이해', 50],
+	    ['C언어 뿌수기', 20],
+	    ['Oracel 완전정복', 10]
+	  ]);
+	
+	  // Set chart options
+	  var options = {'title':'강의별 수강생 수',
+	                 'width':600,
+	                 'height':300};
+	
+	  // Instantiate and draw our chart, passing in some options.
+	  var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
+	  chart.draw(data, options);
+	}
+
+</script>
+</div>
+
 </body>
 </html>

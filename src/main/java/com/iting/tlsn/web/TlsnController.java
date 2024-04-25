@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.iting.lecture.model.CurriVO;
 import com.iting.lecture.service.CurriService;
 import com.iting.lecture.service.LectureService;
+import com.iting.subsp.model.SubspVO;
+import com.iting.subsp.service.SubspService;
 import com.iting.tlsn.model.TlsnDetailVO;
 import com.iting.tlsn.model.TlsnVO;
 import com.iting.tlsn.service.TlsnService;
@@ -35,6 +37,9 @@ public class TlsnController {
 	
 	@Autowired
 	CurriService curriService;
+	
+	@Autowired
+	SubspService subspService;
 		
 	// 수강목록
 	@RequestMapping("member/tlsn/list")
@@ -75,7 +80,21 @@ public class TlsnController {
 	// 수강신청(등록)
 	@PostMapping("member/tlsn/insert")
 	@ResponseBody
-	public int tlsnInsert(@RequestBody TlsnVO vo) {
+	public int tlsnInsert(@RequestBody TlsnVO vo, HttpSession session) {
+		String memNum = (String) session.getAttribute("usernum");
+		
+		/*
+		// 구독 상태 조회
+		SubspVO svo = subspService.getSubspInfo(memNum);
+		
+		System.out.println(svo.getSubspStCd());
+		
+		if(svo.getSubspStCd() == "m1") { // 구독중이 아니면 -99
+			return -99;
+		} else {
+			
+		}
+		*/
 		
 		// 단건 조회
 		TlsnVO tvo = tlsnService.getTlsnInfoMem(vo);
