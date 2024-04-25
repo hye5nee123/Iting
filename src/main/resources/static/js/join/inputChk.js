@@ -73,13 +73,13 @@ function chkInput() {
 			return false;
 		}
 	}
-	/*if (email.value == '') {
+	if (email.value == '') {
 		alert("이메일을 입력해주세요");
 		return false;
 	} else if (!mailAccep) {
 		alert("이메일 형식이 올바르지 않습니다. 다시 확인해주세요.");
 		return false;
-	}*/
+	}
 	if(phoneFormOn){
 		if (phone.value == '') {
 			alert("휴대전화번호를 입력해주세요");

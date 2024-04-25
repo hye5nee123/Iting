@@ -14,9 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.iting.lecture.service.LectureService;
 
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	@Autowired
@@ -25,9 +23,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication auth) throws IOException, ServletException {
-		log.info("Login Success");
+		//log.info("Login Success");
 		List<String> roleNames = new ArrayList<>();
-		//Collection<Authority> ==> List<String>
 		auth.getAuthorities().forEach(authority -> {roleNames.add(authority.getAuthority());});
 		
 		CustomUsers user = (CustomUsers)auth.getPrincipal();
@@ -35,7 +32,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		String usercd = user.getUsersVO().getUserCd();
 		String name = user.getUsersVO().getName();
 		
-		System.out.println(auth.getPrincipal());
 		request.getSession().setAttribute("usertype", usercd);
 		request.getSession().setAttribute("usernum", numcd);
 		request.getSession().setAttribute("userId", auth.getName());
