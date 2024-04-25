@@ -85,7 +85,7 @@ function move(no){
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
                         <div class="mb-0" id="chart_div">
-                        <!-- 차트 위치 -->
+                        	<canvas class="chart2" width="500" height="100"></canvas>
                         </div>
                       </div>
                       <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
@@ -128,10 +128,52 @@ function move(no){
 	     borderRadius:10,
 		}		
 	});
-	 
-	 
+	
+	let NUMBER_CFG = {count: 3, min: 0, max: 100};
+	//const labels = Utils.months({count:12});
+	let model1 = {
+			  labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			  datasets: [
+			    {
+			      label: '매출',
+			      data: [30, 20, 50, 40, 40, 60, 50, 20, 30, 70, 60, 80],
+			     /* borderColor: 'red', */
+			    	  /* Utils.CHART_COLORS.red, */
+			     backgroundColor: '#FF4444',
+			    	  /* Utils.transparentize(Utils.CHART_COLORS.red, 0), */
+			    },
+			    {
+			      label: '지출',
+			      data: [50, 30, 20, 100, 50, 40, 80, 70, 90, 60, 50, 90],
+			    	  /* Utils.numbers(NUMBER_CFG), */
+			     /* borderColor: Utils.CHART_COLORS.blue, */
+			      backgroundColor: '#0088ff',
+			    	  /* Utils.transparentize(Utils.CHART_COLORS.blue, 0), */
+			    }
+			  ]
+			};
+	// 막대 차트
+	let barChart = new Chart(document.getElementsByClassName('chart2'), {
+			  type: 'bar',
+			  data: model1,
+			  options: {
+			    responsive: true,
+			    plugins: {
+			      legend: {
+			        position: 'top',
+			      },
+			      title: {
+			        display: true,
+			        text: '월 매출/지출'
+			      }
+			    }
+			  },
+			});
+	
+
+	
 	 /* 구글 차트 */
-	 google.charts.load('current', {packages: ['corechart', 'bar']});
+	 /* google.charts.load('current', {packages: ['corechart', 'bar']});
 	 google.charts.setOnLoadCallback(drawMaterial);
 
 	 function drawMaterial() {
@@ -170,7 +212,7 @@ function move(no){
 
 	       let materialChart = new google.charts.Bar(document.getElementById('chart_div'));
 	       materialChart.draw(data, options);
-	     }
+	     } */
 	 </script>
 </div>
 </body>
