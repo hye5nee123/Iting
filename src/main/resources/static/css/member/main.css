@@ -19,7 +19,7 @@ body{background:#fff !important;}
 .swiper-pagination span{width:10px; height:10px; border-radius:0;}
 .swiper-pagination-bullet-active{background:#2455a4 !important;}
 .categories{width:100%;}
-.swiper-slide img{object-fit:fill;}
+.swiper-slide img{object-fit:fill !important;}
 
 .pic01{width:440px; height:440px; background:#fff;}
 .pic01 img{margin-left:79px;}
