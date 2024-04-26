@@ -44,6 +44,19 @@ public class SttlController {
        
     }
 	
+	/*
+	// 매월 말일 오전 1시에 실행
+	@Scheduled(cron="0 0 1 L * ?")
+	@GetMapping("member/test")
+    public HttpEntity<String> getPostScheduler(String memNum){
+		
+		subspService.getSubspInfo(memNum);
+		
+		return ReqPaymentSchedulerTest.setPaySchedule();
+       
+    }
+    */
+	
 	
 	
 	/* 강사 */
