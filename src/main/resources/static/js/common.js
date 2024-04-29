@@ -229,7 +229,7 @@ function infoAlert(tit, txt) {
 				<div class="col-lg-6" style="padding: 0;">
 					<div class="input-group">
 						<input class="form-control" type="text" id="sms" name="sms" placeholder="인증번호 입력" aria-describedby="smsbtn">
-						<button id="smsbtn" type="button" class="btn btn-dark" onclick="smschk('`+numkey+`')">인증확인</button>
+						<button id="smsbtn" type="button" class="btn btn-dark" onclick="smschk('1111')">인증확인</button>
 					</div>
 				</div>
 						`;

@@ -51,7 +51,7 @@ function phoneCheck() {
 	} else if (!(/^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/.test(phonev))) {
 		statphone = `<p style="color: #ff8383;">휴대전화번호 형식이 맞지 않습니다.</p>`;
 	} else if (!SMSAccep) {
-		statphone = `<p style="color: #ff8383;">인증 필요</p>`;
+		statphone = `<p style="color: #ff8383;">인증 필요(인증번호 1111입니다. coolSMS 문자수 제한때문에 불가피하게 바꾸었습니다.)</p>`;
 		phoneAccep = true;
 	}
 	document.getElementsByClassName('phonechkstr')[0].innerHTML = statphone;
