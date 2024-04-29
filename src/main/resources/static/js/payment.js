@@ -41,7 +41,8 @@ function reqSubspInfo(memNum) {
 
 //구독 정보 단건조회 응답
 function resSubspInfo(res) {
-	if(res.data.subspStCd == "구독 중"){
+	if(res.data.subspStCd == "m1"){
+		console.log(res.data.subspStCd)
 		errorAlert("이미 구독중입니다.", "구독상태를 확인해주세요.");
 	}
 	else {
