@@ -82,7 +82,7 @@ public class SmsController {
 	 * @return 
 	 */
 	@PostMapping("/sendsms")
-	public SingleMessageSentResponse sendOne(@RequestBody SMSVO nums) {
+	public void sendOne(@RequestBody SMSVO nums) {
 		Message message = new Message();
 		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
 //	        message.setFrom("발신번호 입력");
@@ -91,9 +91,8 @@ public class SmsController {
 		message.setTo(nums.getPhonenum());
 //	        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
 		message.setText(nums.getNumkey());
-		
-		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-		return response; // 문자 보내기
+//		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+//		return response; // 문자 보내기
 	}
 	
 //	public void sendOne(@RequestBody SMSVO nums) {
